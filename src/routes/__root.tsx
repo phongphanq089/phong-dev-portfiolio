@@ -9,8 +9,6 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 import { DefaultCatchBoundary } from "@/components/base/default-catch-boundary"
 import { NotFound } from "@/components/base/not-found"
-import Footer from "@/components/Footer"
-import Header from "@/components/Header"
 import { seo } from "@/lib/utils"
 import appCss from "../styles.css?url"
 
@@ -74,19 +72,23 @@ function RootComponent() {
 	)
 }
 
+const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'system',r=document.documentElement;if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches))r.classList.add('dark');else r.classList.remove('dark')}catch(e){}})()`
+
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
+				<script
+					// biome-ignore lint: This is a standard blocking script for theme management
+					dangerouslySetInnerHTML={{ __html: themeScript as any }}
+				/>
 				<HeadContent />
 			</head>
 			<body
 				className="font-sans antialiased wrap-anywhere"
 				suppressHydrationWarning
 			>
-				<Header />
 				{children}
-				<Footer />
 				<TanStackRouterDevtools position="bottom-right" />
 				<ReactQueryDevtools buttonPosition="bottom-left" />
 				<Scripts />

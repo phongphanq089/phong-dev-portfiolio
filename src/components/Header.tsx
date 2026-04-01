@@ -1,10 +1,19 @@
 import { Link } from "@tanstack/react-router"
-import { AppWindow, Home, Info, LayoutDashboard, Menu } from "lucide-react"
+import {
+	AppWindow,
+	Home,
+	Info,
+	LayoutDashboard,
+	Menu,
+	Palette,
+} from "lucide-react"
+import { ModeToggle } from "./mode-toggle"
 
 export default function Header() {
 	const navigation = [
 		{ name: "Trang chủ", to: "/", icon: Home },
 		{ name: "Giới thiệu", to: "/about", icon: Info },
+		{ name: "Thư viện UI", to: "/library", icon: Palette },
 		{ name: "Bảng điều khiển", to: "/dashboard", icon: LayoutDashboard },
 		{ name: "Studio", to: "/studio", icon: AppWindow },
 	]
@@ -36,6 +45,7 @@ export default function Header() {
 							{item.name}
 						</Link>
 					))}
+					<ModeToggle />
 				</nav>
 
 				{/* Mobile Menu Icon (Placeholder) */}

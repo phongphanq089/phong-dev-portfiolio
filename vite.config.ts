@@ -14,9 +14,21 @@ const config = defineConfig({
 		contentCollections(),
 		tsconfigPaths({ projects: ["./tsconfig.json"] }),
 		tailwindcss(),
-		tanstackStart(),
+		tanstackStart({
+			prerender: {
+				enabled: true,
+				crawlLinks: true, // auto crawl links
+			},
+			sitemap: {
+				enabled: true,
+				host: "http://localhost:3000",
+			},
+		}),
 		viteReact(),
 	],
+	resolve: {
+		dedupe: ["react", "react-dom", "styled-components"],
+	},
 })
 
 export default config
