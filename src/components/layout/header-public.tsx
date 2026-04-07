@@ -3,6 +3,7 @@ import { animate } from "framer-motion"
 import { AppWindow, Home, Info, LayoutDashboard, Palette } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
+import { ModeToggle } from "../mode-toggle"
 
 export interface SpotlightNavbarProps {
 	className?: string
@@ -101,7 +102,7 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
 	return (
 		<div
 			className={cn(
-				"flex justify-center py-6 md:py-10 sticky top-0 z-50 pointer-events-none",
+				"flex justify-center py-2 md:py-3 sticky top-0 z-50 pointer-events-none",
 				className,
 			)}
 		>
@@ -140,6 +141,7 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
 							</li>
 						)
 					})}
+					<ModeToggle />
 				</ul>
 
 				{/* 1. The Moving Spotlight (Follows Mouse) */}

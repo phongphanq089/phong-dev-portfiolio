@@ -7,6 +7,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
+
 import { DefaultCatchBoundary } from "@/components/base/default-catch-boundary"
 import { NotFound } from "@/components/base/not-found"
 import { seo } from "@/lib/utils"
@@ -85,7 +86,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body
-				className="font-sans antialiased wrap-anywhere"
+				className="font-sans antialiased wrap-anywhere relative"
 				suppressHydrationWarning
 			>
 				{children}
