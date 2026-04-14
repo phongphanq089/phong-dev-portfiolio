@@ -34,10 +34,12 @@
 			"recommended": true,
 			"style": {
 				"useImportType": "warn",
-				"noRestrictedImports": "warn"
+				"noRestrictedImports": "warn",
+				"noNonNullAssertion": "warn"
 			},
 			"correctness": {
-				"noUnusedImports": "warn"
+				"noUnusedImports": "warn",
+				"useExhaustiveDependencies": "error"
 			}
 		}
 	},

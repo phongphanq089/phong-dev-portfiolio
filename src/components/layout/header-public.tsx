@@ -3,18 +3,26 @@ import { animate } from "framer-motion"
 import { AppWindow, Home, Info, LayoutDashboard, Palette } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
-import { ModeToggle } from "../mode-toggle"
+import { ModeToggle } from "./mode-toggle"
 
 export interface SpotlightNavbarProps {
 	className?: string
 }
 
+// const navigation = [
+// 	{ name: "Trang chủ", to: "/", icon: Home },
+// 	{ name: "Giới thiệu", to: "/about", icon: Info },
+// 	{ name: "Thư viện UI", to: "/library", icon: Palette },
+// 	{ name: "Bảng điều khiển", to: "/dashboard", icon: LayoutDashboard },
+// 	{ name: "Studio", to: "/studio", icon: AppWindow },
+// ]
+
 const navigation = [
-	{ name: "Trang chủ", to: "/", icon: Home },
-	{ name: "Giới thiệu", to: "/about", icon: Info },
-	{ name: "Thư viện UI", to: "/library", icon: Palette },
-	{ name: "Bảng điều khiển", to: "/dashboard", icon: LayoutDashboard },
-	{ name: "Studio", to: "/studio", icon: AppWindow },
+	{ name: "HOME", to: "/", icon: Home },
+	{ name: "BLOG", to: "/blog", icon: Info },
+	{ name: "PROJECTS", to: "/projects", icon: Palette },
+	{ name: "RESOURCES", to: "/resources", icon: LayoutDashboard },
+	{ name: "STUDIO", to: "/studio", icon: AppWindow },
 ]
 
 export function SpotlightNavbar({ className }: SpotlightNavbarProps) {

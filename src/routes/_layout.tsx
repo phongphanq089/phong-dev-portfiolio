@@ -1,7 +1,8 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
-import BackgroundGradientCursor from "@/components/animation/background-gradient-cursor"
-import Footer from "@/components/Footer"
+import { Container } from "@/components/layout/container"
+import Footer from "@/components/layout/Footer"
 import { SpotlightNavbar } from "@/components/layout/header-public"
+import BackgroundGradientCursor from "@/components/ui/animation/background-gradient-cursor"
 import { ThemeProvider } from "@/provider/theme-provider"
 
 export const Route = createFileRoute("/_layout")({
@@ -29,13 +30,14 @@ function LayoutComponent() {
 
 	return (
 		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-			<div className="min-h-screen flex-1 flex flex-col relative z-10">
+			<Container>
 				<SpotlightNavbar />
 				<main className="flex flex-1">
 					<Outlet />
 				</main>
 				<Footer />
-			</div>
+			</Container>
+
 			<BackgroundGradientCursor
 				mask={effects.mask}
 				dots={effects.dots}

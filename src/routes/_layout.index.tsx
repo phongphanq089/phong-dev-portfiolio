@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_layout/")({
 
 function App() {
 	return (
-		<div className="w-full max-w-[1200px] mx-auto">
+		<div className="w-full">
 			<BannerHero />
 		</div>
 	)

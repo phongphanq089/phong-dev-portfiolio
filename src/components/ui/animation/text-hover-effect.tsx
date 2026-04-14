@@ -2,6 +2,38 @@
 import { motion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 
+/**
+ * Pure (no DOM) text width estimate — runs identically on server and client.
+ * Uses a per-character width factor for bold Helvetica at the given fontSize.
+ * Good enough as an initial viewBox so the layout shift after useEffect is tiny.
+ */
+const estimateViewBox = (
+	text: string,
+	fontSize: number,
+	pad: number,
+	TX: number,
+	TY: number,
+) => {
+	// Bold sans-serif ≈ 0.62× fontSize per char for mixed caps, 0.75× cap-height
+	const estW = fontSize * text.length * 0.62
+	const estH = fontSize * 0.75
+	return {
+		x: TX - estW / 2 - pad,
+		y: TY - estH / 2 - pad,
+		w: estW + pad * 2,
+		h: estH + pad * 2,
+	}
+}
+
+const FONT_SIZE = 80
+const FONT_FAMILY = "helvetica, sans-serif"
+const FONT_WEIGHT = "bold"
+const PAD = 2
+
+// Large origin offset so the text bbox stays well into positive space
+const TX = 5000
+const TY = 5000
+
 export const TextHoverEffect = ({
 	text,
 	duration,
@@ -15,44 +47,51 @@ export const TextHoverEffect = ({
 	const [cursor, setCursor] = useState({ x: 0, y: 0 })
 	const [hovered, setHovered] = useState(false)
 
-	// Place text far from origin so bbox is always fully in positive space.
-	const TX = 5000
-	const TY = 5000
+	/**
+	 * SSR-safe initial viewBox — pure math, same result on server and client.
+	 * Avoids hydration mismatch that occurs when using canvas (DOM) in useState.
+	 * The estimate is close enough to the actual SVG bbox that the useEffect
+	 * fine-tuning causes only a sub-pixel height change.
+	 */
+	const [vb, setVb] = useState(() =>
+		estimateViewBox(text, FONT_SIZE, PAD, TX, TY),
+	)
 
-	// Store viewBox as object so we can map screen coords → SVG user space for the gradient.
-	const [vb, setVb] = useState({ x: TX - 150, y: TY - 50, w: 300, h: 100 })
-
-	// Mask position in absolute SVG user-space coordinates (not percentages).
-	// gradientUnits="userSpaceOnUse" requires absolute coords, not % strings.
+	// Mask position in absolute SVG user-space coordinates
 	const [maskPos, setMaskPos] = useState({ cx: TX, cy: TY })
 
 	useEffect(() => {
+		/**
+		 * Fine-tune the viewBox with the more accurate SVG getBBox() measurement.
+		 * Because the canvas measurement is already close, the change here will be
+		 * tiny (sub-pixel visually) so there's no perceptible layout shift.
+		 */
 		const measure = () => {
 			if (!textRef.current) return
 			try {
 				const b = textRef.current.getBBox()
 				if (b.width > 0 && b.height > 0) {
-					const pad = 2
 					setVb({
-						x: b.x - pad,
-						y: b.y - pad,
-						w: b.width + pad * 2,
-						h: b.height + pad * 2,
+						x: b.x - PAD,
+						y: b.y - PAD,
+						w: b.width + PAD * 2,
+						h: b.height + PAD * 2,
 					})
 				}
 			} catch (_) {
-				/* keep default */
+				/* element not in DOM yet */
 			}
 		}
+
 		measure()
-		document.fonts.ready.then(measure)
+		// Re-measure after web fonts finish loading (may change metrics slightly)
+		document.fonts?.ready.then(measure)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
 		if (!svgRef.current) return
 		const rect = svgRef.current.getBoundingClientRect()
-		// Map screen pixel position to SVG user-space coordinates.
 		const fracX = (cursor.x - rect.left) / rect.width
 		const fracY = (cursor.y - rect.top) / rect.height
 		setMaskPos({
@@ -67,29 +106,33 @@ export const TextHoverEffect = ({
 		textAnchor: "middle" as const,
 		dominantBaseline: "middle" as const,
 		strokeWidth: "0.7",
-		fontSize: "80",
-		fontFamily: "helvetica, sans-serif",
-		fontWeight: "bold",
+		fontSize: String(FONT_SIZE),
+		fontFamily: FONT_FAMILY,
+		fontWeight: FONT_WEIGHT,
 	}
 
-	// Gradient radius: ~30% of viewBox width so it covers a good area.
+	// Gradient radius: ~30% of viewBox width
 	const gradR = vb.w * 0.3
 
 	return (
 		<svg
 			ref={svgRef}
 			width="100%"
-			height="100%"
 			viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
 			preserveAspectRatio="xMidYMid meet"
 			xmlns="http://www.w3.org/2000/svg"
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => setHovered(false)}
 			onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
-			className="select-none"
+			/*
+			 * h-auto: browser derives height from viewBox aspect ratio.
+			 * display:block removes the default inline bottom gap.
+			 */
+			className="w-full h-auto block select-none"
+			style={{ display: "block" }}
 			role="img"
 		>
-			<title className="hidden">{text}</title>
+			<title>{text}</title>
 			<defs>
 				{/* Colorful gradient that fills the hovered text */}
 				<linearGradient
@@ -111,7 +154,7 @@ export const TextHoverEffect = ({
 					)}
 				</linearGradient>
 
-				{/* Radial mask that follows the cursor – coords in SVG user space */}
+				{/* Radial mask that follows the cursor */}
 				<motion.radialGradient
 					id="revealMask"
 					gradientUnits="userSpaceOnUse"

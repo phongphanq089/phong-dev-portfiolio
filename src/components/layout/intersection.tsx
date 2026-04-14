@@ -1,7 +1,6 @@
-const Intersection2 = ({ children }: { children: React.ReactNode }) => (
+const Intersection = ({ children }: { children: React.ReactNode }) => (
 	<div className="relative w-full h-full grid grid-cols-[1fr_1rem_auto_1rem_1fr] grid-rows-[1fr_1px_auto_1px_1fr] [--pattern-fg:var(--color-gray-950)]/5 dark:bg-transparent dark:[--pattern-fg:var(--color-white)]/10">
-		{/* Center content */}
-		<div className="col-start-3 row-start-3 flex max-w-lg w-full flex-col relative">
+		<div className="col-start-3 row-start-3 flex max-w-lg w-full flex-col relative p-10">
 			{children}
 		</div>
 		{/* Left vertical line */}
@@ -15,4 +14,4 @@ const Intersection2 = ({ children }: { children: React.ReactNode }) => (
 	</div>
 )
 
-export default Intersection2
+export default Intersection
