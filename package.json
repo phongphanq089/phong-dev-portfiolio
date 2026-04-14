@@ -71,7 +71,7 @@
     "jsdom": "^28.1.0",
     "typescript": "^5.7.2",
     "vite": "^7.3.2",
-npm install    "vite-tsconfig-paths": "^5.1.4",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"
   },
   "pnpm": {
