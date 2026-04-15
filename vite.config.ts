@@ -17,7 +17,7 @@ const config = defineConfig({
 		tanstackStart({
 			prerender: {
 				enabled: true,
-				crawlLinks: true, // auto crawl links
+				crawlLinks: false, // tắt để tránh follow link /blog chưa tồn tại
 			},
 			sitemap: {
 				enabled: true,
