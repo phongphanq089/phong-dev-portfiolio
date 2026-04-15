@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist/client"
+
+[functions]
+  directory = "dist/server" # Đây là nơi Netlify sẽ tìm các hàm serverless
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server" # Điều hướng mọi yêu cầu vào server logic
+  status = 200
