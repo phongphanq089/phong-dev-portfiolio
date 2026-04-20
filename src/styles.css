@@ -264,34 +264,6 @@ nav {
     0 4px 6px -4px rgba(0, 0, 0, 0.5);
 }
 
-.vengeanceUI-text {
-  font-weight: bold;
-  text-transform: uppercase;
-  position: relative;
-  animation: melt 6s infinite ease-in-out;
-  color: hsl(var(--foreground));
-  text-shadow: 0 0 40px hsl(var(--foreground) / 0.1);
-}
-
-.vengeanceUI-text::before,
-.vengeanceUI-text::after {
-  content: "vengeanceUI";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: hsl(var(--foreground) / 0.15);
-  z-index: -1;
-  transform: scaleY(1);
-  animation: drip 6s infinite ease-in-out;
-}
-
-.vengeanceUI-text::after {
-  filter: blur(20px);
-  color: hsl(var(--foreground) / 0.1);
-}
-
 /* effect for vengeanceUI-text melting */
 @keyframes melt {
   0%,
@@ -314,4 +286,50 @@ nav {
     transform: scaleY(1.15);
     opacity: 0.3;
   }
+}
+
+/* ================= 404 PAGE STYLES ================= */
+
+.toio-404-container {
+  @apply flex flex-col items-center justify-center min-h-screen text-center p-4 bg-background transition-colors duration-500;
+}
+
+.toio-404-display {
+  @apply relative flex items-center justify-center font-serif font-black;
+  font-size: clamp(8rem, 45vw, 40rem);
+  line-height: 0.8;
+  color: var(--foreground);
+}
+
+.toio-404-number {
+  @apply relative z-0 tracking-tighter;
+  opacity: 0.9;
+}
+
+.toio-404-zero-wrapper {
+  @apply relative flex items-center justify-center mx-[-0.02em];
+}
+
+.toio-404-content {
+  @apply md:absolute max-md:hidden inset-0 flex flex-col items-center justify-center z-10;
+  @apply pointer-events-none;
+  @apply text-background; /* Use background color for contrast inside the dark digit */
+  direction: ltr;
+}
+
+.toio-404-content > * {
+  @apply pointer-events-auto;
+}
+
+.toio-404-title {
+  @apply text-base md:text-xl font-serif mb-1 opacity-100;
+}
+
+.toio-404-sub {
+  @apply text-[13px] md:text-xs max-w-[120px] md:max-w-[200px] leading-tight mb-4;
+}
+
+.toio-404-btn {
+  @apply px-4 py-1.5 md:px-6 md:py-2 text-[10px] md:text-xs font-serif border border-background/30 rounded-full transition-all duration-300;
+  @apply hover:bg-background hover:text-foreground;
 }

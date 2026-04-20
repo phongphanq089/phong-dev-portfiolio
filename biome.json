@@ -40,6 +40,9 @@
 			"correctness": {
 				"noUnusedImports": "warn",
 				"useExhaustiveDependencies": "error"
+			},
+			"suppressions": {
+				"noPlaceholder": "off"
 			}
 		}
 	},
