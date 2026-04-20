@@ -1,4 +1,4 @@
-import Intersection from "@/components/layout/intersection"
+
 import { DottedGlowBackground } from "@/components/ui/animation/dotted-glow-background"
 import TextBurnNeon from "@/components/ui/animation/text-burn-neon"
 import { TextHoverEffect } from "@/components/ui/animation/text-hover-effect"
@@ -6,7 +6,7 @@ import ProfileCard from "./profile-card"
 
 const BannerHero = () => {
 	return (
-		<section className="relative w-full overflow-hidden flex flex-col justify-between pb-12">
+		<section className="relative w-full overflow-hidden flex flex-col justify-between pb-12  max-md:pt-12">
 			<div className="relative z-10 select-none">
 				<TextHoverEffect text="PHONGPHAN" />
 				<div className="py-4 mx-auto w-fit">

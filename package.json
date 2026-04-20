@@ -46,6 +46,7 @@
     "react-dom": "^19.2.0",
     "sanity": "^5.18.0",
     "shadcn": "^4.1.2",
+    "splitting": "^1.1.0",
     "streamdown": "^2.3.0",
     "styled-components": "^6.3.12",
     "tailwind-merge": "^3.5.0",

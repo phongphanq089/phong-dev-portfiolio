@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
 import { Container } from "@/components/layout/container"
 import Footer from "@/components/layout/Footer"
-import { SpotlightNavbar } from "@/components/layout/header-public"
+import { SpotlightNavbar } from "@/components/layout/header/header-public"
 import BackgroundGradientCursor from "@/components/ui/animation/background-gradient-cursor"
 import { ThemeProvider } from "@/provider/theme-provider"
 

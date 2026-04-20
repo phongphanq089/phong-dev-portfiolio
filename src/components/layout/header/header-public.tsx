@@ -3,7 +3,11 @@ import { animate } from "framer-motion"
 import { AppWindow, Home, Info, LayoutDashboard, Palette } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
-import { ModeToggle } from "./mode-toggle"
+import { ModeToggle } from "../mode-toggle"
+import { lazy ,Suspense } from 'react';
+import { navigation } from "./setting-menu"
+// import FlippedMenuMobile from "./header/flipped-menu-mobile"
+const FlippedMenuMobile = lazy(() => import("./flipped-menu-mobile"))
 
 export interface SpotlightNavbarProps {
 	className?: string
@@ -17,13 +21,7 @@ export interface SpotlightNavbarProps {
 // 	{ name: "Studio", to: "/studio", icon: AppWindow },
 // ]
 
-const navigation = [
-	{ name: "HOME", to: "/", icon: Home },
-	{ name: "BLOG", to: "/blog", icon: Info },
-	{ name: "PROJECTS", to: "/projects", icon: Palette },
-	{ name: "RESOURCES", to: "/resources", icon: LayoutDashboard },
-	{ name: "STUDIO", to: "/studio", icon: AppWindow },
-]
+
 
 export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
 	const navRef = useRef<HTMLDivElement>(null)
@@ -117,7 +115,7 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
 			<nav
 				ref={navRef}
 				className={cn(
-					"spotlight-nav spotlight-nav-bg glass-border spotlight-nav-shadow",
+					"spotlight-nav spotlight-nav-bg glass-border spotlight-nav-shadow max-md:hidden",
 					"relative h-12 flex items-center rounded-full transition-all duration-300 overflow-hidden pointer-events-auto",
 				)}
 			>
@@ -184,6 +182,12 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
 				{/* 3. Bottom Border Track (Subtle) */}
 				<div className="absolute bottom-0 left-0 w-full bg-neutral-200 dark:bg-white/10 h-full z-0" />
 			</nav>
+			{/* Mobile Menu Wrapper - Enable interaction */}
+			<div className="md:hidden pointer-events-auto absolute right-4 top-2">
+				<Suspense fallback={null}>
+					<FlippedMenuMobile navigation={navigation} />
+				</Suspense>
+			</div>
 		</div>
 	)
 }

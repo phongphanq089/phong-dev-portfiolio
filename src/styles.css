@@ -158,7 +158,7 @@ body {
 }
 
 .container-wrapper {
-  @apply 3xl:max-w-[calc(var(--breakpoint-2xl)+2rem)] mx-auto w-full px-2;
+  @apply 3xl:max-w-[calc(var(--breakpoint-2xl)+2rem)] mx-auto w-full md:px-2;
 }
 
 .container {
