@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+
 import { client } from "@/lib/sanity"
 
 interface SitemapRoute {

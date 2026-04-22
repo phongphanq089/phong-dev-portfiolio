@@ -1,4 +1,4 @@
-import { Home, Info, Palette, LayoutDashboard, AppWindow } from "lucide-react";
+import { AppWindow,Home, Info, LayoutDashboard, Palette } from "lucide-react";
 
 export const navigation = [
 	{ name: "HOME", to: "/", icon: Home },

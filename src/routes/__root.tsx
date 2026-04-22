@@ -7,9 +7,11 @@ import {
 	Scripts,
 } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
+
 import { DefaultCatchBoundary } from "@/components/errors/default-catch-boundary"
 import { NotFound } from "@/components/errors/not-found"
 import { seo } from "@/lib/utils"
+
 import appCss from "../styles.css?url"
 
 export const Route = createRootRouteWithContext<{

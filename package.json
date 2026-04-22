@@ -4,12 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "node --max-old-space-size=4096 node_modules/vite/bin/vite.js dev --port 3000",
-    "build": "node --max-old-space-size=4096 node_modules/vite/bin/vite.js build",
+    "build": "tsc -b && node --max-old-space-size=4096 node_modules/vite/bin/vite.js build",
     "preview": "vite preview --port 8081",
     "test": "vitest run",
-    "format": "biome format",
-    "lint": "biome lint",
-    "check": "biome check"
+    "format": "eslint . --fix",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.8",
@@ -22,10 +21,6 @@
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/ai-gemini": "^0.8.4",
-    "@tanstack/ai-ollama": "^0.6.3",
-    "@tanstack/ai-openai": "^0.7.2",
-    "@tanstack/ai-react": "^0.7.6",
     "@tanstack/react-devtools": "^0.10.0",
     "@tanstack/react-query": "^5.95.2",
     "@tanstack/react-query-devtools": "^5.95.2",
@@ -57,9 +52,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.5",
-    "@content-collections/core": "^0.13.1",
-    "@content-collections/vite": "^0.2.8",
+    "@eslint/js": "^9.21.0",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "latest",
     "@testing-library/dom": "^10.4.1",
@@ -69,8 +62,17 @@
     "@types/react-dom": "^19.2.0",
     "@types/three": "^0.183.1",
     "@vitejs/plugin-react": "^5.1.4",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "globals": "^16.0.0",
     "jsdom": "^28.1.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.7.2",
+    "typescript-eslint": "^8.24.1",
     "vite": "^7.3.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"

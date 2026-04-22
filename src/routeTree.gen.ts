@@ -13,12 +13,9 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as LibraryRouteImport } from './routes/_library'
 import { Route as LayoutRouteImport } from './routes/_layout'
-import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as LayoutIndexRouteImport } from './routes/_layout.index'
 import { Route as StudioSplatRouteImport } from './routes/studio.$'
 import { Route as LibraryLibraryRouteImport } from './routes/_library.library'
-import { Route as LayoutAboutRouteImport } from './routes/_layout.about'
-import { Route as AdminDashboardRouteImport } from './routes/_admin.dashboard'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -38,10 +35,6 @@ const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/_admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -57,23 +50,11 @@ const LibraryLibraryRoute = LibraryLibraryRouteImport.update({
   path: '/library',
   getParentRoute: () => LibraryRoute,
 } as any)
-const LayoutAboutRoute = LayoutAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const AdminDashboardRoute = AdminDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AdminRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/dashboard': typeof AdminDashboardRoute
-  '/about': typeof LayoutAboutRoute
   '/library': typeof LibraryLibraryRoute
   '/studio/$': typeof StudioSplatRoute
 }
@@ -81,59 +62,36 @@ export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/dashboard': typeof AdminDashboardRoute
-  '/about': typeof LayoutAboutRoute
   '/library': typeof LibraryLibraryRoute
   '/studio/$': typeof StudioSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_admin': typeof AdminRouteWithChildren
   '/_layout': typeof LayoutRouteWithChildren
   '/_library': typeof LibraryRouteWithChildren
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_admin/dashboard': typeof AdminDashboardRoute
-  '/_layout/about': typeof LayoutAboutRoute
   '/_library/library': typeof LibraryLibraryRoute
   '/studio/$': typeof StudioSplatRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/robots.txt'
-    | '/sitemap.xml'
-    | '/dashboard'
-    | '/about'
-    | '/library'
-    | '/studio/$'
+  fullPaths: '/' | '/robots.txt' | '/sitemap.xml' | '/library' | '/studio/$'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/robots.txt'
-    | '/sitemap.xml'
-    | '/dashboard'
-    | '/about'
-    | '/library'
-    | '/studio/$'
+  to: '/' | '/robots.txt' | '/sitemap.xml' | '/library' | '/studio/$'
   id:
     | '__root__'
-    | '/_admin'
     | '/_layout'
     | '/_library'
     | '/robots.txt'
     | '/sitemap.xml'
-    | '/_admin/dashboard'
-    | '/_layout/about'
     | '/_library/library'
     | '/studio/$'
     | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AdminRoute: typeof AdminRouteWithChildren
   LayoutRoute: typeof LayoutRouteWithChildren
   LibraryRoute: typeof LibraryRouteWithChildren
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -171,13 +129,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_admin': {
-      id: '/_admin'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_layout/': {
       id: '/_layout/'
       path: '/'
@@ -199,40 +150,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryLibraryRouteImport
       parentRoute: typeof LibraryRoute
     }
-    '/_layout/about': {
-      id: '/_layout/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof LayoutAboutRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_admin/dashboard': {
-      id: '/_admin/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof AdminRoute
-    }
   }
 }
 
-interface AdminRouteChildren {
-  AdminDashboardRoute: typeof AdminDashboardRoute
-}
-
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminDashboardRoute: AdminDashboardRoute,
-}
-
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
-
 interface LayoutRouteChildren {
-  LayoutAboutRoute: typeof LayoutAboutRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutAboutRoute: LayoutAboutRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 
@@ -251,7 +176,6 @@ const LibraryRouteWithChildren =
   LibraryRoute._addFileChildren(LibraryRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  AdminRoute: AdminRouteWithChildren,
   LayoutRoute: LayoutRouteWithChildren,
   LibraryRoute: LibraryRouteWithChildren,
   RobotsDottxtRoute: RobotsDottxtRoute,

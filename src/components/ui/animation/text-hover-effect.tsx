@@ -86,7 +86,7 @@ export const TextHoverEffect = ({
 		measure()
 		// Re-measure after web fonts finish loading (may change metrics slightly)
 		document.fonts?.ready.then(measure)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		 
 	}, [])
 
 	useEffect(() => {
