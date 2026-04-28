@@ -8,7 +8,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client" , "vitest"], // Nếu dùng TanStack Start, hãy thêm "vinxi/types" vào đây
+    "types": ["vite/client", "vitest"], // Nếu dùng TanStack Start, hãy thêm "vinxi/types" vào đây
     "skipLibCheck": true,
 
     "moduleResolution": "bundler",

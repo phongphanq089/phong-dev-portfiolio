@@ -82,6 +82,7 @@ export const DottedGlowBackground = ({
     return fromRoot || null
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const detectDarkMode = (): boolean => {
     const root = document.documentElement
     if (root.classList.contains("dark")) return true

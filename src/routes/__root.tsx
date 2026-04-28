@@ -1,10 +1,10 @@
 import type { QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import {
-	createRootRouteWithContext,
-	HeadContent,
-	Outlet,
-	Scripts,
+  createRootRouteWithContext,
+  HeadContent,
+  Outlet,
+  Scripts,
 } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 
@@ -15,86 +15,87 @@ import { seo } from "@/lib/utils"
 import appCss from "../styles.css?url"
 
 export const Route = createRootRouteWithContext<{
-	queryClient: QueryClient
+  queryClient: QueryClient
 }>()({
-	head: () => ({
-		meta: [
-			{
-				charSet: "utf-8",
-			},
-			{
-				name: "viewport",
-				content: "width=device-width, initial-scale=1",
-			},
-			...seo({
-				title:
-					"TanStack Start | Type-Safe, Client-First, Full-Stack React Framework",
-				description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
-			}),
-		],
-		links: [
-			{ rel: "stylesheet", href: appCss },
-			{
-				rel: "apple-touch-icon",
-				sizes: "180x180",
-				href: "/apple-touch-icon.png",
-			},
-			{
-				rel: "icon",
-				type: "image/png",
-				sizes: "32x32",
-				href: "/favicon-32x32.png",
-			},
-			{
-				rel: "icon",
-				type: "image/png",
-				sizes: "16x16",
-				href: "/favicon-16x16.png",
-			},
-			{ rel: "manifest", href: "/site.webmanifest", color: "#fffff" },
-			{ rel: "icon", href: "/favicon.ico" },
-		],
-	}),
-	errorComponent: (props) => {
-		return (
-			<RootDocument>
-				<DefaultCatchBoundary {...props} />
-			</RootDocument>
-		)
-	},
-	notFoundComponent: () => <NotFound />,
-	component: RootComponent,
+  head: () => ({
+    meta: [
+      {
+        charSet: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      ...seo({
+        title:
+          "TanStack Start | Type-Safe, Client-First, Full-Stack React Framework",
+        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+      }),
+    ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
+      { rel: "manifest", href: "/site.webmanifest", color: "#fffff" },
+      { rel: "icon", href: "/favicon.ico" },
+    ],
+  }),
+  errorComponent: (props) => {
+    return (
+      <RootDocument>
+        <DefaultCatchBoundary {...props} />
+      </RootDocument>
+    )
+  },
+  notFoundComponent: () => <NotFound />,
+  component: RootComponent,
 })
 
+// eslint-disable-next-line react-refresh/only-export-components
 function RootComponent() {
-	return (
-		<RootDocument>
-			<Outlet />
-		</RootDocument>
-	)
+  return (
+    <RootDocument>
+      <Outlet />
+    </RootDocument>
+  )
 }
 
 const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'system',r=document.documentElement;if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches))r.classList.add('dark');else r.classList.remove('dark')}catch(e){}})()`
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-	return (
-		<html lang="en" suppressHydrationWarning>
-			<head>
-				<script
-					// biome-ignore lint: This is a standard blocking script for theme management
-					dangerouslySetInnerHTML={{ __html: themeScript as any }}
-				/>
-				<HeadContent />
-			</head>
-			<body
-				className="font-sans antialiased wrap-anywhere relative"
-				suppressHydrationWarning
-			>
-				{children}
-				<TanStackRouterDevtools position="bottom-right" />
-				<ReactQueryDevtools buttonPosition="bottom-left" />
-				<Scripts />
-			</body>
-		</html>
-	)
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          dangerouslySetInnerHTML={{ __html: themeScript as any }}
+        />
+        <HeadContent />
+      </head>
+      <body
+        className="relative font-sans wrap-anywhere antialiased"
+        suppressHydrationWarning
+      >
+        {children}
+        <TanStackRouterDevtools position="bottom-right" />
+        <ReactQueryDevtools buttonPosition="bottom-left" />
+        <Scripts />
+      </body>
+    </html>
+  )
 }

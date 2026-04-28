@@ -1,17 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import BannerHero from "@/features/home/banner-hero"
-import SectionAbout from "@/features/home/section-about"
+import { HomeView } from "@/features/home/home-view"
 
 export const Route = createFileRoute("/_layout/")({
-  component: App,
+  component: HomeView,
 })
-
-function App() {
-  return (
-    <div className="w-full">
-      <BannerHero />
-      <SectionAbout />
-    </div>
-  )
-}

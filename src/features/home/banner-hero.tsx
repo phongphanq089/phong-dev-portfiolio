@@ -1,6 +1,7 @@
 import { DottedGlowBackground } from "@/components/ui/animation/dotted-glow-background"
 import TextBurnNeon from "@/components/ui/animation/text-burn-neon"
 import { TextHoverEffect } from "@/components/ui/animation/text-hover-effect"
+
 import ProfileCard from "./components/profile-card"
 
 const BannerHero = () => {
