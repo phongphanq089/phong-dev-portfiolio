@@ -66,7 +66,6 @@ export const Route = createRootRouteWithContext<{
   component: RootComponent,
 })
 
-// eslint-disable-next-line react-refresh/only-export-components
 function RootComponent() {
   return (
     <RootDocument>
@@ -75,7 +74,7 @@ function RootComponent() {
   )
 }
 
-const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'system',r=document.documentElement;if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches))r.classList.add('dark');else r.classList.remove('dark')}catch(e){}})()`
+const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'dark',r=document.documentElement;if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches))r.classList.add('dark');else r.classList.remove('dark')}catch(e){}})()`
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (

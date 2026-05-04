@@ -87,6 +87,7 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
   ) => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
     const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 })
+    const [isVisible, setIsVisible] = useState(false)
     const backgroundRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -95,6 +96,7 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
 
     useEffect(() => {
       const handleMouseMove = (event: MouseEvent) => {
+        setIsVisible(true)
         if (backgroundRef.current) {
           const rect = backgroundRef.current.getBoundingClientRect()
           setCursorPosition({
@@ -104,8 +106,18 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
         }
       }
 
+      const handleMouseLeave = () => setIsVisible(false)
+      const handleMouseEnter = () => setIsVisible(true)
+
       document.addEventListener("mousemove", handleMouseMove)
-      return () => document.removeEventListener("mousemove", handleMouseMove)
+      document.addEventListener("mouseleave", handleMouseLeave)
+      document.addEventListener("mouseenter", handleMouseEnter)
+
+      return () => {
+        document.removeEventListener("mousemove", handleMouseMove)
+        document.removeEventListener("mouseleave", handleMouseLeave)
+        document.removeEventListener("mouseenter", handleMouseEnter)
+      }
     }, [])
 
     useEffect(() => {
@@ -213,6 +225,8 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
               pointerEvents: "none",
               filter: "blur(40px)",
               mixBlendMode: "lighten",
+              opacity: isVisible ? 1 : 0,
+              transition: "opacity 0.4s ease-out",
             }}
           />
         )}

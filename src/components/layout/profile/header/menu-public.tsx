@@ -1,15 +1,13 @@
 import { Link, useLocation } from "@tanstack/react-router"
 import { animate } from "framer-motion"
-import { lazy, Suspense, useEffect, useRef, useState } from "react"
-
-import { cn } from "@/lib/utils"
+import { useEffect, useRef, useState } from "react"
 
 import { ModeToggle } from "@/components/ui/mode-toggle"
-import { navigation } from "./setting-menu"
-// import FlippedMenuMobile from "./header/flipped-menu-mobile"
-const FlippedMenuMobile = lazy(() => import("./flipped-menu-mobile"))
+import { cn } from "@/lib/utils"
 
-export interface SpotlightNavbarProps {
+import { navigation } from "./setting-menu"
+
+export interface MenuPublicProps {
   className?: string
 }
 
@@ -21,7 +19,7 @@ export interface SpotlightNavbarProps {
 // 	{ name: "Studio", to: "/studio", icon: AppWindow },
 // ]
 
-export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
+export function MenuPublic({ className }: MenuPublicProps) {
   const navRef = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()
 
@@ -106,7 +104,7 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
   return (
     <div
       className={cn(
-        "pointer-events-none sticky top-0 z-50 flex justify-center py-2 md:py-3",
+        "pointer-events-none flex justify-center py-2 md:py-3",
         className
       )}
     >
@@ -156,7 +154,7 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
             background: `
             radial-gradient(
               120px circle at var(--spotlight-x) 100%,
-              var(--spotlight-color, rgba(0,0,0,0.1)) 0%,
+              var(--spotlight-color, rgba(255,255,255,0.05)) 0%,
               transparent 50%
             )
           `,
@@ -170,7 +168,7 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
             background: `
                 radial-gradient(
                   60px circle at var(--ambience-x) 0%,
-                  var(--ambience-color, rgba(0,0,0,1)) 0%,
+                  var(--ambience-color, rgba(34, 197, 94, 0.5)) 0%,
                   transparent 100%
                 )
               `,
@@ -178,14 +176,8 @@ export function SpotlightNavbar({ className }: SpotlightNavbarProps) {
         />
 
         {/* 3. Bottom Border Track (Subtle) */}
-        <div className="absolute bottom-0 left-0 z-0 h-full w-full bg-neutral-200 dark:bg-white/10" />
+        <div className="absolute bottom-0 left-0 z-0 h-full w-full bg-white/5" />
       </nav>
-      {/* Mobile Menu Wrapper - Enable interaction */}
-      <div className="pointer-events-auto absolute top-2 right-4 md:hidden">
-        <Suspense fallback={null}>
-          <FlippedMenuMobile navigation={navigation} />
-        </Suspense>
-      </div>
     </div>
   )
 }
