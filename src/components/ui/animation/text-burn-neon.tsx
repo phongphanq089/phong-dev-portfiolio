@@ -58,8 +58,8 @@ export default function TextBurnNeon({
         })
 
         tl.to(char, {
-          color: "#ffffff",
-          textShadow: "0 0 10px #ffffff, 0 0 20px #ffaa00",
+          color: "#ff3300",
+          textShadow: "0 0 10px #ff3300, 0 0 20px #ffaa00",
           duration: 0.4,
           ease: "power2.out",
         })

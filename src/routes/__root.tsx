@@ -10,6 +10,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
 
 import { DefaultCatchBoundary } from "@/components/errors/default-catch-boundary"
 import { NotFound } from "@/components/errors/not-found"
+import { MusicPlayer } from "@/components/ui/music-player"
 import { seo } from "@/lib/utils"
 
 import appCss from "../styles.css?url"
@@ -91,6 +92,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         suppressHydrationWarning
       >
         {children}
+        <MusicPlayer />
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
