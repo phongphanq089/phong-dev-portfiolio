@@ -6,24 +6,35 @@ const NumbersSimulation = () => {
 
   useEffect(() => {
     const updateLineCount = () => {
+      if (!containerRef.current) return
+      const wrapper = containerRef.current.closest(".min-h-screen") || document.body
       const lineHeight = 24 // Matches h-6
-      const contentHeight = document.body.scrollHeight
+      const contentHeight = Math.max(wrapper.scrollHeight, wrapper.clientHeight)
       const count = Math.max(1, Math.ceil(contentHeight / lineHeight))
       setLineCount(count)
     }
 
-    const resizeObserver = new ResizeObserver(() => {
-      updateLineCount()
-    })
+    const wrapper = containerRef.current?.closest(".min-h-screen") || document.body
 
-    resizeObserver.observe(document.body)
+    // Observe size changes
+    const resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(updateLineCount)
+    })
+    resizeObserver.observe(wrapper)
+
+    // Observe DOM mutations that might change scrollHeight without changing clientHeight
+    const mutationObserver = new MutationObserver(() => {
+      requestAnimationFrame(updateLineCount)
+    })
+    mutationObserver.observe(wrapper, { childList: true, subtree: true, attributes: true })
+
     updateLineCount()
 
-    // Also update on window resize just in case
     window.addEventListener("resize", updateLineCount)
 
     return () => {
       resizeObserver.disconnect()
+      mutationObserver.disconnect()
       window.removeEventListener("resize", updateLineCount)
     }
   }, [])
@@ -31,10 +42,10 @@ const NumbersSimulation = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute top-0 left-0 flex w-12 flex-col items-center text-[10px] text-muted-foreground/50 select-none"
+      className="absolute inset-0 flex w-12 flex-col items-center overflow-hidden text-[10px] text-muted-foreground/50 select-none"
     >
       {Array.from({ length: lineCount }).map((_, i) => (
-        <div key={i} className="flex h-6 items-center">
+        <div key={i} className="flex h-6 w-full items-center justify-center">
           {String(i + 1).padStart(2, "0")}
         </div>
       ))}

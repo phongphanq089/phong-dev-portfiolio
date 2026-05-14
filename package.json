@@ -13,6 +13,7 @@
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.7",
     "@gsap/react": "^2.1.2",
+    "@paper-design/shaders-react": "^0.0.76",
     "@phosphor-icons/react": "^2.1.10",
     "@portabletext/react": "^6.0.3",
     "@radix-ui/react-checkbox": "^1.2.2",

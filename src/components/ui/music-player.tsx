@@ -3,8 +3,10 @@ import { useEffect, useRef, useState } from "react"
 const SONG = {
   title: "Lofi Hip Hop",
   artist: "ChillHop",
-  src: "https://cdn.pixabay.com/audio/2022/01/20/audio_d0c6ff1bab.mp3",
+  src: "https://cdn.sanity.io/files/i6rvgdeu/music-app-player/ee8c9a37cff4bd27011cdfe042a215ae0a42f082.mp3",
 }
+
+const AUTO_PLAY = false // Set to true to enable autoplay by default
 
 export function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -16,6 +18,9 @@ export function MusicPlayer() {
     const audio = audioRef.current
     if (!audio) return
     audio.volume = 0.35
+
+    if (!AUTO_PLAY) return
+
     const t = setTimeout(async () => {
       try {
         await audio.play()
@@ -43,9 +48,7 @@ export function MusicPlayer() {
     <>
       <audio ref={audioRef} src={SONG.src} loop preload="auto" />
 
-      {/* Floating music button — bottom right */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-
+      <div className="flex flex-col items-end gap-2">
         {/* Song name tooltip — shows on hover */}
         <div
           className={`pointer-events-none flex items-center gap-2 rounded-full border border-white/10 bg-black/80 px-3 py-1.5 backdrop-blur-md transition-all duration-300 ${
@@ -54,7 +57,7 @@ export function MusicPlayer() {
         >
           {/* Mini equalizer inside tooltip */}
           {playing && (
-            <span className="flex items-end gap-[2px] h-3">
+            <span className="flex h-3 items-end gap-[2px]">
               {[0, 1, 2, 3].map((i) => (
                 <span
                   key={i}
@@ -68,7 +71,7 @@ export function MusicPlayer() {
               ))}
             </span>
           )}
-          <span className="font-mono text-[10px] text-white/60 whitespace-nowrap">
+          <span className="font-mono text-[10px] whitespace-nowrap text-white/60">
             {playing ? `♪ ${SONG.title}` : "Click to play"}
           </span>
         </div>
@@ -79,7 +82,7 @@ export function MusicPlayer() {
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           aria-label={playing ? "Pause music" : "Play music"}
-          className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-black/70 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-white/30 hover:bg-black/90 hover:scale-110 active:scale-95"
+          className="relative flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-black/70 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-white/30 hover:bg-black/90 active:scale-95"
         >
           {/* Ripple ring when playing */}
           {playing && (
@@ -95,7 +98,7 @@ export function MusicPlayer() {
           {/* Icon */}
           {playing ? (
             /* Equalizer bars */
-            <span className="flex items-end gap-[3px] h-4 pb-[1px]">
+            <span className="flex h-4 items-end gap-[3px] pb-[1px]">
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
@@ -116,7 +119,10 @@ export function MusicPlayer() {
               viewBox="0 0 24 24"
               fill="currentColor"
             >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" opacity="0.7" />
+              <polygon
+                points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                opacity="0.7"
+              />
               <path
                 d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"
                 fill="none"

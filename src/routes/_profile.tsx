@@ -1,10 +1,15 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
+import { useEffect, useState } from "react"
 
 import Footer from "@/components/layout/profile/Footer"
 import { GridSection } from "@/components/layout/profile/grid-layout"
-import HeaderV2 from "@/components/layout/profile/header/header-v2"
-import MenuBottomV2 from "@/components/layout/profile/header/menu-bottom-v2"
+import Header from "@/components/layout/profile/header/menu-public"
+import MenuBottomMobile from "@/components/layout/profile/header/menu-public-mobile"
 import NumbersSimulation from "@/components/layout/profile/numbers-simulation"
+import { EdgeBlur } from "@/components/shared/edge-blur"
+import BackgroundGradientCursor from "@/components/ui/animation/background-gradient-cursor"
+import { type TOCItemType, TOCMinimap } from "@/components/ui/toc-minimap"
+import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/provider/theme-provider"
 
 export const Route = createFileRoute("/_profile")({
@@ -12,6 +17,17 @@ export const Route = createFileRoute("/_profile")({
 })
 
 function LayoutComponent() {
+  const [showMinimap, setShowMinimap] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowMinimap(window.scrollY > 600)
+    }
+    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   const effects = {
     mask: { cursor: true, x: 0, y: 0, radius: 100 },
     gradient: {
@@ -32,47 +48,67 @@ function LayoutComponent() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className="relative flex min-h-screen w-full flex-col bg-background text-foreground selection:bg-primary/20">
+      <div className="relative flex min-h-screen w-full bg-background text-foreground selection:bg-primary/20">
+        <div
+          className={cn(
+            "fixed top-1/2 right-0 z-50 -translate-y-1/2 transition-all duration-500",
+            showMinimap
+              ? "translate-x-0 opacity-100"
+              : "pointer-events-none translate-x-10 opacity-0"
+          )}
+        >
+          <TOCMinimap items={ITEMS} />
+        </div>
         {/* ------------------------------ Background cursor gradient ------------------------------------------ */}
-        {/* <BackgroundGradientCursor
+        <BackgroundGradientCursor
           mask={effects.mask}
           dots={effects.dots}
           grid={effects.grid}
           lines={effects.lines}
-        /> */}
+        />
         {/* --------------------------------------------------------------------------------------------------------- */}
         {/* Numbers simulation on the left edge */}
-        <div className="pointer-events-none absolute top-0 bottom-0 left-0 z-1 hidden w-12 md:block">
+        <div className="pointer-events-none relative z-1 hidden w-12 shrink-0 border-r border-border md:block">
           <NumbersSimulation />
         </div>
 
-        {/* ------------------------------ Header ---------------------------------------------- */}
-        <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
-          <GridSection
-            borderTop={false}
-            borderBottom={true}
-            className="flex justify-center py-4 transition-all duration-300"
-          >
-            <HeaderV2 />
-          </GridSection>
-        </div>
-        {/* --------------------------------------------------------------------------------------------------------- */}
+        {/* ------------------------------ Main Layout ---------------------------------------------- */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          {/* ------------------------------ Header ---------------------------------------------- */}
+          <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
+            <GridSection
+              borderTop={false}
+              borderBottom={true}
+              className="flex justify-center p-0 transition-all duration-300"
+            >
+              <Header />
+            </GridSection>
+          </div>
+          {/* --------------------------------------------------------------------------------------------------------- */}
 
-        {/* Mobile Bottom Dock Menu */}
-        <MenuBottomV2 />
+          {/* Mobile Bottom Dock Menu */}
+          <MenuBottomMobile />
 
-        {/* ------------------------------ Main Content Area ------------------------------------------------------ */}
-        <main className="flex w-full flex-1 flex-col">
-          <Outlet />
-        </main>
-        {/* --------------------------------------------------------------------------------------------------------- */}
+          {/* ------------------------------ Main Content Area ------------------------------------------------------ */}
+          <main className="flex w-full flex-1 flex-col">
+            <Outlet />
+          </main>
+          {/* --------------------------------------------------------------------------------------------------------- */}
 
-        {/* ------------------------------ Footer ---------------------------------------------------- */}
-        <GridSection borderBottom={false}>
+          {/* ------------------------------ Footer ---------------------------------------------------- */}
           <Footer />
-        </GridSection>
-        {/* --------------------------------------------------------------------------------------------------------- */}
+          {/* --------------------------------------------------------------------------------------------------------- */}
+        </div>
       </div>
+      <EdgeBlur position="bottom" height={72} />
     </ThemeProvider>
   )
 }
+
+const ITEMS: TOCItemType[] = [
+  { title: "Banner", url: "#banner", depth: 1 },
+  { title: "About", url: "#about", depth: 1 },
+  { title: "Components ui", url: "#components-ui", depth: 1 },
+  { title: "Project", url: "#project", depth: 1 },
+  { title: "Blog", url: "#contact", depth: 1 },
+]
