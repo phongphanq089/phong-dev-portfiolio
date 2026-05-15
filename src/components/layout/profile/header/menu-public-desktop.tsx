@@ -4,38 +4,7 @@ import LiquidMetalButton from "@/components/ui/animation/liquid-metal-button"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { cn } from "@/lib/utils"
 
-const navItems = [
-  {
-    label: "Home",
-    color: "text-[#66ff00]",
-    border: "border-[#66ff00]",
-    bg: "bg-[#66ff00]",
-  },
-  {
-    label: "PROJECTS",
-    color: "text-[#ff00ff]",
-    border: "border-[#ff00ff]",
-    bg: "bg-[#ff00ff]",
-  },
-  {
-    label: "BLOG",
-    color: "text-[#ff6600]",
-    border: "border-[#ff6600]",
-    bg: "bg-[#ff6600]",
-  },
-  {
-    label: "RESOURECES",
-    color: "text-[#ffcc00]",
-    border: "border-[#ffcc00]",
-    bg: "bg-[#ffcc00]",
-  },
-  {
-    label: "STUDIO",
-    color: "text-white",
-    border: "border-white",
-    bg: "bg-white",
-  },
-]
+import { navItems } from "./setting-menu"
 
 export const Header = () => {
   return (

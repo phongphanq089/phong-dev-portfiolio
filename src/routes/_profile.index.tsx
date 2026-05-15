@@ -1,7 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { HomeView } from "@/features/home/home-view"
+import BannerHero from "@/features/home/banner-hero"
 
 export const Route = createFileRoute("/_profile/")({
-  component: HomeView,
+  component: HomePage,
 })
+
+function HomePage() {
+  ;<div className="w-full">
+    {/* Hero Section */}
+
+    <div className="mx-auto px-8 md:px-16">
+      <BannerHero />
+    </div>
+    {/*
+      <GridSection className="py-12" borderTop={true}>
+        <SectionAbout />
+      </GridSection> */}
+
+    {/* ── UI Components Section ── */}
+    {/* <UiComponentsSection /> */}
+
+    {/* ── Projects Section ── */}
+    {/* <ProjectsSection /> */}
+
+    {/* ── Blog Section ── */}
+    {/* <BlogSection /> */}
+
+    {/* ── Bookmarks Section ── */}
+    {/* <BookmarkSection /> */}
+  </div>
+}

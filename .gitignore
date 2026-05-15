@@ -3,7 +3,7 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
+
 .nitro
 .tanstack
 .wrangler
@@ -11,3 +11,10 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+# .agents
+.vscode
+stats.html
+
+# AI
+.gemini
+tsconfig.tsbuildinfo

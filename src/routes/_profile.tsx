@@ -3,12 +3,13 @@ import { useEffect, useState } from "react"
 
 import Footer from "@/components/layout/profile/Footer"
 import { GridSection } from "@/components/layout/profile/grid-layout"
-import Header from "@/components/layout/profile/header/menu-public"
+import Header from "@/components/layout/profile/header/menu-public-desktop"
 import MenuBottomMobile from "@/components/layout/profile/header/menu-public-mobile"
 import NumbersSimulation from "@/components/layout/profile/numbers-simulation"
 import { EdgeBlur } from "@/components/shared/edge-blur"
 import BackgroundGradientCursor from "@/components/ui/animation/background-gradient-cursor"
-import { type TOCItemType, TOCMinimap } from "@/components/ui/toc-minimap"
+import { TOCMinimap } from "@/components/ui/toc-minimap"
+import { TOCItems } from "@/constants"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/provider/theme-provider"
 
@@ -57,7 +58,7 @@ function LayoutComponent() {
               : "pointer-events-none translate-x-10 opacity-0"
           )}
         >
-          <TOCMinimap items={ITEMS} />
+          <TOCMinimap items={TOCItems} />
         </div>
         {/* ------------------------------ Background cursor gradient ------------------------------------------ */}
         <BackgroundGradientCursor
@@ -104,11 +105,3 @@ function LayoutComponent() {
     </ThemeProvider>
   )
 }
-
-const ITEMS: TOCItemType[] = [
-  { title: "Banner", url: "#banner", depth: 1 },
-  { title: "About", url: "#about", depth: 1 },
-  { title: "Components ui", url: "#components-ui", depth: 1 },
-  { title: "Project", url: "#project", depth: 1 },
-  { title: "Blog", url: "#contact", depth: 1 },
-]
