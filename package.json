@@ -6,7 +6,7 @@
     "dev": "node --max-old-space-size=4096 node_modules/vite/bin/vite.js dev --port 3000",
     "build": "tsc -b && node --max-old-space-size=4096 node_modules/vite/bin/vite.js build",
     "preview": "vite preview --port 8081",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "lint": "eslint .",
     "format": "prettier --write . && eslint --fix",
     "check": "prettier --check .",
@@ -85,6 +85,15 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "lightningcss"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
     ]
   }
 }
