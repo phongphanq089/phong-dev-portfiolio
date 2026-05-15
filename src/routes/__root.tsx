@@ -27,12 +27,16 @@ export const Route = createRootRouteWithContext<{
         content: "width=device-width, initial-scale=1",
       },
       ...seo({
-        title:
-          "TanStack Start | Type-Safe, Client-First, Full-Stack React Framework",
-        description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+        title: "Phong Phan | Full-stack Architect & Creative Developer",
+        description:
+          "Portfolio of Phong Phan, a Full-stack Architect specializing in high-performance systems and immersive digital experiences. Expert in React, TypeScript, and modern UI/UX design.",
+        keywords:
+          "Phong Phan, Full-stack Architect, Creative Developer, React, TypeScript, UI/UX Design, Portfolio, Web Development, Software Engineer",
+        image: "/OGimage.jpg",
       }),
     ],
     links: [
+      { rel: "canonical", href: "https://phongphan.dev" },
       { rel: "stylesheet", href: appCss },
       {
         rel: "apple-touch-icon",
@@ -53,6 +57,27 @@ export const Route = createRootRouteWithContext<{
       },
       { rel: "manifest", href: "/site.webmanifest", color: "#fffff" },
       { rel: "icon", href: "/favicon.ico" },
+    ],
+    scripts: [
+      {
+        tag: "script",
+        attrs: {
+          type: "application/ld+json",
+        },
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Phong Phan",
+          jobTitle: "Full-stack Architect",
+          url: "https://phongphan.dev",
+          sameAs: [
+            "https://github.com/phongphanq089",
+            "https://linkedin.com/in/phongphan",
+          ],
+          description:
+            "Full-stack Architect specializing in high-performance systems and immersive digital experiences.",
+        }),
+      },
     ],
   }),
   errorComponent: (props) => {
@@ -80,10 +105,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          dangerouslySetInnerHTML={{ __html: themeScript as any }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript as string }} />
         <HeadContent />
       </head>
       <body
