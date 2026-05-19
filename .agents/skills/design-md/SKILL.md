@@ -42,7 +42,7 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
    - Review screen titles to identify the target screen (e.g., "Home", "Landing Page")
    - Extract the Screen ID from the screen's `name` field
 
-4. **Metadata fetch**: 
+4. **Metadata fetch**:
    - Call `[prefix]:get_screen` with both `projectId` and `screenId` (both as numeric IDs only)
    - This returns the complete screen object including:
      - `screenshot.downloadUrl` - Visual reference of the design
@@ -63,27 +63,45 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
 
 ## Analysis & Synthesis Instructions
 
-### 1. Extract Project Identity (JSON)
-- Locate the Project Title
-- Locate the specific Project ID (e.g., from the `name` field in the JSON)
+### 1. Extract Project Identity & Core Brand Tokens
+
+- Locate the Project Title and the specific Project ID (e.g., from the `name` field in the JSON).
+- **Strict Brand Constraints:** Define the established brand colors and primary fonts already declared in the source. Do not allow the addition of arbitrary, ad-hoc fonts or extra colors. Enforce consistent reuse of established assets.
 
 ### 2. Define the Atmosphere (Image/HTML)
+
 Evaluate the screenshot and HTML structure to capture the overall "vibe." Use evocative adjectives to describe the mood (e.g., "Airy," "Dense," "Minimalist," "Utilitarian").
 
 ### 3. Map the Color Palette (Tailwind Config/JSON)
+
 Identify the key colors in the system. For each color, provide:
+
 - A descriptive, natural language name that conveys its character (e.g., "Deep Muted Teal-Navy")
 - The specific hex code in parentheses for precision (e.g., "#294056")
 - Its specific functional role (e.g., "Used for primary actions")
 
 ### 4. Translate Geometry & Shape (CSS/Tailwind)
+
 Convert technical `border-radius` and layout values into physical descriptions:
+
 - Describe `rounded-full` as "Pill-shaped"
 - Describe `rounded-lg` as "Subtly rounded corners"
 - Describe `rounded-none` as "Sharp, squared-off edges"
 
 ### 5. Describe Depth & Elevation
+
 Explain how the UI handles layers. Describe the presence and quality of shadows (e.g., "Flat," "Whisper-soft diffused shadows," or "Heavy, high-contrast drop shadows").
+
+### 6. Enforce Typography & Component Behavior Strict Rules
+
+- **Typography Synchronization:** Ensure H1 to H6 styles are perfectly synchronized and unified across all pages. Ensure H1 sizing and weight are identical everywhere (e.g., if H1 is `text-3xl` on desktop on one page, it must not be `text-4xl` on another page).
+- **Control Element Layout (No Wrap):** Action buttons, tabs, menu items, and links **MUST strictly apply `whitespace-nowrap`** to stay aligned on a single line and avoid awkward line breaks.
+- **Font-to-Padding Synchronization:** Paddings on buttons, badges, and controls must scale proportionally and remain synchronized with their active font sizes to maintain balanced visual metrics.
+- **Responsive Size & Padding Compression:** Responsive layouts must minimize font-size and padding on mobile screens. Do not keep oversized fonts (e.g. desktop `3xl` scaling down to only `2xl` on mobile is still too large; scale it down to `lg` or `xl`). Padding must shrink aggressively on mobile to prevent squishing layout columns.
+- **Mobile 2-Column Grid Exception:** For cards carrying less information (like simple blog lists, project grids, or product items), **always display them in a 2-column grid (`grid-cols-2`) on mobile viewports**. Reserve 1-column layouts (`grid-cols-1`) strictly for highly complex interactive containers.
+- **Ultra-Dense Mobile Card Treatment:** For 2-column mobile grids, enforce native-app layout logic: hide non-essential secondary elements (e.g., descriptions, tags, subtitles) and scale down internal padding (`p-2` or `p-3`) and text sizes (`text-xs` or `text-[10px]`) to the absolute minimum readable limit.
+- **Full-Viewport Error Verification:** Ensure the layout adaptively supports all viewport sizes (from 320px up to 4K resolutions), preventing text overlaps, horizontal scrolling, or broken containers.
+- **Body Scroll Lock for Overlays:** When any modal, popup, dialog, drawer, or sidebar is active/opened, the main page body background scroll **MUST be disabled** (`document.body.style.overflow = "hidden"`). The scroll lock must be safely restored to the original value when the overlay closes/unmounts.
 
 ## Output Guidelines
 
@@ -96,24 +114,30 @@ Explain how the UI handles layers. Describe the presence and quality of shadows 
 
 ```markdown
 # Design System: [Project Title]
+
 **Project ID:** [Insert Project ID Here]
 
 ## 1. Visual Theme & Atmosphere
+
 (Description of the mood, density, and aesthetic philosophy.)
 
 ## 2. Color Palette & Roles
-(List colors by Descriptive Name + Hex Code + Functional Role.)
+
+(List colors by Descriptive Name + Hex Code + Functional Role. Enforce color reuse; no ad-hoc colors.)
 
 ## 3. Typography Rules
-(Description of font family, weight usage for headers vs. body, and letter-spacing character.)
+
+(Description of font family, font reuse limits, and H1-H6 absolute scale consistency across all pages.)
 
 ## 4. Component Stylings
-* **Buttons:** (Shape description, color assignment, behavior).
-* **Cards/Containers:** (Corner roundness description, background color, shadow depth).
-* **Inputs/Forms:** (Stroke style, background).
 
-## 5. Layout Principles
-(Description of whitespace strategy, margins, and grid alignment.)
+- **Buttons & Action Tabs:** (Shape description, color assignment, strict whitespace-nowrap rule, padding-font size synchronization).
+- **Cards/Containers:** (Corner roundness description, background color, shadow depth).
+- **Inputs/Forms:** (Stroke style, background).
+
+## 5. Layout Principles & Responsive Behavior
+
+(Whitespace strategy, margins, grid alignment, aggressive mobile text/padding size compression, and multi-viewport bug-free verification rules.)
 ```
 
 ## Usage Example
@@ -121,16 +145,19 @@ Explain how the UI handles layers. Describe the presence and quality of shadows 
 To use this skill for the Furniture Collection project:
 
 1. **Retrieve project information:**
+
    ```
    Use the Stitch MCP Server to get the Furniture Collection project
    ```
 
 2. **Get the Home page screen details:**
+
    ```
    Retrieve the Home page screen's code, image, and screen object information
    ```
 
 3. **Reference best practices:**
+
    ```
    Review the Stitch Effective Prompting Guide at:
    https://stitch.withgoogle.com/docs/learn/prompting/
