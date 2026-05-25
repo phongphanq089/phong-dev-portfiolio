@@ -8,8 +8,6 @@ import {
 
 import { DefaultCatchBoundary } from "@/components/errors/default-catch-boundary"
 import { NotFound } from "@/components/errors/not-found"
-import { MusicPlayer } from "@/components/ui/music-player"
-import { ScrollToTop } from "@/components/ui/scroll-to-top"
 import { seo } from "@/lib/utils"
 
 import appCss from "../styles.css?url"
@@ -114,10 +112,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       >
         {children}
         {/* Global Floating Actions */}
-        <div className="fixed right-6 bottom-6 z-100 flex flex-col items-end gap-3">
-          <ScrollToTop />
-          <MusicPlayer />
-        </div>
+
         {/* <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" /> */}
         <Scripts />

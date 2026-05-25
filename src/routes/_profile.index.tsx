@@ -1,33 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router"
 
+import { GridSection } from "@/components/layout/profile/grid-layout"
 import BannerHero from "@/features/home/banner-hero"
+import SectionAbout from "@/features/home/section-about"
+import UiComponentsSection from "@/features/home/ui-components-section"
 
 export const Route = createFileRoute("/_profile/")({
   component: HomePage,
 })
 
 function HomePage() {
-  ;<div className="w-full">
-    {/* Hero Section */}
+  return (
+    <div className="w-full">
+      {/* Hero Section */}
 
-    <div className="mx-auto px-8 md:px-16">
-      <BannerHero />
-    </div>
-    {/*
+      <div className="mx-auto px-8 md:px-16">
+        <BannerHero />
+      </div>
       <GridSection className="py-12" borderTop={true}>
         <SectionAbout />
-      </GridSection> */}
+      </GridSection>
+      <UiComponentsSection />
+      {/*
+        <GridSection className="py-12" borderTop={true}>
+          <SectionAbout />
+        </GridSection> */}
 
-    {/* ── UI Components Section ── */}
-    {/* <UiComponentsSection /> */}
+      {/* ── UI Components Section ── */}
+      {/* <UiComponentsSection /> */}
 
-    {/* ── Projects Section ── */}
-    {/* <ProjectsSection /> */}
+      {/* ── Projects Section ── */}
+      {/* <ProjectsSection /> */}
 
-    {/* ── Blog Section ── */}
-    {/* <BlogSection /> */}
+      {/* ── Blog Section ── */}
+      {/* <BlogSection /> */}
 
-    {/* ── Bookmarks Section ── */}
-    {/* <BookmarkSection /> */}
-  </div>
+      {/* ── Bookmarks Section ── */}
+      {/* <BookmarkSection /> */}
+    </div>
+  )
 }

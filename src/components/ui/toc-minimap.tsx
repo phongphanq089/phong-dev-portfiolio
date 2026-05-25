@@ -10,7 +10,7 @@ import { uMiniMapOpenSound } from "@/lib/u-mini-map-open"
 import { cn } from "@/lib/utils"
 
 export type TOCItemType = {
-  title: React.ReactNode
+  title: React.ReactNode | string
   url: string
   depth: number
 }

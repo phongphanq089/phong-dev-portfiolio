@@ -8,87 +8,133 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as ProfileRouteImport } from './routes/_profile'
-import { Route as LibraryRouteImport } from './routes/_library'
-import { Route as ProfileIndexRouteImport } from './routes/_profile.index'
-import { Route as StudioSplatRouteImport } from './routes/studio.$'
-import { Route as LibraryLibraryRouteImport } from './routes/_library.library'
+import { Route as rootRouteImport } from "./routes/__root"
+import { Route as SitemapDotxmlRouteImport } from "./routes/sitemap[.]xml"
+import { Route as RobotsDottxtRouteImport } from "./routes/robots[.]txt"
+import { Route as ProfileRouteImport } from "./routes/_profile"
+import { Route as LibraryRouteImport } from "./routes/_library"
+import { Route as ProfileIndexRouteImport } from "./routes/_profile.index"
+import { Route as StudioSplatRouteImport } from "./routes/studio.$"
+import { Route as ProfileResourcesRouteImport } from "./routes/_profile.resources"
+import { Route as ProfileProjectRouteImport } from "./routes/_profile.project"
+import { Route as ProfileBlogRouteImport } from "./routes/_profile.blog"
+import { Route as LibraryLibraryRouteImport } from "./routes/_library.library"
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+  id: "/sitemap.xml",
+  path: "/sitemap.xml",
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
+  id: "/robots.txt",
+  path: "/robots.txt",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
-  id: '/_profile',
+  id: "/_profile",
   getParentRoute: () => rootRouteImport,
 } as any)
 const LibraryRoute = LibraryRouteImport.update({
-  id: '/_library',
+  id: "/_library",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => ProfileRoute,
 } as any)
 const StudioSplatRoute = StudioSplatRouteImport.update({
-  id: '/studio/$',
-  path: '/studio/$',
+  id: "/studio/$",
+  path: "/studio/$",
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfileResourcesRoute = ProfileResourcesRouteImport.update({
+  id: "/resources",
+  path: "/resources",
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileProjectRoute = ProfileProjectRouteImport.update({
+  id: "/project",
+  path: "/project",
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileBlogRoute = ProfileBlogRouteImport.update({
+  id: "/blog",
+  path: "/blog",
+  getParentRoute: () => ProfileRoute,
+} as any)
 const LibraryLibraryRoute = LibraryLibraryRouteImport.update({
-  id: '/library',
-  path: '/library',
+  id: "/library",
+  path: "/library",
   getParentRoute: () => LibraryRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof ProfileIndexRoute
-  '/robots.txt': typeof RobotsDottxtRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/library': typeof LibraryLibraryRoute
-  '/studio/$': typeof StudioSplatRoute
+  "/": typeof ProfileIndexRoute
+  "/robots.txt": typeof RobotsDottxtRoute
+  "/sitemap.xml": typeof SitemapDotxmlRoute
+  "/library": typeof LibraryLibraryRoute
+  "/blog": typeof ProfileBlogRoute
+  "/project": typeof ProfileProjectRoute
+  "/resources": typeof ProfileResourcesRoute
+  "/studio/$": typeof StudioSplatRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof ProfileIndexRoute
-  '/robots.txt': typeof RobotsDottxtRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/library': typeof LibraryLibraryRoute
-  '/studio/$': typeof StudioSplatRoute
+  "/": typeof ProfileIndexRoute
+  "/robots.txt": typeof RobotsDottxtRoute
+  "/sitemap.xml": typeof SitemapDotxmlRoute
+  "/library": typeof LibraryLibraryRoute
+  "/blog": typeof ProfileBlogRoute
+  "/project": typeof ProfileProjectRoute
+  "/resources": typeof ProfileResourcesRoute
+  "/studio/$": typeof StudioSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_library': typeof LibraryRouteWithChildren
-  '/_profile': typeof ProfileRouteWithChildren
-  '/robots.txt': typeof RobotsDottxtRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_library/library': typeof LibraryLibraryRoute
-  '/studio/$': typeof StudioSplatRoute
-  '/_profile/': typeof ProfileIndexRoute
+  "/_library": typeof LibraryRouteWithChildren
+  "/_profile": typeof ProfileRouteWithChildren
+  "/robots.txt": typeof RobotsDottxtRoute
+  "/sitemap.xml": typeof SitemapDotxmlRoute
+  "/_library/library": typeof LibraryLibraryRoute
+  "/_profile/blog": typeof ProfileBlogRoute
+  "/_profile/project": typeof ProfileProjectRoute
+  "/_profile/resources": typeof ProfileResourcesRoute
+  "/studio/$": typeof StudioSplatRoute
+  "/_profile/": typeof ProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/robots.txt' | '/sitemap.xml' | '/library' | '/studio/$'
+  fullPaths:
+    | "/"
+    | "/robots.txt"
+    | "/sitemap.xml"
+    | "/library"
+    | "/blog"
+    | "/project"
+    | "/resources"
+    | "/studio/$"
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/robots.txt' | '/sitemap.xml' | '/library' | '/studio/$'
+  to:
+    | "/"
+    | "/robots.txt"
+    | "/sitemap.xml"
+    | "/library"
+    | "/blog"
+    | "/project"
+    | "/resources"
+    | "/studio/$"
   id:
-    | '__root__'
-    | '/_library'
-    | '/_profile'
-    | '/robots.txt'
-    | '/sitemap.xml'
-    | '/_library/library'
-    | '/studio/$'
-    | '/_profile/'
+    | "__root__"
+    | "/_library"
+    | "/_profile"
+    | "/robots.txt"
+    | "/sitemap.xml"
+    | "/_library/library"
+    | "/_profile/blog"
+    | "/_profile/project"
+    | "/_profile/resources"
+    | "/studio/$"
+    | "/_profile/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -99,54 +145,75 @@ export interface RootRouteChildren {
   StudioSplatRoute: typeof StudioSplatRoute
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
+    "/sitemap.xml": {
+      id: "/sitemap.xml"
+      path: "/sitemap.xml"
+      fullPath: "/sitemap.xml"
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
+    "/robots.txt": {
+      id: "/robots.txt"
+      path: "/robots.txt"
+      fullPath: "/robots.txt"
       preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_profile': {
-      id: '/_profile'
-      path: ''
-      fullPath: '/'
+    "/_profile": {
+      id: "/_profile"
+      path: ""
+      fullPath: "/"
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_library': {
-      id: '/_library'
-      path: ''
-      fullPath: '/'
+    "/_library": {
+      id: "/_library"
+      path: ""
+      fullPath: "/"
       preLoaderRoute: typeof LibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_profile/': {
-      id: '/_profile/'
-      path: '/'
-      fullPath: '/'
+    "/_profile/": {
+      id: "/_profile/"
+      path: "/"
+      fullPath: "/"
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof ProfileRoute
     }
-    '/studio/$': {
-      id: '/studio/$'
-      path: '/studio/$'
-      fullPath: '/studio/$'
+    "/studio/$": {
+      id: "/studio/$"
+      path: "/studio/$"
+      fullPath: "/studio/$"
       preLoaderRoute: typeof StudioSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_library/library': {
-      id: '/_library/library'
-      path: '/library'
-      fullPath: '/library'
+    "/_profile/resources": {
+      id: "/_profile/resources"
+      path: "/resources"
+      fullPath: "/resources"
+      preLoaderRoute: typeof ProfileResourcesRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/project": {
+      id: "/_profile/project"
+      path: "/project"
+      fullPath: "/project"
+      preLoaderRoute: typeof ProfileProjectRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/blog": {
+      id: "/_profile/blog"
+      path: "/blog"
+      fullPath: "/blog"
+      preLoaderRoute: typeof ProfileBlogRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_library/library": {
+      id: "/_library/library"
+      path: "/library"
+      fullPath: "/library"
       preLoaderRoute: typeof LibraryLibraryRouteImport
       parentRoute: typeof LibraryRoute
     }
@@ -165,10 +232,16 @@ const LibraryRouteWithChildren =
   LibraryRoute._addFileChildren(LibraryRouteChildren)
 
 interface ProfileRouteChildren {
+  ProfileBlogRoute: typeof ProfileBlogRoute
+  ProfileProjectRoute: typeof ProfileProjectRoute
+  ProfileResourcesRoute: typeof ProfileResourcesRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
 }
 
 const ProfileRouteChildren: ProfileRouteChildren = {
+  ProfileBlogRoute: ProfileBlogRoute,
+  ProfileProjectRoute: ProfileProjectRoute,
+  ProfileResourcesRoute: ProfileResourcesRoute,
   ProfileIndexRoute: ProfileIndexRoute,
 }
 
@@ -186,9 +259,9 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { getRouter } from "./router.tsx"
+import type { createStart } from "@tanstack/react-start"
+declare module "@tanstack/react-start" {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>

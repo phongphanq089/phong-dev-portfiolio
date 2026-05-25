@@ -1,5 +1,4 @@
 import { VerifiedIcon } from "lucide-react"
-import Link from "next/link"
 
 import { cn } from "@/lib/utils"
 
@@ -47,7 +46,12 @@ function XCard({
   },
 }: XCardProps) {
   return (
-    <Link href={link} target="_blank">
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-full"
+    >
       <div
         className={cn(
           "relative isolate w-full max-w-xl min-w-[400px] overflow-hidden rounded-2xl p-1.5 md:min-w-[500px]",
@@ -174,7 +178,7 @@ function XCard({
           )}
         </div>
       </div>
-    </Link>
+    </a>
   )
 }
 

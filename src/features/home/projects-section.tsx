@@ -77,7 +77,7 @@ const ProjectsSection = () => {
                     ].map((t) => (
                       <span
                         key={t}
-                        className="rounded border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 font-mono text-[10px] text-white/40"
+                        className="rounded border border-border bg-foreground/[0.04] px-2 py-0.5 font-mono text-[10px] text-foreground/60"
                       >
                         {t}
                       </span>
@@ -123,15 +123,15 @@ const ProjectsSection = () => {
                 <div className="flex h-full min-h-[220px] items-center justify-center p-8">
                   {/* Placeholder preview */}
                   <div className="w-full select-none">
-                    <div className="mx-auto w-32 overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-2">
+                    <div className="mx-auto w-32 overflow-hidden rounded-xl border border-border bg-foreground/[0.04] p-2">
                       {["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"].map(
                         (item, i) => (
                           <div
                             key={item}
                             className={`rounded px-3 py-2 text-center text-xs font-medium transition-all ${
                               i === 2
-                                ? "bg-white/15 text-white"
-                                : "text-white/30"
+                                ? "bg-foreground/10 font-semibold text-foreground"
+                                : "text-foreground/45"
                             }`}
                           >
                             {item}
@@ -202,7 +202,7 @@ const ProjectsSection = () => {
                       {tags.map((t) => (
                         <span
                           key={t}
-                          className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 font-mono text-[9px] text-white/35"
+                          className="rounded border border-border bg-foreground/[0.04] px-1.5 py-0.5 font-mono text-[9px] text-foreground/60"
                         >
                           {t}
                         </span>
