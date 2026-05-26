@@ -1,9 +1,10 @@
 import { GridSection } from "@/components/layout/profile/grid-layout"
+import { Card, CardCanvas } from "@/components/ui/animated-glow-card"
 
 const UiComponentsSection = () => {
   return (
     <>
-      <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
+      <GridSection className="px-4 pt-16 pb-0 md:px-8" showCrosshairs={false}>
         <div className="flex items-end justify-between">
           <div>
             <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/50 uppercase">
@@ -38,11 +39,11 @@ const UiComponentsSection = () => {
       </GridSection>
 
       <GridSection
-        className="px-8 py-8 md:px-16"
+        className="px-4 py-8 md:px-8"
         borderTop={false}
         showCrosshairs={false}
       >
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 gap-y-10 md:grid-cols-3">
           {[
             {
               title: "Text Burn Neon",
@@ -86,7 +87,9 @@ const UiComponentsSection = () => {
                     <span
                       key={item}
                       className={`rounded px-2.5 py-1 text-[11px] font-medium ${
-                        i === 0 ? "bg-white/15 text-white" : "text-white/40"
+                        i === 0
+                          ? "bg-foreground/10 font-semibold text-foreground"
+                          : "text-foreground/45"
                       }`}
                     >
                       {item}
@@ -105,7 +108,7 @@ const UiComponentsSection = () => {
                   {[66, 45].map((w, i) => (
                     <div
                       key={i}
-                      className="h-1.5 w-full overflow-hidden rounded-full bg-white/10"
+                      className="h-1.5 w-full overflow-hidden rounded-full bg-foreground/10"
                     >
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500"
@@ -143,8 +146,8 @@ const UiComponentsSection = () => {
               tags: ["SVG", "Hover"],
               preview: (
                 <span
-                  className="text-xl font-bold tracking-wide text-white/20 select-none"
-                  style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}
+                  className="text-xl font-bold tracking-wide text-foreground/25 select-none"
+                  style={{ WebkitTextStroke: "1px var(--border)" }}
                 >
                   HOVER
                 </span>
@@ -156,15 +159,15 @@ const UiComponentsSection = () => {
               desc: "Accessible modal with backdrop blur.",
               tags: ["UI", "A11y"],
               preview: (
-                <div className="w-full max-w-[160px] rounded-lg border border-white/10 bg-white/[0.06] px-4 py-3 text-center backdrop-blur-sm select-none">
-                  <div className="mb-1 text-[10px] font-semibold text-white/70">
+                <div className="w-full max-w-[160px] rounded-lg border border-border bg-foreground/[0.04] px-4 py-3 text-center backdrop-blur-sm select-none">
+                  <div className="mb-1 text-[10px] font-semibold text-foreground">
                     Confirm?
                   </div>
                   <div className="flex justify-center gap-2">
-                    <span className="rounded bg-white/10 px-2 py-0.5 text-[9px] text-white/50">
+                    <span className="rounded bg-foreground/10 px-2 py-0.5 text-[9px] text-foreground/60">
                       Cancel
                     </span>
-                    <span className="rounded border border-purple-500/30 bg-purple-500/25 px-2 py-0.5 text-[9px] text-purple-300/80">
+                    <span className="rounded border border-purple-500/35 bg-purple-500/15 px-2 py-0.5 text-[9px] font-medium text-purple-600 dark:text-purple-300">
                       OK
                     </span>
                   </div>
@@ -201,42 +204,41 @@ const UiComponentsSection = () => {
               from: "from-teal-950/50",
             },
           ].map(({ title, desc, tags, isNew, preview, from }) => (
-            <div
-              key={title}
-              className="group cursor-pointer overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-white/20 hover:shadow-[0_0_32px_rgba(255,255,255,0.04)]"
-            >
-              {/* Preview area — uniform aspect ratio */}
-              <div
-                className={`flex aspect-video items-center justify-center bg-gradient-to-br ${from} via-card to-card p-4`}
-              >
-                {preview}
-              </div>
+            <CardCanvas key={title}>
+              <Card>
+                {/* Preview area — uniform aspect ratio */}
+                <div
+                  className={`flex aspect-video items-center justify-center bg-linear-to-br ${from} via-card to-card p-4`}
+                >
+                  {preview}
+                </div>
 
-              {/* Metadata */}
-              <div className="p-3">
-                <div className="mb-0.5 flex items-center justify-between gap-2">
-                  <h3 className="truncate text-xs font-semibold">{title}</h3>
-                  {isNew && (
-                    <span className="shrink-0 rounded bg-primary/15 px-1.5 py-0.5 font-mono text-[8px] font-bold text-primary/80">
-                      NEW
-                    </span>
-                  )}
+                {/* Metadata */}
+                <div className="p-3">
+                  <div className="mb-0.5 flex items-center justify-between gap-2">
+                    <h3 className="truncate text-xs font-semibold">{title}</h3>
+                    {isNew && (
+                      <span className="shrink-0 rounded bg-primary/15 px-1.5 py-0.5 font-mono text-[8px] font-bold text-primary/80">
+                        NEW
+                      </span>
+                    )}
+                  </div>
+                  <p className="mb-2 text-[10px] leading-relaxed text-muted-foreground/55">
+                    {desc}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {tags.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded border border-border bg-foreground/4 px-1.5 py-0.5 font-mono text-[9px] text-foreground/60"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <p className="mb-2 text-[10px] leading-relaxed text-muted-foreground/55">
-                  {desc}
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 font-mono text-[9px] text-white/35"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+              </Card>
+            </CardCanvas>
           ))}
         </div>
       </GridSection>

@@ -8,6 +8,8 @@ import MenuBottomMobile from "@/components/layout/profile/header/menu-public-mob
 import NumbersSimulation from "@/components/layout/profile/numbers-simulation"
 import { EdgeBlur } from "@/components/shared/edge-blur"
 import BackgroundGradientCursor from "@/components/ui/animation/background-gradient-cursor"
+import { MusicPlayer } from "@/components/ui/music-player"
+import { ScrollToTop } from "@/components/ui/scroll-to-top"
 import { TOCMinimap } from "@/components/ui/toc-minimap"
 import { TOCItems } from "@/constants"
 import { cn } from "@/lib/utils"
@@ -49,7 +51,7 @@ function LayoutComponent() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className="relative flex min-h-screen w-full bg-background text-foreground selection:bg-primary/20">
+      <div className="relative flex min-h-screen w-full overflow-x-clip bg-background text-foreground selection:bg-primary/20">
         <div
           className={cn(
             "fixed top-1/2 right-0 z-50 -translate-y-1/2 transition-all duration-500",
@@ -91,7 +93,7 @@ function LayoutComponent() {
           <MenuBottomMobile />
 
           {/* ------------------------------ Main Content Area ------------------------------------------------------ */}
-          <main className="flex w-full flex-1 flex-col">
+          <main className="flex w-full flex-1 flex-col overflow-x-clip">
             <Outlet />
           </main>
           {/* --------------------------------------------------------------------------------------------------------- */}
@@ -101,7 +103,11 @@ function LayoutComponent() {
           {/* --------------------------------------------------------------------------------------------------------- */}
         </div>
       </div>
-      <EdgeBlur position="bottom" height={72} />
+      <EdgeBlur position="bottom" height={172} />
+      <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
+        <ScrollToTop />
+        <MusicPlayer />
+      </div>
     </ThemeProvider>
   )
 }

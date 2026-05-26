@@ -56,6 +56,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.65 0.25 260);
+  /* Technical Blueprint Theme Variables */
+  --border-glow: rgba(255, 255, 255, 0.22);
+  --grid-dots: rgba(255, 255, 255, 0.06);
+  --grid-dots-hover: rgba(255, 255, 255, 0.12);
 }
 
 .dark {
@@ -64,23 +68,23 @@
 
 .light {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  --popover-foreground: oklch(0 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  --secondary-foreground: oklch(0 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.2 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
   --ring: oklch(0.708 0 0);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -88,8 +92,12 @@
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-border: oklch(0.9 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  /* Technical Blueprint Light Variables */
+  --border-glow: rgba(0, 0, 0, 0.22);
+  --grid-dots: rgba(0, 0, 0, 0.04);
+  --grid-dots-hover: rgba(0, 0, 0, 0.08);
 }
 
 @theme inline {
@@ -347,4 +355,192 @@ nav {
   top: 0;
   right: 0;
   overflow: hidden;
+}
+
+/* ─── Technical Blueprint Glow Card & Canvas Styles ─── */
+.card-canvas {
+  position: relative;
+  border-radius: 4px;
+  overflow: visible; /* Allows corner crosshair lines to extend outside card bounds */
+  padding: 1px;
+  background: transparent;
+  display: flex;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.card-backdrop {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(239, 68, 68, 0.09),
+    transparent 65%
+  );
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card-canvas:hover .card-backdrop {
+  opacity: 1;
+}
+
+.glow-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--card);
+  overflow: visible; /* Let crosshairs show outside card boundaries */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  transition:
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.glow-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+.card-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: var(--card);
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  background-image: radial-gradient(var(--grid-dots) 1.2px, transparent 1.2px);
+  background-size: 8px 8px;
+  transition: background-image 0.3s ease;
+}
+
+.glow-card:hover .card-content {
+  background-image: radial-gradient(
+    var(--grid-dots-hover) 1.2px,
+    transparent 1.2px
+  );
+}
+
+/* ─── Blueprint Corner Reticles/Crosshairs ─── */
+.corner-crosshair {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.3;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-card:hover .corner-crosshair {
+  opacity: 1;
+}
+
+.corner-crosshair .line-h {
+  transition:
+    width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
+  width: 16px;
+}
+
+.corner-crosshair .line-v {
+  transition:
+    height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
+  height: 16px;
+}
+
+.glow-card:hover .corner-crosshair .line-h {
+  width: 32px;
+}
+
+.glow-card:hover .corner-crosshair .line-v {
+  height: 32px;
+}
+
+/* Top Left Corner Reticle */
+.corner-crosshair.tl {
+  top: -1px;
+  left: -1px;
+}
+.corner-crosshair.tl .line-h {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-glow));
+}
+.corner-crosshair.tl .line-v {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border-glow));
+}
+
+/* Top Right Corner Reticle */
+.corner-crosshair.tr {
+  top: -1px;
+  right: -1px;
+}
+.corner-crosshair.tr .line-h {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--border-glow));
+}
+.corner-crosshair.tr .line-v {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border-glow));
+}
+
+/* Bottom Left Corner Reticle */
+.corner-crosshair.bl {
+  bottom: -1px;
+  left: -1px;
+}
+.corner-crosshair.bl .line-h {
+  position: absolute;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-glow));
+}
+.corner-crosshair.bl .line-v {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 1px;
+  background: linear-gradient(to top, transparent, var(--border-glow));
+}
+
+/* Bottom Right Corner Reticle */
+.corner-crosshair.br {
+  bottom: -1px;
+  right: -1px;
+}
+.corner-crosshair.br .line-h {
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--border-glow));
+}
+.corner-crosshair.br .line-v {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 1px;
+  background: linear-gradient(to top, transparent, var(--border-glow));
 }
