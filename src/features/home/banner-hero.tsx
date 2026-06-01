@@ -31,7 +31,7 @@ const SidebarItem = ({
 
 /* ─── Bracketed Button ─── */
 const BracketButton = ({ label }: { label: string }) => (
-  <button className="group relative flex items-center px-4 py-1 font-mono text-[11px] tracking-[0.2em] text-foreground/60 transition-all hover:text-foreground">
+  <button className="group relative flex items-center px-4 py-1 text-[9px] tracking-[0.2em] text-foreground/60 transition-all hover:text-foreground sm:text-[11px]">
     <span className="text-foreground/20 transition-colors group-hover:text-red-500">
       [{" "}
     </span>
@@ -90,7 +90,7 @@ const BannerHero = () => {
           </div>
 
           <div className="relative w-full text-right md:w-auto">
-            <TextBurnNeon className="text-3xl font-black text-primary-color xl:text-[5rem]">
+            <TextBurnNeon className="text-3xl font-black text-primary xl:text-[5rem]">
               DEVELOPER
             </TextBurnNeon>
             <div className="absolute -top-4 -right-2 h-8 w-8 border-t border-r border-red-500/50 md:-right-4" />
@@ -175,7 +175,7 @@ const BannerHero = () => {
             ROOT@DEV: READY TO SHIP_
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
+          <div className="flex items-center justify-center gap-4 md:gap-8">
             <BracketButton label="VIEW MY WORK" />
             <div className="hidden h-4 w-px bg-border md:block" />
             <BracketButton label="GET IN TOUCH" />
@@ -195,7 +195,7 @@ const BannerHero = () => {
       <div className="pointer-events-none absolute top-0 right-[10%] h-full w-px bg-border/50" />
 
       {/* Scanline effect */}
-      <div className="pointer-events-none absolute inset-0 z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_4px,3px_100%] opacity-[0.05] dark:opacity-20" />
+      <div className="pointer-events-none absolute inset-0 z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-size-[100%_4px,3px_100%] opacity-[0.05] dark:opacity-20" />
     </div>
   )
 }

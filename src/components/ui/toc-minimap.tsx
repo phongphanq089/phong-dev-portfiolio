@@ -52,7 +52,7 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
                 data-depth={item.depth}
                 data-active={item.url === `#${activeHeading}`}
                 className={cn(
-                  "h-0.5 w-6 shrink-0 rounded-xs bg-primary-color transition-[background-color] duration-200",
+                  "h-0.5 w-6 shrink-0 rounded-xs bg-primary transition-[background-color] duration-200",
                   "data-[depth=3]:ml-2 data-[depth=3]:w-4",
                   "data-[depth=4]:ml-4 data-[depth=4]:w-2",
                   "data-active:bg-foreground"

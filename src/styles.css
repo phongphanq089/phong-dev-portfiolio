@@ -20,6 +20,7 @@
   --color-light-scroll: oklch(0.8 0 0);
   --font-brand: "BrandFont", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", serif;
+  --color-primary: #dc2626;
 }
 
 :root {
@@ -29,7 +30,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.15 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.65 0.25 260); /* Vibrant Indigo/Blue */
+  --primary: #dc2626; /* Vibrant Indigo/Blue */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.25 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -73,7 +74,7 @@
   --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: #dc2626;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0 0 0);

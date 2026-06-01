@@ -14,7 +14,7 @@ function HomePage() {
     <div className="w-full">
       {/* Hero Section */}
 
-      <div className="mx-auto px-8 md:px-16">
+      <div className="mx-auto w-full px-3 sm:px-8 md:px-16">
         <BannerHero />
       </div>
       <GridSection className="py-12" borderTop={true}>

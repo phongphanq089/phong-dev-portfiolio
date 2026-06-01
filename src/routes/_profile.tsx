@@ -12,6 +12,7 @@ import { MusicPlayer } from "@/components/ui/music-player"
 import { ScrollToTop } from "@/components/ui/scroll-to-top"
 import { TOCMinimap } from "@/components/ui/toc-minimap"
 import { TOCItems } from "@/constants"
+import { useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/provider/theme-provider"
 
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/_profile")({
 
 function LayoutComponent() {
   const [showMinimap, setShowMinimap] = useState(false)
-
+  const isDownLg = useMediaQuery("max-lg")
   useEffect(() => {
     const handleScroll = () => {
       setShowMinimap(window.scrollY > 600)
@@ -103,10 +104,12 @@ function LayoutComponent() {
           {/* --------------------------------------------------------------------------------------------------------- */}
         </div>
       </div>
-      <EdgeBlur position="bottom" height={172} />
+      <EdgeBlur position="bottom" height={100} />
       <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
         <ScrollToTop />
-        <MusicPlayer />
+        <div className="hidden lg:block">
+          {!isDownLg ? <MusicPlayer /> : null}
+        </div>
       </div>
     </ThemeProvider>
   )

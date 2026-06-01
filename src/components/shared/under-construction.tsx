@@ -62,7 +62,7 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
 
   return (
     <CardCanvas className="mx-auto w-full justify-center">
-      <div className="relative flex flex-col items-center justify-center px-4 py-16 md:px-8">
+      <div className="relative flex w-full flex-col items-center justify-center py-16">
         {/* Visual Header Badge */}
         <div
           className="mb-8 flex items-center gap-2 border border-dashed bg-background/50 px-3 py-1.5 font-mono text-[10px] tracking-widest uppercase backdrop-blur-md"
@@ -73,10 +73,10 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
         </div>
 
         {/* Blueprint Container */}
-        <Card className="w-full overflow-hidden">
+        <Card className="w-full max-w-4xl overflow-hidden">
           <div className="relative grid grid-cols-1 border-b border-border bg-black/40 md:grid-cols-12">
             {/* Left Column: Rotating Holographic Compass & Stats (5 cols) */}
-            <div className="col-span-1 flex flex-col items-center justify-center border-b border-dashed border-border border-white/10 p-6 md:col-span-5 md:border-r md:border-b-0">
+            <div className="col-span-1 flex min-w-0 flex-col items-center justify-center border-b border-dashed border-white/10 p-6 md:col-span-5 md:border-r md:border-b-0">
               {/* Radar Graphic */}
               <div className="relative flex h-36 w-36 items-center justify-center">
                 <Disc
@@ -140,7 +140,7 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
             </div>
 
             {/* Right Column: Console Log Terminal (7 cols) */}
-            <div className="col-span-1 flex flex-col bg-black/60 p-6 font-mono md:col-span-7">
+            <div className="col-span-1 flex min-w-0 flex-col bg-black/60 p-6 font-mono md:col-span-7">
               <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-2">
                 <div className="flex items-center gap-2 text-xs text-white/70">
                   <Terminal className="h-3.5 w-3.5" />
@@ -152,11 +152,14 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
               </div>
 
               {/* Terminal Screen lines */}
-              <div className="custom-scrollbar h-48 space-y-1.5 overflow-y-auto text-[10px] leading-relaxed text-slate-300">
+              <div className="custom-scrollbar h-48 w-full space-y-1.5 overflow-x-hidden overflow-y-auto text-[10px] leading-relaxed text-slate-300">
                 {terminalLines.map((line, idx) => {
                   if (!line || typeof line !== "string") return null
                   return (
-                    <div key={idx} className="whitespace-pre-wrap">
+                    <div
+                      key={idx}
+                      className="w-full break-all whitespace-pre-wrap"
+                    >
                       {line.startsWith("[INIT]") && (
                         <span style={{ color: colorTheme }}>{line}</span>
                       )}
