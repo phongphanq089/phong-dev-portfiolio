@@ -1,40 +1,34 @@
 import { GridSection } from "@/components/layout/profile/grid-layout"
+import { SectionHeading } from "@/components/ui/section-heading"
 
 const ProjectsSection = () => {
   return (
     <>
       <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
-        <div className="flex items-end justify-between">
-          <div>
-            <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/50 uppercase">
-              02 / Work
-            </span>
-            <h2 className="mt-2 text-4xl font-semibold tracking-tight">
-              Projects
-              <span className="ml-3 align-middle font-mono text-xl font-normal text-muted-foreground/40">
-                (6)
-              </span>
-            </h2>
-            <p className="mt-1 text-muted-foreground">
-              Things I've shipped. From idea to production.
-            </p>
-          </div>
-          <button className="group mb-1 flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-accent/60 hover:text-foreground">
-            All projects
-            <svg
-              className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </button>
-        </div>
+        <SectionHeading
+          id="project"
+          label="02 / Work"
+          heading="Projects"
+          count={6}
+          subtitle="Things I've shipped. From idea to production."
+          action={
+            <button className="group flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-accent/60 hover:text-foreground">
+              All projects
+              <svg
+                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+          }
+        />
       </GridSection>
 
       <GridSection

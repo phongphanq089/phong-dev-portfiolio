@@ -1,8 +1,13 @@
+import { motion } from "motion/react"
+
+import { GridSection } from "@/components/layout/profile/grid-layout"
+import { SkeletonOne } from "@/components/ui/animation/skeleton-hover"
 import {
   iconComponents,
   type IconName,
   RenderIcon,
 } from "@/components/ui/icons"
+import { SectionHeading } from "@/components/ui/section-heading"
 
 /* ─── Tech stack badge ─── */
 type TechItem = {
@@ -44,6 +49,52 @@ const techStack: TechItem[][] = [
     },
     { label: "MongoDB", icon: "mongodb", link: "https://www.mongodb.com/" },
     { label: "GitHub", icon: "github", link: "https://github.com/" },
+    { label: "Tanstack", icon: "tanstack", link: "https://tanstack.com/" },
+    {
+      label: "React Navigation",
+      icon: "reactnavigation",
+      link: "https://reactnavigation.org/",
+    },
+    {
+      label: "shadcn-ui",
+      icon: "shadcnui",
+      link: "https://shadcn.com/",
+    },
+    {
+      label: "Motion",
+      icon: "motion",
+      link: "https://www.framer.com/motion/",
+    },
+    {
+      label: "NestJS",
+      icon: "nestjs",
+      link: "https://nestjs.com/",
+    },
+    {
+      label: "Fastify",
+      icon: "fastify",
+      link: "https://www.fastify.io/",
+    },
+    {
+      label: "Material UI",
+      icon: "materialui",
+      link: "https://material.io/",
+    },
+    {
+      label: "Refine",
+      icon: "refine",
+      link: "https://refine.dev/",
+    },
+    {
+      label: "Sanity",
+      icon: "sanity",
+      link: "https://www.sanity.io/",
+    },
+    {
+      label: "Vite",
+      icon: "vite",
+      link: "https://vitejs.dev/",
+    },
   ],
 ]
 
@@ -85,43 +136,59 @@ const StackBadge = ({ item }: { item: TechItem }) => {
 }
 
 /* ─── Hobby pill ─── */
-const HobbyTag = ({ emoji, label }: { emoji: string; label: string }) => (
-  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-foreground/3 px-3 py-1 text-[11px] text-muted-foreground/80">
-    <span>{emoji}</span>
+const HobbyTag = ({ label }: { label: string }) => (
+  <motion.span
+    whileHover={{
+      y: -2,
+      scale: 1.03,
+      borderColor: "rgba(220, 38, 38, 0.4)",
+      backgroundColor: "rgba(220, 38, 38, 0.05)",
+    }}
+    whileTap={{ scale: 0.98 }}
+    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-border bg-foreground/3 px-3.5 py-1 text-[11px] text-muted-foreground/80 transition-colors duration-300 hover:text-foreground"
+  >
+    <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/30 transition-all duration-300 group-hover:scale-125 group-hover:bg-primary" />
     {label}
-  </span>
+  </motion.span>
 )
 
 /* ─── Main component ─── */
 const SectionAbout = () => {
   return (
-    <div className="flex flex-col gap-12 px-8 md:px-16">
+    <>
       {/* ── Section header ── */}
-      <div className="flex items-center gap-4">
-        <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/50 uppercase">
-          00 / About
-        </span>
-        <div className="h-px flex-1 bg-border" />
-      </div>
+      <GridSection
+        className="px-8 py-5 md:px-16"
+        borderTop
+        showCrosshairs={false}
+      >
+        <SectionHeading id="about" label="01 / About" heading="About" />
+      </GridSection>
 
       {/* ── 2-column layout ── */}
-      <div className="grid gap-12 md:grid-cols-[1fr_1fr] lg:grid-cols-[55fr_45fr]">
+      <GridSection
+        columns={2}
+        className="px-4 py-12 md:px-8"
+        borderTop={false}
+        showCrosshairs={false}
+      >
         {/* LEFT – Bio */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 pr-0 max-md:mb-10 md:pr-4">
           {/* ── Avatar hero block ── */}
-          <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-4">
             {/* Large avatar */}
             <div className="relative w-fit">
-              <div className="h-24 w-24 overflow-hidden rounded-2xl border-2 border-border shadow-[0_0_40px_rgba(0,0,0,0.06)] dark:shadow-[0_0_40px_rgba(255,255,255,0.06)]">
+              <div className="h-30 w-30 overflow-hidden rounded-2xl border-2 border-border shadow-[0_0_40px_rgba(0,0,0,0.06)] dark:shadow-[0_0_40px_rgba(255,255,255,0.06)]">
                 <img
-                  src="/avatar.gif"
+                  src="/avatar.png"
                   alt="Phong Phan"
                   className="h-full w-full object-cover"
                 />
               </div>
               {/* Online status dot */}
-              <span className="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-background bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]">
-                <span className="h-2 w-2 animate-ping rounded-full bg-emerald-300 opacity-75" />
+              <span className="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-primary shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+                <span className="h-2 w-2 animate-ping rounded-full bg-white opacity-75" />
               </span>
             </div>
 
@@ -141,7 +208,7 @@ const SectionAbout = () => {
                 </svg>
               </div>
               <p className="font-mono text-[11px] tracking-wider text-muted-foreground/60">
-                Fullstack Developer · Quang Binh, VN
+                Fullstack Developer · Viet Nam
               </p>
               <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-0.5">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
@@ -198,17 +265,17 @@ const SectionAbout = () => {
               Beyond Coding
             </p>
             <div className="flex flex-wrap gap-2">
-              <HobbyTag emoji="🏋️" label="Gym" />
-              <HobbyTag emoji="⚽" label="Football" />
-              <HobbyTag emoji="🧗" label="Mountain climbing" />
-              <HobbyTag emoji="📚" label="Reading" />
-              <HobbyTag emoji="✈️" label="Traveling" />
+              <HobbyTag label="Gym" />
+              <HobbyTag label="Football" />
+              <HobbyTag label="Mountain climbing" />
+              <HobbyTag label="Reading" />
+              <HobbyTag label="Traveling" />
             </div>
           </div>
         </div>
 
         {/* RIGHT – Tech Stack */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 pl-0 md:pl-8">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-foreground">
               Stack
@@ -228,24 +295,32 @@ const SectionAbout = () => {
             ))}
           </div>
 
-          {/* Years of experience stat */}
-          <div className="mt-2 flex gap-6 border-t border-border pt-4">
-            {[
-              { num: "3+", label: "Years experience" },
-              { num: "10+", label: "Projects built" },
-              { num: "∞", label: "Bugs fixed 😅" },
-            ].map(({ num, label }) => (
-              <div key={label} className="flex flex-col gap-0.5">
-                <span className="text-xl font-bold text-foreground">{num}</span>
-                <span className="font-mono text-[10px] text-muted-foreground/50">
-                  {label}
-                </span>
-              </div>
-            ))}
+          {/* Interactive Chat Showcase */}
+          <div className="mt-2 flex flex-col gap-4 rounded-2xl border border-border/80 bg-muted/10 p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] backdrop-blur-sm">
+            <div className="flex items-center justify-between border-b border-border/50 pb-2">
+              <span className="font-mono text-[9px] tracking-wider text-muted-foreground/60 uppercase">
+                Interactive Showcase
+              </span>
+              <span className="flex h-2 w-2 items-center justify-center">
+                <span className="absolute h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500 opacity-75" />
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <SkeletonOne
+                text1="There are tons of awesome frameworks like React, Angular, Vue, and Svelte that can make your life... easier (or a complete mess, depending on your code)! 😜"
+                text2="I LOVE JAVASCRIPT"
+              />
+              <SkeletonOne
+                text1="Keep things simple with JavaScript"
+                text2="DELUSIONAL 🤯"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </GridSection>
+    </>
   )
 }
 

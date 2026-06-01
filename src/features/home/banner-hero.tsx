@@ -10,12 +10,23 @@ const SidebarItem = ({
   number,
   label,
   active,
+  href,
 }: {
   number: string
   label: string
   active?: boolean
+  href: string
 }) => (
-  <div className={`group flex cursor-pointer items-center gap-3`}>
+  <a
+    href={href}
+    onClick={(e) => {
+      e.preventDefault()
+      document
+        .getElementById(href.replace("#", ""))
+        ?.scrollIntoView({ behavior: "smooth" })
+    }}
+    className="group flex cursor-pointer items-center gap-3"
+  >
     <span
       className={`font-mono text-[10px] ${active ? "text-red-500" : "text-foreground/20 group-hover:text-foreground/40"}`}
     >
@@ -26,7 +37,7 @@ const SidebarItem = ({
     >
       {label}
     </span>
-  </div>
+  </a>
 )
 
 /* ─── Bracketed Button ─── */
@@ -50,6 +61,7 @@ const BannerHero = () => {
 
   return (
     <div
+      id="banner"
       ref={containerRef}
       className="relative w-full overflow-hidden text-foreground selection:bg-red-500/30"
     >
@@ -70,6 +82,7 @@ const BannerHero = () => {
               key={`${item.title}-${index}`}
               number={`${index + 1}`}
               label={item.title as string}
+              href={item.url}
               active={index === 0}
             />
           ))}

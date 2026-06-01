@@ -8,16 +8,26 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 import { ElevenTy } from "./11ty"
 import { Code } from "./code"
 import { External } from "./external"
+import { Fastify } from "./fastify"
 import { GitHub } from "./github"
 import { JavaScript } from "./javascript"
+import { MaterialUI } from "./material-ui"
 import { MongoDB } from "./mongodb"
+import { Motion } from "./motion"
+import { NestJS } from "./nestjs"
 import { NextJS } from "./nextjs"
 import { NodeJS } from "./node"
 import { PostgreSQL } from "./postgres"
 import { Python } from "./python"
 import { ReactIcon } from "./react"
+import { ReactNavigation } from "./react-navigation"
+import { Refine } from "./refine"
+import { Sanity } from "./sanity"
+import { ShadcnUI } from "./shadcn-ui"
 import { Tailwind } from "./tailwind"
+import { Tanstack } from "./tanstack"
 import { TypeScript } from "./typescript"
+import { Vite } from "./vite"
 import { Zustand } from "./zustand"
 
 export const iconComponents = {
@@ -35,6 +45,16 @@ export const iconComponents = {
   external: External,
   code: Code,
   zustand: Zustand,
+  tanstack: Tanstack,
+  reactnavigation: ReactNavigation,
+  motion: Motion,
+  shadcnui: ShadcnUI,
+  nestjs: NestJS,
+  fastify: Fastify,
+  materialui: MaterialUI,
+  refine: Refine,
+  sanity: Sanity,
+  vite: Vite,
 } as const
 
 export type IconName = keyof typeof iconComponents
