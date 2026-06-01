@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router"
+import { useEffect, useState } from "react"
 
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { MusicPlayer } from "@/components/ui/music-player"
@@ -9,6 +10,12 @@ import { navItems } from "./setting-menu"
 
 export const Header = () => {
   const isDownLg = useMediaQuery("max-lg")
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true)
+  }, [])
 
   return (
     <header className="w-full">
@@ -44,7 +51,7 @@ export const Header = () => {
         <div className="flex items-center gap-6">
           <ModeToggle />
           <div className="hidden max-lg:block">
-            {isDownLg ? <MusicPlayer /> : null}
+            {isMounted && isDownLg ? <MusicPlayer /> : null}
           </div>
         </div>
       </div>

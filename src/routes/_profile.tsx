@@ -22,7 +22,14 @@ export const Route = createFileRoute("/_profile")({
 
 function LayoutComponent() {
   const [showMinimap, setShowMinimap] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const isDownLg = useMediaQuery("max-lg")
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true)
+  }, [])
+
   useEffect(() => {
     const handleScroll = () => {
       setShowMinimap(window.scrollY > 600)
@@ -108,7 +115,7 @@ function LayoutComponent() {
       <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
         <ScrollToTop />
         <div className="hidden lg:block">
-          {!isDownLg ? <MusicPlayer /> : null}
+          {isMounted && !isDownLg ? <MusicPlayer /> : null}
         </div>
       </div>
     </ThemeProvider>

@@ -3,29 +3,30 @@
 
 "use client"
 
-import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
 
 // Define form schema with zod
 const formSchema = z.object({
@@ -38,9 +39,12 @@ const formSchema = z.object({
   role: z.enum(["admin", "user", "viewer"], {
     required_error: "Please select a role.",
   }),
-  bio: z.string().max(160, {
-    message: "Bio must not be longer than 160 characters.",
-  }).optional(),
+  bio: z
+    .string()
+    .max(160, {
+      message: "Bio must not be longer than 160 characters.",
+    })
+    .optional(),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -60,7 +64,7 @@ export function UserProfileForm() {
   function onSubmit(values: FormValues) {
     // In a real app, send to API
     console.log(values)
-    
+
     toast({
       title: "Profile updated",
       description: "Your profile has been successfully updated.",
@@ -156,18 +160,18 @@ export function UserProfileForm() {
 
 /**
  * Key Patterns Demonstrated:
- * 
+ *
  * 1. Form Composition: Using shadcn/ui's Form components with react-hook-form
  * 2. Validation: Zod schema for type-safe validation
  * 3. Error Handling: Automatic error messages via FormMessage
  * 4. Accessibility: All fields properly labeled with descriptions
  * 5. Type Safety: TypeScript types inferred from Zod schema
- * 
+ *
  * Required Dependencies:
  * - react-hook-form
  * - @hookform/resolvers
  * - zod
- * 
+ *
  * Installation:
  * npx shadcn@latest add form
  * npx shadcn@latest add input

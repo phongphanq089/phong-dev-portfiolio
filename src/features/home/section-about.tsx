@@ -1,60 +1,92 @@
+import {
+  iconComponents,
+  type IconName,
+  RenderIcon,
+} from "@/components/ui/icons"
+
 /* ─── Tech stack badge ─── */
 type TechItem = {
   label: string
-  color?: string
-  icon?: string
+  icon?: IconName
+  link?: string
 }
 
 const techStack: TechItem[][] = [
   [
-    { label: "TypeScript", icon: "TS", color: "#3178c6" },
-    { label: "JavaScript", icon: "JS", color: "#f7df1e" },
-    { label: "React", icon: "⚛", color: "#61dafb" },
-    { label: "Next.js", icon: "N", color: "#ffffff" },
-    { label: "TailwindCSS", icon: "~", color: "#38bdf8" },
-    { label: "Node.js", icon: "⬡", color: "#6db33f" },
-  ],
-  [
-    { label: "shadcn/ui", icon: "◈", color: "#ffffff" },
-    { label: "Radix UI", icon: "◎", color: "#ffffff" },
-    { label: "Motion", icon: "◐", color: "#ff6b6b" },
-    { label: "TanStack", icon: "⧫", color: "#ef4444" },
-    { label: "Redux", icon: "◉", color: "#764abc" },
-    { label: "Zustand", icon: "Z", color: "#f97316" },
-  ],
-  [
-    { label: "PostgreSQL", icon: "🐘", color: "#336791" },
-    { label: "MongoDB", icon: "◓", color: "#4db33d" },
-    { label: "MySQL", icon: "⬤", color: "#00758f" },
-    { label: "Redis", icon: "R", color: "#dc382d" },
-    { label: "Docker", icon: "◫", color: "#2496ed" },
-    { label: "Git", icon: "⌥", color: "#f05032" },
-  ],
-  [
-    { label: "Figma", icon: "◈", color: "#a259ff" },
-    { label: "ChatGPT", icon: "✦", color: "#10a37f" },
-    { label: "Claude", icon: "✧", color: "#d4a574" },
-    { label: "Cursor", icon: "◇", color: "#ffffff" },
-    { label: "GitHub", icon: "◉", color: "#ffffff" },
-    { label: "Photoshop", icon: "Ps", color: "#31a8ff" },
+    {
+      label: "TypeScript",
+      icon: "typescript",
+      link: "https://www.typescriptlang.org/",
+    },
+    {
+      label: "JavaScript",
+      icon: "javascript",
+      link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    },
+    { label: "React", icon: "react", link: "https://react.dev/" },
+    { label: "Next.js", icon: "nextjs", link: "https://nextjs.org/" },
+    {
+      label: "TailwindCSS",
+      icon: "tailwind",
+      link: "https://tailwindcss.com/",
+    },
+    { label: "Node.js", icon: "node", link: "https://nodejs.org/" },
+    { label: "11ty", icon: "ElevenTy", link: "https://www.11ty.dev/" },
+    {
+      label: "Zustand",
+      icon: "zustand",
+      link: "https://zustand-demo.pmnd.rs/",
+    },
+    {
+      label: "PostgreSQL",
+      icon: "postgres",
+      link: "https://www.postgresql.org/",
+    },
+    { label: "MongoDB", icon: "mongodb", link: "https://www.mongodb.com/" },
+    { label: "GitHub", icon: "github", link: "https://github.com/" },
   ],
 ]
 
-const StackBadge = ({ item }: { item: TechItem }) => (
-  <span className="inline-flex cursor-default items-center gap-1.5 rounded border border-border bg-foreground/[0.04] px-2.5 py-1.5 text-xs text-muted-foreground transition-all duration-200 hover:border-foreground/20 hover:bg-foreground/[0.08] hover:text-foreground">
-    <span
-      className="font-mono text-[11px] font-bold"
-      style={{ color: item.color }}
-    >
-      {item.icon}
-    </span>
-    {item.label}
-  </span>
-)
+const StackBadge = ({ item }: { item: TechItem }) => {
+  const hasSvgIcon = item.icon && item.icon in iconComponents
+
+  const content = (
+    <>
+      {hasSvgIcon ? (
+        <RenderIcon
+          name={item.icon as IconName}
+          size={14}
+          className="transition-transform duration-200 group-hover:scale-110"
+        />
+      ) : (
+        <span className="font-mono text-[11px] font-bold">{item.icon}</span>
+      )}
+      <span>{item.label}</span>
+    </>
+  )
+
+  const className =
+    "group inline-flex items-center gap-1.5 rounded border border-border bg-foreground/4 px-2.5 py-1.5 text-xs text-muted-foreground transition-all duration-200 hover:border-foreground/20 hover:bg-foreground/8 hover:text-foreground"
+
+  if (item.link) {
+    return (
+      <a
+        href={item.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${className} cursor-pointer hover:border-primary/40 hover:bg-primary/3 hover:text-primary`}
+      >
+        {content}
+      </a>
+    )
+  }
+
+  return <span className={`${className} cursor-default`}>{content}</span>
+}
 
 /* ─── Hobby pill ─── */
 const HobbyTag = ({ emoji, label }: { emoji: string; label: string }) => (
-  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-foreground/[0.03] px-3 py-1 text-[11px] text-muted-foreground/80">
+  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-foreground/3 px-3 py-1 text-[11px] text-muted-foreground/80">
     <span>{emoji}</span>
     {label}
   </span>
@@ -101,7 +133,7 @@ const SectionAbout = () => {
                 </h3>
                 {/* Verified */}
                 <svg
-                  className="h-4 w-4 flex-shrink-0 text-blue-400"
+                  className="h-4 w-4 shrink-0 text-blue-400"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >

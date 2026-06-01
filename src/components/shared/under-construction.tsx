@@ -61,8 +61,8 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
   }, [pageName])
 
   return (
-    <CardCanvas className="mx-auto w-full justify-center">
-      <div className="relative flex w-full flex-col items-center justify-center py-16">
+    <CardCanvas className="mx-auto w-full max-w-4xl justify-center">
+      <div className="relative flex w-full min-w-0 flex-col items-center justify-center">
         {/* Visual Header Badge */}
         <div
           className="mb-8 flex items-center gap-2 border border-dashed bg-background/50 px-3 py-1.5 font-mono text-[10px] tracking-widest uppercase backdrop-blur-md"
@@ -73,8 +73,8 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
         </div>
 
         {/* Blueprint Container */}
-        <Card className="w-full max-w-4xl overflow-hidden">
-          <div className="relative grid grid-cols-1 border-b border-border bg-black/40 md:grid-cols-12">
+        <Card className="w-full min-w-0 overflow-hidden">
+          <div className="relative grid w-full min-w-0 grid-cols-1 border-b border-border bg-black/40 md:grid-cols-12">
             {/* Left Column: Rotating Holographic Compass & Stats (5 cols) */}
             <div className="col-span-1 flex min-w-0 flex-col items-center justify-center border-b border-dashed border-white/10 p-6 md:col-span-5 md:border-r md:border-b-0">
               {/* Radar Graphic */}

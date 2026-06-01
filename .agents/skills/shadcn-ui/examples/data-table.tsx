@@ -3,38 +3,40 @@
 
 "use client"
 
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+} from "@tanstack/react-table"
 import {
-    ColumnDef,
-    ColumnFiltersState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    SortingState,
-    useReactTable,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
 } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table"
 
 // Define data type
@@ -106,9 +108,7 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: "Role",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("role")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("role")}</div>,
   },
   {
     accessorKey: "status",
@@ -150,7 +150,9 @@ export const columns: ColumnDef<User>[] = [
 
 export function DataTableExample() {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  )
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -291,7 +293,7 @@ export function DataTableExample() {
 
 /**
  * Key Patterns Demonstrated:
- * 
+ *
  * 1. TanStack Table Integration: Using @tanstack/react-table with shadcn/ui
  * 2. Sorting: Click headers to sort ascending/descending
  * 3. Filtering: Text input to filter table data
@@ -299,11 +301,11 @@ export function DataTableExample() {
  * 5. Pagination: Built-in pagination controls
  * 6. Row Actions: Dropdown menu per row for context actions
  * 7. Responsive Design: Table adapts to different screen sizes
- * 
+ *
  * Required Dependencies:
  * - @tanstack/react-table
  * - lucide-react
- * 
+ *
  * Installation:
  * npx shadcn@latest add table
  * npx shadcn@latest add button

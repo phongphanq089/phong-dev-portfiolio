@@ -2,12 +2,12 @@ import { motion } from "framer-motion"
 
 export default function HeroAnimation() {
   return (
-    <div className="relative h-64 w-full rounded-2xl bg-linear-to-br from-indigo-500 to-purple-600 flex items-center justify-center overflow-hidden">
+    <div className="relative flex h-64 w-full items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-indigo-500 to-purple-600">
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-white text-3xl font-black italic tracking-tighter"
+        className="text-3xl font-black tracking-tighter text-white italic"
       >
         MODERN UI
       </motion.div>

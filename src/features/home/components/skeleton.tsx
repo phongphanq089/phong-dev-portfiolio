@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { motion } from "motion/react"
 
 const Avatar = () => {
