@@ -20,6 +20,25 @@
   --color-light-scroll: oklch(0.8 0 0);
   --font-brand: "BrandFont", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", serif;
+  --color-primary: #dc2626;
+
+  /* ─── Typography Scale ─────────────────────────────────────────────── */
+  /* Section label  — monospace eyebrow above the heading */
+  --text-section-label: 0.625rem; /* 10px */
+  --tracking-section-label: 0.3em;
+
+  /* Section heading — main h2 of every section */
+  --text-section-heading: 2.25rem; /* 36px  ≈ text-4xl */
+  --text-section-heading-sm: 1.75rem; /* 28px on mobile */
+  --leading-section-heading: 1.15;
+  --tracking-section-heading: -0.02em;
+
+  /* Section count badge — (6) / (37) next to heading */
+  --text-section-count: 1.25rem; /* 20px ≈ text-xl */
+
+  /* Section subtitle — short description below heading */
+  --text-section-subtitle: 0.9375rem; /* 15px */
+  --leading-section-subtitle: 1.55;
 }
 
 :root {
@@ -29,7 +48,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.15 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.65 0.25 260); /* Vibrant Indigo/Blue */
+  --primary: #dc2626; /* Vibrant Indigo/Blue */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.25 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -62,9 +81,9 @@
   --grid-dots-hover: rgba(255, 255, 255, 0.12);
 }
 
-.dark {
-  /* Inherit from :root for now as dark is default */
-}
+/* .dark {
+
+} */
 
 .light {
   --background: oklch(1 0 0);
@@ -73,7 +92,7 @@
   --card-foreground: oklch(0 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: #dc2626;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0 0 0);
@@ -156,6 +175,56 @@
   }
   html {
     @apply font-mono;
+  }
+}
+
+/* ─── Section Typography Utilities ─── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-section-label);
+  letter-spacing: var(--tracking-section-label);
+  text-transform: uppercase;
+  color: oklch(var(--muted-foreground-raw, 0.7 0 0) / 50%);
+  color: color-mix(in oklch, var(--muted-foreground) 50%, transparent);
+}
+
+.section-heading {
+  font-size: var(--text-section-heading-sm);
+  font-weight: 600;
+  line-height: var(--leading-section-heading);
+  letter-spacing: var(--tracking-section-heading);
+  color: var(--foreground);
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    font-size: var(--text-section-heading);
+  }
+}
+
+.section-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-section-count);
+  font-weight: 400;
+  color: color-mix(in oklch, var(--muted-foreground) 40%, transparent);
+  margin-left: 0.75rem;
+  vertical-align: middle;
+}
+
+.section-subtitle {
+  font-size: var(--text-section-subtitle);
+  line-height: var(--leading-section-subtitle);
+  color: var(--muted-foreground);
+}
+
+/* ── Shared keyframe: terminal cursor blink (SectionEmptyState) ── */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }
 

@@ -26,6 +26,11 @@ const config = defineConfig({
   resolve: {
     dedupe: ["react", "react-dom", "styled-components"],
   },
+  server: {
+    hmr: {
+      overlay: false,
+    },
+  },
 })
 
 export default config

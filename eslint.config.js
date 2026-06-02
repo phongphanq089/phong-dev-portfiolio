@@ -9,7 +9,7 @@ import tseslint from "typescript-eslint"
 export default tseslint.config(
   {
     // Các thư mục cần bỏ qua
-    ignores: ["dist", ".vinxi", ".output"],
+    ignores: ["dist", ".vinxi", ".output", ".agents", ".agent"],
   },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],

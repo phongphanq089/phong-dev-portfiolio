@@ -1,41 +1,35 @@
 import { GridSection } from "@/components/layout/profile/grid-layout"
+import { SectionHeading } from "@/components/ui/section-heading"
 
 const BlogSection = () => {
   return (
     <>
       {/* ── Blog Section ── */}
       <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
-        <div className="flex items-end justify-between">
-          <div>
-            <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/50 uppercase">
-              03 / Writing
-            </span>
-            <h2 className="mt-2 text-4xl font-semibold tracking-tight">
-              Blog
-              <span className="ml-3 align-middle font-mono text-xl font-normal text-muted-foreground/40">
-                (37)
-              </span>
-            </h2>
-            <p className="mt-1 text-muted-foreground">
-              Thoughts on code, design, and everything in between.
-            </p>
-          </div>
-          <button className="group mb-1 flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-accent/60 hover:text-foreground">
-            All posts
-            <svg
-              className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
-          </button>
-        </div>
+        <SectionHeading
+          id="blog"
+          label="03 / Writing"
+          heading="Blog"
+          count={37}
+          subtitle="Thoughts on code, design, and everything in between."
+          action={
+            <button className="group flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-accent/60 hover:text-foreground">
+              All posts
+              <svg
+                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </button>
+          }
+        />
       </GridSection>
 
       {/* Blog cards */}

@@ -7,14 +7,16 @@ const NumbersSimulation = () => {
   useEffect(() => {
     const updateLineCount = () => {
       if (!containerRef.current) return
-      const wrapper = containerRef.current.closest(".min-h-screen") || document.body
+      const wrapper =
+        containerRef.current.closest(".min-h-screen") || document.body
       const lineHeight = 24 // Matches h-6
       const contentHeight = Math.max(wrapper.scrollHeight, wrapper.clientHeight)
       const count = Math.max(1, Math.ceil(contentHeight / lineHeight))
       setLineCount(count)
     }
 
-    const wrapper = containerRef.current?.closest(".min-h-screen") || document.body
+    const wrapper =
+      containerRef.current?.closest(".min-h-screen") || document.body
 
     // Observe size changes
     const resizeObserver = new ResizeObserver(() => {
@@ -26,7 +28,11 @@ const NumbersSimulation = () => {
     const mutationObserver = new MutationObserver(() => {
       requestAnimationFrame(updateLineCount)
     })
-    mutationObserver.observe(wrapper, { childList: true, subtree: true, attributes: true })
+    mutationObserver.observe(wrapper, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    })
 
     updateLineCount()
 

@@ -1,24 +1,14 @@
-import { Link, useRouterState } from "@tanstack/react-router"
 import { AnimatePresence, motion } from "framer-motion"
 import { LayoutGrid, X } from "lucide-react"
 import { useState } from "react"
 
 import { cn } from "@/lib/utils"
 
+import { MenuItem, type NavItemType } from "./menu-item"
 import { navItems } from "./setting-menu"
-
-const activeColors: Record<string, string> = {
-  Home: "#66ff00",
-  PROJECTS: "#ff00ff",
-  BLOG: "#ff6600",
-  RESOURCES: "#ffcc00",
-  STUDIO: "#ffffff",
-}
 
 export const MenuBottomMobile = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const routerState = useRouterState()
-  const currentPath = routerState.location.pathname
 
   // The permanent first 3 tabs (Home, PROJECTS, BLOG)
   const primaryTabs = navItems.slice(0, 3)
@@ -26,7 +16,7 @@ export const MenuBottomMobile = () => {
   const expandedTabs = navItems.slice(3)
 
   return (
-    <div className="fixed bottom-3 left-1/2 z-200 w-full max-w-[98%] -translate-x-1/2 lg:hidden">
+    <div className="fixed bottom-1 left-1/2 z-200 w-full max-w-[98%] -translate-x-1/2 lg:hidden">
       <AnimatePresence>
         {isExpanded && (
           <motion.div
@@ -36,49 +26,14 @@ export const MenuBottomMobile = () => {
             className="mb-2 overflow-hidden border border-white/20 bg-black/90 p-2 shadow-2xl backdrop-blur-xl"
           >
             <div className="grid grid-cols-2 gap-2">
-              {expandedTabs.map((item) => {
-                const isActive = currentPath.startsWith(item.link)
-                const activeColor = activeColors[item.label] || "#ffffff"
-
-                return (
-                  <Link
-                    key={item.label}
-                    to={item.link}
-                    onClick={() => setIsExpanded(false)}
-                    className={cn(
-                      "flex items-center gap-3 border bg-black p-4 transition-all duration-300",
-                      isActive
-                        ? "shadow-[0_0_10px_rgba(255,255,255,0.05)]"
-                        : "border-white/10 hover:border-current",
-                      item.color
-                    )}
-                    style={{
-                      borderColor: isActive ? activeColor : undefined,
-                    }}
-                  >
-                    <div
-                      className={cn(
-                        "h-2 w-2 transition-transform duration-300",
-                        item.bg,
-                        isActive && "scale-110 animate-pulse"
-                      )}
-                      style={{
-                        boxShadow: isActive
-                          ? `0 0 8px ${activeColor}`
-                          : undefined,
-                      }}
-                    />
-                    <span
-                      className={cn(
-                        "font-mono text-sm font-bold tracking-wider transition-colors duration-200",
-                        isActive ? "text-white" : "text-white/70"
-                      )}
-                    >
-                      {item.label}
-                    </span>
-                  </Link>
-                )
-              })}
+              {expandedTabs.map((item) => (
+                <MenuItem
+                  key={item.label}
+                  item={item as NavItemType}
+                  variant="mobile-expanded"
+                  onClick={() => setIsExpanded(false)}
+                />
+              ))}
             </div>
           </motion.div>
         )}
@@ -87,55 +42,19 @@ export const MenuBottomMobile = () => {
       {/* Main Dock Bar */}
       <div className="flex items-center justify-between border border-white/20 bg-black/80 p-1.5 shadow-2xl backdrop-blur-md">
         <div className="flex flex-1 items-center gap-1">
-          {primaryTabs.map((item) => {
-            const isActive =
-              item.link === "/"
-                ? currentPath === "/"
-                : currentPath.startsWith(item.link)
-            const activeColor = activeColors[item.label] || "#ffffff"
-
-            return (
-              <Link
-                key={item.label}
-                to={item.link}
-                className={cn(
-                  "flex h-full flex-1 flex-col items-center justify-center gap-1 border bg-black py-2.5 transition-all duration-300 active:scale-95",
-                  isActive
-                    ? "shadow-[0_-5px_15px_rgba(255,255,255,0.02)]"
-                    : "border-white/5",
-                  item.color
-                )}
-                style={{
-                  borderColor: isActive ? activeColor : undefined,
-                }}
-              >
-                <div
-                  className={cn(
-                    "h-4 w-4 transition-transform duration-300",
-                    item.bg,
-                    isActive && "scale-110 animate-pulse"
-                  )}
-                  style={{
-                    boxShadow: isActive ? `0 0 8px ${activeColor}` : undefined,
-                  }}
-                />
-                <span
-                  className={cn(
-                    "font-mono text-xs font-bold tracking-tighter transition-colors duration-200",
-                    isActive ? "text-white" : "text-white/60"
-                  )}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            )
-          })}
+          {primaryTabs.map((item) => (
+            <MenuItem
+              key={item.label}
+              item={item as NavItemType}
+              variant="mobile-primary"
+            />
+          ))}
 
           {/* MORE Button */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className={cn(
-              "flex h-full flex-1 flex-col items-center justify-center gap-1 border bg-black py-2.5 text-white transition-all active:scale-95",
+              "flex h-full flex-1 flex-col items-center justify-center gap-1 border bg-primary py-2 text-white transition-all active:scale-95",
               isExpanded ? "border-primary" : "border-white/5"
             )}
           >
@@ -144,7 +63,7 @@ export const MenuBottomMobile = () => {
             ) : (
               <LayoutGrid className="h-4 w-4 text-white" />
             )}
-            <span className="font-mono text-xs font-bold tracking-tighter text-white/80">
+            <span className="text-[9px] font-bold tracking-tighter text-white/80">
               MORE
             </span>
           </button>

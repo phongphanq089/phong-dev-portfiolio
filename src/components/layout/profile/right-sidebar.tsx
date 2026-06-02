@@ -1,6 +1,6 @@
 const RightSidebar = () => {
   return (
-    <aside className="hidden w-[240px] border-l border-white/5 p-8 lg:flex dark:bg-black/20 backdrop-blur-sm">
+    <aside className="hidden w-[240px] border-l border-white/5 p-8 backdrop-blur-sm lg:flex dark:bg-black/20">
       <div className="w-full space-y-6">
         <h3 className="border-b border-white/10 pb-2 text-sm font-bold tracking-widest text-white uppercase">
           Index

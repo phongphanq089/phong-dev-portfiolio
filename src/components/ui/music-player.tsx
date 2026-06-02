@@ -51,7 +51,7 @@ export function MusicPlayer() {
       <div className="flex flex-col items-end gap-2">
         {/* Song name tooltip — shows on hover */}
         <div
-          className={`pointer-events-none flex items-center gap-2 rounded-full border border-white/10 bg-black/80 px-3 py-1.5 backdrop-blur-md transition-all duration-300 ${
+          className={`pointer-events-none flex items-center gap-2 rounded-full border border-white/10 bg-black/80 px-3 py-1.5 backdrop-blur-md transition-all duration-300 max-lg:hidden ${
             hovered ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
           }`}
         >

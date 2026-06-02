@@ -26,7 +26,8 @@ export const SOCIALINK = {
 export const TOCItems: TOCItemType[] = [
   { title: "Banner", url: "#banner", depth: 1 },
   { title: "About", url: "#about", depth: 1 },
-  { title: "Components ui", url: "#components-ui", depth: 1 },
-  { title: "Project", url: "#project", depth: 1 },
-  { title: "Blog", url: "#contact", depth: 1 },
+  { title: "Components", url: "#components-ui", depth: 1 },
+  { title: "Projects", url: "#project", depth: 1 },
+  { title: "Blog", url: "#blog", depth: 1 },
+  { title: "Bookmarks", url: "#bookmarks", depth: 1 },
 ]

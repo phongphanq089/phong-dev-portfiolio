@@ -1,26 +1,18 @@
 import { GridSection } from "@/components/layout/profile/grid-layout"
+import { SectionHeading } from "@/components/ui/section-heading"
 
 const BookmarkSection = () => {
   return (
     <>
       {/* ── Bookmarks Section ── */}
       <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
-        <div className="flex items-end justify-between">
-          <div>
-            <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/50 uppercase">
-              03 / Reading
-            </span>
-            <h2 className="mt-2 text-4xl font-semibold tracking-tight">
-              Bookmarks
-              <span className="ml-3 align-middle font-mono text-xl font-normal text-muted-foreground/40">
-                (14)
-              </span>
-            </h2>
-            <p className="mt-1 text-muted-foreground">
-              Articles, talks, and links I keep coming back to.
-            </p>
-          </div>
-        </div>
+        <SectionHeading
+          id="bookmarks"
+          label="03 / Reading"
+          heading="Bookmarks"
+          count={14}
+          subtitle="Articles, talks, and links I keep coming back to."
+        />
       </GridSection>
 
       <GridSection

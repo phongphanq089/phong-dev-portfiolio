@@ -5,6 +5,7 @@ This guide walks you through setting up shadcn/ui in both new and existing proje
 ## Prerequisites
 
 Before you begin, ensure you have:
+
 - **Node.js 18+** installed
 - **React 18+** in your project
 - **Tailwind CSS 3.0+** configured
@@ -21,6 +22,7 @@ npx shadcn@latest create
 ```
 
 This interactive command will guide you through:
+
 1.  **Project Name**: Directory for your app.
 2.  **Visual Style**: Choose from Vega, Nova, Maia, Lyra, Mira, or Classic.
 3.  **Base Color**: Select your primary theme color.
@@ -77,10 +79,7 @@ Configure `tailwind.config.js`:
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
@@ -120,7 +119,9 @@ You'll be asked to configure:
 ## Advanced Features
 
 ### Visual Styles
+
 shadcn/ui now offers multiple visual styles beyond the defaults:
+
 - **Vega**: The classic shadcn/ui look.
 - **Nova**: Reduced padding/margins, compact.
 - **Maia**: Soft, rounded, generous spacing.
@@ -128,14 +129,15 @@ shadcn/ui now offers multiple visual styles beyond the defaults:
 - **Mira**: Dense, compact.
 
 ### Base UI Support
-You can now choose between **Radix UI** and **Base UI** as the underlying primitive library. They share the same component API/abstraction, so your usage remains consistent.
 
+You can now choose between **Radix UI** and **Base UI** as the underlying primitive library. They share the same component API/abstraction, so your usage remains consistent.
 
 ### Step 3: Verify Configuration
 
 The init command creates/updates several files:
 
 **components.json** (root of project):
+
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -156,6 +158,7 @@ The init command creates/updates several files:
 ```
 
 **src/lib/utils.ts**:
+
 ```typescript
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -166,15 +169,16 @@ export function cn(...inputs: ClassValue[]) {
 ```
 
 **Updated tailwind.config.js**:
+
 ```javascript
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -223,6 +227,7 @@ module.exports = {
 ```
 
 **Updated globals.css** (or equivalent):
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -343,6 +348,7 @@ Components will be added to `src/components/ui/` by default.
 ## Verification Steps
 
 1. **Check file structure**:
+
    ```
    src/
    ├── components/
@@ -353,9 +359,10 @@ Components will be added to `src/components/ui/` by default.
    ```
 
 2. **Test a simple component**:
+
    ```tsx
    import { Button } from "@/components/ui/button"
-   
+
    export default function App() {
      return <Button>Click me</Button>
    }
@@ -378,7 +385,8 @@ Components will be added to `src/components/ui/` by default.
 
 ### Styles not applying
 
-**Solution**: 
+**Solution**:
+
 - Ensure `globals.css` is imported in your app entry point
 - Verify Tailwind config `content` paths include your files
 - Check CSS variables are defined in `globals.css`
@@ -386,6 +394,7 @@ Components will be added to `src/components/ui/` by default.
 ### TypeScript errors in components
 
 **Solution**:
+
 - Run `npm install` to ensure all dependencies are installed
 - Check that `@types/react` is installed
 - Restart TypeScript server in your editor
@@ -393,6 +402,7 @@ Components will be added to `src/components/ui/` by default.
 ### Components look broken
 
 **Solution**:
+
 - Verify `tailwindcss-animate` is installed: `npm install tailwindcss-animate`
 - Check that CSS variables are properly defined
 - Ensure you're not overriding component styles globally
