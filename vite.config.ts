@@ -6,6 +6,8 @@ import viteReact from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
+const isDev = process.env.NODE_ENV !== "production"
+
 const config = defineConfig({
   resolve: {
     dedupe: ["react", "react-dom", "styled-components"],
@@ -21,14 +23,14 @@ const config = defineConfig({
       srcDirectory: "src",
       prerender: {
         enabled: true,
-        crawlLinks: true,
+        crawlLinks: false,
       },
       pages: [
         { path: "/" },
         { path: "/project" },
         { path: "/blog" },
         { path: "/resources" },
-        { path: "/studio" },
+        { path: "/library" },
       ],
       sitemap: {
         enabled: true,
@@ -39,7 +41,7 @@ const config = defineConfig({
 
     tailwindcss(),
     viteReact(),
-    devtools(),
+    isDev && devtools(),
   ],
 })
 
