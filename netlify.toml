@@ -1,16 +1,3 @@
 [build]
-  # Đổi lệnh build thành build:nitro để kích hoạt preset
   command = "pnpm run build"
-
-  # Thư mục chứa các file tĩnh (HTML/CSS/JS/Hình ảnh) sau khi build
-  publish = ".output/public"
-
-[functions]
-  # Chỉ đường dẫn cho Netlify biết nơi Nitro đã đóng gói các hàm Serverless (SSR/API)
-  directory = ".netlify/functions-internal"
-
-[[redirects]]
-  # Quy tắc điều hướng: Tất cả các request động sẽ được đẩy vào hàm xử lý của Nitro
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
+  publish = "dist/client"
