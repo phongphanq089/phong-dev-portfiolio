@@ -18,3 +18,4 @@ stats.html
 # AI
 .gemini
 tsconfig.tsbuildinfo
+.netlify
