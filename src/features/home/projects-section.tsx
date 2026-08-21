@@ -1,10 +1,13 @@
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { SectionHeading } from "@/shared/ui/system/section-heading"
 
 const ProjectsSection = () => {
   return (
     <>
-      <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
+      <GridContainer
+        className="px-8 pt-16 pb-0 md:px-16"
+        showCrosshairs={false}
+      >
         <SectionHeading
           id="project"
           label="02 / Work"
@@ -29,9 +32,9 @@ const ProjectsSection = () => {
             </button>
           }
         />
-      </GridSection>
+      </GridContainer>
 
-      <GridSection
+      <GridContainer
         className="px-8 py-8 md:px-16"
         borderTop={false}
         showCrosshairs={false}
@@ -241,7 +244,7 @@ const ProjectsSection = () => {
             ))}
           </div>
         </div>
-      </GridSection>
+      </GridContainer>
     </>
   )
 }

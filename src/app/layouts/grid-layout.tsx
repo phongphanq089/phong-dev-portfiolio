@@ -18,7 +18,8 @@ export const Crosshair = ({ className }: { className?: string }) => (
   </svg>
 )
 
-export interface GridSectionProps {
+export interface GridContainerProps {
+  as?: React.ElementType
   children: React.ReactNode
   className?: string
   showCrosshairs?: boolean
@@ -27,16 +28,17 @@ export interface GridSectionProps {
   borderTop?: boolean
 }
 
-export function GridSection({
+export function GridContainer({
+  as: Component = "section",
   children,
   className,
   showCrosshairs = true,
   columns = 1,
   borderBottom = true,
   borderTop = false,
-}: GridSectionProps) {
+}: GridContainerProps) {
   return (
-    <section
+    <Component
       className={cn(
         "relative z-1",
         borderBottom && "border-b border-border",
@@ -76,6 +78,6 @@ export function GridSection({
 
         {children}
       </div>
-    </section>
+    </Component>
   )
 }

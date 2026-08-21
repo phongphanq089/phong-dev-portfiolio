@@ -1,6 +1,6 @@
 import { motion } from "motion/react"
 
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { SkeletonOne } from "@/shared/ui/animation/skeleton-hover"
 import { iconComponents, type IconName, RenderIcon } from "@/shared/ui/icons"
 import { SectionHeading } from "@/shared/ui/system/section-heading"
@@ -152,10 +152,10 @@ const HobbyTag = ({ label }: { label: string }) => (
 const SectionAbout = () => {
   return (
     <>
-      <GridSection className="px-8 py-3" borderTop>
+      <GridContainer className="px-8 py-3" borderTop>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="flex w-full gap-3">
-            <GridSection showCrosshairs={false} borderTop={true}>
+            <GridContainer showCrosshairs={false} borderTop={true}>
               <div className="h-30 w-30 overflow-hidden">
                 <img
                   src="/avatar.gif"
@@ -163,10 +163,10 @@ const SectionAbout = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-            </GridSection>
+            </GridContainer>
 
             <div className="flex w-full flex-col gap-2">
-              <GridSection
+              <GridContainer
                 showCrosshairs={false}
                 borderTop={true}
                 className="w-full p-3"
@@ -176,8 +176,8 @@ const SectionAbout = () => {
                   label="01 / About"
                   heading="Phong Phan"
                 />
-              </GridSection>
-              <GridSection
+              </GridContainer>
+              <GridContainer
                 showCrosshairs={false}
                 borderTop={true}
                 className="w-full p-3"
@@ -185,7 +185,7 @@ const SectionAbout = () => {
                 <p className="font-mono text-[11px] tracking-wider text-muted-foreground/60">
                   Fullstack Developer · Viet Nam
                 </p>
-              </GridSection>
+              </GridContainer>
             </div>
           </div>
           <div className="flex flex-col gap-3">
@@ -195,9 +195,9 @@ const SectionAbout = () => {
             />
           </div>
         </div>
-      </GridSection>
+      </GridContainer>
 
-      <GridSection showCrosshairs={false} className="p-8">
+      <GridContainer showCrosshairs={false} className="p-8">
         <div className="flex flex-col gap-4 text-justify text-[16px] leading-relaxed text-white/80">
           <p>
             Hi there! I'm <span className="font-bold">Phong Phan</span>. My
@@ -246,14 +246,14 @@ const SectionAbout = () => {
             <HobbyTag label="Traveling" />
           </div>
         </div>
-      </GridSection>
+      </GridContainer>
 
-      <GridSection borderTop className="px-8 py-2">
+      <GridContainer borderTop className="px-8 py-2">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground uppercase">
           Tech Stack
         </h2>
-      </GridSection>
-      <GridSection showCrosshairs={false} className="p-8">
+      </GridContainer>
+      <GridContainer showCrosshairs={false} className="p-8">
         <div className="flex flex-col gap-4">
           {techStack.map((row, ri) => (
             <div key={ri} className="flex flex-wrap gap-2">
@@ -263,7 +263,7 @@ const SectionAbout = () => {
             </div>
           ))}
         </div>
-      </GridSection>
+      </GridContainer>
     </>
   )
 }

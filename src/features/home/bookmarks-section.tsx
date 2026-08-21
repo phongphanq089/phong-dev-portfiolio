@@ -1,11 +1,14 @@
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { SectionHeading } from "@/shared/ui/system/section-heading"
 
 const BookmarkSection = () => {
   return (
     <>
       {/* ── Bookmarks Section ── */}
-      <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
+      <GridContainer
+        className="px-8 pt-16 pb-0 md:px-16"
+        showCrosshairs={false}
+      >
         <SectionHeading
           id="bookmarks"
           label="03 / Reading"
@@ -13,9 +16,9 @@ const BookmarkSection = () => {
           count={14}
           subtitle="Articles, talks, and links I keep coming back to."
         />
-      </GridSection>
+      </GridContainer>
 
-      <GridSection
+      <GridContainer
         className="px-8 py-8 md:px-16"
         borderTop={false}
         showCrosshairs={false}
@@ -127,7 +130,7 @@ const BookmarkSection = () => {
             </a>
           ))}
         </div>
-      </GridSection>
+      </GridContainer>
     </>
   )
 }

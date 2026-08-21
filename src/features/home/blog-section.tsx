@@ -1,11 +1,14 @@
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { SectionHeading } from "@/shared/ui/system/section-heading"
 
 const BlogSection = () => {
   return (
     <>
       {/* ── Blog Section ── */}
-      <GridSection className="px-8 pt-16 pb-0 md:px-16" showCrosshairs={false}>
+      <GridContainer
+        className="px-8 pt-16 pb-0 md:px-16"
+        showCrosshairs={false}
+      >
         <SectionHeading
           id="blog"
           label="03 / Writing"
@@ -30,10 +33,10 @@ const BlogSection = () => {
             </button>
           }
         />
-      </GridSection>
+      </GridContainer>
 
       {/* Blog cards */}
-      <GridSection
+      <GridContainer
         className="px-8 py-8 md:px-16"
         borderTop={false}
         showCrosshairs={false}
@@ -135,10 +138,10 @@ const BlogSection = () => {
             </div>
           ))}
         </div>
-      </GridSection>
+      </GridContainer>
 
       {/* Blog CTA */}
-      <GridSection
+      <GridContainer
         className="flex items-center justify-center py-10"
         borderTop={true}
         showCrosshairs={false}
@@ -159,7 +162,7 @@ const BlogSection = () => {
             <path d="m12 5 7 7-7 7" />
           </svg>
         </button>
-      </GridSection>
+      </GridContainer>
     </>
   )
 }

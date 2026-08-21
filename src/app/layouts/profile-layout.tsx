@@ -14,7 +14,7 @@ import { Footer } from "@/widgets/profile-footer"
 import { Header, MenuBottomMobile } from "@/widgets/profile-header"
 import { NumbersSimulation } from "@/widgets/profile-sidebar"
 
-import { GridSection } from "./grid-layout"
+import { GridContainer } from "./grid-layout"
 
 export function ProfileLayout({ children }: { children?: React.ReactNode }) {
   const [showMinimap, setShowMinimap] = useState(false)
@@ -57,13 +57,13 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
         <div className="flex min-w-0 flex-1 flex-col">
           {/* Header */}
           <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
-            <GridSection
+            <GridContainer
               borderTop={false}
               borderBottom={true}
               className="flex justify-center p-0 transition-all duration-300"
             >
               <Header />
-            </GridSection>
+            </GridContainer>
           </div>
 
           {/* Mobile Bottom Dock Menu */}

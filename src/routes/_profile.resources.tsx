@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { UnderConstruction } from "@/shared/ui/system/under-construction"
 
 export const Route = createFileRoute("/_profile/resources")({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_profile/resources")({
 function ResourcesPage() {
   return (
     <div className="w-full">
-      <GridSection
+      <GridContainer
         className="px-4 py-16 md:px-8"
         borderTop={false}
         showCrosshairs={true}
@@ -20,7 +20,7 @@ function ResourcesPage() {
           colorTheme="#ffcc00"
           colorName="gold"
         />
-      </GridSection>
+      </GridContainer>
     </div>
   )
 }

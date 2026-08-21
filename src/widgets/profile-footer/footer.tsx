@@ -1,4 +1,4 @@
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { TextHoverEffect } from "@/shared/ui/animation/text-hover-effect"
 
 const SocialItem = ({
@@ -26,7 +26,7 @@ const SocialItem = ({
 export default function Footer() {
   return (
     <div>
-      <GridSection className="px-8 py-12 md:px-16">
+      <GridContainer className="px-8 py-12 md:px-16">
         <div className="flex flex-col gap-4">
           <p className="text-sm leading-relaxed text-muted-foreground">
             Inspired by{" "}
@@ -81,9 +81,9 @@ export default function Footer() {
             .
           </p>
         </div>
-      </GridSection>
+      </GridContainer>
 
-      <GridSection
+      <GridContainer
         className="grid grid-cols-2 divide-x divide-border md:grid-cols-4"
         borderTop={true}
         showCrosshairs={false}
@@ -144,7 +144,7 @@ export default function Footer() {
             </svg>
           }
         />
-      </GridSection>
+      </GridContainer>
 
       <div className="px-10">
         <TextHoverEffect text="PHONG PHAN" />

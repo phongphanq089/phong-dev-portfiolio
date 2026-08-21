@@ -1,4 +1,4 @@
-import { GridSection } from "@/app/layouts/grid-layout"
+import { GridContainer } from "@/app/layouts"
 import { Card, CardCanvas } from "@/shared/ui/animation/animated-glow-card"
 import { SectionEmptyState } from "@/shared/ui/system/section-empty-state"
 import { SectionHeading } from "@/shared/ui/system/section-heading"
@@ -18,7 +18,7 @@ const HAS_DATA = uiComponentItems.length > 0
 const UiComponentsSection = () => {
   return (
     <>
-      <GridSection className="px-4 py-5 md:px-8" showCrosshairs={false}>
+      <GridContainer className="px-4 py-5 md:px-8" showCrosshairs={false}>
         <SectionHeading
           id="components-ui"
           label="02 / Components"
@@ -45,9 +45,9 @@ const UiComponentsSection = () => {
             ) : null
           }
         />
-      </GridSection>
+      </GridContainer>
 
-      <GridSection
+      <GridContainer
         className="px-4 py-8 md:px-8"
         borderTop={false}
         showCrosshairs={false}
@@ -104,10 +104,10 @@ const UiComponentsSection = () => {
             )}
           </div>
         )}
-      </GridSection>
+      </GridContainer>
 
       {HAS_DATA && (
-        <GridSection
+        <GridContainer
           className="flex items-center justify-center py-10"
           borderTop={true}
           showCrosshairs={false}
@@ -128,7 +128,7 @@ const UiComponentsSection = () => {
               <path d="m12 5 7 7-7 7" />
             </svg>
           </button>
-        </GridSection>
+        </GridContainer>
       )}
     </>
   )

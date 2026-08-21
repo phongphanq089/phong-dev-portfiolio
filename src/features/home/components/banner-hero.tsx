@@ -2,13 +2,13 @@
 
 import { ArrowDownRight } from "lucide-react"
 
-import { GridSection } from "@/app/layouts"
+import { GridContainer } from "@/app/layouts"
 import { PPMarkIsometric } from "@/shared/ui"
 import TextBurnNeon from "@/shared/ui/animation/text-burn-neon"
 
 const BannerHero = () => {
   return (
-    <GridSection
+    <GridContainer
       className="relative flex flex-col overflow-hidden px-4 pt-8 pb-12 sm:px-8"
       showCrosshairs={true}
       borderBottom={false}
@@ -112,7 +112,7 @@ const BannerHero = () => {
           </span>
         </div>
       </div>
-    </GridSection>
+    </GridContainer>
   )
 }
 
