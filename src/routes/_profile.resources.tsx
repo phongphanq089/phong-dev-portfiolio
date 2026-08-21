@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { GridSection } from "@/components/layout/profile/grid-layout"
-import { UnderConstruction } from "@/components/shared/under-construction"
+import { GridSection } from "@/app/layouts/grid-layout"
+import { UnderConstruction } from "@/shared/ui/system/under-construction"
 
 export const Route = createFileRoute("/_profile/resources")({
   component: ResourcesPage,

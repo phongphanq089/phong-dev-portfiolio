@@ -3,7 +3,7 @@ import "./profile-card.css"
 
 import React, { useCallback, useEffect, useMemo, useRef } from "react"
 
-import { DEFAULT_NAME_PORTFOLIO } from "@/constants"
+import { DEFAULT_NAME_PORTFOLIO } from "@/shared/constants"
 
 interface ProfileCardProps {
   avatarUrl: string

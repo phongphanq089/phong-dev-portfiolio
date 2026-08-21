@@ -1,13 +1,9 @@
 import { motion } from "motion/react"
 
-import { GridSection } from "@/components/layout/profile/grid-layout"
-import { SkeletonOne } from "@/components/ui/animation/skeleton-hover"
-import {
-  iconComponents,
-  type IconName,
-  RenderIcon,
-} from "@/components/ui/icons"
-import { SectionHeading } from "@/components/ui/section-heading"
+import { GridSection } from "@/app/layouts/grid-layout"
+import { SkeletonOne } from "@/shared/ui/animation/skeleton-hover"
+import { iconComponents, type IconName, RenderIcon } from "@/shared/ui/icons"
+import { SectionHeading } from "@/shared/ui/system/section-heading"
 
 /* ─── Tech stack badge ─── */
 type TechItem = {

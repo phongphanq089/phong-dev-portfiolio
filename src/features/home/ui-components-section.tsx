@@ -1,7 +1,7 @@
-import { GridSection } from "@/components/layout/profile/grid-layout"
-import { Card, CardCanvas } from "@/components/ui/animated-glow-card"
-import { SectionEmptyState } from "@/components/ui/section-empty-state"
-import { SectionHeading } from "@/components/ui/section-heading"
+import { GridSection } from "@/app/layouts/grid-layout"
+import { Card, CardCanvas } from "@/shared/ui/animation/animated-glow-card"
+import { SectionEmptyState } from "@/shared/ui/system/section-empty-state"
+import { SectionHeading } from "@/shared/ui/system/section-heading"
 
 import { uiComponentItems } from "./data/ui-components.data"
 

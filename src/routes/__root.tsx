@@ -1,14 +1,16 @@
 import type { QueryClient } from "@tanstack/react-query"
 import {
   createRootRouteWithContext,
+  type ErrorComponentProps,
   HeadContent,
   Outlet,
   Scripts,
 } from "@tanstack/react-router"
+import type { JSX } from "react/jsx-runtime"
 
-import { DefaultCatchBoundary } from "@/components/errors/default-catch-boundary"
-import { NotFound } from "@/components/errors/not-found"
-import { seo } from "@/lib/utils"
+import { seo } from "@/shared/lib/utils"
+import { DefaultCatchBoundary } from "@/shared/ui/system/default-catch-boundary"
+import { NotFound } from "@/shared/ui/system/not-found"
 
 import appCss from "../styles.css?url"
 
@@ -78,7 +80,7 @@ export const Route = createRootRouteWithContext<{
       },
     ],
   }),
-  errorComponent: (props) => {
+  errorComponent: (props: JSX.IntrinsicAttributes & ErrorComponentProps) => {
     return (
       <RootDocument>
         <DefaultCatchBoundary {...props} />

@@ -1,5 +1,5 @@
-import { GridSection } from "@/components/layout/profile/grid-layout"
-import { SectionHeading } from "@/components/ui/section-heading"
+import { GridSection } from "@/app/layouts/grid-layout"
+import { SectionHeading } from "@/shared/ui/system/section-heading"
 
 const BlogSection = () => {
   return (

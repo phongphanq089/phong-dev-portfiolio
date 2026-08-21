@@ -2,8 +2,8 @@
 
 import { useRef } from "react"
 
-import TextBurnNeon from "@/components/ui/animation/text-burn-neon"
-import { TOCItems } from "@/constants"
+import { TOCItems } from "@/shared/constants"
+import TextBurnNeon from "@/shared/ui/animation/text-burn-neon"
 
 /* ─── Sidebar Navigation Item ─── */
 const SidebarItem = ({

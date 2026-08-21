@@ -19,4 +19,5 @@ export const Route = createFileRoute("/robots.txt")({
       },
     },
   },
-})
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any)

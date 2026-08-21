@@ -28,26 +28,8 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      // "react-refresh/only-export-components": [
-      //   "warn",
-      //   {
-      //     allowExportNames: [
-      //       "loader",
-      //       "clientLoader",
-      //       "action",
-      //       "clientAction",
-      //       "ErrorBoundary",
-      //       "HydrateFallback",
-      //       "headers",
-      //       "handle",
-      //       "links",
-      //       "meta",
-      //       "shouldRevalidate",
-      //     ],
-      //   },
-      // ],
+
       "react-refresh/only-export-components": "off",
-      // Các rule bạn thích ở option 1
       "@typescript-eslint/consistent-type-imports": "error",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",

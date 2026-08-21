@@ -17,6 +17,12 @@ const config = defineConfig({
       overlay: false,
     },
   },
+  optimizeDeps: {
+    include: ["sanity", "sanity/structure"],
+  },
+  ssr: {
+    external: ["sanity", "sanity/structure"],
+  },
   plugins: [
     tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
@@ -31,6 +37,7 @@ const config = defineConfig({
         { path: "/blog" },
         { path: "/resources" },
         { path: "/library" },
+        { path: "/design-system" },
       ],
       sitemap: {
         enabled: true,

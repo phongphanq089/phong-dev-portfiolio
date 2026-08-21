@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
 import { LibraryView } from "@/features/library/library-view"
-import { seo } from "@/lib/utils"
+import { seo } from "@/shared/lib/utils"
 
 export const Route = createFileRoute("/_library/library")({
   head: () => ({

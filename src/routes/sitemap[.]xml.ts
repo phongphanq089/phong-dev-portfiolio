@@ -1,18 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { client } from "@/lib/sanity"
+import { client } from "@/shared/lib/sanity"
 
 interface SitemapRoute {
   path: string
   lastmod: string
   changefreq:
-    | "always"
-    | "hourly"
-    | "daily"
-    | "weekly"
-    | "monthly"
-    | "yearly"
-    | "never"
+    "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never"
   priority: string
 }
 
@@ -78,7 +72,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const allRoutes = [...staticRoutes, ...dynamicRoutes]
 
         // 4. Tạo XML string
-        const host = process.env.VITE_SITE_URL || "http://localhost:3000"
+        const host = import.meta.env.VITE_SITE_URL || "http://localhost:3000"
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes
@@ -103,4 +97,5 @@ ${allRoutes
       },
     },
   },
-})
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any)
