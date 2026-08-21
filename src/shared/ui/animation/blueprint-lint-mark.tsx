@@ -129,7 +129,7 @@ export function BlueprintLintMark({
             {/* Fluid Text Label: Sticks directly to the right of Col 1, at the bottom */}
             <span
               className={cn(
-                "absolute bottom-0 left-[115%] z-20 font-sans text-[10px]! font-bold tracking-tight whitespace-nowrap text-zinc-400 transition-colors group-hover:text-zinc-600 dark:text-white/40 dark:group-hover:text-white",
+                "absolute bottom-0 left-[115%] z-20 text-[10px]! font-bold tracking-tight whitespace-nowrap text-zinc-400 transition-colors group-hover:text-zinc-600 dark:text-white/40 dark:group-hover:text-white",
                 currentSize.text,
                 isStaticActive && "text-zinc-600 dark:text-white"
               )}

@@ -109,7 +109,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body
-        className="relative font-sans wrap-anywhere antialiased"
+        className="relative wrap-anywhere antialiased"
         suppressHydrationWarning
       >
         {children}

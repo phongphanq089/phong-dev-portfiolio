@@ -38,10 +38,10 @@ const BannerHero = () => {
 
           <div className="absolute top-20 left-0 hidden flex-col gap-2.5 font-mono text-[11px] text-muted-foreground/80 lg:flex">
             <div className="relative z-10 mx-auto mb-6 flex flex-col select-none">
-              <h1 className="font-sans text-5xl leading-[0.88] font-black tracking-tighter text-foreground sm:text-7xl md:text-6xl lg:text-7xl">
+              <h1 className="text-5xl leading-[0.88] font-black tracking-tighter text-foreground sm:text-7xl md:text-6xl lg:text-7xl">
                 CREATIVE
               </h1>
-              <TextBurnNeon className="mt-1 font-sans text-5xl leading-[0.88] font-black tracking-tighter text-primary-color sm:text-7xl md:text-6xl lg:text-7xl">
+              <TextBurnNeon className="mt-1 text-5xl leading-[0.88] font-black tracking-tighter text-primary sm:text-7xl md:text-6xl lg:text-7xl">
                 DEVELOPER
               </TextBurnNeon>
             </div>
@@ -107,7 +107,7 @@ const BannerHero = () => {
             <span>RECENT WORK</span>
             <ArrowDownRight className="h-3 w-3 text-primary" />
           </div>
-          <span className="font-sans text-xs font-black tracking-tight text-foreground uppercase sm:text-sm">
+          <span className="text-xs font-black tracking-tight text-foreground uppercase sm:text-sm">
             DESIGN WITHOUT LIMITS
           </span>
         </div>

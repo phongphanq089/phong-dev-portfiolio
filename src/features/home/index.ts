@@ -1,6 +1,6 @@
-﻿export * from "./banner-hero"
 export * from "./blog-section"
 export * from "./bookmarks-section"
+export * from "./components/banner-hero"
 export * from "./projects-section"
 export * from "./section-about"
 export * from "./ui-components-section"

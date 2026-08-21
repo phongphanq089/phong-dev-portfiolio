@@ -1,10 +1,10 @@
 export function TokensSection() {
   const colors = [
     {
-      name: "Primary",
-      class: "bg-primary",
-      text: "#dc2626",
-      desc: "Main brand accent",
+      name: "PP Primary (Brand)",
+      class: "bg-pp-primary",
+      text: "var(--pp-primary) / #dc2626",
+      desc: "Main brand signature accent",
     },
     {
       name: "Background",
