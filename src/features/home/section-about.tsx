@@ -177,7 +177,7 @@ const SectionAbout = () => {
             <div className="relative w-fit">
               <div className="h-30 w-30 overflow-hidden rounded-2xl border-2 border-border shadow-[0_0_40px_rgba(0,0,0,0.06)] dark:shadow-[0_0_40px_rgba(255,255,255,0.06)]">
                 <img
-                  src="/avatar.png"
+                  src="/avatar1.png"
                   alt="Phong Phan"
                   className="h-full w-full object-cover"
                 />

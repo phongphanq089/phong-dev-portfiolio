@@ -1,4 +1,5 @@
-﻿import { Badge } from "@/shared/ui/core/badge"
+import BackgroundGradientCursor from "@/shared/ui/animation/background-gradient-cursor"
+import { Badge } from "@/shared/ui/core/badge"
 import { Checkbox } from "@/shared/ui/core/checkbox"
 import { Separator } from "@/shared/ui/core/separator"
 import { ModeToggle } from "@/shared/ui/system/mode-toggle"
@@ -8,6 +9,20 @@ import { SectionEmptyState } from "@/shared/ui/system/section-empty-state"
 import { ShowcaseCard } from "../components/showcase-card"
 
 export function FeedbackSection() {
+
+  const effects = {
+    mask: { cursor: true, radius: 120 },
+    gradient: {
+      display: true,
+      tilt: 45,
+      colorStart: "blue-500",
+      colorEnd: "transparent",
+      opacity: 30,
+    },
+    dots: { display: true, size: 2, color: "primary", opacity: 20 },
+    lines: { display: false, opacity: 100 },
+    grid: { display: false, opacity: 100 },
+  }
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       <ShowcaseCard
@@ -64,6 +79,27 @@ export function FeedbackSection() {
             title="Module in Progress"
             subtitle="This component is being calibrated with system tokens."
           />
+        </div>
+      </ShowcaseCard>
+
+      <ShowcaseCard
+        title="Background Gradient Cursor"
+        description="Animated gradient cursor with mask, dots, lines, and grid effects"
+        tag="System"
+      >
+        <div className="relative h-60 w-full overflow-hidden rounded-lg border border-border/50 bg-background/50 p-4">
+          <BackgroundGradientCursor
+            position="absolute"
+            mask={effects.mask}
+            dots={effects.dots}
+            grid={effects.grid}
+            lines={effects.lines}
+            gradient={effects.gradient}
+          />
+          <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-1 font-mono text-xs text-muted-foreground select-none">
+            <span className="text-foreground/80 font-medium">Interactive Canvas Area</span>
+            <span className="text-[10px]">Hover mouse inside to reveal cursor gradient mask</span>
+          </div>
         </div>
       </ShowcaseCard>
     </div>

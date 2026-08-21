@@ -1,4 +1,4 @@
-import classNames from "classnames"
+﻿import classNames from "classnames"
 import type React from "react"
 import {
   type CSSProperties,
@@ -20,7 +20,7 @@ interface MaskProps {
   cursor?: boolean
   x?: number
   y?: number
-  radius?: number
+  radius?: number | string
 }
 
 interface GradientProps {
@@ -71,9 +71,8 @@ interface BackgroundProps {
 const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
   (
     {
-      position = "fixed",
+      position = "absolute",
       gradient = {},
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       dots = {},
       grid = {},
       lines = {},
@@ -96,13 +95,23 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
 
     useEffect(() => {
       const handleMouseMove = (event: MouseEvent) => {
-        setIsVisible(true)
         if (backgroundRef.current) {
           const rect = backgroundRef.current.getBoundingClientRect()
-          setCursorPosition({
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top,
-          })
+          const isInside =
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom
+
+          if (position === "fixed" || isInside) {
+            setIsVisible(true)
+            setCursorPosition({
+              x: event.clientX - rect.left,
+              y: event.clientY - rect.top,
+            })
+          } else {
+            setIsVisible(false)
+          }
         }
       }
 
@@ -118,7 +127,7 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
         document.removeEventListener("mouseleave", handleMouseLeave)
         document.removeEventListener("mouseenter", handleMouseEnter)
       }
-    }, [])
+    }, [position])
 
     useEffect(() => {
       let animationFrameId: number
@@ -135,8 +144,9 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
         animationFrameId = requestAnimationFrame(updateSmoothPosition)
       }
 
-      if (mask.cursor)
+      if (mask.cursor) {
         animationFrameId = requestAnimationFrame(updateSmoothPosition)
+      }
       return () => cancelAnimationFrame(animationFrameId)
     }, [cursorPosition, mask])
 
@@ -151,11 +161,16 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
           rgba(255, 60, 0, 0) 70%
         )`
 
+      const radiusUnit =
+        typeof mask.radius === "number"
+          ? `${mask.radius}px`
+          : mask.radius || (position === "fixed" ? "50vh" : "150px")
+
       if (mask.cursor) {
         return {
           "--mask-position-x": `${smoothPosition.x}px`,
           "--mask-position-y": `${smoothPosition.y}px`,
-          "--mask-radius": `${mask.radius || 50}vh`,
+          "--mask-radius": radiusUnit,
           "--mask-gradient": gradient,
         } as CSSProperties
       }
@@ -164,13 +179,14 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
         return {
           "--mask-position-x": `${mask.x}%`,
           "--mask-position-y": `${mask.y}%`,
-          "--mask-radius": `${mask.radius || 50}vh`,
+          "--mask-radius": radiusUnit,
           "--mask-gradient": gradient,
         } as CSSProperties
       }
 
       return {}
     }
+
     return (
       <div
         ref={backgroundRef}
@@ -215,10 +231,20 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
           />
         )}
 
+        {dots.display && (
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              opacity: dots.opacity ? dots.opacity / 100 : 0.3,
+              backgroundSize: "20px 20px",
+              backgroundImage: `radial-gradient(var(--${dots.color || "foreground"}) ${dots.size || 1}px, transparent ${dots.size || 1}px)`,
+            }}
+          />
+        )}
+
         {mask.cursor && (
           <div
-            ref={backgroundRef}
-            className="absolute top-0 left-0 z-[-1] h-full w-full overflow-hidden"
+            className="absolute top-0 left-0 z-0 h-full w-full overflow-hidden"
             style={{
               ...maskStyle(),
               background: "var(--mask-gradient)",
@@ -236,4 +262,5 @@ const BackgroundGradientCursor = forwardRef<HTMLDivElement, BackgroundProps>(
     )
   }
 )
+
 export default BackgroundGradientCursor

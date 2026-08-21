@@ -6,7 +6,6 @@ import { TOCItems } from "@/shared/constants"
 import { useMediaQuery } from "@/shared/hooks/use-media-query"
 import { cn } from "@/shared/lib/utils"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
-import BackgroundGradientCursor from "@/shared/ui/animation/background-gradient-cursor"
 import { EdgeBlur } from "@/shared/ui/system/edge-blur"
 import { ScrollToTop } from "@/shared/ui/system/scroll-to-top"
 import { TOCMinimap } from "@/shared/ui/system/toc-minimap"
@@ -35,24 +34,6 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const effects = {
-    mask: { cursor: true, x: 0, y: 0, radius: 100 },
-    gradient: {
-      display: true,
-      x: 50,
-      y: 0,
-      width: 100,
-      height: 100,
-      tilte: 0,
-      colorStart: "blue-500",
-      colorEnd: "transparent",
-      opacity: 50,
-    },
-    dots: { display: true, size: 2, color: "gray-500", opacity: 20 },
-    lines: { display: false, opacity: 100 },
-    grid: { display: false, opacity: 100 },
-  }
-
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="relative flex min-h-screen w-full overflow-x-clip bg-background text-foreground selection:bg-primary/20">
@@ -66,13 +47,7 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
         >
           <TOCMinimap items={TOCItems} />
         </div>
-        {/* Background cursor gradient */}
-        <BackgroundGradientCursor
-          mask={effects.mask}
-          dots={effects.dots}
-          grid={effects.grid}
-          lines={effects.lines}
-        />
+
         {/* Numbers simulation on the left edge */}
         <div className="pointer-events-none relative z-1 hidden w-12 shrink-0 border-r border-border md:block">
           <NumbersSimulation />

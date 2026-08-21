@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import BannerHero from "@/features/home/banner-hero"
+import BannerHero from "@/features/home/components/banner-hero"
 import SectionAbout from "@/features/home/section-about"
 import UiComponentsSection from "@/features/home/ui-components-section"
 
