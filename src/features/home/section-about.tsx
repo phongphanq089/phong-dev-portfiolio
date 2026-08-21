@@ -113,7 +113,7 @@ const StackBadge = ({ item }: { item: TechItem }) => {
   )
 
   const className =
-    "group inline-flex items-center gap-1.5 rounded border border-border bg-foreground/4 px-2.5 py-1.5 text-xs text-muted-foreground transition-all duration-200 hover:border-foreground/20 hover:bg-foreground/8 hover:text-foreground"
+    "group inline-flex items-center gap-1.5 rounded border border-border bg-foreground/4 px-3 py-2 text-xs text-muted-foreground transition-all duration-200 hover:border-foreground/20 hover:bg-foreground/8 hover:text-foreground"
 
   if (item.link) {
     return (
@@ -149,171 +149,119 @@ const HobbyTag = ({ label }: { label: string }) => (
   </motion.span>
 )
 
-/* ─── Main component ─── */
 const SectionAbout = () => {
   return (
     <>
-      {/* ── Section header ── */}
-      <GridSection
-        className="px-8 py-5 md:px-16"
-        borderTop
-        showCrosshairs={false}
-      >
-        <SectionHeading id="about" label="01 / About" heading="About" />
-      </GridSection>
-
-      {/* ── 2-column layout ── */}
-      <GridSection
-        columns={2}
-        className="px-4 py-12 md:px-8"
-        borderTop={false}
-        showCrosshairs={false}
-      >
-        {/* LEFT – Bio */}
-        <div className="flex flex-col gap-6 pr-0 max-md:mb-10 md:pr-4">
-          {/* ── Avatar hero block ── */}
-          <div className="flex items-center gap-4">
-            {/* Large avatar */}
-            <div className="relative w-fit">
-              <div className="h-30 w-30 overflow-hidden rounded-2xl border-2 border-border shadow-[0_0_40px_rgba(0,0,0,0.06)] dark:shadow-[0_0_40px_rgba(255,255,255,0.06)]">
+      <GridSection className="px-8 py-3" borderTop>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="flex w-full gap-3">
+            <GridSection showCrosshairs={false} borderTop={true}>
+              <div className="h-30 w-30 overflow-hidden">
                 <img
-                  src="/avatar1.png"
+                  src="/avatar.gif"
                   alt="Phong Phan"
                   className="h-full w-full object-cover"
                 />
               </div>
-              {/* Online status dot */}
-              <span className="absolute -right-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-primary shadow-[0_0_8px_rgba(255,255,255,0.6)]">
-                <span className="h-2 w-2 animate-ping rounded-full bg-white opacity-75" />
-              </span>
-            </div>
+            </GridSection>
 
-            {/* Name + role */}
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center gap-2">
-                <h3 className="text-xl font-bold text-foreground">
-                  Phong Phan
-                </h3>
-                {/* Verified */}
-                <svg
-                  className="h-4 w-4 shrink-0 text-blue-400"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <p className="font-mono text-[11px] tracking-wider text-muted-foreground/60">
-                Fullstack Developer · Viet Nam
-              </p>
-              <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-0.5">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-                <span className="font-mono text-[9px] tracking-wider text-emerald-400/90 uppercase">
-                  Open to work
-                </span>
-              </span>
+            <div className="flex w-full flex-col gap-2">
+              <GridSection
+                showCrosshairs={false}
+                borderTop={true}
+                className="w-full p-3"
+              >
+                <SectionHeading
+                  id="about"
+                  label="01 / About"
+                  heading="Phong Phan"
+                />
+              </GridSection>
+              <GridSection
+                showCrosshairs={false}
+                borderTop={true}
+                className="w-full p-3"
+              >
+                <p className="font-mono text-[11px] tracking-wider text-muted-foreground/60">
+                  Fullstack Developer · Viet Nam
+                </p>
+              </GridSection>
             </div>
           </div>
-
-          {/* Bio paragraphs */}
-          <div className="flex flex-col gap-4 text-sm leading-relaxed text-foreground">
-            <p>
-              Hi there! I'm{" "}
-              <span className="font-bold text-foreground">Phong Phan</span>. My
-              daily life revolves around coding, debugging, and tackling tech
-              challenges. I'm a fast learner, always eager to explore new
-              technologies, and I have a strong passion for problem-solving.
-            </p>
-
-            <p>
-              🚀 I always try to learn and develop myself every day.
-              Continuously learning and challenging myself will help me become a
-              better programmer. I'm also very interested in{" "}
-              <span className="font-semibold text-foreground">
-                sharing knowledge
-              </span>{" "}
-              — I believe that sharing helps everyone grow.
-            </p>
-
-            <p>
-              With several years of experience in web development, I have
-              participated in projects ranging from small sites to complex
-              applications. My stack includes{" "}
-              <span className="font-bold text-primary">
-                HTML, CSS, JavaScript, React, Next.js, Node.js
-              </span>
-              , Headless CMS, and tools like Git & GitHub.
-            </p>
-
-            <p>
-              I'm always open to opportunities that align with my skills and
-              passions — whether it's an innovative startup, a groundbreaking
-              project, or a top-notch team.{" "}
-              <span className="font-medium text-foreground">
-                Let's build something amazing together! 🚀
-              </span>
-            </p>
-          </div>
-
-          {/* Hobbies */}
-          <div className="flex flex-col gap-2">
-            <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground/40 uppercase">
-              Beyond Coding
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <HobbyTag label="Gym" />
-              <HobbyTag label="Football" />
-              <HobbyTag label="Mountain climbing" />
-              <HobbyTag label="Reading" />
-              <HobbyTag label="Traveling" />
-            </div>
+          <div className="flex flex-col gap-3">
+            <SkeletonOne
+              text1="There are tons of awesome frameworks like React, Angular, Vue, and Svelte that can make your life... easier (or a complete mess, depending on your code)"
+              text2="DELUSIONAL"
+            />
           </div>
         </div>
+      </GridSection>
 
-        {/* RIGHT – Tech Stack */}
-        <div className="flex flex-col gap-5 pl-0 md:pl-8">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              Stack
-            </h2>
-            <p className="mt-1 font-mono text-[11px] text-muted-foreground/50">
-              Technologies I work with
-            </p>
+      <GridSection showCrosshairs={false} className="p-8">
+        <div className="flex flex-col gap-4 text-justify text-[16px] leading-relaxed text-white/80">
+          <p>
+            Hi there! I'm <span className="font-bold">Phong Phan</span>. My
+            daily life revolves around coding, debugging, and tackling tech
+            challenges. I'm a fast learner, always eager to explore new
+            technologies, and I have a strong passion for problem-solving.
+          </p>
+
+          <p>
+            I always try to learn and develop myself every day. Continuously
+            learning and challenging myself will help me become a better
+            programmer. I'm also very interested in{" "}
+            <span className="font-semibold">sharing knowledge</span> — I believe
+            that sharing helps everyone grow.
+          </p>
+
+          <p>
+            With several years of experience in web development, I have
+            participated in projects ranging from small sites to complex
+            applications. My stack includes{" "}
+            <span className="font-bold text-primary">
+              HTML, CSS, JavaScript, React, Next.js, Node.js
+            </span>
+            , Headless CMS, and tools like Git & GitHub.
+          </p>
+
+          <p>
+            I'm always open to opportunities that align with my skills and
+            passions — whether it's an innovative startup, a groundbreaking
+            project, or a top-notch team.{" "}
+            <span className="font-medium">
+              Let's build something amazing together!
+            </span>
+          </p>
+        </div>
+
+        <div className="mt-3 flex flex-col gap-2">
+          <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground/40 uppercase">
+            Beyond Coding
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <HobbyTag label="Gym" />
+            <HobbyTag label="Football" />
+            <HobbyTag label="Mountain climbing" />
+            <HobbyTag label="Reading" />
+            <HobbyTag label="Traveling" />
           </div>
+        </div>
+      </GridSection>
 
-          <div className="flex flex-col gap-3">
-            {techStack.map((row, ri) => (
-              <div key={ri} className="flex flex-wrap gap-2">
-                {row.map((item) => (
-                  <StackBadge key={item.label} item={item} />
-                ))}
-              </div>
-            ))}
-          </div>
-
-          {/* Interactive Chat Showcase */}
-          <div className="mt-2 flex flex-col gap-4 rounded-2xl border border-border/80 bg-muted/10 p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] backdrop-blur-sm">
-            <div className="flex items-center justify-between border-b border-border/50 pb-2">
-              <span className="font-mono text-[9px] tracking-wider text-muted-foreground/60 uppercase">
-                Interactive Showcase
-              </span>
-              <span className="flex h-2 w-2 items-center justify-center">
-                <span className="absolute h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span className="absolute h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500 opacity-75" />
-              </span>
+      <GridSection borderTop className="px-8 py-2">
+        <h2 className="text-2xl font-semibold tracking-tight text-foreground uppercase">
+          Tech Stack
+        </h2>
+      </GridSection>
+      <GridSection showCrosshairs={false} className="p-8">
+        <div className="flex flex-col gap-4">
+          {techStack.map((row, ri) => (
+            <div key={ri} className="flex flex-wrap gap-2">
+              {row.map((item) => (
+                <StackBadge key={item.label} item={item} />
+              ))}
             </div>
-
-            <div className="flex flex-col gap-3">
-              <SkeletonOne
-                text1="There are tons of awesome frameworks like React, Angular, Vue, and Svelte that can make your life... easier (or a complete mess, depending on your code)! 😜"
-                text2="I LOVE JAVASCRIPT"
-              />
-              <SkeletonOne
-                text1="Keep things simple with JavaScript"
-                text2="DELUSIONAL 🤯"
-              />
-            </div>
-          </div>
+          ))}
         </div>
       </GridSection>
     </>

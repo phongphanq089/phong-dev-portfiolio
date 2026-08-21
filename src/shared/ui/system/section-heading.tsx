@@ -58,19 +58,17 @@ export function SectionHeading({
   return (
     <div
       id={id}
-      className={cn("flex items-end justify-between gap-6", className)}
+      className={cn("flex items-end justify-between gap-2", className)}
     >
       {/* ── Left block ── */}
       <div>
         {label && <span className="section-label block">{label}</span>}
-
-        <Tag className={cn("section-heading", label && "mt-2")}>
+        <Tag className={cn("section-heading")}>
           {heading}
           {count !== undefined && (
             <span className="section-count">({count})</span>
           )}
         </Tag>
-
         {subtitle && <p className="section-subtitle mt-1">{subtitle}</p>}
       </div>
 
