@@ -56,7 +56,7 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
         {/* Main Layout */}
         <div className="flex min-w-0 flex-1 flex-col">
           {/* Header */}
-          <div className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
+          <div className="sticky top-0 z-50 w-full">
             <GridContainer
               borderTop={false}
               borderBottom={true}

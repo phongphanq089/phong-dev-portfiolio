@@ -37,7 +37,8 @@
   --leading-section-subtitle: 1.55;
 }
 
-:root {
+:root,
+.dark {
   /* ─── Brand Base Tokens (PP Identity) ─── */
   --pp-primary: #dc2626; /* Red-600 */
   --pp-primary-foreground: oklch(0.985 0 0);
@@ -292,6 +293,10 @@ html::-webkit-scrollbar {
 
 html::-webkit-scrollbar-thumb {
   background-color: var(--color-dark-scroll);
+}
+
+button {
+  @apply cursor-pointer;
 }
 
 .custom-scrollbar::-webkit-scrollbar {

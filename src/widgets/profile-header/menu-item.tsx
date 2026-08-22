@@ -3,11 +3,12 @@ import { Link, useRouterState } from "@tanstack/react-router"
 import { cn } from "@/shared/lib/utils"
 
 export const activeColors: Record<string, string> = {
-  Home: "#66ff00",
+  HOME: "#66ff00",
   PROJECTS: "#ff00ff",
   BLOG: "#ff6600",
   RESOURCES: "#ffcc00",
-  STUDIO: "#ffffff",
+  STUDIO: "var(--foreground)",
+  "DESIGN SYSTEM": "#00f0ff",
 }
 
 export interface NavItemType {
@@ -31,17 +32,17 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
   const isActive =
     item.link === "/" ? currentPath === "/" : currentPath.startsWith(item.link)
 
-  const activeColor = activeColors[item.label] || "#ffffff"
+  const activeColor = activeColors[item.label] || "var(--foreground)"
 
   if (variant === "desktop") {
     return (
       <Link
         to={item.link}
         className={cn(
-          "group relative flex items-center gap-3 border bg-black px-4 py-2 transition-all duration-300",
+          "group relative flex items-center gap-2.5 border bg-background/60 px-2.5 py-1.5 backdrop-blur-xs transition-colors duration-150 hover:bg-accent",
           isActive
-            ? "shadow-[0_0_15px_rgba(255,255,255,0.03)]"
-            : "border-white/5 hover:border-current",
+            ? "border-current shadow-xs"
+            : "border-border/80 hover:border-foreground/40",
           item.color
         )}
         style={{
@@ -51,7 +52,7 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
         {/* Color Square */}
         <div
           className={cn(
-            "h-3 w-3 shrink-0 transition-transform duration-300",
+            "h-2 w-2 shrink-0 transition-transform duration-150",
             item.bg,
             isActive && "scale-110 animate-pulse"
           )}
@@ -63,9 +64,14 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
         {/* Text */}
         <span
           className={cn(
-            "font-mono text-sm font-bold tracking-wider whitespace-nowrap transition-colors duration-200 group-hover:text-inherit",
-            isActive ? "text-white" : "text-white/70"
+            "font-mono text-xs font-medium tracking-wider whitespace-nowrap transition-colors duration-150",
+            isActive
+              ? "font-semibold text-foreground"
+              : "text-muted-foreground group-hover:text-foreground"
           )}
+          style={{
+            color: isActive ? activeColor : undefined,
+          }}
         >
           {item.label}
         </span>
@@ -73,7 +79,7 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
         {/* Cyber Active Bottom Bar */}
         {isActive && (
           <span
-            className="absolute right-0 bottom-0 left-0 h-[2px] transition-all duration-300"
+            className="absolute right-0 bottom-0 left-0 h-[2px] transition-all duration-150"
             style={{
               backgroundColor: activeColor,
               boxShadow: `0 0 8px ${activeColor}`,
@@ -90,10 +96,10 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
         to={item.link}
         onClick={onClick}
         className={cn(
-          "flex items-center gap-3 border bg-black p-4 transition-all duration-300",
+          "flex items-center gap-3 border bg-background/80 p-3 transition-colors duration-150 hover:bg-accent",
           isActive
-            ? "shadow-[0_0_10px_rgba(255,255,255,0.05)]"
-            : "border-white/10 hover:border-current",
+            ? "border-current shadow-xs"
+            : "border-border hover:border-foreground/40",
           item.color
         )}
         style={{
@@ -102,7 +108,7 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
       >
         <div
           className={cn(
-            "h-2 w-2 transition-transform duration-300",
+            "h-2 w-2 transition-transform duration-150",
             item.bg,
             isActive && "scale-110 animate-pulse"
           )}
@@ -112,9 +118,12 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
         />
         <span
           className={cn(
-            "font-mono text-xs font-bold tracking-wider transition-colors duration-200",
-            isActive ? "text-white" : "text-white/70"
+            "font-mono text-xs font-medium tracking-wider transition-colors duration-150",
+            isActive ? "font-semibold text-foreground" : "text-muted-foreground"
           )}
+          style={{
+            color: isActive ? activeColor : undefined,
+          }}
         >
           {item.label}
         </span>
@@ -127,10 +136,10 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
     <Link
       to={item.link}
       className={cn(
-        "flex h-full flex-1 flex-col items-center justify-center gap-1 border bg-black py-2 transition-all duration-300 active:scale-95",
+        "flex h-full flex-1 flex-col items-center justify-center gap-1 border bg-background/80 py-2 transition-all duration-150 active:scale-95",
         isActive
-          ? "shadow-[0_-5px_15px_rgba(255,255,255,0.02)]"
-          : "border-white/5",
+          ? "border-current shadow-xs"
+          : "border-border/60 hover:border-border",
         item.color
       )}
       style={{
@@ -139,7 +148,7 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
     >
       <div
         className={cn(
-          "h-2 w-2 transition-transform duration-300",
+          "h-1.5 w-1.5 transition-transform duration-150",
           item.bg,
           isActive && "scale-110 animate-pulse"
         )}
@@ -149,9 +158,12 @@ export const MenuItem = ({ item, variant, onClick }: MenuItemProps) => {
       />
       <span
         className={cn(
-          "font-mono text-xs font-bold tracking-tighter transition-colors duration-200",
-          isActive ? "text-white" : "text-white/60"
+          "font-mono text-[10px] font-semibold tracking-tight transition-colors duration-150",
+          isActive ? "font-bold text-foreground" : "text-muted-foreground"
         )}
+        style={{
+          color: isActive ? activeColor : undefined,
+        }}
       >
         {item.label}
       </span>

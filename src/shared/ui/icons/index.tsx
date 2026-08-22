@@ -1,4 +1,4 @@
-﻿import React from "react"
+import React from "react"
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string
@@ -18,6 +18,7 @@ import { NestJS } from "./nestjs"
 import { NextJS } from "./nextjs"
 import { NodeJS } from "./node"
 import { PostgreSQL } from "./postgres"
+import { PPPixelMark } from "./pp-pixel-mark"
 import { Python } from "./python"
 import { ReactIcon } from "./react"
 import { ReactNavigation } from "./react-navigation"
@@ -44,6 +45,7 @@ export {
   NextJS,
   NodeJS,
   PostgreSQL,
+  PPPixelMark,
   Python,
   ReactIcon,
   ReactNavigation,

@@ -1,8 +1,9 @@
-﻿import { Link } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router"
 import {
   ArrowLeft,
   Box,
   Cpu,
+  Fingerprint,
   Info,
   Layers,
   Palette,
@@ -16,6 +17,7 @@ import { Button } from "@/shared/ui/core/button"
 import { ModeToggle } from "@/shared/ui/system/mode-toggle"
 
 import { AnimationsSection } from "./sections/animations-section"
+import { BrandSection } from "./sections/brand-section"
 import { ButtonsSection } from "./sections/buttons-section"
 import { CardsSection } from "./sections/cards-section"
 import { FeedbackSection } from "./sections/feedback-section"
@@ -23,13 +25,21 @@ import { IconsSection } from "./sections/icons-section"
 import { TokensSection } from "./sections/tokens-section"
 
 type SectionTab =
-  "all" | "tokens" | "buttons" | "animations" | "cards" | "feedback" | "icons"
+  | "all"
+  | "brand"
+  | "tokens"
+  | "buttons"
+  | "animations"
+  | "cards"
+  | "feedback"
+  | "icons"
 
 export function DesignSystemShowcase() {
   const [activeTab, setActiveTab] = useState<SectionTab>("all")
 
   const tabs = [
     { id: "all", label: "All Modules", icon: Layers },
+    { id: "brand", label: "Logo & Brand Mark", icon: Fingerprint },
     { id: "tokens", label: "Tokens & Colors", icon: Palette },
     { id: "buttons", label: "Buttons & Controls", icon: Box },
     { id: "animations", label: "Shaders & FX", icon: Sparkles },
@@ -111,6 +121,15 @@ export function DesignSystemShowcase() {
 
         {/* Content Container */}
         <main className="mx-auto max-w-7xl space-y-16 px-4 py-12 sm:px-6">
+          {(activeTab === "all" || activeTab === "brand") && (
+            <section className="space-y-4">
+              <h2 className="font-mono text-lg font-bold text-primary">
+                # Logo & Brand Identity
+              </h2>
+              <BrandSection />
+            </section>
+          )}
+
           {(activeTab === "all" || activeTab === "tokens") && (
             <section className="space-y-4">
               <h2 className="font-mono text-lg font-bold text-primary">

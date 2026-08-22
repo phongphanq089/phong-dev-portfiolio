@@ -9,8 +9,11 @@ import {
 import type { JSX } from "react/jsx-runtime"
 
 import { seo } from "@/shared/lib/utils"
+import { ThemeProvider } from "@/shared/providers/theme-provider"
+import { TooltipProvider } from "@/shared/ui"
 import { DefaultCatchBoundary } from "@/shared/ui/system/default-catch-boundary"
 import { NotFound } from "@/shared/ui/system/not-found"
+import { CommandMenu } from "@/widgets/command-menu"
 
 import appCss from "../styles.css?url"
 
@@ -99,7 +102,7 @@ function RootComponent() {
   )
 }
 
-const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'dark',r=document.documentElement;if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches))r.classList.add('dark');else r.classList.remove('dark')}catch(e){}})()`
+const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'dark',r=document.documentElement,s=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;r.classList.remove('light','dark');r.classList.add(s);}catch(e){}})()`
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
@@ -112,7 +115,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         className="relative wrap-anywhere antialiased"
         suppressHydrationWarning
       >
-        {children}
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <TooltipProvider>
+            {children}
+            <CommandMenu />
+          </TooltipProvider>
+        </ThemeProvider>
+
         {/* Global Floating Actions */}
 
         {/* <TanStackRouterDevtools position="bottom-right" />

@@ -1,12 +1,5 @@
 export const navItems = [
   {
-    label: "Home",
-    color: "text-[#66ff00]",
-    border: "border-[#66ff00]",
-    bg: "bg-[#66ff00]",
-    link: "/",
-  },
-  {
     label: "PROJECTS",
     color: "text-[#ff00ff]",
     border: "border-[#ff00ff]",

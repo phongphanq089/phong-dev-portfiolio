@@ -1,4 +1,5 @@
-﻿export * from "./music-player"
+export * from "./command-menu"
+export * from "./music-player"
 export * from "./profile-footer"
 export { Header } from "./profile-header"
 export { LeftSidebar, RightSidebar } from "./profile-sidebar"
