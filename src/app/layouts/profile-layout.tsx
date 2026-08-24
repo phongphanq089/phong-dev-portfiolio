@@ -1,33 +1,27 @@
-﻿/* eslint-disable react-hooks/set-state-in-effect */
 import { Outlet } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 
-import { TOCItems } from "@/shared/constants"
+import { HOME_TOC_ITEMS } from "@/shared/config"
 import { useMediaQuery } from "@/shared/hooks/use-media-query"
 import { cn } from "@/shared/lib/utils"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
 import { EdgeBlur } from "@/shared/ui/system/edge-blur"
-import { ScrollToTop } from "@/shared/ui/system/scroll-to-top"
+import ProgressWhileScroll from "@/shared/ui/system/progress-while-scroll"
 import { TOCMinimap } from "@/shared/ui/system/toc-minimap"
-import { MusicPlayer } from "@/widgets/music-player"
 import { Footer } from "@/widgets/profile-footer"
-import { Header, MenuBottomMobile } from "@/widgets/profile-header"
+import { Header } from "@/widgets/profile-header"
+import BottomMenu from "@/widgets/profile-header/bottom-menu"
 import { NumbersSimulation } from "@/widgets/profile-sidebar"
 
 import { GridContainer } from "./grid-layout"
 
 export function ProfileLayout({ children }: { children?: React.ReactNode }) {
   const [showMinimap, setShowMinimap] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
-  const isDownLg = useMediaQuery("max-lg")
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  const isDownMd = useMediaQuery("max-md")
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowMinimap(window.scrollY > 600)
+      setShowMinimap(window.scrollY > 300)
     }
     window.addEventListener("scroll", handleScroll)
     handleScroll()
@@ -45,17 +39,13 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
               : "pointer-events-none translate-x-10 opacity-0"
           )}
         >
-          <TOCMinimap items={TOCItems} />
+          <TOCMinimap items={HOME_TOC_ITEMS} />
         </div>
-
-        {/* Numbers simulation on the left edge */}
         <div className="pointer-events-none relative z-1 hidden w-12 shrink-0 border-r border-border md:block">
           <NumbersSimulation />
         </div>
 
-        {/* Main Layout */}
         <div className="flex min-w-0 flex-1 flex-col">
-          {/* Header */}
           <div className="sticky top-0 z-50 w-full">
             <GridContainer
               borderTop={false}
@@ -66,24 +56,28 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
             </GridContainer>
           </div>
 
-          {/* Mobile Bottom Dock Menu */}
-          <MenuBottomMobile />
+          {/* Bottom Floating Dynamic Dock & Scroll Progress */}
+          <div className="fixed bottom-6 left-1/2 z-100 -translate-x-1/2 md:right-8 md:bottom-8 md:left-auto md:translate-x-0">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <BottomMenu />
+              <ProgressWhileScroll />
+            </div>
+          </div>
 
-          {/* Main Content Area */}
           <main className="flex w-full flex-1 flex-col overflow-x-clip">
             {children ?? <Outlet />}
           </main>
 
-          {/* Footer */}
           <Footer />
         </div>
       </div>
-      <EdgeBlur position="bottom" height={100} />
+      <EdgeBlur position="bottom" height={isDownMd ? 30 : 100} />
+
       <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
-        <ScrollToTop />
-        <div className="hidden lg:block">
+        {/* <ScrollToTop /> */}
+        {/* <div className="hidden lg:block">
           {isMounted && !isDownLg ? <MusicPlayer /> : null}
-        </div>
+        </div> */}
       </div>
     </ThemeProvider>
   )

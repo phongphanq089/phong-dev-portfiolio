@@ -36,7 +36,6 @@ const config = defineConfig({
         { path: "/project" },
         { path: "/blog" },
         { path: "/resources" },
-        { path: "/library" },
         { path: "/design-system" },
       ],
       sitemap: {

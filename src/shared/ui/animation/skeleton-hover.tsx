@@ -12,7 +12,7 @@ const Avatar = () => {
   )
 }
 
-export const SkeletonOne = ({
+export const SkeletonHover = ({
   text1,
   text2,
 }: {

@@ -22,6 +22,7 @@ export type TOCMinimapProps = {
 }
 
 export function TOCMinimap({ items, className }: TOCMinimapProps) {
+  const [open, setOpen] = useState(false)
   const itemIds = useMemo(
     () => items.map((item) => item.url.replace("#", "")),
     [items]
@@ -35,17 +36,43 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
     return null
   }
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen)
+    if (nextOpen) play()
+  }
+
+  const handleTriggerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setOpen((prev) => {
+      const next = !prev
+      if (next) play()
+      return next
+    })
+  }
+
+  const handleItemClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    setOpen(false)
+    const url = e.currentTarget.getAttribute("href") ?? ""
+    scrollToHeading(url)
+  }
+
   return (
     <div className={cn("ml-auto w-18", className)}>
       <HoverCard
+        open={open}
+        onOpenChange={handleOpenChange}
         openDelay={0}
-        closeDelay={0}
-        onOpenChange={(open) => {
-          if (open) play()
-        }}
+        closeDelay={150}
       >
-        <HoverCardTrigger asChild>
-          <div className="flex max-h-[50dvh] flex-col gap-3 overflow-hidden py-3 pl-6 opacity-100 transition-opacity duration-200 data-popup-open:opacity-0">
+        <HoverCardTrigger asChild onClick={handleTriggerClick}>
+          <button
+            type="button"
+            aria-label="Table of contents minimap"
+            aria-expanded={open}
+            className="flex max-h-[50dvh] w-full cursor-pointer touch-manipulation flex-col items-end gap-3 overflow-hidden py-3 pr-2 pl-6 opacity-100 transition-opacity duration-200 select-none focus:outline-none focus-visible:ring-1 focus-visible:ring-primary data-popup-open:opacity-0"
+          >
             {items.map((item) => (
               <div
                 key={item.url}
@@ -53,13 +80,13 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
                 data-active={item.url === `#${activeHeading}`}
                 className={cn(
                   "h-0.5 w-6 shrink-0 rounded-xs bg-primary transition-[background-color] duration-200",
-                  "data-[depth=3]:ml-2 data-[depth=3]:w-4",
-                  "data-[depth=4]:ml-4 data-[depth=4]:w-2",
+                  "data-[depth=3]:w-4",
+                  "data-[depth=4]:w-2",
                   "data-active:bg-foreground"
                 )}
               />
             ))}
-          </div>
+          </button>
         </HoverCardTrigger>
 
         <HoverCardContent
@@ -68,6 +95,8 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
           alignOffset={0}
           side="left"
           sideOffset={-60}
+          onPointerDownOutside={() => setOpen(false)}
+          onInteractOutside={() => setOpen(false)}
         >
           <div className="flex max-h-[50dvh] overflow-y-auto overscroll-contain">
             <ul className="flex size-full flex-col px-6 py-4 text-sm">
@@ -78,7 +107,7 @@ export function TOCMinimap({ items, className }: TOCMinimapProps) {
                     data-depth={item.depth}
                     data-active={item.url === `#${activeHeading}`}
                     className={cn(
-                      "line-clamp-2 w-full transition-[color] duration-200",
+                      "line-clamp-2 w-full cursor-pointer transition-[color] duration-200",
                       "text-muted-foreground hover:text-foreground data-active:text-foreground",
                       "data-[depth=3]:pl-4 data-[depth=4]:pl-8"
                     )}
@@ -129,12 +158,6 @@ export function useActiveHeading(itemIds: string[]) {
   }, [itemIds])
 
   return activeId
-}
-
-function handleItemClick(e: React.MouseEvent<HTMLAnchorElement>) {
-  e.preventDefault()
-  const url = e.currentTarget.getAttribute("href") ?? ""
-  scrollToHeading(url)
 }
 
 function scrollToHeading(url: string) {

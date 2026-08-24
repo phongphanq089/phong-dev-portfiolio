@@ -631,3 +631,7 @@ nav {
   width: 1px;
   background: linear-gradient(to top, transparent, var(--border-glow));
 }
+
+@utility link-underline {
+  @apply underline decoration-current/30 decoration-1 underline-offset-3 transition-colors hover:decoration-current;
+}

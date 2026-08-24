@@ -10,7 +10,6 @@ import {
   Twitter,
 } from "lucide-react"
 
-import ProfileCard from "@/features/home/components/profile-card"
 import { ScrollArea } from "@/shared/ui/core/scroll-area"
 
 const LeftSidebar = () => {
@@ -18,27 +17,6 @@ const LeftSidebar = () => {
     <aside className="hidden w-[300px] flex-col border-r border-white/5 lg:flex dark:bg-black/20">
       <ScrollArea className="h-full w-full">
         <div className="relative min-h-full space-y-8 p-6">
-          {/* --- Avatar Section --- */}
-          {/* <div className="group relative aspect- w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
-            <img
-              src="/assets/images/banner.jpg"
-              alt="Phong Phan"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          </div> */}
-          <ProfileCard
-            handle="ByPhong"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl="/assets/images/banner.jpg"
-            iconUrl={"/assets/images/iconpattern.png"}
-            // grainUrl="/setting/grain.webp"
-            showUserInfo={false}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-
           {/* --- Identity Section --- */}
           <div className="space-y-2">
             <h2 className="text-2xl font-black tracking-tighter text-green-500 uppercase">

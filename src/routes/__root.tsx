@@ -8,14 +8,14 @@ import {
 } from "@tanstack/react-router"
 import type { JSX } from "react/jsx-runtime"
 
-import { seo } from "@/shared/lib/utils"
+import { createSeoMeta, siteConfig } from "@/shared/config"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
 import { TooltipProvider } from "@/shared/ui"
 import { DefaultCatchBoundary } from "@/shared/ui/system/default-catch-boundary"
 import { NotFound } from "@/shared/ui/system/not-found"
 import { CommandMenu } from "@/widgets/command-menu"
 
-import appCss from "../styles.css?url"
+import appCss from "../styles/app.css?url"
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -29,17 +29,10 @@ export const Route = createRootRouteWithContext<{
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      ...seo({
-        title: "Phong Phan | Full-stack Architect & Creative Developer",
-        description:
-          "Portfolio of Phong Phan, a Full-stack Architect specializing in high-performance systems and immersive digital experiences. Expert in React, TypeScript, and modern UI/UX design.",
-        keywords:
-          "Phong Phan, Full-stack Architect, Creative Developer, React, TypeScript, UI/UX Design, Portfolio, Web Development, Software Engineer",
-        image: "/OGimage.jpg",
-      }),
+      ...createSeoMeta(),
     ],
     links: [
-      { rel: "canonical", href: "https://phongphan.dev" },
+      { rel: "canonical", href: siteConfig.url },
       { rel: "stylesheet", href: appCss },
       {
         rel: "apple-touch-icon",

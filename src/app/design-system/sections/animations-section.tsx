@@ -1,7 +1,7 @@
 import { BlueprintLintMark } from "@/shared/ui/animation/blueprint-lint-mark"
-import { FluidGradientText } from "@/shared/ui/animation/fluid-gradient-text"
+import { PhongPhanIsometric } from "@/shared/ui/animation/phong-phan-isometric"
 import { PPMarkIsometric } from "@/shared/ui/animation/pp-mark-isometric"
-import { SkeletonOne } from "@/shared/ui/animation/skeleton-hover"
+import { SkeletonHover } from "@/shared/ui/animation/skeleton-hover"
 import TextBurnNeon from "@/shared/ui/animation/text-burn-neon"
 import { TextHoverEffect } from "@/shared/ui/animation/text-hover-effect"
 
@@ -53,12 +53,28 @@ export function AnimationsSection() {
         tag="Isometric Motion"
         className="md:col-span-2"
       >
-        <div className="relative mx-auto flex w-full max-w-2xl items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-background/50 p-6 backdrop-blur-sm">
+        <div className="relative mx-auto flex w-full items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-background/50 p-6 backdrop-blur-sm">
           <div className="w-full max-w-lg">
             <PPMarkIsometric />
           </div>
           <div className="pointer-events-none absolute right-4 bottom-4 font-mono text-[11px] text-muted-foreground/60">
             [ Fig. 1 • Click & Drag ]
+          </div>
+        </div>
+      </ShowcaseCard>
+
+      <ShowcaseCard
+        title="Phong Phan Blueprint Typography (Footer)"
+        description="Horizontal technical blueprint typography with diagonal hatching pattern, wireframe outlines, interactive radial flashlight, and spring physics"
+        tag="Blueprint Typography"
+        className="md:col-span-2"
+      >
+        <div className="relative mx-auto flex w-full items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-background/50 p-6 backdrop-blur-sm">
+          <div className="w-full">
+            <PhongPhanIsometric className="w-full" />
+          </div>
+          <div className="pointer-events-none absolute right-4 bottom-4 font-mono text-[11px] text-muted-foreground/60">
+            [ Fig. 2 • Interactive 3D Block ]
           </div>
         </div>
       </ShowcaseCard>
@@ -78,18 +94,10 @@ export function AnimationsSection() {
         description="Hovering revealed skeleton blueprint animation"
         tag="Motion"
       >
-        <SkeletonOne text1="Tech Stack Module" text2="Fullstack Architecture" />
-      </ShowcaseCard>
-
-      <ShowcaseCard
-        title="Fluid Gradient Text"
-        description="Interactive cursor-responsive SVG gradient text"
-        tag="Motion"
-        className="md:col-span-2"
-      >
-        <div className="h-32 w-full max-w-xl text-primary">
-          <FluidGradientText text="DESIGN SYSTEM" />
-        </div>
+        <SkeletonHover
+          text1="Tech Stack Module"
+          text2="Fullstack Architecture"
+        />
       </ShowcaseCard>
 
       <ShowcaseCard

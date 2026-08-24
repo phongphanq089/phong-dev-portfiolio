@@ -62,14 +62,20 @@ export function SectionHeading({
     >
       {/* ── Left block ── */}
       <div>
-        {label && <span className="section-label block">{label}</span>}
-        <Tag className={cn("section-heading")}>
+        {label && (
+          <span className="section-label block whitespace-nowrap">{label}</span>
+        )}
+        <Tag
+          className={cn("section-heading whitespace-nowrap max-sm:text-xl!")}
+        >
           {heading}
           {count !== undefined && (
             <span className="section-count">({count})</span>
           )}
         </Tag>
-        {subtitle && <p className="section-subtitle mt-1">{subtitle}</p>}
+        {subtitle && (
+          <p className="section-subtitle mt-1 max-sm:text-lg!">{subtitle}</p>
+        )}
       </div>
 
       {/* ── Right action slot ── */}

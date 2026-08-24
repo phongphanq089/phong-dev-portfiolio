@@ -1,5 +1,5 @@
 ﻿import { CreepyButton } from "@/shared/ui/animation/creepy-button"
-import { LiquidMetalButton } from "@/shared/ui/animation/liquid-metal-button"
+import GenerateButton from "@/shared/ui/animation/generate-button"
 import { Button } from "@/shared/ui/core/button"
 
 import { ShowcaseCard } from "../components/showcase-card"
@@ -39,12 +39,8 @@ export function ButtonsSection() {
         <CreepyButton>Creepy Hover</CreepyButton>
       </ShowcaseCard>
 
-      <ShowcaseCard
-        title="Liquid Metal Shader Button"
-        description="Shader liquid metal border effect"
-        tag="Shader"
-      >
-        <LiquidMetalButton>Liquid Metal</LiquidMetalButton>
+      <ShowcaseCard title="Generate Button" tag="Shader">
+        <GenerateButton hue={210} />
       </ShowcaseCard>
     </div>
   )

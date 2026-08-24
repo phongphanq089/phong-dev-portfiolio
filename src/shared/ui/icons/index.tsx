@@ -19,7 +19,6 @@ import { NextJS } from "./nextjs"
 import { NodeJS } from "./node"
 import { PostgreSQL } from "./postgres"
 import { PPPixelMark } from "./pp-pixel-mark"
-import { Python } from "./python"
 import { ReactIcon } from "./react"
 import { ReactNavigation } from "./react-navigation"
 import { Refine } from "./refine"
@@ -46,7 +45,6 @@ export {
   NodeJS,
   PostgreSQL,
   PPPixelMark,
-  Python,
   ReactIcon,
   ReactNavigation,
   Refine,
@@ -70,7 +68,6 @@ export const iconComponents = {
   node: NodeJS,
   postgres: PostgreSQL,
   mongodb: MongoDB,
-  python: Python,
   external: External,
   code: Code,
   zustand: Zustand,

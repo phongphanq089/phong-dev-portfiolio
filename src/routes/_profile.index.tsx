@@ -1,35 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import BannerHero from "@/features/home/components/banner-hero"
+import { GridContainer } from "@/app/layouts"
+import BannerHero from "@/features/home/banner-hero"
 import SectionAbout from "@/features/home/section-about"
-import UiComponentsSection from "@/features/home/ui-components-section"
+import SectionMapVietnamese from "@/features/home/section-map-vietnammese"
+import SectionTechStack from "@/features/home/section-tech-stack"
+import UiComponentsSection from "@/features/home/section-ui-components"
+import { createSeoMeta } from "@/shared/config"
 
 export const Route = createFileRoute("/_profile/")({
+  head: () => ({
+    meta: createSeoMeta("home"),
+  }),
   component: HomePage,
 })
 
 function HomePage() {
   return (
     <div className="w-full">
-      {/* Hero Section */}
-
-      <div className="mx-auto w-full px-3 sm:px-8 md:px-16">
+      <GridContainer
+        className="relative flex flex-col overflow-hidden px-4 pt-8 pb-12 sm:px-8"
+        showCrosshairs={true}
+        borderBottom={false}
+      >
         <BannerHero />
-      </div>
+      </GridContainer>
+
       <SectionAbout />
+
+      <SectionTechStack />
+
       <UiComponentsSection />
 
-      {/* ── UI Components Section ── */}
-      {/* <UiComponentsSection /> */}
-
-      {/* ── Projects Section ── */}
-      {/* <ProjectsSection /> */}
-
-      {/* ── Blog Section ── */}
-      {/* <BlogSection /> */}
-
-      {/* ── Bookmarks Section ── */}
-      {/* <BookmarkSection /> */}
+      <GridContainer showCrosshairs={true} as={"section"}>
+        <SectionMapVietnamese />
+      </GridContainer>
     </div>
   )
 }

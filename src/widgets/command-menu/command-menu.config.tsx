@@ -19,11 +19,10 @@ import {
   Sparkles,
   Sun,
   User,
-  Wand2,
 } from "lucide-react"
 import type { ReactNode } from "react"
 
-import { SOCIALINK } from "@/shared/constants"
+import { siteConfig } from "@/shared/config"
 import { GitHub } from "@/shared/ui/icons"
 
 export type CommandMenuItem = {
@@ -192,16 +191,6 @@ export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
     to: "/#components-ui",
   },
   {
-    id: "comp-fluid-gradient",
-    title: "Fluid Gradient Text",
-    description: "Mouse-tracking SVG gradient on text",
-    icon: <Wand2 className="size-4 text-blue-400" />,
-    shortcut: ["C", "2"],
-    keywords: ["fluid gradient text", "motion", "svg", "mouse track"],
-    group: "components",
-    to: "/#components-ui",
-  },
-  {
     id: "comp-liquid-metal",
     title: "Liquid Metal Button",
     description: "Fluid shader distortion button",
@@ -278,7 +267,7 @@ export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
     icon: <GitHub size={16} className="text-foreground" />,
     keywords: ["github", "code", "repo", "git"],
     group: "social",
-    externalUrl: SOCIALINK.github.link,
+    externalUrl: siteConfig.social.github.href,
   },
   {
     id: "social-linkedin",
@@ -287,7 +276,7 @@ export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
     icon: <ExternalLink className="size-4 text-blue-500" />,
     keywords: ["linkedin", "connect", "recruitment", "cv"],
     group: "social",
-    externalUrl: SOCIALINK.linkedin.link,
+    externalUrl: siteConfig.social.linkedin.href,
   },
   {
     id: "social-twitter",
@@ -296,24 +285,24 @@ export const COMMAND_MENU_ITEMS: CommandMenuItem[] = [
     icon: <ExternalLink className="size-4 text-sky-400" />,
     keywords: ["twitter", "x", "social"],
     group: "social",
-    externalUrl: SOCIALINK.twiter.link,
+    externalUrl: siteConfig.social.twitter.href,
   },
   {
     id: "social-email",
     title: "Send Email",
-    description: "Get in touch: phongphanq089@gmail.com",
+    description: `Get in touch: ${siteConfig.author.email}`,
     icon: <Mail className="size-4 text-emerald-400" />,
     keywords: ["email", "mail", "contact", "lien he", "gmail"],
     group: "social",
-    externalUrl: SOCIALINK.mail,
+    externalUrl: siteConfig.social.email.href,
   },
   {
     id: "social-phone",
     title: "Call Phone",
-    description: "Direct phone contact: 0706113210",
+    description: `Direct phone contact: ${siteConfig.author.phone}`,
     icon: <Phone className="size-4 text-green-400" />,
     keywords: ["phone", "call", "dien thoai", "so dien thoai"],
     group: "social",
-    externalUrl: SOCIALINK.phone,
+    externalUrl: siteConfig.social.phone.href,
   },
 ]
