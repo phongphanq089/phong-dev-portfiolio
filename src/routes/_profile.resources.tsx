@@ -21,8 +21,7 @@ function ResourcesPage() {
       >
         <UnderConstruction
           pageName="Resources"
-          colorTheme="#ffcc00"
-          colorName="gold"
+          colorTheme="var(--pp-primary)"
         />
       </GridContainer>
     </div>

@@ -4,7 +4,7 @@ import { iconComponents } from "@/shared/ui"
 
 const SectionTechStack = () => {
   return (
-    <>
+    <section id="tech-stack">
       <GridContainer borderTop className="px-8 py-2">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground uppercase">
           Tech Stack
@@ -34,7 +34,7 @@ const SectionTechStack = () => {
           })}
         </div>
       </GridContainer>
-    </>
+    </section>
   )
 }
 

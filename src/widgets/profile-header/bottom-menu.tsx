@@ -58,7 +58,7 @@ const BottomMenu = () => {
             <div className="px-2.5 py-1 font-mono text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
               Navigation
             </div>
-            {NAV_ITEMS.map(({ label, link, color, bg }) => {
+            {NAV_ITEMS.map(({ label, link }) => {
               const isActive =
                 link === "/"
                   ? currentPath === "/"
@@ -77,22 +77,22 @@ const BottomMenu = () => {
                 >
                   <div
                     className={cn(
-                      "size-2 shrink-0 rounded-xs transition-transform",
-                      bg,
+                      "size-2 shrink-0 rounded-xs bg-pp-primary transition-transform",
                       isActive && "scale-110 animate-pulse"
                     )}
                     style={{
-                      boxShadow: isActive ? `0 0 8px ${color}` : undefined,
+                      boxShadow: isActive
+                        ? "0 0 8px var(--pp-primary)"
+                        : undefined,
                     }}
                   />
 
                   <span className="font-mono">{label}</span>
                   {isActive && (
                     <span
-                      className="ml-auto size-1.5 rounded-full"
+                      className="ml-auto size-1.5 rounded-full bg-pp-primary"
                       style={{
-                        backgroundColor: color,
-                        boxShadow: `0 0 8px ${color}`,
+                        boxShadow: "0 0 8px var(--pp-primary)",
                       }}
                     />
                   )}

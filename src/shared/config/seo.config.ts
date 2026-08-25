@@ -49,6 +49,11 @@ export const pagesSeoConfig: Record<string, SeoConfig> = {
     description:
       "Personal portfolio of Phong Phan — Frontend Engineer focused on building highly polished user interfaces, fluid interactions, and modern web applications.",
   },
+  block: {
+    title: "Blocks • Phong Phan",
+    description:
+      "Beautifully designed, production-ready UI blocks and templates built with React and Tailwind CSS.",
+  },
   projects: {
     title: "Projects • Phong Phan",
     description:
@@ -63,6 +68,11 @@ export const pagesSeoConfig: Record<string, SeoConfig> = {
     title: "Resources • Phong Phan",
     description:
       "Curated collection of developer tools, documentation, libraries, and design bookmarks for modern web development.",
+  },
+  componentUi: {
+    title: "Component UI • Phong Phan",
+    description:
+      "Pixel-perfect, uniquely crafted UI primitives, custom hooks, and interaction patterns.",
   },
   designSystem: {
     title: "Design System • Phong Phan",

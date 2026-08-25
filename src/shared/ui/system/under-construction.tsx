@@ -48,7 +48,7 @@ export const UnderConstruction: React.FC<UnderConstructionProps> = ({
           {/* Left Floating Typography & Technical Objectives */}
           <div className="relative z-10 mb-6 flex w-full flex-col gap-3 text-[11px] text-muted-foreground/80 md:absolute md:top-20 md:left-0 md:mb-0 md:max-w-xs lg:max-w-sm">
             <div className="flex flex-col select-none">
-              <h1 className="text-3xl leading-[0.88] font-black tracking-tighter text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="text-3xl leading-[0.88] font-black tracking-tighter whitespace-nowrap text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
                 {pageName.toUpperCase()}
               </h1>
               <TextBurnNeon className="mt-1 text-3xl leading-[0.88] font-black tracking-tighter text-primary sm:text-5xl md:text-6xl lg:text-7xl">

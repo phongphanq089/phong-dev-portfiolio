@@ -104,7 +104,7 @@ export function CommandMenu() {
                     className="flex items-center gap-3 px-3 py-2.5"
                   >
                     {item.icon && (
-                      <div className="flex size-6 shrink-0 items-center justify-center rounded-md border border-border/40 bg-muted/40 text-muted-foreground group-data-[selected=true]/command-item:border-border group-data-[selected=true]/command-item:bg-background/80 group-data-[selected=true]/command-item:text-foreground">
+                      <div className="flex size-6 shrink-0 items-center justify-center rounded-md border border-border/40 bg-muted/40 text-muted-foreground group-data-[selected=true]/command-item:border-pp-primary/40 group-data-[selected=true]/command-item:bg-pp-primary/10 group-data-[selected=true]/command-item:text-pp-primary">
                         {item.icon}
                       </div>
                     )}
@@ -115,7 +115,7 @@ export function CommandMenu() {
                           {item.title}
                         </span>
                         {item.badge && (
-                          <span className="py-0.2 rounded border border-primary/30 bg-primary/15 px-1.5 font-mono text-[9px] font-semibold text-primary">
+                          <span className="py-0.2 rounded border border-pp-primary/30 bg-pp-primary/15 px-1.5 font-mono text-[9px] font-semibold text-pp-primary">
                             {item.badge}
                           </span>
                         )}
@@ -150,7 +150,7 @@ export function CommandMenu() {
       {/* Footer bar matching image 1 */}
       <div className="flex items-center justify-between border-t border-border/60 bg-muted/30 px-3.5 py-2.5 text-xs text-muted-foreground">
         <div className="flex items-center gap-2">
-          <PPPixelMark size={20} className="text-primary" />
+          <PPPixelMark size={20} className="text-pp-primary" />
           <span className="font-mono text-[11px] font-medium tracking-wide text-muted-foreground">
             PHONG PHAN
           </span>

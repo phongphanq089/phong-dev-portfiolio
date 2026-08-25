@@ -1,17 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router"
 
 import { GridContainer } from "@/app/layouts"
-import { createSeoMeta } from "@/shared/config"
-import { UnderConstruction } from "@/shared/ui/system/under-construction"
+import { UnderConstruction } from "@/shared/ui"
 
-export const Route = createFileRoute("/_profile/project")({
-  head: () => ({
-    meta: createSeoMeta("projects"),
-  }),
-  component: ProjectPage,
+export const Route = createFileRoute("/_profile/component-ui")({
+  component: RouteComponent,
 })
 
-function ProjectPage() {
+function RouteComponent() {
   return (
     <div className="w-full">
       <GridContainer
@@ -20,9 +16,8 @@ function ProjectPage() {
         showCrosshairs={true}
       >
         <UnderConstruction
-          pageName="Projects"
-          colorTheme="#ff00ff"
-          colorName="magenta"
+          pageName="Components ui"
+          colorTheme="var(--pp-primary)"
         />
       </GridContainer>
     </div>

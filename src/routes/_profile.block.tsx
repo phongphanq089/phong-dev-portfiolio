@@ -1,17 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router"
 
 import { GridContainer } from "@/app/layouts"
-import { createSeoMeta } from "@/shared/config"
-import { UnderConstruction } from "@/shared/ui/system/under-construction"
+import { UnderConstruction } from "@/shared/ui"
 
-export const Route = createFileRoute("/_profile/blog")({
-  head: () => ({
-    meta: createSeoMeta("blog"),
-  }),
-  component: BlogPage,
+export const Route = createFileRoute("/_profile/block")({
+  component: RouteComponent,
 })
 
-function BlogPage() {
+function RouteComponent() {
   return (
     <div className="w-full">
       <GridContainer
@@ -19,7 +15,7 @@ function BlogPage() {
         borderBottom={false}
         showCrosshairs={true}
       >
-        <UnderConstruction pageName="Blog" colorTheme="var(--pp-primary)" />
+        <UnderConstruction pageName="Block" colorTheme="var(--pp-primary)" />
       </GridContainer>
     </div>
   )

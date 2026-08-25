@@ -33,9 +33,10 @@ const config = defineConfig({
       },
       pages: [
         { path: "/" },
-        { path: "/project" },
+        { path: "/block" },
         { path: "/blog" },
         { path: "/resources" },
+        { path: "/component-ui" },
         { path: "/design-system" },
       ],
       sitemap: {

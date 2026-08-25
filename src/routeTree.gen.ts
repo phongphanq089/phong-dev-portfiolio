@@ -8,126 +8,138 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root"
-import { Route as SitemapDotxmlRouteImport } from "./routes/sitemap[.]xml"
-import { Route as RobotsDottxtRouteImport } from "./routes/robots[.]txt"
-import { Route as DesignSystemRouteImport } from "./routes/design-system"
-import { Route as ProfileRouteImport } from "./routes/_profile"
-import { Route as ProfileIndexRouteImport } from "./routes/_profile.index"
-import { Route as StudioSplatRouteImport } from "./routes/studio.$"
-import { Route as ProfileResourcesRouteImport } from "./routes/_profile.resources"
-import { Route as ProfileProjectRouteImport } from "./routes/_profile.project"
-import { Route as ProfileBlogRouteImport } from "./routes/_profile.blog"
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as ProfileRouteImport } from './routes/_profile'
+import { Route as ProfileIndexRouteImport } from './routes/_profile.index'
+import { Route as StudioSplatRouteImport } from './routes/studio.$'
+import { Route as ProfileResourcesRouteImport } from './routes/_profile.resources'
+import { Route as ProfileComponentUiRouteImport } from './routes/_profile.component-ui'
+import { Route as ProfileBlogRouteImport } from './routes/_profile.blog'
+import { Route as ProfileBlockRouteImport } from './routes/_profile.block'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: "/sitemap.xml",
-  path: "/sitemap.xml",
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: "/robots.txt",
-  path: "/robots.txt",
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
-  id: "/design-system",
-  path: "/design-system",
+  id: '/design-system',
+  path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
-  id: "/_profile",
+  id: '/_profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => ProfileRoute,
 } as any)
 const StudioSplatRoute = StudioSplatRouteImport.update({
-  id: "/studio/$",
-  path: "/studio/$",
+  id: '/studio/$',
+  path: '/studio/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileResourcesRoute = ProfileResourcesRouteImport.update({
-  id: "/resources",
-  path: "/resources",
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => ProfileRoute,
 } as any)
-const ProfileProjectRoute = ProfileProjectRouteImport.update({
-  id: "/project",
-  path: "/project",
+const ProfileComponentUiRoute = ProfileComponentUiRouteImport.update({
+  id: '/component-ui',
+  path: '/component-ui',
   getParentRoute: () => ProfileRoute,
 } as any)
 const ProfileBlogRoute = ProfileBlogRouteImport.update({
-  id: "/blog",
-  path: "/blog",
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileBlockRoute = ProfileBlockRouteImport.update({
+  id: '/block',
+  path: '/block',
   getParentRoute: () => ProfileRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof ProfileIndexRoute
-  "/design-system": typeof DesignSystemRoute
-  "/robots.txt": typeof RobotsDottxtRoute
-  "/sitemap.xml": typeof SitemapDotxmlRoute
-  "/blog": typeof ProfileBlogRoute
-  "/project": typeof ProfileProjectRoute
-  "/resources": typeof ProfileResourcesRoute
-  "/studio/$": typeof StudioSplatRoute
+  '/': typeof ProfileIndexRoute
+  '/design-system': typeof DesignSystemRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/block': typeof ProfileBlockRoute
+  '/blog': typeof ProfileBlogRoute
+  '/component-ui': typeof ProfileComponentUiRoute
+  '/resources': typeof ProfileResourcesRoute
+  '/studio/$': typeof StudioSplatRoute
 }
 export interface FileRoutesByTo {
-  "/design-system": typeof DesignSystemRoute
-  "/robots.txt": typeof RobotsDottxtRoute
-  "/sitemap.xml": typeof SitemapDotxmlRoute
-  "/blog": typeof ProfileBlogRoute
-  "/project": typeof ProfileProjectRoute
-  "/resources": typeof ProfileResourcesRoute
-  "/studio/$": typeof StudioSplatRoute
-  "/": typeof ProfileIndexRoute
+  '/design-system': typeof DesignSystemRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/block': typeof ProfileBlockRoute
+  '/blog': typeof ProfileBlogRoute
+  '/component-ui': typeof ProfileComponentUiRoute
+  '/resources': typeof ProfileResourcesRoute
+  '/studio/$': typeof StudioSplatRoute
+  '/': typeof ProfileIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  "/_profile": typeof ProfileRouteWithChildren
-  "/design-system": typeof DesignSystemRoute
-  "/robots.txt": typeof RobotsDottxtRoute
-  "/sitemap.xml": typeof SitemapDotxmlRoute
-  "/_profile/blog": typeof ProfileBlogRoute
-  "/_profile/project": typeof ProfileProjectRoute
-  "/_profile/resources": typeof ProfileResourcesRoute
-  "/studio/$": typeof StudioSplatRoute
-  "/_profile/": typeof ProfileIndexRoute
+  '/_profile': typeof ProfileRouteWithChildren
+  '/design-system': typeof DesignSystemRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_profile/block': typeof ProfileBlockRoute
+  '/_profile/blog': typeof ProfileBlogRoute
+  '/_profile/component-ui': typeof ProfileComponentUiRoute
+  '/_profile/resources': typeof ProfileResourcesRoute
+  '/studio/$': typeof StudioSplatRoute
+  '/_profile/': typeof ProfileIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
-    | "/design-system"
-    | "/robots.txt"
-    | "/sitemap.xml"
-    | "/blog"
-    | "/project"
-    | "/resources"
-    | "/studio/$"
+    | '/'
+    | '/design-system'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/block'
+    | '/blog'
+    | '/component-ui'
+    | '/resources'
+    | '/studio/$'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | "/design-system"
-    | "/robots.txt"
-    | "/sitemap.xml"
-    | "/blog"
-    | "/project"
-    | "/resources"
-    | "/studio/$"
-    | "/"
+    | '/design-system'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/block'
+    | '/blog'
+    | '/component-ui'
+    | '/resources'
+    | '/studio/$'
+    | '/'
   id:
-    | "__root__"
-    | "/_profile"
-    | "/design-system"
-    | "/robots.txt"
-    | "/sitemap.xml"
-    | "/_profile/blog"
-    | "/_profile/project"
-    | "/_profile/resources"
-    | "/studio/$"
-    | "/_profile/"
+    | '__root__'
+    | '/_profile'
+    | '/design-system'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/_profile/block'
+    | '/_profile/blog'
+    | '/_profile/component-ui'
+    | '/_profile/resources'
+    | '/studio/$'
+    | '/_profile/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -138,84 +150,93 @@ export interface RootRouteChildren {
   StudioSplatRoute: typeof StudioSplatRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/sitemap.xml": {
-      id: "/sitemap.xml"
-      path: "/sitemap.xml"
-      fullPath: "/sitemap.xml"
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/robots.txt": {
-      id: "/robots.txt"
-      path: "/robots.txt"
-      fullPath: "/robots.txt"
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/design-system": {
-      id: "/design-system"
-      path: "/design-system"
-      fullPath: "/design-system"
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
       preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/_profile": {
-      id: "/_profile"
-      path: ""
-      fullPath: "/"
+    '/_profile': {
+      id: '/_profile'
+      path: ''
+      fullPath: '/'
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/_profile/": {
-      id: "/_profile/"
-      path: "/"
-      fullPath: "/"
+    '/_profile/': {
+      id: '/_profile/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof ProfileRoute
     }
-    "/studio/$": {
-      id: "/studio/$"
-      path: "/studio/$"
-      fullPath: "/studio/$"
+    '/studio/$': {
+      id: '/studio/$'
+      path: '/studio/$'
+      fullPath: '/studio/$'
       preLoaderRoute: typeof StudioSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    "/_profile/resources": {
-      id: "/_profile/resources"
-      path: "/resources"
-      fullPath: "/resources"
+    '/_profile/resources': {
+      id: '/_profile/resources'
+      path: '/resources'
+      fullPath: '/resources'
       preLoaderRoute: typeof ProfileResourcesRouteImport
       parentRoute: typeof ProfileRoute
     }
-    "/_profile/project": {
-      id: "/_profile/project"
-      path: "/project"
-      fullPath: "/project"
-      preLoaderRoute: typeof ProfileProjectRouteImport
+    '/_profile/component-ui': {
+      id: '/_profile/component-ui'
+      path: '/component-ui'
+      fullPath: '/component-ui'
+      preLoaderRoute: typeof ProfileComponentUiRouteImport
       parentRoute: typeof ProfileRoute
     }
-    "/_profile/blog": {
-      id: "/_profile/blog"
-      path: "/blog"
-      fullPath: "/blog"
+    '/_profile/blog': {
+      id: '/_profile/blog'
+      path: '/blog'
+      fullPath: '/blog'
       preLoaderRoute: typeof ProfileBlogRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/_profile/block': {
+      id: '/_profile/block'
+      path: '/block'
+      fullPath: '/block'
+      preLoaderRoute: typeof ProfileBlockRouteImport
       parentRoute: typeof ProfileRoute
     }
   }
 }
 
 interface ProfileRouteChildren {
+  ProfileBlockRoute: typeof ProfileBlockRoute
   ProfileBlogRoute: typeof ProfileBlogRoute
-  ProfileProjectRoute: typeof ProfileProjectRoute
+  ProfileComponentUiRoute: typeof ProfileComponentUiRoute
   ProfileResourcesRoute: typeof ProfileResourcesRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
 }
 
 const ProfileRouteChildren: ProfileRouteChildren = {
+  ProfileBlockRoute: ProfileBlockRoute,
   ProfileBlogRoute: ProfileBlogRoute,
-  ProfileProjectRoute: ProfileProjectRoute,
+  ProfileComponentUiRoute: ProfileComponentUiRoute,
   ProfileResourcesRoute: ProfileResourcesRoute,
   ProfileIndexRoute: ProfileIndexRoute,
 }
@@ -234,9 +255,9 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from "./router.tsx"
-import type { createStart } from "@tanstack/react-start"
-declare module "@tanstack/react-start" {
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>

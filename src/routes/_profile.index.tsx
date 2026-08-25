@@ -32,7 +32,7 @@ function HomePage() {
 
       <UiComponentsSection />
 
-      <GridContainer showCrosshairs={true} as={"section"}>
+      <GridContainer showCrosshairs={true} as={"section"} id="vietnam-map">
         <SectionMapVietnamese />
       </GridContainer>
     </div>

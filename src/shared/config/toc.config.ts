@@ -3,10 +3,9 @@ import type { TOCItemType } from "@/shared/ui/system/toc-minimap"
 export const HOME_TOC_ITEMS: TOCItemType[] = [
   { title: "Home", url: "#banner", depth: 1 },
   { title: "About", url: "#about", depth: 1 },
-  { title: "Components ui", url: "#components-ui", depth: 1 },
-  // { title: "Projects", url: "#project", depth: 1 },
-  // { title: "Blog", url: "#blog", depth: 1 },
-  // { title: "Bookmarks", url: "#bookmarks", depth: 1 },
+  { title: "Tech Stack", url: "#tech-stack", depth: 1 },
+  { title: "Components UI", url: "#components-ui", depth: 1 },
+  { title: "Location", url: "#vietnam-map", depth: 1 },
 ]
 
 export const DESIGN_SYSTEM_TOC_ITEMS: TOCItemType[] = [
