@@ -1,8 +1,8 @@
-import { Outlet } from "@tanstack/react-router"
+import { Outlet, useRouterState } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 
 import { HOME_TOC_ITEMS } from "@/shared/config"
-import { useMediaQuery } from "@/shared/hooks/use-media-query"
+import { useMediaQuery } from "@/shared/hooks"
 import { cn } from "@/shared/lib/utils"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
 import { EdgeBlur } from "@/shared/ui/system/edge-blur"
@@ -18,29 +18,36 @@ import { GridContainer } from "./grid-layout"
 export function ProfileLayout({ children }: { children?: React.ReactNode }) {
   const [showMinimap, setShowMinimap] = useState(false)
   const isDownMd = useMediaQuery("max-md")
+  const currentPath = useRouterState({ select: (s) => s.location.pathname })
+  const isHome = currentPath === "/" || currentPath === ""
+  const isMinimapVisible = isHome && showMinimap
 
   useEffect(() => {
+    if (!isHome) return
+
     const handleScroll = () => {
       setShowMinimap(window.scrollY > 300)
     }
     window.addEventListener("scroll", handleScroll)
     handleScroll()
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [isHome])
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="relative flex min-h-screen w-full overflow-x-clip bg-background text-foreground selection:bg-primary/20">
-        <div
-          className={cn(
-            "fixed top-1/2 right-0 z-50 -translate-y-1/2 transition-all duration-500",
-            showMinimap
-              ? "translate-x-0 opacity-100"
-              : "pointer-events-none translate-x-10 opacity-0"
-          )}
-        >
-          <TOCMinimap items={HOME_TOC_ITEMS} />
-        </div>
+        {isHome && (
+          <div
+            className={cn(
+              "fixed top-1/2 right-0 z-50 -translate-y-1/2 transition-all duration-500",
+              isMinimapVisible
+                ? "translate-x-0 opacity-100"
+                : "pointer-events-none translate-x-10 opacity-0"
+            )}
+          >
+            <TOCMinimap items={HOME_TOC_ITEMS} />
+          </div>
+        )}
         <div className="pointer-events-none relative z-1 hidden w-12 shrink-0 border-r border-border md:block">
           <NumbersSimulation />
         </div>

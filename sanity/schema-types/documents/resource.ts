@@ -1,5 +1,5 @@
 import { LinkIcon } from "@sanity/icons"
-import { defineArrayMember, defineField, defineType } from "sanity"
+import { defineField, defineType } from "sanity"
 
 export const resourceType = defineType({
   name: "resource",
@@ -88,20 +88,6 @@ export const resourceType = defineType({
       description:
         "Select main category (e.g. Components, Icons, Tools, Libraries, 3D...)",
       validation: (rule) => rule.required().error("Category is required"),
-    }),
-    // Tags (Multiple references to tag, e.g. React, Tailwind, Next.js, Three.js, Svelte...)
-    defineField({
-      name: "tags",
-      title: "Tech Stack & Tags",
-      type: "array",
-      description:
-        "Keywords & frameworks (e.g. #react, #tailwind, #threejs, #vue)",
-      of: [
-        defineArrayMember({
-          type: "reference",
-          to: [{ type: "tag" }],
-        }),
-      ],
     }),
     // Pricing / License Badge
     defineField({

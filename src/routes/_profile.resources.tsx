@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { GridContainer } from "@/app/layouts"
+import { ResourceGrid } from "@/features/resources"
 import { createSeoMeta } from "@/shared/config"
-import { UnderConstruction } from "@/shared/ui/system/under-construction"
 
 export const Route = createFileRoute("/_profile/resources")({
   head: () => ({
@@ -14,16 +13,7 @@ export const Route = createFileRoute("/_profile/resources")({
 function ResourcesPage() {
   return (
     <div className="w-full">
-      <GridContainer
-        className="relative flex flex-col overflow-hidden px-4 pt-8 pb-12 sm:px-8"
-        borderBottom={false}
-        showCrosshairs={true}
-      >
-        <UnderConstruction
-          pageName="Resources"
-          colorTheme="var(--pp-primary)"
-        />
-      </GridContainer>
+      <ResourceGrid />
     </div>
   )
 }
