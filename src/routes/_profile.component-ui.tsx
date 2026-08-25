@@ -1,25 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { GridContainer } from "@/app/layouts"
-import { UnderConstruction } from "@/shared/ui"
+import { ComponentGrid } from "@/features/component-ui"
+import { createSeoMeta } from "@/shared/config"
 
 export const Route = createFileRoute("/_profile/component-ui")({
-  component: RouteComponent,
+  head: () => ({
+    meta: createSeoMeta("componentUi"),
+  }),
+  component: ComponentUiPage,
 })
 
-function RouteComponent() {
+function ComponentUiPage() {
   return (
     <div className="w-full">
-      <GridContainer
-        className="relative flex flex-col overflow-hidden px-4 pt-8 pb-12 sm:px-8"
-        borderBottom={false}
-        showCrosshairs={true}
-      >
-        <UnderConstruction
-          pageName="Components ui"
-          colorTheme="var(--pp-primary)"
-        />
-      </GridContainer>
+      <ComponentGrid />
     </div>
   )
 }

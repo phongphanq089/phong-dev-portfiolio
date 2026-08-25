@@ -4,7 +4,11 @@ export const HOME_TOC_ITEMS: TOCItemType[] = [
   { title: "Home", url: "#banner", depth: 1 },
   { title: "About", url: "#about", depth: 1 },
   { title: "Tech Stack", url: "#tech-stack", depth: 1 },
-  { title: "Components UI", url: "#components-ui", depth: 1 },
+  { title: "Blocks", url: "#blocks", depth: 1 },
+  { title: "Components", url: "#components-ui", depth: 1 },
+  { title: "Writing", url: "#blog", depth: 1 },
+  { title: "Resources", url: "#resources", depth: 1 },
+  { title: "Bookmarks", url: "#bookmarks", depth: 1 },
   { title: "Location", url: "#vietnam-map", depth: 1 },
 ]
 

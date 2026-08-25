@@ -16,7 +16,7 @@ export const MAIN_NAV_ITEMS: NavItemConfig[] = [
     id: "block",
     label: "BLOCKS",
     title: "Blocks",
-    link: "/block",
+    link: "/blocks",
     color: "var(--pp-primary)",
     textColor: "text-pp-primary",
     border: "border-pp-primary",

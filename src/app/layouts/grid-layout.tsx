@@ -1,4 +1,4 @@
-﻿import React from "react"
+import React from "react"
 
 import { cn } from "@/shared/lib/utils"
 
@@ -23,7 +23,7 @@ export interface GridContainerProps {
   children: React.ReactNode
   className?: string
   showCrosshairs?: boolean
-  columns?: 1 | 2
+  columns?: 1 | 2 | 3
   borderBottom?: boolean
   borderTop?: boolean
 }
@@ -49,11 +49,19 @@ export function GridContainer({
         className={cn(
           "relative mx-auto h-full max-w-5xl border-r border-l border-border",
           columns === 2 && "grid grid-cols-1 md:grid-cols-2",
+          columns === 3 && "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
           className
         )}
       >
         {columns === 2 && (
           <div className="pointer-events-none absolute top-0 bottom-0 left-1/2 hidden w-px -translate-x-1/2 bg-border md:block" />
+        )}
+
+        {columns === 3 && (
+          <>
+            <div className="pointer-events-none absolute top-0 bottom-0 left-1/3 hidden w-px -translate-x-1/2 bg-border lg:block" />
+            <div className="pointer-events-none absolute top-0 bottom-0 left-2/3 hidden w-px -translate-x-1/2 bg-border lg:block" />
+          </>
         )}
 
         {showCrosshairs && borderBottom && (
@@ -62,6 +70,12 @@ export function GridContainer({
             <Crosshair className="right-[-6px] bottom-[-6px]" />
             {columns === 2 && (
               <Crosshair className="bottom-[-6px] left-1/2 -translate-x-1/2" />
+            )}
+            {columns === 3 && (
+              <>
+                <Crosshair className="bottom-[-6px] left-1/3 hidden -translate-x-1/2 lg:block" />
+                <Crosshair className="bottom-[-6px] left-2/3 hidden -translate-x-1/2 lg:block" />
+              </>
             )}
           </>
         )}
@@ -72,6 +86,12 @@ export function GridContainer({
             <Crosshair className="top-[-6px] right-[-6px]" />
             {columns === 2 && (
               <Crosshair className="top-[-6px] left-1/2 -translate-x-1/2" />
+            )}
+            {columns === 3 && (
+              <>
+                <Crosshair className="top-[-6px] left-1/3 hidden -translate-x-1/2 lg:block" />
+                <Crosshair className="top-[-6px] left-2/3 hidden -translate-x-1/2 lg:block" />
+              </>
             )}
           </>
         )}

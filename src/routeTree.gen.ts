@@ -8,138 +8,200 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as DesignSystemRouteImport } from './routes/design-system'
-import { Route as ProfileRouteImport } from './routes/_profile'
-import { Route as ProfileIndexRouteImport } from './routes/_profile.index'
-import { Route as StudioSplatRouteImport } from './routes/studio.$'
-import { Route as ProfileResourcesRouteImport } from './routes/_profile.resources'
-import { Route as ProfileComponentUiRouteImport } from './routes/_profile.component-ui'
-import { Route as ProfileBlogRouteImport } from './routes/_profile.blog'
-import { Route as ProfileBlockRouteImport } from './routes/_profile.block'
+import { Route as rootRouteImport } from "./routes/__root"
+import { Route as SitemapDotxmlRouteImport } from "./routes/sitemap[.]xml"
+import { Route as RobotsDottxtRouteImport } from "./routes/robots[.]txt"
+import { Route as DesignSystemRouteImport } from "./routes/design-system"
+import { Route as ProfileRouteImport } from "./routes/_profile"
+import { Route as ProfileIndexRouteImport } from "./routes/_profile.index"
+import { Route as StudioSplatRouteImport } from "./routes/studio.$"
+import { Route as ProfileResourcesRouteImport } from "./routes/_profile.resources"
+import { Route as ProfileComponentUiRouteImport } from "./routes/_profile.component-ui"
+import { Route as ProfileBlogRouteImport } from "./routes/_profile.blog"
+import { Route as ProfileBlockRouteImport } from "./routes/_profile.block"
+import { Route as ProfileBlocksIndexRouteImport } from "./routes/_profile.blocks.index"
+import { Route as ProfileComponentUiSlugRouteImport } from "./routes/_profile.component-ui_.$slug"
+import { Route as ProfileBlockSlugRouteImport } from "./routes/_profile.block_.$slug"
+import { Route as ProfileBlocksCategoryIndexRouteImport } from "./routes/_profile.blocks.$category.index"
+import { Route as ProfileBlocksCategorySlugRouteImport } from "./routes/_profile.blocks.$category.$slug"
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+  id: "/sitemap.xml",
+  path: "/sitemap.xml",
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
+  id: "/robots.txt",
+  path: "/robots.txt",
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemRoute = DesignSystemRouteImport.update({
-  id: '/design-system',
-  path: '/design-system',
+  id: "/design-system",
+  path: "/design-system",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
-  id: '/_profile',
+  id: "/_profile",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => ProfileRoute,
 } as any)
 const StudioSplatRoute = StudioSplatRouteImport.update({
-  id: '/studio/$',
-  path: '/studio/$',
+  id: "/studio/$",
+  path: "/studio/$",
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileResourcesRoute = ProfileResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
+  id: "/resources",
+  path: "/resources",
   getParentRoute: () => ProfileRoute,
 } as any)
 const ProfileComponentUiRoute = ProfileComponentUiRouteImport.update({
-  id: '/component-ui',
-  path: '/component-ui',
+  id: "/component-ui",
+  path: "/component-ui",
   getParentRoute: () => ProfileRoute,
 } as any)
 const ProfileBlogRoute = ProfileBlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+  id: "/blog",
+  path: "/blog",
   getParentRoute: () => ProfileRoute,
 } as any)
 const ProfileBlockRoute = ProfileBlockRouteImport.update({
-  id: '/block',
-  path: '/block',
+  id: "/block",
+  path: "/block",
   getParentRoute: () => ProfileRoute,
 } as any)
+const ProfileBlocksIndexRoute = ProfileBlocksIndexRouteImport.update({
+  id: "/blocks/",
+  path: "/blocks/",
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileComponentUiSlugRoute = ProfileComponentUiSlugRouteImport.update({
+  id: "/component-ui_/$slug",
+  path: "/component-ui/$slug",
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileBlockSlugRoute = ProfileBlockSlugRouteImport.update({
+  id: "/block_/$slug",
+  path: "/block/$slug",
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileBlocksCategoryIndexRoute =
+  ProfileBlocksCategoryIndexRouteImport.update({
+    id: "/blocks/$category/",
+    path: "/blocks/$category/",
+    getParentRoute: () => ProfileRoute,
+  } as any)
+const ProfileBlocksCategorySlugRoute =
+  ProfileBlocksCategorySlugRouteImport.update({
+    id: "/blocks/$category/$slug",
+    path: "/blocks/$category/$slug",
+    getParentRoute: () => ProfileRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof ProfileIndexRoute
-  '/design-system': typeof DesignSystemRoute
-  '/robots.txt': typeof RobotsDottxtRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/block': typeof ProfileBlockRoute
-  '/blog': typeof ProfileBlogRoute
-  '/component-ui': typeof ProfileComponentUiRoute
-  '/resources': typeof ProfileResourcesRoute
-  '/studio/$': typeof StudioSplatRoute
+  "/": typeof ProfileIndexRoute
+  "/design-system": typeof DesignSystemRoute
+  "/robots.txt": typeof RobotsDottxtRoute
+  "/sitemap.xml": typeof SitemapDotxmlRoute
+  "/block": typeof ProfileBlockRoute
+  "/blog": typeof ProfileBlogRoute
+  "/component-ui": typeof ProfileComponentUiRoute
+  "/resources": typeof ProfileResourcesRoute
+  "/studio/$": typeof StudioSplatRoute
+  "/block/$slug": typeof ProfileBlockSlugRoute
+  "/component-ui/$slug": typeof ProfileComponentUiSlugRoute
+  "/blocks/": typeof ProfileBlocksIndexRoute
+  "/blocks/$category/$slug": typeof ProfileBlocksCategorySlugRoute
+  "/blocks/$category/": typeof ProfileBlocksCategoryIndexRoute
 }
 export interface FileRoutesByTo {
-  '/design-system': typeof DesignSystemRoute
-  '/robots.txt': typeof RobotsDottxtRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/block': typeof ProfileBlockRoute
-  '/blog': typeof ProfileBlogRoute
-  '/component-ui': typeof ProfileComponentUiRoute
-  '/resources': typeof ProfileResourcesRoute
-  '/studio/$': typeof StudioSplatRoute
-  '/': typeof ProfileIndexRoute
+  "/design-system": typeof DesignSystemRoute
+  "/robots.txt": typeof RobotsDottxtRoute
+  "/sitemap.xml": typeof SitemapDotxmlRoute
+  "/block": typeof ProfileBlockRoute
+  "/blog": typeof ProfileBlogRoute
+  "/component-ui": typeof ProfileComponentUiRoute
+  "/resources": typeof ProfileResourcesRoute
+  "/studio/$": typeof StudioSplatRoute
+  "/": typeof ProfileIndexRoute
+  "/block/$slug": typeof ProfileBlockSlugRoute
+  "/component-ui/$slug": typeof ProfileComponentUiSlugRoute
+  "/blocks": typeof ProfileBlocksIndexRoute
+  "/blocks/$category/$slug": typeof ProfileBlocksCategorySlugRoute
+  "/blocks/$category": typeof ProfileBlocksCategoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_profile': typeof ProfileRouteWithChildren
-  '/design-system': typeof DesignSystemRoute
-  '/robots.txt': typeof RobotsDottxtRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_profile/block': typeof ProfileBlockRoute
-  '/_profile/blog': typeof ProfileBlogRoute
-  '/_profile/component-ui': typeof ProfileComponentUiRoute
-  '/_profile/resources': typeof ProfileResourcesRoute
-  '/studio/$': typeof StudioSplatRoute
-  '/_profile/': typeof ProfileIndexRoute
+  "/_profile": typeof ProfileRouteWithChildren
+  "/design-system": typeof DesignSystemRoute
+  "/robots.txt": typeof RobotsDottxtRoute
+  "/sitemap.xml": typeof SitemapDotxmlRoute
+  "/_profile/block": typeof ProfileBlockRoute
+  "/_profile/blog": typeof ProfileBlogRoute
+  "/_profile/component-ui": typeof ProfileComponentUiRoute
+  "/_profile/resources": typeof ProfileResourcesRoute
+  "/studio/$": typeof StudioSplatRoute
+  "/_profile/": typeof ProfileIndexRoute
+  "/_profile/block_/$slug": typeof ProfileBlockSlugRoute
+  "/_profile/component-ui_/$slug": typeof ProfileComponentUiSlugRoute
+  "/_profile/blocks/": typeof ProfileBlocksIndexRoute
+  "/_profile/blocks/$category/$slug": typeof ProfileBlocksCategorySlugRoute
+  "/_profile/blocks/$category/": typeof ProfileBlocksCategoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/design-system'
-    | '/robots.txt'
-    | '/sitemap.xml'
-    | '/block'
-    | '/blog'
-    | '/component-ui'
-    | '/resources'
-    | '/studio/$'
+    | "/"
+    | "/design-system"
+    | "/robots.txt"
+    | "/sitemap.xml"
+    | "/block"
+    | "/blog"
+    | "/component-ui"
+    | "/resources"
+    | "/studio/$"
+    | "/block/$slug"
+    | "/component-ui/$slug"
+    | "/blocks/"
+    | "/blocks/$category/$slug"
+    | "/blocks/$category/"
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/design-system'
-    | '/robots.txt'
-    | '/sitemap.xml'
-    | '/block'
-    | '/blog'
-    | '/component-ui'
-    | '/resources'
-    | '/studio/$'
-    | '/'
+    | "/design-system"
+    | "/robots.txt"
+    | "/sitemap.xml"
+    | "/block"
+    | "/blog"
+    | "/component-ui"
+    | "/resources"
+    | "/studio/$"
+    | "/"
+    | "/block/$slug"
+    | "/component-ui/$slug"
+    | "/blocks"
+    | "/blocks/$category/$slug"
+    | "/blocks/$category"
   id:
-    | '__root__'
-    | '/_profile'
-    | '/design-system'
-    | '/robots.txt'
-    | '/sitemap.xml'
-    | '/_profile/block'
-    | '/_profile/blog'
-    | '/_profile/component-ui'
-    | '/_profile/resources'
-    | '/studio/$'
-    | '/_profile/'
+    | "__root__"
+    | "/_profile"
+    | "/design-system"
+    | "/robots.txt"
+    | "/sitemap.xml"
+    | "/_profile/block"
+    | "/_profile/blog"
+    | "/_profile/component-ui"
+    | "/_profile/resources"
+    | "/studio/$"
+    | "/_profile/"
+    | "/_profile/block_/$slug"
+    | "/_profile/component-ui_/$slug"
+    | "/_profile/blocks/"
+    | "/_profile/blocks/$category/$slug"
+    | "/_profile/blocks/$category/"
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -150,76 +212,111 @@ export interface RootRouteChildren {
   StudioSplatRoute: typeof StudioSplatRoute
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
+    "/sitemap.xml": {
+      id: "/sitemap.xml"
+      path: "/sitemap.xml"
+      fullPath: "/sitemap.xml"
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
+    "/robots.txt": {
+      id: "/robots.txt"
+      path: "/robots.txt"
+      fullPath: "/robots.txt"
       preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/design-system': {
-      id: '/design-system'
-      path: '/design-system'
-      fullPath: '/design-system'
+    "/design-system": {
+      id: "/design-system"
+      path: "/design-system"
+      fullPath: "/design-system"
       preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_profile': {
-      id: '/_profile'
-      path: ''
-      fullPath: '/'
+    "/_profile": {
+      id: "/_profile"
+      path: ""
+      fullPath: "/"
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_profile/': {
-      id: '/_profile/'
-      path: '/'
-      fullPath: '/'
+    "/_profile/": {
+      id: "/_profile/"
+      path: "/"
+      fullPath: "/"
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof ProfileRoute
     }
-    '/studio/$': {
-      id: '/studio/$'
-      path: '/studio/$'
-      fullPath: '/studio/$'
+    "/studio/$": {
+      id: "/studio/$"
+      path: "/studio/$"
+      fullPath: "/studio/$"
       preLoaderRoute: typeof StudioSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_profile/resources': {
-      id: '/_profile/resources'
-      path: '/resources'
-      fullPath: '/resources'
+    "/_profile/resources": {
+      id: "/_profile/resources"
+      path: "/resources"
+      fullPath: "/resources"
       preLoaderRoute: typeof ProfileResourcesRouteImport
       parentRoute: typeof ProfileRoute
     }
-    '/_profile/component-ui': {
-      id: '/_profile/component-ui'
-      path: '/component-ui'
-      fullPath: '/component-ui'
+    "/_profile/component-ui": {
+      id: "/_profile/component-ui"
+      path: "/component-ui"
+      fullPath: "/component-ui"
       preLoaderRoute: typeof ProfileComponentUiRouteImport
       parentRoute: typeof ProfileRoute
     }
-    '/_profile/blog': {
-      id: '/_profile/blog'
-      path: '/blog'
-      fullPath: '/blog'
+    "/_profile/blog": {
+      id: "/_profile/blog"
+      path: "/blog"
+      fullPath: "/blog"
       preLoaderRoute: typeof ProfileBlogRouteImport
       parentRoute: typeof ProfileRoute
     }
-    '/_profile/block': {
-      id: '/_profile/block'
-      path: '/block'
-      fullPath: '/block'
+    "/_profile/block": {
+      id: "/_profile/block"
+      path: "/block"
+      fullPath: "/block"
       preLoaderRoute: typeof ProfileBlockRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/blocks/": {
+      id: "/_profile/blocks/"
+      path: "/blocks"
+      fullPath: "/blocks/"
+      preLoaderRoute: typeof ProfileBlocksIndexRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/component-ui_/$slug": {
+      id: "/_profile/component-ui_/$slug"
+      path: "/component-ui/$slug"
+      fullPath: "/component-ui/$slug"
+      preLoaderRoute: typeof ProfileComponentUiSlugRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/block_/$slug": {
+      id: "/_profile/block_/$slug"
+      path: "/block/$slug"
+      fullPath: "/block/$slug"
+      preLoaderRoute: typeof ProfileBlockSlugRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/blocks/$category/": {
+      id: "/_profile/blocks/$category/"
+      path: "/blocks/$category"
+      fullPath: "/blocks/$category/"
+      preLoaderRoute: typeof ProfileBlocksCategoryIndexRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    "/_profile/blocks/$category/$slug": {
+      id: "/_profile/blocks/$category/$slug"
+      path: "/blocks/$category/$slug"
+      fullPath: "/blocks/$category/$slug"
+      preLoaderRoute: typeof ProfileBlocksCategorySlugRouteImport
       parentRoute: typeof ProfileRoute
     }
   }
@@ -231,6 +328,11 @@ interface ProfileRouteChildren {
   ProfileComponentUiRoute: typeof ProfileComponentUiRoute
   ProfileResourcesRoute: typeof ProfileResourcesRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
+  ProfileBlockSlugRoute: typeof ProfileBlockSlugRoute
+  ProfileComponentUiSlugRoute: typeof ProfileComponentUiSlugRoute
+  ProfileBlocksIndexRoute: typeof ProfileBlocksIndexRoute
+  ProfileBlocksCategorySlugRoute: typeof ProfileBlocksCategorySlugRoute
+  ProfileBlocksCategoryIndexRoute: typeof ProfileBlocksCategoryIndexRoute
 }
 
 const ProfileRouteChildren: ProfileRouteChildren = {
@@ -239,6 +341,11 @@ const ProfileRouteChildren: ProfileRouteChildren = {
   ProfileComponentUiRoute: ProfileComponentUiRoute,
   ProfileResourcesRoute: ProfileResourcesRoute,
   ProfileIndexRoute: ProfileIndexRoute,
+  ProfileBlockSlugRoute: ProfileBlockSlugRoute,
+  ProfileComponentUiSlugRoute: ProfileComponentUiSlugRoute,
+  ProfileBlocksIndexRoute: ProfileBlocksIndexRoute,
+  ProfileBlocksCategorySlugRoute: ProfileBlocksCategorySlugRoute,
+  ProfileBlocksCategoryIndexRoute: ProfileBlocksCategoryIndexRoute,
 }
 
 const ProfileRouteWithChildren =
@@ -255,9 +362,9 @@ export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
+import type { getRouter } from "./router.tsx"
+import type { createStart } from "@tanstack/react-start"
+declare module "@tanstack/react-start" {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
