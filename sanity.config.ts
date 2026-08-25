@@ -1,12 +1,11 @@
 import { defineConfig } from "sanity"
 import { structureTool } from "sanity/structure"
 
-const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || "i6rvgdeu"
-const dataset = import.meta.env.VITE_SANITY_DATASET || "production"
+import { dataset, projectId } from "./src/shared/lib/sanity"
 
 export default defineConfig({
   name: "default",
-  title: "My Sanity Studio",
+  title: "Phong Phan Portfolio Studio",
 
   projectId,
   dataset,
