@@ -72,13 +72,6 @@ export function ProfileLayout({ children }: { children?: React.ReactNode }) {
         </div>
       </div>
       <EdgeBlur position="bottom" height={isDownMd ? 30 : 100} />
-
-      <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
-        {/* <ScrollToTop /> */}
-        {/* <div className="hidden lg:block">
-          {isMounted && !isDownLg ? <MusicPlayer /> : null}
-        </div> */}
-      </div>
     </ThemeProvider>
   )
 }

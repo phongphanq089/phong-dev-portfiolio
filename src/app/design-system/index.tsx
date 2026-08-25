@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react"
 
 import { DESIGN_SYSTEM_TOC_ITEMS } from "@/shared/config"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
+import { ScrollToTop } from "@/shared/ui"
 import { ModeToggle } from "@/shared/ui/system/mode-toggle"
 import { TOCMinimap } from "@/shared/ui/system/toc-minimap"
 
@@ -181,6 +182,10 @@ export function DesignSystemShowcase() {
             <IconsSection />
           </section>
         </main>
+
+        <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
+          <ScrollToTop />
+        </div>
       </div>
     </ThemeProvider>
   )

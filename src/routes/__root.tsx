@@ -5,6 +5,7 @@ import {
   HeadContent,
   Outlet,
   Scripts,
+  useLocation,
 } from "@tanstack/react-router"
 import type { JSX } from "react/jsx-runtime"
 
@@ -109,18 +110,26 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         suppressHydrationWarning
       >
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <TooltipProvider>
-            {children}
-            <CommandMenu />
-          </TooltipProvider>
+          <RootLayoutBody>{children}</RootLayoutBody>
         </ThemeProvider>
-
-        {/* Global Floating Actions */}
-
-        {/* <TanStackRouterDevtools position="bottom-right" />
-        <ReactQueryDevtools buttonPosition="bottom-left" /> */}
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function RootLayoutBody({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+  const isStudio = location.pathname.startsWith("/studio")
+
+  if (isStudio) {
+    return <>{children}</>
+  }
+
+  return (
+    <TooltipProvider>
+      {children}
+      <CommandMenu />
+    </TooltipProvider>
   )
 }
