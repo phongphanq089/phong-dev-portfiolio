@@ -37,7 +37,7 @@ export default function SectionMapVietnamese() {
         containerMousePosition={position}
         isMouseLeave={isMouseLeave}
       >
-        <div className="relative size-full place-items-center">
+        <div className="relative size-full place-items-center pt-10">
           <img
             src="/assets/svg/VN-map.svg?updatedAt=1745730197368"
             className="w-9/10 grayscale-100 transition-[filter] duration-300 group-hover/article:grayscale-50 hover:grayscale-0"

@@ -1,3 +1,4 @@
+export * from "./bookmarks.config"
 export * from "./navigation.config"
 export * from "./seo.config"
 export * from "./site.config"

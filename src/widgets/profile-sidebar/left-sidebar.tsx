@@ -10,6 +10,7 @@ import {
   Twitter,
 } from "lucide-react"
 
+import { siteConfig } from "@/shared/config"
 import { ScrollArea } from "@/shared/ui/core/scroll-area"
 
 const LeftSidebar = () => {
@@ -20,32 +21,31 @@ const LeftSidebar = () => {
           {/* --- Identity Section --- */}
           <div className="space-y-2">
             <h2 className="text-2xl font-black tracking-tighter text-green-500 uppercase">
-              PHONG PHAN
+              {siteConfig.author.name.toUpperCase()}
             </h2>
             <p className="text-sm font-medium text-white/90">
-              Frontend Developer
+              {siteConfig.author.role}
             </p>
           </div>
 
           {/* --- Bio Section --- */}
           <p className="text-xs leading-relaxed text-slate-400">
-            I build modern, responsive and accessible web experiences with clean
-            code and intuitive UI.
+            {siteConfig.author.bio}
           </p>
 
           {/* --- Contact Info Section --- */}
           <div className="space-y-4 text-[11px]">
             <div className="flex items-center gap-3 text-slate-300">
               <MapPin className="h-4 w-4 text-green-500" />
-              <span>Ho Chi Minh City, VN</span>
+              <span>{siteConfig.author.location}</span>
             </div>
             <div className="flex items-center gap-3 text-slate-300">
               <Mail className="h-4 w-4 text-green-500" />
-              <span>phongphan.dev@gmail.com</span>
+              <span>{siteConfig.author.email}</span>
             </div>
             <div className="flex items-center gap-3 text-slate-300">
               <Phone className="h-4 w-4 text-green-500" />
-              <span>+84 123 456 789</span>
+              <span>{siteConfig.author.phone}</span>
             </div>
             <div className="flex items-center gap-3 text-slate-300">
               <div className="relative flex h-4 w-4 items-center justify-center">
@@ -58,10 +58,30 @@ const LeftSidebar = () => {
 
           {/* --- Social Icons --- */}
           <div className="flex items-center gap-5 pt-2">
-            <Github className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
-            <Linkedin className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
-            <Twitter className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
-            <Globe className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
+            <a
+              href={siteConfig.social.github.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Github className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
+            </a>
+            <a
+              href={siteConfig.social.linkedin.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Linkedin className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
+            </a>
+            <a
+              href={siteConfig.social.twitter.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Twitter className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
+            </a>
+            <a href={siteConfig.url} target="_blank" rel="noreferrer">
+              <Globe className="h-4 w-4 cursor-pointer text-slate-400 transition-colors hover:text-green-500" />
+            </a>
           </div>
 
           {/* --- Download CV Button --- */}
@@ -85,10 +105,12 @@ const LeftSidebar = () => {
               </p>
             </div>
 
-            <button className="group flex w-full items-center justify-center gap-2 border border-white/10 bg-white/5 py-4 text-[11px] font-bold text-white transition-all hover:bg-white/10 active:scale-95">
-              <Send className="h-3.5 w-3.5 text-green-500" />
-              <span>{">"} CONTACT ME</span>
-            </button>
+            <a href={siteConfig.social.email.href}>
+              <button className="group flex w-full items-center justify-center gap-2 border border-white/10 bg-white/5 py-4 text-[11px] font-bold text-white transition-all hover:bg-white/10 active:scale-95">
+                <Send className="h-3.5 w-3.5 text-green-500" />
+                <span>{">"} CONTACT ME</span>
+              </button>
+            </a>
           </div>
         </div>
       </ScrollArea>

@@ -1,4 +1,13 @@
+import { siteConfig } from "@/shared/config/site.config"
+
 import type { BlogCategory, BlogPost, BlogTag } from "./types"
+
+const BLOG_AUTHOR = {
+  name: siteConfig.author.name,
+  role: siteConfig.author.role,
+  avatar: siteConfig.author.avatar,
+  verified: true,
+} as const
 
 export const MOCK_CATEGORIES: BlogCategory[] = [
   {
@@ -88,12 +97,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-08-10T09:00:00.000Z",
     readTime: 6,
     isFeatured: true,
-    author: {
-      name: "Phong Phan",
-      role: "Frontend Engineer",
-      avatar: "/avatar.gif",
-      verified: true,
-    },
+    author: BLOG_AUTHOR,
   },
   {
     _id: "post-2",
@@ -117,12 +121,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-08-04T14:30:00.000Z",
     readTime: 8,
     isFeatured: true,
-    author: {
-      name: "Phong Phan",
-      role: "Frontend Engineer",
-      avatar: "/avatar.gif",
-      verified: true,
-    },
+    author: BLOG_AUTHOR,
   },
   {
     _id: "post-3",
@@ -140,12 +139,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-07-28T10:15:00.000Z",
     readTime: 11,
     isFeatured: false,
-    author: {
-      name: "Phong Phan",
-      role: "Frontend Engineer",
-      avatar: "/avatar.gif",
-      verified: true,
-    },
+    author: BLOG_AUTHOR,
   },
   {
     _id: "post-4",
@@ -163,12 +157,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-07-15T16:00:00.000Z",
     readTime: 9,
     isFeatured: false,
-    author: {
-      name: "Phong Phan",
-      role: "Frontend Engineer",
-      avatar: "/avatar.gif",
-      verified: true,
-    },
+    author: BLOG_AUTHOR,
   },
   {
     _id: "post-5",
@@ -185,12 +174,7 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-06-30T11:20:00.000Z",
     readTime: 7,
     isFeatured: false,
-    author: {
-      name: "Phong Phan",
-      role: "Frontend Engineer",
-      avatar: "/avatar.gif",
-      verified: true,
-    },
+    author: BLOG_AUTHOR,
   },
   {
     _id: "post-6",
@@ -208,11 +192,6 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-06-18T08:45:00.000Z",
     readTime: 5,
     isFeatured: false,
-    author: {
-      name: "Phong Phan",
-      role: "Frontend Engineer",
-      avatar: "/avatar.gif",
-      verified: true,
-    },
+    author: BLOG_AUTHOR,
   },
 ]

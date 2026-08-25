@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react"
 import React from "react"
 
 import { GridContainer } from "@/app/layouts"
+import { siteConfig } from "@/shared/config"
 import { PhongPhanIsometric } from "@/shared/ui/animation"
 
 import { coreTechnologies, inspriedBy, scocialLinks } from "./setting-footer"
@@ -112,10 +113,12 @@ export default function Footer() {
           </p>
           <p className="text-sm text-muted-foreground">
             Built with care by{" "}
-            <span className="font-semibold text-foreground">phongphan.dev</span>
+            <span className="font-semibold text-foreground">
+              {siteConfig.url.replace("https://", "")}
+            </span>
             . The source code is available on{" "}
             <a
-              href="https://github.com/phongphanq089/phong-dev-portfiolio"
+              href={siteConfig.repoUrl}
               target="_blank"
               rel="noreferrer"
               className="underline underline-offset-4 transition-colors hover:text-pp-primary"
