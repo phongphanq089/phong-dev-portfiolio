@@ -1,6 +1,57 @@
+import type React from "react"
+
 import { siteConfig } from "@/shared/config"
+import { Sanity, ShadcnUI, Tailwind, Tanstack } from "@/shared/ui/icons"
 
 export const inspriedBy = siteConfig.inspirations
+
+export interface TechCredit {
+  name: string
+  title: string
+  description: string
+  href: string
+  icon: React.ComponentType<{ className?: string; size?: number | string }>
+  badge: string
+}
+
+export const coreTechnologies: TechCredit[] = [
+  {
+    name: "Tailwind CSS",
+    title: "Tailwind CSS",
+    description:
+      "Utility-first styling engine, custom design tokens, and OKLCH color palettes.",
+    href: "https://tailwindcss.com",
+    icon: Tailwind,
+    badge: "Design & CSS",
+  },
+  {
+    name: "shadcn/ui",
+    title: "shadcn/ui",
+    description:
+      "Accessible, beautifully crafted UI primitives and reusable React components.",
+    href: "https://ui.shadcn.com",
+    icon: ShadcnUI,
+    badge: "UI Library",
+  },
+  {
+    name: "TanStack Start",
+    title: "TanStack Start",
+    description:
+      "Full-stack React framework with 100% type-safe routing and SSR prerendering.",
+    href: "https://tanstack.com/start",
+    icon: Tanstack,
+    badge: "Framework",
+  },
+  {
+    name: "Sanity",
+    title: "Sanity CMS",
+    description:
+      "Headless content platform, real-time schema modeling, and embedded Studio.",
+    href: "https://www.sanity.io",
+    icon: Sanity,
+    badge: "Content CMS",
+  },
+]
 
 export const scocialLinks = [
   {

@@ -14,13 +14,13 @@ export const ShadcnUI = ({ size = 24, className, ...props }: IconProps) => (
   >
     <g clipPath="url(#a)">
       <path
-        fill="#fff"
+        className="fill-black dark:fill-[#fff]"
         d="M92.515 49.037a4.349 4.349 0 0 1 6.15 6.15L55.186 98.664a4.349 4.349 0 0 1-6.15-6.15zM83.82 1.211a4.349 4.349 0 0 1 6.149 6.15L7.361 89.968a4.349 4.349 0 0 1-6.15-6.15z"
       />
     </g>
     <defs>
       <clipPath id="a">
-        <path fill="#fff" d="M0 0h100v100H0z" />
+        <path className="fill-black dark:fill-[#fff]" d="M0 0h100v100H0z" />
       </clipPath>
     </defs>
   </svg>
