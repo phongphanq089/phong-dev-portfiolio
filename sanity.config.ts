@@ -1,5 +1,6 @@
 import { codeInput } from "@sanity/code-input"
 import { colorInput } from "@sanity/color-input"
+import { CogIcon } from "@sanity/icons"
 import { table } from "@sanity/table"
 import { defineConfig } from "sanity"
 import { structureTool } from "sanity/structure"
@@ -15,7 +16,31 @@ export default defineConfig({
   dataset,
   basePath: "/studio",
 
-  plugins: [structureTool(), colorInput(), table(), codeInput()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title("Content & Settings")
+          .items([
+            S.listItem()
+              .title("Site Settings")
+              .icon(CogIcon)
+              .child(
+                S.document()
+                  .schemaType("setting")
+                  .documentId("siteSettings")
+                  .title("Site Settings")
+              ),
+            S.divider(),
+            ...S.documentTypeListItems().filter(
+              (listItem) => listItem.getId() !== "setting"
+            ),
+          ]),
+    }),
+    colorInput(),
+    table(),
+    codeInput(),
+  ],
 
   schema: {
     types: schemaTypes,

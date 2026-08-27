@@ -9,7 +9,6 @@ import { SectionEmptyState } from "@/shared/ui/system/section-empty-state"
 import { ShowcaseCard } from "../components/showcase-card"
 
 export function FeedbackSection() {
-
   const effects = {
     mask: { cursor: true, radius: 120 },
     gradient: {
@@ -97,8 +96,12 @@ export function FeedbackSection() {
             gradient={effects.gradient}
           />
           <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-1 font-mono text-xs text-muted-foreground select-none">
-            <span className="text-foreground/80 font-medium">Interactive Canvas Area</span>
-            <span className="text-[10px]">Hover mouse inside to reveal cursor gradient mask</span>
+            <span className="font-medium text-foreground/80">
+              Interactive Canvas Area
+            </span>
+            <span className="text-[10px]">
+              Hover mouse inside to reveal cursor gradient mask
+            </span>
           </div>
         </div>
       </ShowcaseCard>

@@ -34,3 +34,87 @@ const imageBuilder = imageUrlBuilder(client)
 export function urlFor(source: SanityImageSource) {
   return imageBuilder.image(source)
 }
+
+export interface SanitySiteSettings {
+  _id: string
+  _updatedAt?: string
+  siteTitle?: string
+  siteName?: string
+  siteDescription?: string
+  siteUrl?: string
+  keywords?: string[]
+  author?: string
+  ogImage?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+    alt?: string
+  }
+  twitterCard?: "summary_large_image" | "summary"
+  twitterHandle?: string
+  favicon?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  favicon16?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  favicon32?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  appleTouchIcon?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  androidChrome192?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  androidChrome512?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  safariMaskIcon?: {
+    asset?: {
+      _ref?: string
+      _type?: string
+    }
+  }
+  themeColor?: {
+    hex?: string
+  }
+  backgroundColor?: {
+    hex?: string
+  }
+  githubUrl?: string
+  linkedinUrl?: string
+  twitterUrl?: string
+  email?: string
+  phone?: string
+}
+
+export const SITE_SETTINGS_QUERY = `*[_type == "setting"][0]`
+
+export async function getSiteSettings(): Promise<SanitySiteSettings | null> {
+  try {
+    return await client.fetch<SanitySiteSettings | null>(SITE_SETTINGS_QUERY)
+  } catch (error) {
+    console.error("Error fetching site settings from Sanity:", error)
+    return null
+  }
+}

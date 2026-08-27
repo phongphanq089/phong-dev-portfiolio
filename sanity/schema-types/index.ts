@@ -3,12 +3,14 @@ import { groupType } from "./documents/group"
 import { postType } from "./documents/post"
 import { resourceType } from "./documents/resource"
 import { resourceCategoryType } from "./documents/resourceCategory"
+import { settingType } from "./documents/setting"
 import { tagType } from "./documents/tag"
 import { blockContentType } from "./objects/blockContent"
 import { calloutType } from "./objects/callout"
 
 export const schemaTypes = [
   // Documents
+  settingType,
   postType,
   categoryType,
   groupType,
@@ -29,5 +31,6 @@ export {
   postType,
   resourceCategoryType,
   resourceType,
+  settingType,
   tagType,
 }
