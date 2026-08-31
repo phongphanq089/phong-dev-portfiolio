@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Portfolio of Phong Phan. Frontend Engineer with a solid fullstack foundation, specializing in React, TypeScript, TanStack, fluid interactions, and UI craftsmanship.",
   url: "https://phongphan.dev",
-  ogImage: "https://ik.imagekit.io/htnacim0q/portfolio/banner-hero_scrh3z.png",
+  ogImage: "/og-image.jpg",
   repoUrl: "https://github.com/phongphanq089/phong-dev-portfiolio",
 
   author: {
@@ -26,11 +26,11 @@ export const siteConfig = {
     },
     linkedin: {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/phong-phan-719464201/",
+      href: "www.linkedin.com/in/phong-phan-719464201",
     },
     twitter: {
       name: "X (Twitter)",
-      href: "https://www.linkedin.com/in/phong-phan-719464201/",
+      href: "https://x.com/PhongPhanq089",
     },
     email: {
       name: "Email",
