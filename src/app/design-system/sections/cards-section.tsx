@@ -74,7 +74,7 @@ export function CardsSection() {
         tag="Animation"
       >
         <CardCanvas className="w-full max-w-xs">
-          <GlowCard className="space-y-2 p-6 text-center">
+          <GlowCard contentClassName="space-y-2 p-6 text-center">
             <div className="text-sm font-semibold text-primary">Glow Card</div>
             <p className="text-xs text-muted-foreground">
               Hover over this card to activate dynamic corner crosshair glows.

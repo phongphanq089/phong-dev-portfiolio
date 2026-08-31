@@ -194,4 +194,22 @@ export const MOCK_BLOG_POSTS: BlogPost[] = [
     isFeatured: false,
     author: BLOG_AUTHOR,
   },
+  {
+    _id: "post-7",
+    title:
+      "Micro-Interactions That Matter: Crafting GSAP & Motion Physics for Web",
+    slug: { current: "micro-interactions-gsap-motion-physics" },
+    excerpt:
+      "Why spring physics, haptic sound feedback, magnetic button boundaries, and staggered typographic entrances elevate web apps from good to unforgettable.",
+    coverImage: {
+      url: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop",
+      alt: "Motion physics visual and neon glow typography animation",
+    },
+    categories: [MOCK_CATEGORIES[2], MOCK_CATEGORIES[1]],
+    tags: [MOCK_TAGS[0], MOCK_TAGS[5]],
+    publishedAt: "2026-06-18T08:45:00.000Z",
+    readTime: 5,
+    isFeatured: false,
+    author: BLOG_AUTHOR,
+  },
 ]

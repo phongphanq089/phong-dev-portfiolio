@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js dev --port 5731",
     "build": "vite build && tsc --noEmit",
-    "preview": "vite preview --port 5732",
+    "preview": "vite preview --port 5731",
     "test": "vitest run --passWithNoTests",
     "lint": "eslint .",
     "format": "prettier --write . && eslint --fix",

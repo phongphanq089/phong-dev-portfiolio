@@ -2,6 +2,7 @@ import { BookmarkX } from "lucide-react"
 import { useMemo, useState } from "react"
 
 import { GridContainer } from "@/app/layouts"
+import { SectionEmptyState } from "@/shared/ui/system"
 
 import { MOCK_RESOURCE_CATEGORIES, MOCK_RESOURCES } from "../mock-data"
 import type { PricingBadge, Resource, ResourceSortOption } from "../types"
@@ -131,12 +132,12 @@ export function ResourceGrid() {
                 />
               ) : (
                 /* Empty placeholder cell for odd count of items */
-                <div className="hidden h-full w-full items-center justify-center p-8 text-center md:flex">
-                  <div className="flex flex-col items-center gap-2 text-muted-foreground/40">
-                    <span className="font-mono text-[11px] tracking-wider uppercase">
-                      More Bookmarks Coming Soon
-                    </span>
-                  </div>
+                <div className="hidden h-full w-full md:flex">
+                  <SectionEmptyState
+                    variant="cell"
+                    title="More Bookmarks Coming Soon"
+                    description="Curating additional design & dev tools."
+                  />
                 </div>
               )}
             </div>
@@ -147,30 +148,28 @@ export function ResourceGrid() {
         <GridContainer
           borderBottom
           showCrosshairs
-          className="flex flex-col items-center justify-center px-4 py-16 text-center sm:px-8 sm:py-24"
+          className="p-6 sm:p-10 md:p-12"
         >
-          <div className="flex size-14 items-center justify-center rounded-2xl border border-border/60 bg-muted/30 text-pp-primary shadow-xs">
-            <BookmarkX className="size-7" />
-          </div>
-          <h3 className="mt-4 text-lg font-bold text-foreground sm:text-xl">
-            No resources found
-          </h3>
-          <p className="mt-1 max-w-sm text-xs leading-relaxed text-muted-foreground sm:text-sm">
-            We couldn't find any resources matching your search query or
-            filters. Try resetting your criteria.
-          </p>
-          <button
-            type="button"
-            onClick={() => {
-              setSelectedCategory(null)
-              setSelectedPricing("ALL")
-              setSortOption("featured")
-              setSearchQuery("")
-            }}
-            className="mt-5 rounded-lg border border-pp-primary/40 bg-pp-primary/10 px-4 py-2 font-mono text-xs font-semibold text-pp-primary transition-all duration-200 hover:bg-pp-primary hover:text-white"
-          >
-            Clear all filters
-          </button>
+          <SectionEmptyState
+            icon={<BookmarkX className="size-6" />}
+            badge="RESOURCES DIRECTORY"
+            title="No resources found"
+            description="We couldn't find any resources matching your search query or filters. Try resetting your criteria."
+            action={
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCategory(null)
+                  setSelectedPricing("ALL")
+                  setSortOption("featured")
+                  setSearchQuery("")
+                }}
+                className="rounded-lg border border-pp-primary/40 bg-pp-primary/10 px-4 py-2 font-mono text-xs font-semibold text-pp-primary transition-all duration-200 hover:bg-pp-primary hover:text-white active:scale-98"
+              >
+                Clear all filters
+              </button>
+            }
+          />
         </GridContainer>
       )}
     </div>
