@@ -21,7 +21,7 @@ const config = defineConfig({
     include: ["sanity", "sanity/structure"],
   },
   ssr: {
-    external: ["sanity", "sanity/structure"],
+    noExternal: ["gsap", "@gsap/react", "use-sound"],
   },
   plugins: [
     tsconfigPaths({ projects: ["./tsconfig.json"] }),

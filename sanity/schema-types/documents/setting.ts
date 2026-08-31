@@ -32,12 +32,29 @@ export const settingType = defineType({
   fields: [
     // --- GENERAL GROUP ---
     defineField({
+      name: "coverImage",
+      title: "Banner Image / Cover",
+      group: "general",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alt Text",
+          description: "Crucial for SEO & accessibility.",
+        }),
+      ],
+    }),
+    defineField({
       name: "siteTitle",
       title: "Site Title",
       type: "string",
       group: "general",
       description:
-        "Tiêu đề chính của website (hiển thị trên thẻ title trình duyệt và kết quả tìm kiếm Google).",
+        "Primary website title (displayed on browser tab title and Google search results).",
       placeholder: "e.g. Phong Phan • Frontend Engineer",
       validation: (rule) => rule.required().error("Site title is required"),
     }),
@@ -46,7 +63,7 @@ export const settingType = defineType({
       title: "Site Name / Brand",
       type: "string",
       group: "general",
-      description: "Tên thương hiệu ngắn gọn (sử dụng cho og:site_name).",
+      description: "Short brand or website name (used for og:site_name).",
       placeholder: "e.g. Phong Phan",
     }),
     defineField({
@@ -56,10 +73,14 @@ export const settingType = defineType({
       rows: 3,
       group: "general",
       description:
-        "Đoạn mô tả ngắn về website/bản thân cho công cụ tìm kiếm và thẻ meta description.",
+        "Short description of the website / portfolio for search engines and meta description tag.",
       placeholder: "Portfolio and engineering showcase of Phong Phan...",
       validation: (rule) =>
-        rule.max(300).warning("Mô tả SEO tối ưu nên dưới 160-300 ký tự"),
+        rule
+          .max(300)
+          .warning(
+            "Optimal SEO description should be under 160-300 characters"
+          ),
     }),
     defineField({
       name: "siteUrl",
@@ -67,7 +88,7 @@ export const settingType = defineType({
       type: "url",
       group: "general",
       description:
-        "Địa chỉ URL website chính thức (ví dụ: https://phongphan.dev).",
+        "Official canonical website URL (e.g. https://phongphan.dev).",
       placeholder: "https://phongphan.dev",
     }),
     defineField({
@@ -75,7 +96,7 @@ export const settingType = defineType({
       title: "SEO Keywords",
       type: "array",
       group: "general",
-      description: "Danh sách từ khóa phục vụ cho SEO thẻ meta keywords.",
+      description: "List of keywords for SEO and meta keywords tag.",
       of: [defineArrayMember({ type: "string" })],
       options: {
         layout: "tags",
@@ -86,8 +107,7 @@ export const settingType = defineType({
       title: "Author Name",
       type: "string",
       group: "general",
-      description:
-        "Tên tác giả / chủ sở hữu website (sử dụng cho meta author).",
+      description: "Author / site owner name (used for meta author tag).",
       placeholder: "Phong Phan",
     }),
 
@@ -98,7 +118,7 @@ export const settingType = defineType({
       type: "image",
       group: "seo",
       description:
-        "Ảnh preview hiển thị khi chia sẻ link lên Facebook, Zalo, LinkedIn, Twitter/X, Telegram, v.v. (Khuyến nghị: 1200x630 px, định dạng JPG/PNG).",
+        "Preview image displayed when sharing links on Facebook, LinkedIn, Twitter/X, Telegram, etc. (Recommended: 1200x630 px, JPG/PNG format).",
       options: {
         hotspot: true,
       },
@@ -107,8 +127,7 @@ export const settingType = defineType({
           name: "alt",
           type: "string",
           title: "Alt Text",
-          description:
-            "Mô tả hình ảnh phục vụ trợ năng (accessibility) và SEO.",
+          description: "Image description for accessibility and SEO.",
         }),
       ],
     }),
@@ -117,16 +136,16 @@ export const settingType = defineType({
       title: "Twitter Card Format",
       type: "string",
       group: "seo",
-      description: "Định dạng thẻ Twitter Card khi chia sẻ trên mạng xã hội X.",
+      description: "Twitter Card layout when sharing on X / Twitter.",
       initialValue: "summary_large_image",
       options: {
         list: [
           {
-            title: "Summary Large Image (Khuyến nghị - Ảnh lớn đẹp)",
+            title: "Summary Large Image (Recommended - Large card preview)",
             value: "summary_large_image",
           },
           {
-            title: "Summary (Ảnh thumbnail vuông bên cạnh)",
+            title: "Summary (Small square thumbnail)",
             value: "summary",
           },
         ],
@@ -138,18 +157,18 @@ export const settingType = defineType({
       title: "Twitter/X Creator Handle",
       type: "string",
       group: "seo",
-      description: "Tài khoản Twitter/X (ví dụ: @phongphanq089).",
+      description: "Twitter/X creator handle (e.g. @phongphanq089).",
       placeholder: "@phongphanq089",
     }),
 
     // --- FAVICONS & APP ICONS GROUP ---
     defineField({
       name: "favicon",
-      title: "Main Favicon (.ico hoặc .png)",
+      title: "Main Favicon (.ico or .png)",
       type: "image",
       group: "icons",
       description:
-        "Favicon chính hiển thị trên tab trình duyệt (File favicon.ico hoặc favicon.png 48x48 / 32x32).",
+        "Primary favicon displayed on browser tabs (favicon.ico or favicon.png 48x48 / 32x32 px).",
     }),
     defineField({
       name: "favicon16",
@@ -157,7 +176,7 @@ export const settingType = defineType({
       type: "image",
       group: "icons",
       description:
-        "Icon kích thước chuẩn 16x16 px cho các trình duyệt hoặc màn hình tiêu chuẩn.",
+        "Standard 16x16 px favicon for legacy browsers and standard displays.",
     }),
     defineField({
       name: "favicon32",
@@ -165,7 +184,7 @@ export const settingType = defineType({
       type: "image",
       group: "icons",
       description:
-        "Icon kích thước 32x32 px cho màn hình Retina và trình duyệt hiện đại.",
+        "Standard 32x32 px favicon for Retina displays and modern browsers.",
     }),
     defineField({
       name: "appleTouchIcon",
@@ -173,7 +192,7 @@ export const settingType = defineType({
       type: "image",
       group: "icons",
       description:
-        "Icon hiển thị khi người dùng Bookmark hoặc Thêm vào màn hình chính (Add to Home Screen) trên iPhone / iPad (Kích thước chuẩn: 180x180 px).",
+        "Icon displayed when users bookmark or Add to Home Screen on iOS / iPadOS (Standard size: 180x180 px).",
     }),
     defineField({
       name: "androidChrome192",
@@ -181,7 +200,7 @@ export const settingType = defineType({
       type: "image",
       group: "icons",
       description:
-        "Icon PWA cho thiết bị Android trên màn hình chính (Kích thước chuẩn: 192x192 px, định dạng PNG).",
+        "PWA icon for Android home screen (Standard size: 192x192 px, PNG format).",
     }),
     defineField({
       name: "androidChrome512",
@@ -189,7 +208,7 @@ export const settingType = defineType({
       type: "image",
       group: "icons",
       description:
-        "Icon PWA độ phân giải cao và Splash Screen cho Android (Kích thước chuẩn: 512x512 px, định dạng PNG).",
+        "High-resolution PWA icon and splash screen for Android (Standard size: 512x512 px, PNG format).",
     }),
     defineField({
       name: "safariMaskIcon",
@@ -197,7 +216,7 @@ export const settingType = defineType({
       type: "image",
       group: "icons",
       description:
-        "Icon SVG vector đơn sắc (monochrome) dùng cho tính năng Pinned Tabs của Safari trên macOS.",
+        "Monochrome SVG vector icon used for Safari pinned tabs on macOS.",
     }),
 
     // --- PWA & THEME GROUP ---
@@ -207,7 +226,7 @@ export const settingType = defineType({
       type: "color",
       group: "pwa",
       description:
-        'Màu thanh tiêu đề / thanh địa chỉ của trình duyệt di động (thẻ <meta name="theme-color">).',
+        'Browser toolbar and address bar color on mobile devices (<meta name="theme-color">).',
       options: {
         disableAlpha: true,
       },
@@ -218,7 +237,7 @@ export const settingType = defineType({
       type: "color",
       group: "pwa",
       description:
-        "Màu nền khi khởi động ứng dụng Web App / PWA (Splash Screen).",
+        "Background color displayed during PWA / Web App splash screen startup.",
       options: {
         disableAlpha: true,
       },

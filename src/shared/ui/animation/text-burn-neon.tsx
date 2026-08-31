@@ -3,7 +3,9 @@ import gsap from "gsap"
 import SplitText from "gsap/SplitText"
 import { useRef } from "react"
 
-gsap.registerPlugin(SplitText)
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(SplitText, useGSAP)
+}
 
 interface TextBurnNeonProps {
   children: string

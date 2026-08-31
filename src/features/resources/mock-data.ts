@@ -386,4 +386,21 @@ export const MOCK_RESOURCES: Resource[] = [
     isFeatured: false,
     publishedAt: "2026-05-18T13:20:00.000Z",
   },
+  {
+    _id: "res-realtime-colors-v2",
+    _type: "resource",
+    title: "Realtime Colors",
+    slug: { current: "realtime-colors" },
+    url: "https://www.realtimecolors.com",
+    description:
+      "Visualize color palettes, contrast ratios, and typographic hierarchies in real-time across a live mock landing page layout.",
+    coverImage: {
+      url: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1200&auto=format&fit=crop",
+      alt: "Realtime Colors palette design system simulator preview",
+    },
+    category: MOCK_RESOURCE_CATEGORIES[6],
+    pricing: "Free",
+    isFeatured: false,
+    publishedAt: "2026-05-18T13:20:00.000Z",
+  },
 ]

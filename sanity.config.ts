@@ -8,6 +8,9 @@ import { structureTool } from "sanity/structure"
 import { schemaTypes } from "./sanity/schema-types"
 import { dataset, projectId } from "./src/shared/lib/sanity"
 
+// Define singleton types
+const singletonTypes = new Set(["setting"])
+
 export default defineConfig({
   name: "default",
   title: "Phong Phan Portfolio Studio",
@@ -28,12 +31,12 @@ export default defineConfig({
               .child(
                 S.document()
                   .schemaType("setting")
-                  .documentId("siteSettings")
+                  .documentId("settings")
                   .title("Site Settings")
               ),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => listItem.getId() !== "setting"
+              (listItem) => !singletonTypes.has(listItem.getId() || "")
             ),
           ]),
     }),
@@ -44,6 +47,19 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    // Filter out singleton types from the global "Create new document" menu (+)
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+  },
+
+  document: {
+    // For singleton documents, remove delete and duplicate to prevent accidental deletion
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(
+            ({ action }) => action && !["delete", "duplicate"].includes(action)
+          )
+        : input,
   },
 
   beta: {
