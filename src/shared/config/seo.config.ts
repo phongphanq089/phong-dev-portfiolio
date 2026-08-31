@@ -1,3 +1,9 @@
+import {
+  getSanityImageUrl,
+  type SanityImage,
+  type SanitySiteSettings,
+} from "@/shared/lib/sanity"
+
 import { siteConfig } from "./site.config"
 
 export interface SeoConfig {
@@ -92,10 +98,36 @@ export const pagesSeoConfig: Record<string, SeoConfig> = {
 }
 
 /**
- * Creates meta tags array for TanStack Router `head: () => ({ meta: createSeoMeta(...) })`
+ * Resolves Open Graph image URL with fallback logic:
+ * 1. Explicit custom image URL passed in route config
+ * 2. Sanity Site Settings ogImage asset (optimized via urlFor)
+ * 3. Default predefined ogImage
+ */
+export function getOgImageUrl(
+  customImage?: string,
+  sanityOgImage?: SanityImage
+): string {
+  if (customImage && customImage.trim() !== "") {
+    return customImage
+  }
+
+  return (
+    getSanityImageUrl(sanityOgImage, {
+      width: 1200,
+      height: 630,
+      fit: "crop",
+      fallback: defaultSeoConfig.ogImage,
+    }) || defaultSeoConfig.ogImage
+  )
+}
+
+/**
+ * Creates meta tags array for TanStack Router: `head: () => ({ meta: createSeoMeta(config, siteSettings) })`
+ * Prioritizes dynamic Sanity schema settings when present, with complete fallback to predefined defaults.
  */
 export function createSeoMeta(
-  config?: Partial<SeoConfig> | keyof typeof pagesSeoConfig
+  config?: Partial<SeoConfig> | keyof typeof pagesSeoConfig,
+  siteSettings?: SanitySiteSettings | null
 ) {
   let resolved: Partial<SeoConfig> = {}
 
@@ -105,40 +137,208 @@ export function createSeoMeta(
     resolved = config
   }
 
-  const title = resolved.title ?? defaultSeoConfig.title
-  const description = resolved.description ?? defaultSeoConfig.description
-  const image = resolved.ogImage ?? defaultSeoConfig.ogImage
-  const url = resolved.url ?? defaultSeoConfig.url
-  const keywords = Array.isArray(resolved.keywords)
-    ? resolved.keywords.join(", ")
-    : (resolved.keywords ?? defaultSeoConfig.keywords.join(", "))
+  const isRoot = !config || config === undefined
+  const hasCustomImage = Boolean(
+    resolved.ogImage && resolved.ogImage.trim() !== ""
+  )
+  const hasSanityImage = Boolean(siteSettings?.ogImage?.asset)
+
+  // Priority: Route Config > Sanity Schema Settings > Default Static Config
+  const title =
+    resolved.title?.trim() ||
+    siteSettings?.siteTitle?.trim() ||
+    defaultSeoConfig.title
+
+  const description =
+    resolved.description?.trim() ||
+    siteSettings?.siteDescription?.trim() ||
+    defaultSeoConfig.description
+
+  const siteName = siteSettings?.siteName?.trim() || defaultSeoConfig.siteName
+
+  const author = siteSettings?.author?.trim() || defaultSeoConfig.author
+
+  const url =
+    resolved.url?.trim() ||
+    siteSettings?.siteUrl?.trim() ||
+    defaultSeoConfig.url
+
+  let keywords: string
+  if (resolved.keywords) {
+    keywords = Array.isArray(resolved.keywords)
+      ? resolved.keywords.join(", ")
+      : resolved.keywords
+  } else if (siteSettings?.keywords && siteSettings.keywords.length > 0) {
+    keywords = siteSettings.keywords.join(", ")
+  } else {
+    keywords = defaultSeoConfig.keywords.join(", ")
+  }
+
   const noIndex = resolved.noIndex ?? defaultSeoConfig.noIndex
 
-  return [
-    { title },
+  const metaList: Array<{
+    name?: string
+    property?: string
+    content: string
+    title?: string
+  }> = [
+    {
+      title,
+      content: "",
+    },
     { name: "description", content: description },
-    { name: "keywords", content: keywords },
-    { name: "author", content: defaultSeoConfig.author },
-
-    // Open Graph / Facebook
-    { property: "og:type", content: "website" },
-    { property: "og:site_name", content: defaultSeoConfig.siteName },
-    { property: "og:locale", content: defaultSeoConfig.locale },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
-    { property: "og:url", content: url },
-    { property: "og:image", content: image },
-
-    // Twitter Card
-    { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
-    { name: "twitter:image", content: image },
-
-    // Robots
-    {
-      name: "robots",
-      content: noIndex ? "noindex, nofollow" : "index, follow",
-    },
   ]
+
+  // Image handling: Only output og:image if root OR custom image OR sanity image exists
+  if (isRoot || hasCustomImage || hasSanityImage) {
+    const image = getOgImageUrl(resolved.ogImage, siteSettings?.ogImage)
+    metaList.push(
+      { property: "og:image", content: image },
+      { name: "twitter:image", content: image }
+    )
+  }
+
+  // Base root meta (only need to output at root or if siteSettings is provided)
+  if (isRoot || siteSettings) {
+    const twitterCard = siteSettings?.twitterCard || "summary_large_image"
+    const twitterHandle = siteSettings?.twitterHandle?.trim()
+    const themeColor = siteSettings?.themeColor?.hex
+
+    metaList.push(
+      { name: "keywords", content: keywords },
+      { name: "author", content: author },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: siteName },
+      { property: "og:locale", content: defaultSeoConfig.locale },
+      { property: "og:url", content: url },
+      { name: "twitter:card", content: twitterCard },
+      {
+        name: "robots",
+        content: noIndex ? "noindex, nofollow" : "index, follow",
+      }
+    )
+
+    if (twitterHandle) {
+      metaList.push(
+        { name: "twitter:site", content: twitterHandle },
+        { name: "twitter:creator", content: twitterHandle }
+      )
+    }
+
+    metaList.push(
+      { name: "theme-color", content: themeColor || "#dc2626" },
+      { name: "application-name", content: siteName },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      {
+        name: "apple-mobile-web-app-status-bar-style",
+        content: "black-translucent",
+      },
+      { name: "apple-mobile-web-app-title", content: siteName }
+    )
+  } else {
+    // For child routes with specific overrides
+    if (resolved.url) {
+      metaList.push({ property: "og:url", content: resolved.url })
+    }
+    if (resolved.keywords) {
+      metaList.push({ name: "keywords", content: keywords })
+    }
+    if (resolved.noIndex !== undefined) {
+      metaList.push({
+        name: "robots",
+        content: resolved.noIndex ? "noindex, nofollow" : "index, follow",
+      })
+    }
+  }
+
+  return metaList
+}
+
+/**
+ * Creates dynamic header link tags (Favicons, Apple Touch, Manifest, Canonical URL)
+ * Checks Sanity schema image assets first, falling back to local files.
+ */
+export function createSiteLinks(siteSettings?: SanitySiteSettings | null) {
+  const canonicalUrl = siteSettings?.siteUrl?.trim() || siteConfig.url
+
+  const favicon = getSanityImageUrl(siteSettings?.favicon, {
+    fallback: "/favicon.ico",
+  })
+
+  const favicon16 = getSanityImageUrl(siteSettings?.favicon16, {
+    width: 16,
+    height: 16,
+    fallback: "/favicon-16x16.png",
+  })
+
+  const favicon32 = getSanityImageUrl(siteSettings?.favicon32, {
+    width: 32,
+    height: 32,
+    fallback: "/favicon-32x32.png",
+  })
+
+  const appleTouchIcon = getSanityImageUrl(siteSettings?.appleTouchIcon, {
+    width: 180,
+    height: 180,
+    fallback: "/apple-touch-icon.png",
+  })
+
+  const links: Array<{
+    rel: string
+    href: string
+    type?: string
+    sizes?: string
+    color?: string
+  }> = [
+    { rel: "canonical", href: canonicalUrl },
+    { rel: "apple-touch-icon", sizes: "180x180", href: appleTouchIcon },
+    { rel: "icon", type: "image/png", sizes: "32x32", href: favicon32 },
+    { rel: "icon", type: "image/png", sizes: "16x16", href: favicon16 },
+    {
+      rel: "manifest",
+      href: "/site.webmanifest",
+      color: siteSettings?.themeColor?.hex || "#ffffff",
+    },
+    { rel: "icon", href: favicon },
+  ]
+
+  const safariMask = getSanityImageUrl(siteSettings?.safariMaskIcon)
+  if (safariMask) {
+    links.push({
+      rel: "mask-icon",
+      href: safariMask,
+      color: siteSettings?.themeColor?.hex || "#000000",
+    })
+  }
+
+  return links
+}
+
+/**
+ * Creates Person structured data JSON-LD with Sanity settings fallback to static config.
+ */
+export function createPersonJsonLd(siteSettings?: SanitySiteSettings | null) {
+  const canonicalUrl = siteSettings?.siteUrl?.trim() || siteConfig.url
+
+  const sameAs = [
+    siteSettings?.githubUrl?.trim() || siteConfig.social.github.href,
+    siteSettings?.linkedinUrl?.trim() || siteConfig.social.linkedin.href,
+    siteSettings?.twitterUrl?.trim() || siteConfig.social.twitter.href,
+  ].filter(Boolean)
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteSettings?.author?.trim() || siteConfig.author.name,
+    jobTitle: siteConfig.author.role || "Frontend Engineer",
+    url: canonicalUrl,
+    sameAs,
+    description:
+      siteSettings?.siteDescription?.trim() || siteConfig.description,
+  }
 }
