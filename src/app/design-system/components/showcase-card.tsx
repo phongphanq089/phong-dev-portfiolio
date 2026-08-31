@@ -28,7 +28,7 @@ export function ShowcaseCard({
     >
       <div className="mb-4 flex items-center justify-between border-b border-border/60 pb-3">
         <div>
-          <h3 className="font-mono text-base font-semibold tracking-tight text-foreground">
+          <h3 className="text-base font-semibold tracking-tight text-foreground">
             {title}
           </h3>
           {description && (
@@ -40,7 +40,7 @@ export function ShowcaseCard({
         {tag && (
           <Badge
             variant="outline"
-            className="border-primary/30 font-mono text-[10px] text-primary uppercase"
+            className="border-primary/30 text-[10px] text-primary uppercase"
           >
             {tag}
           </Badge>

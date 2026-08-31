@@ -2,10 +2,15 @@ import { ArrowDownRight } from "lucide-react"
 
 import { PPMarkIsometric } from "@/shared/ui"
 import TextBurnNeon from "@/shared/ui/animation/text-burn-neon"
+import { StripedPattern } from "@/shared/ui/system"
 
 const BannerHero = () => {
   return (
     <>
+      <StripedPattern
+        variant="absolute"
+        className="opacity-40 dark:opacity-20"
+      />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_1px)] [background-size:24px_24px] opacity-40 dark:opacity-30" />
       <div className="relative z-10 mx-auto my-4 w-full">
         <div className="group relative mx-auto flex flex-col items-center justify-center">

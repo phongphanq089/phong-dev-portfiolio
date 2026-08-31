@@ -84,7 +84,7 @@ export function ${pascalTitle}Block() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Block Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <span className="font-mono text-xs font-semibold text-primary uppercase">
+          <span className=" text-xs font-semibold text-primary uppercase">
             ${block.category}
           </span>
           <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -139,7 +139,7 @@ export function ${pascalTitle}Block() {
 
         <div className="relative z-10 flex flex-col gap-4">
           {/* Breadcrumb Navigation */}
-          <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Link to="/" className="transition-colors hover:text-foreground">
               Home
             </Link>
@@ -167,14 +167,14 @@ export function ${pascalTitle}Block() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
                 {block.isPro && (
-                  <span className="flex items-center rounded-md border border-white/20 bg-white/10 px-2.5 py-1 font-mono text-xs font-bold text-white shadow-xs">
+                  <span className="flex items-center rounded-md border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-bold text-white shadow-xs">
                     Pro
                   </span>
                 )}
                 <h1 className="section-heading text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
                   {block.title}
                 </h1>
-                <span className="rounded-full border border-border bg-muted/60 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground uppercase">
+                <span className="rounded-full border border-border bg-muted/60 px-2.5 py-0.5 text-[10px] font-semibold text-muted-foreground uppercase">
                   {block.category}
                 </span>
               </div>
@@ -187,7 +187,7 @@ export function ${pascalTitle}Block() {
             {/* Back Button */}
             <Link
               to="/blocks"
-              className="flex items-center gap-2 rounded-lg border border-border/80 bg-background/80 px-3.5 py-2 font-mono text-xs font-medium text-foreground transition-all hover:border-pp-primary/60 hover:bg-pp-primary/10 hover:text-pp-primary active:scale-98"
+              className="flex items-center gap-2 rounded-lg border border-border/80 bg-background/80 px-3.5 py-2 text-xs font-medium text-foreground transition-all hover:border-pp-primary/60 hover:bg-pp-primary/10 hover:text-pp-primary active:scale-98"
             >
               <ArrowLeft className="size-3.5" />
               <span>All Blocks</span>
@@ -199,7 +199,7 @@ export function ${pascalTitle}Block() {
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 rounded-md border border-white/10 bg-white/5 px-2 py-1">
                 <Terminal className="size-3.5 text-white/60" />
-                <div className="flex items-center gap-1 font-mono text-[11px] text-white/60">
+                <div className="flex items-center gap-1 text-[11px] text-white/60">
                   {(["pnpm", "npm", "bun"] as const).map((pm) => (
                     <button
                       key={pm}
@@ -218,7 +218,7 @@ export function ${pascalTitle}Block() {
                 </div>
               </div>
 
-              <code className="max-w-[280px] truncate font-mono text-xs text-white/90 sm:max-w-md">
+              <code className="max-w-[280px] truncate text-xs text-white/90 sm:max-w-md">
                 {installCommand}
               </code>
             </div>
@@ -228,7 +228,7 @@ export function ${pascalTitle}Block() {
                 <Button
                   type="button"
                   onClick={handleCopyInstall}
-                  className="flex h-7 items-center gap-1.5 rounded-md border border-white/15 bg-white/10 px-2.5 font-mono text-xs text-white transition-colors hover:bg-white/20 active:scale-95"
+                  className="flex h-7 items-center gap-1.5 rounded-md border border-white/15 bg-white/10 px-2.5 text-xs text-white transition-colors hover:bg-white/20 active:scale-95"
                 >
                   {copiedInstall ? (
                     <>
@@ -243,11 +243,7 @@ export function ${pascalTitle}Block() {
                   )}
                 </Button>
               </TooltipTrigger>
-              <TooltipContent
-                side="top"
-                sideOffset={4}
-                className="font-mono text-[10px]"
-              >
+              <TooltipContent side="top" sideOffset={4} className="text-[10px]">
                 {copiedInstall
                   ? "Copied command!"
                   : "Copy installation command"}
@@ -269,7 +265,7 @@ export function ${pascalTitle}Block() {
             type="button"
             onClick={() => setActiveTab("preview")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-medium transition-all duration-200",
+              "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all duration-200",
               activeTab === "preview"
                 ? "border-pp-primary/60 bg-pp-primary/10 text-pp-primary shadow-xs"
                 : "border-border/60 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/60 hover:text-foreground"
@@ -283,7 +279,7 @@ export function ${pascalTitle}Block() {
             type="button"
             onClick={() => setActiveTab("code")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-medium transition-all duration-200",
+              "flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all duration-200",
               activeTab === "code"
                 ? "border-pp-primary/60 bg-pp-primary/10 text-pp-primary shadow-xs"
                 : "border-border/60 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/60 hover:text-foreground"
@@ -370,7 +366,7 @@ export function ${pascalTitle}Block() {
                 <div className="size-3 rounded-full bg-red-500/80" />
                 <div className="size-3 rounded-full bg-amber-500/80" />
                 <div className="size-3 rounded-full bg-emerald-500/80" />
-                <span className="ml-2 font-mono text-xs text-white/50">
+                <span className="ml-2 text-xs text-white/50">
                   {block.slug}.tsx
                 </span>
               </div>
@@ -378,7 +374,7 @@ export function ${pascalTitle}Block() {
               <Button
                 type="button"
                 onClick={handleCopyCode}
-                className="flex h-7 items-center gap-1.5 rounded-md border border-white/15 bg-white/10 px-2.5 font-mono text-xs text-white hover:bg-white/20 active:scale-95"
+                className="flex h-7 items-center gap-1.5 rounded-md border border-white/15 bg-white/10 px-2.5 text-xs text-white hover:bg-white/20 active:scale-95"
               >
                 {copiedCode ? (
                   <>
@@ -394,7 +390,7 @@ export function ${pascalTitle}Block() {
               </Button>
             </div>
 
-            <pre className="mt-4 overflow-x-auto font-mono text-xs leading-relaxed text-white/90">
+            <pre className="mt-4 overflow-x-auto text-xs leading-relaxed text-white/90">
               <code>{sampleCode}</code>
             </pre>
           </div>
@@ -417,7 +413,7 @@ export function ${pascalTitle}Block() {
               <ArrowLeft className="size-4" />
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase">
+              <span className="text-[10px] text-muted-foreground uppercase">
                 Previous Block
               </span>
               <span className="font-bold text-foreground transition-colors group-hover:text-pp-primary">
@@ -436,7 +432,7 @@ export function ${pascalTitle}Block() {
             className="group flex items-center justify-end gap-3 rounded-xl border border-border/80 bg-background/60 p-4 text-right transition-all hover:border-pp-primary/60 hover:bg-pp-primary/10"
           >
             <div className="flex flex-col text-right">
-              <span className="font-mono text-[10px] text-muted-foreground uppercase">
+              <span className="text-[10px] text-muted-foreground uppercase">
                 Next Block
               </span>
               <span className="font-bold text-foreground transition-colors group-hover:text-pp-primary">

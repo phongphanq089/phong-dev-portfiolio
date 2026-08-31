@@ -1,5 +1,4 @@
 import { ChevronDown, ChevronUp, Info, User } from "lucide-react"
-import React from "react"
 
 import type { SchematicType } from "../../types"
 
@@ -189,7 +188,7 @@ export function CalendarSchematic() {
 export function NotFoundSchematic() {
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <div className="font-mono text-3xl font-extrabold tracking-widest text-white">
+      <div className="text-3xl font-extrabold tracking-widest text-white">
         404
       </div>
       <div className="h-1.5 w-24 rounded-full bg-white/20" />
@@ -211,7 +210,7 @@ export function ActivityFeedSchematic() {
               <div className="size-5 shrink-0 rounded-full bg-white/20" />
               <div className="h-2 w-16 rounded-full bg-white/40" />
             </div>
-            <span className="font-mono text-[10px] font-semibold text-white/80">
+            <span className="text-[10px] font-semibold text-white/80">
               {item.amount}
             </span>
           </div>
@@ -332,7 +331,7 @@ export function CommandSchematic() {
     <div className="flex w-full max-w-[200px] flex-col gap-1.5 rounded-xl border border-white/15 bg-black/90 p-2.5 shadow-xl">
       <div className="flex items-center justify-between border-b border-white/10 pb-1.5">
         <div className="h-2 w-20 rounded-full bg-white/70" />
-        <span className="rounded border border-white/20 bg-white/10 px-1 font-mono text-[8px] text-white/60">
+        <span className="rounded border border-white/20 bg-white/10 px-1 text-[8px] text-white/60">
           ⌘K
         </span>
       </div>
@@ -480,7 +479,7 @@ export function TooltipSchematic() {
         <span className="text-[9px] font-bold">Add to favorites</span>
         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-white" />
       </div>
-      {/* Trigger Button */}
+
       <div className="mt-1 flex size-8 items-center justify-center rounded-lg border border-white/15 bg-white/[0.06]">
         <div className="size-3.5 rounded-sm bg-white/60" />
       </div>
@@ -488,7 +487,6 @@ export function TooltipSchematic() {
   )
 }
 
-// 26. Skeleton / Shimmer Schematic
 export function SkeletonSchematic() {
   return (
     <div className="flex w-full max-w-[190px] items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] p-3">

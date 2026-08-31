@@ -19,6 +19,7 @@ export const DESIGN_SYSTEM_TOC_ITEMS: TOCItemType[] = [
   { title: "Buttons & Controls", url: "#buttons", depth: 1 },
   { title: "Shaders & FX", url: "#animations", depth: 1 },
   { title: "Cards & Containers", url: "#cards", depth: 1 },
+  { title: "Blueprint & Layout", url: "#blueprint", depth: 1 },
   { title: "States & Feedback", url: "#feedback", depth: 1 },
   { title: "Tech Icons", url: "#icons", depth: 1 },
 ]

@@ -15,9 +15,7 @@ import { SectionHeading } from "@/shared/ui/system/section-heading"
 function renderBookmarkIcon(type: BookmarkItem["iconType"]) {
   switch (type) {
     case "copper":
-      return (
-        <span className="font-mono text-xs font-black text-white/90">C</span>
-      )
+      return <span className="text-xs font-black text-white/90">C</span>
     case "vercel":
       return <Triangle className="size-3.5 fill-current text-white/90" />
     case "book":
@@ -38,13 +36,11 @@ export const SectionBookmarks = () => {
   return (
     <>
       {/* Heading Section */}
-      <GridContainer className="px-4 py-5 md:px-8" showCrosshairs={false}>
+      <GridContainer className="p-0" showCrosshairs={false}>
         <SectionHeading
           id="bookmarks"
-          label="07 / Reading & Discoveries"
           heading="Bookmarks"
           count={BOOKMARKS.length}
-          subtitle="Inspiring articles, design engineering references, courses, and tools."
         />
       </GridContainer>
 
@@ -76,7 +72,7 @@ export const SectionBookmarks = () => {
                   <h3 className="text-sm font-bold tracking-tight text-foreground transition-colors group-hover:text-pp-primary sm:text-base">
                     {item.title}
                   </h3>
-                  <div className="flex items-center gap-2 font-mono text-[11px] text-muted-foreground/70 sm:text-xs">
+                  <div className="flex items-center gap-2 text-[11px] text-muted-foreground/70 sm:text-xs">
                     <span>{item.author}</span>
                     <span className="opacity-30">|</span>
                     <span>{item.type}</span>

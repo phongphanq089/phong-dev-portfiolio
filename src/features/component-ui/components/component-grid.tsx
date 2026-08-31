@@ -31,31 +31,27 @@ export function ComponentGrid() {
           showCrosshairs
           className="w-full"
         >
-          {/* Column 1 */}
           <div className="flex h-full w-full border-b border-border p-4 sm:p-5 md:border-b-0 md:p-5 lg:p-6">
             <ComponentCard component={triplet[0]} />
           </div>
-
-          {/* Column 2 */}
           <div className="flex h-full w-full border-b border-border p-4 sm:p-5 md:border-b-0 md:p-5 lg:p-6">
             {triplet[1] ? (
               <ComponentCard component={triplet[1]} />
             ) : (
-              <div className="hidden h-full w-full items-center justify-center p-8 text-center lg:flex">
-                <span className="font-mono text-[10px] tracking-wider text-muted-foreground/30 uppercase">
+              <div className="hidden h-full w-full items-center justify-center rounded-lg bg-accent p-8 text-center lg:flex">
+                <span className="text-[10px] tracking-wider text-muted-foreground/30 uppercase">
                   More Primitives Coming Soon
                 </span>
               </div>
             )}
           </div>
 
-          {/* Column 3 */}
           <div className="flex h-full w-full p-4 sm:p-5 md:p-5 lg:p-6">
             {triplet[2] ? (
               <ComponentCard component={triplet[2]} />
             ) : (
-              <div className="hidden h-full w-full items-center justify-center p-8 text-center lg:flex">
-                <span className="font-mono text-[10px] tracking-wider text-muted-foreground/30 uppercase">
+              <div className="hidden h-full w-full items-center justify-center rounded-lg bg-accent p-8 text-center lg:flex">
+                <span className="text-[10px] tracking-wider text-muted-foreground/30 uppercase">
                   More Primitives Coming Soon
                 </span>
               </div>

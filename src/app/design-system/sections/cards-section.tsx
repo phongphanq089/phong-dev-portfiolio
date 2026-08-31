@@ -1,3 +1,7 @@
+import { BLOCKS_DATA } from "@/features/blocks/blocks-data"
+import { BlockCard } from "@/features/blocks/components/block-card"
+import { ComponentCard } from "@/features/component-ui/components/component-card"
+import { COMPONENTS_DATA } from "@/features/component-ui/components-data"
 import {
   Card as GlowCard,
   CardCanvas,
@@ -18,6 +22,28 @@ import { ShowcaseCard } from "../components/showcase-card"
 export function CardsSection() {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      {/* 1. Production Block Card */}
+      <ShowcaseCard
+        title="Production Block Card"
+        description="2-Column widescreen section preview card with mockup viewport header"
+        tag="Blocks"
+      >
+        <div className="w-full max-w-sm">
+          <BlockCard block={BLOCKS_DATA[0]} />
+        </div>
+      </ShowcaseCard>
+
+      {/* 2. Component UI Card */}
+      <ShowcaseCard
+        title="Component UI Card"
+        description="Primitive UI card with category count, copy name action and schematic"
+        tag="Components"
+      >
+        <div className="w-full max-w-sm">
+          <ComponentCard component={COMPONENTS_DATA[0]} />
+        </div>
+      </ShowcaseCard>
+
       <ShowcaseCard
         title="Standard Card Primitive"
         description="Shadcn styled container with header, content & footer"
@@ -25,7 +51,7 @@ export function CardsSection() {
       >
         <Card className="w-full max-w-sm">
           <CardHeader>
-            <CardTitle className="font-mono text-base">Project Card</CardTitle>
+            <CardTitle className="text-base">Project Card</CardTitle>
             <CardDescription className="text-xs">
               Fullstack web application setup
             </CardDescription>
@@ -49,9 +75,7 @@ export function CardsSection() {
       >
         <CardCanvas className="w-full max-w-xs">
           <GlowCard className="space-y-2 p-6 text-center">
-            <div className="font-mono text-sm font-semibold text-primary">
-              Glow Card
-            </div>
+            <div className="text-sm font-semibold text-primary">Glow Card</div>
             <p className="text-xs text-muted-foreground">
               Hover over this card to activate dynamic corner crosshair glows.
             </p>

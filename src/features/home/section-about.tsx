@@ -42,13 +42,9 @@ const SectionAbout = () => {
               <GridContainer
                 showCrosshairs={false}
                 borderTop={true}
-                className="w-full p-3"
+                className="w-full p-0"
               >
-                <SectionHeading
-                  id="about"
-                  label="01 / About"
-                  heading="Phong Phan"
-                />
+                <SectionHeading id="about" heading="About Me" />
               </GridContainer>
               <GridContainer
                 showCrosshairs={false}

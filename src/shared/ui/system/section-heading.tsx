@@ -1,34 +1,31 @@
+import React from "react"
+
 import { cn } from "@/shared/lib/utils"
+
+import { StripedPattern } from "./striped-pattern"
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * SectionHeading
  *
- * A standardised heading block used at the top of every home-page section.
+ * A minimal, standardised blueprint heading block used at the top of sections.
+ * Displays title, optional count, expanding striped space, and action slot.
  *
- * Visual anatomy (all three are optional):
+ * Visual anatomy:
  *
- *   ┌──────────────────────────────────────────────────────┐
- *   │  01 / Work                         ← eyebrow label  │
- *   │  Projects    (6)                   ← heading + count │
- *   │  Things I've shipped…              ← subtitle        │
- *   └──────────────────────────────────────────────────────┘
- *
- * Design tokens used (defined in styles.css):
- *   --text-section-label / --tracking-section-label
- *   --text-section-heading / --text-section-heading-sm / --leading-section-heading / --tracking-section-heading
- *   --text-section-count
- *   --text-section-subtitle / --leading-section-subtitle
+ *   ┌──────────────────────────────────────────────────────────────────────────┐
+ *   │ Projects (6)  ───────────── [Striped Pattern] ──────────  [ View all → ] │
+ *   └──────────────────────────────────────────────────────────────────────────┘
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
 type SectionHeadingProps = {
-  /** Eyebrow monospace label e.g. "01 / Work" */
-  label?: string
   /** Main heading text e.g. "Projects" */
   heading: string
   /** Optional count badge rendered inline e.g. "(6)" */
   count?: string | number
-  /** Short subtitle below the heading */
+  /** @deprecated Label removed in favor of clean title */
+  label?: string
+  /** @deprecated Subtitle removed in favor of compact blueprint header design */
   subtitle?: string
   /** Extra slot rendered to the right of the heading block (e.g. a CTA button) */
   action?: React.ReactNode
@@ -46,10 +43,8 @@ type SectionHeadingProps = {
 }
 
 export function SectionHeading({
-  label,
   heading,
   count,
-  subtitle,
   action,
   className,
   as: Tag = "h2",
@@ -58,28 +53,31 @@ export function SectionHeading({
   return (
     <div
       id={id}
-      className={cn("flex items-end justify-between gap-2", className)}
+      className={cn(
+        "relative flex w-full items-center justify-between gap-4 overflow-hidden px-4 py-4 sm:px-6 md:px-8",
+        className
+      )}
     >
-      {/* ── Left block ── */}
-      <div>
-        {label && (
-          <span className="section-label block whitespace-nowrap">{label}</span>
-        )}
-        <Tag
-          className={cn("section-heading whitespace-nowrap max-sm:text-xl!")}
-        >
-          {heading}
+      {/* Full Absolute Blueprint Striped Background Pattern */}
+      <StripedPattern
+        variant="absolute"
+        className="opacity-60 dark:opacity-30"
+      />
+
+      {/* ── Left info: Heading + Count ── */}
+      <div className="relative z-10 flex shrink-0 items-center gap-2">
+        <Tag className="flex items-center gap-2 text-base font-bold tracking-tight text-foreground sm:text-lg md:text-xl">
+          <span>{heading}</span>
           {count !== undefined && (
-            <span className="section-count">({count})</span>
+            <span className="text-xs font-normal text-muted-foreground/60">
+              ({count})
+            </span>
           )}
         </Tag>
-        {subtitle && (
-          <p className="section-subtitle mt-1 max-sm:text-lg!">{subtitle}</p>
-        )}
       </div>
 
       {/* ── Right action slot ── */}
-      {action && <div className="mb-1 shrink-0">{action}</div>}
+      {action && <div className="relative z-10 shrink-0">{action}</div>}
     </div>
   )
 }
@@ -87,10 +85,9 @@ export function SectionHeading({
 /* ─────────────────────────────────────────────────────────────────────────────
  * SectionDivider
  *
- * The slim horizontal rule with the eyebrow label on the left.
- * Used in the About section and similar minimal headers.
+ * The slim horizontal rule with the title on the left and full absolute striped pattern.
  *
- *   01 / About ───────────────────────────────────────────
+ *   About ────────────────────────────────────────────────
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -101,9 +98,19 @@ type SectionDividerProps = {
 
 export function SectionDivider({ label, className }: SectionDividerProps) {
   return (
-    <div className={cn("flex items-center gap-4", className)}>
-      <span className="section-label">{label}</span>
-      <div className="h-px flex-1 bg-border" />
+    <div
+      className={cn(
+        "relative flex items-center justify-between overflow-hidden px-4 py-2.5 sm:px-6",
+        className
+      )}
+    >
+      <StripedPattern
+        variant="absolute"
+        className="opacity-50 dark:opacity-25"
+      />
+      <span className="relative z-10 text-sm font-semibold tracking-tight text-foreground sm:text-base">
+        {label}
+      </span>
     </div>
   )
 }

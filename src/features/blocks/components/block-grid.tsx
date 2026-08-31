@@ -21,11 +21,11 @@ export function BlockGrid({ category = "all" }: BlockGridProps) {
     return BLOCKS_DATA.filter((b) => b.category === category)
   }, [category])
 
-  // Chunk into triplets for 3-column GridContainer rows
+  // Chunk into pairs for 2-column GridContainer rows
   const blockRows = useMemo(() => {
     const rows: BlockItem[][] = []
-    for (let i = 0; i < filteredBlocks.length; i += 3) {
-      rows.push(filteredBlocks.slice(i, i + 3))
+    for (let i = 0; i < filteredBlocks.length; i += 2) {
+      rows.push(filteredBlocks.slice(i, i + 2))
     }
     return rows
   }, [filteredBlocks])
@@ -40,41 +40,28 @@ export function BlockGrid({ category = "all" }: BlockGridProps) {
         <BlockFilterBar activeCategory={category} />
       </GridContainer>
 
-      {/* 3. 3-Column Grid Container Rows */}
+      {/* 3. 2-Column Grid Container Rows */}
       {blockRows.length > 0 ? (
-        blockRows.map((triplet, rowIndex) => (
+        blockRows.map((pair, rowIndex) => (
           <GridContainer
             key={`block-row-${rowIndex}`}
-            columns={3}
+            columns={2}
             borderBottom
             showCrosshairs
             className="w-full"
           >
             {/* Column 1 */}
-            <div className="flex h-full w-full border-b border-border p-4 sm:p-5 md:border-b-0 md:p-5 lg:p-6">
-              <BlockCard block={triplet[0]} />
+            <div className="flex h-full w-full border-b border-border p-4 sm:p-5 md:border-b-0 md:p-6">
+              <BlockCard block={pair[0]} />
             </div>
 
             {/* Column 2 */}
-            <div className="flex h-full w-full border-b border-border p-4 sm:p-5 md:border-b-0 md:p-5 lg:p-6">
-              {triplet[1] ? (
-                <BlockCard block={triplet[1]} />
+            <div className="flex h-full w-full p-4 sm:p-5 md:p-6">
+              {pair[1] ? (
+                <BlockCard block={pair[1]} />
               ) : (
-                <div className="hidden h-full w-full items-center justify-center p-8 text-center lg:flex">
-                  <span className="font-mono text-[10px] tracking-wider text-muted-foreground/30 uppercase">
-                    More Blocks Coming Soon
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Column 3 */}
-            <div className="flex h-full w-full p-4 sm:p-5 md:p-5 lg:p-6">
-              {triplet[2] ? (
-                <BlockCard block={triplet[2]} />
-              ) : (
-                <div className="hidden h-full w-full items-center justify-center p-8 text-center lg:flex">
-                  <span className="font-mono text-[10px] tracking-wider text-muted-foreground/30 uppercase">
+                <div className="hidden h-full w-full items-center justify-center rounded-lg bg-accent p-8 text-center md:flex">
+                  <span className="text-[10px] tracking-wider text-muted-foreground/30 uppercase">
                     More Blocks Coming Soon
                   </span>
                 </div>
@@ -97,7 +84,7 @@ export function BlockGrid({ category = "all" }: BlockGridProps) {
           </p>
           <Link
             to="/blocks"
-            className="mt-5 flex items-center gap-2 rounded-lg border border-pp-primary/40 bg-pp-primary/10 px-4 py-2 font-mono text-xs font-semibold text-pp-primary transition-all duration-200 hover:bg-pp-primary hover:text-white"
+            className="mt-5 flex items-center gap-2 rounded-lg border border-pp-primary/40 bg-pp-primary/10 px-4 py-2 text-xs font-semibold text-pp-primary transition-all duration-200 hover:bg-pp-primary hover:text-white"
           >
             <LayoutGrid className="size-3.5" />
             <span>Show all blocks</span>

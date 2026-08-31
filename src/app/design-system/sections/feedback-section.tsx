@@ -47,7 +47,7 @@ export function FeedbackSection() {
             <Checkbox id="terms" defaultChecked />
             <label
               htmlFor="terms"
-              className="cursor-pointer font-mono text-xs text-foreground"
+              className="cursor-pointer text-xs text-foreground"
             >
               Active State
             </label>
@@ -95,7 +95,7 @@ export function FeedbackSection() {
             lines={effects.lines}
             gradient={effects.gradient}
           />
-          <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-1 font-mono text-xs text-muted-foreground select-none">
+          <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-1 text-xs text-muted-foreground select-none">
             <span className="font-medium text-foreground/80">
               Interactive Canvas Area
             </span>

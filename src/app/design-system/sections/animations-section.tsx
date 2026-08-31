@@ -19,30 +19,24 @@ export function AnimationsSection() {
         <div className="flex w-full flex-wrap items-end justify-center gap-8 py-6">
           <div className="flex flex-col items-center gap-2">
             <BlueprintLintMark size="sm" text="lint" />
-            <span className="font-mono text-xs text-muted-foreground">
-              [ size="sm" ]
-            </span>
+            <span className="text-xs text-muted-foreground">[ size="sm" ]</span>
           </div>
 
           <div className="flex flex-col items-center gap-2">
             <BlueprintLintMark width={140} text="lint" />
-            <span className="font-mono text-xs text-muted-foreground">
-              [ width=140 ]
-            </span>
+            <span className="text-xs text-muted-foreground">[ width=140 ]</span>
           </div>
 
           <div className="flex flex-col items-center gap-2">
             <BlueprintLintMark width={180} text="lint" isStaticActive />
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               [ width=180 (Active) ]
             </span>
           </div>
 
           <div className="flex flex-col items-center gap-2">
             <BlueprintLintMark width={240} text="PP" />
-            <span className="font-mono text-xs text-muted-foreground">
-              [ width=240 ]
-            </span>
+            <span className="text-xs text-muted-foreground">[ width=240 ]</span>
           </div>
         </div>
       </ShowcaseCard>
@@ -57,7 +51,7 @@ export function AnimationsSection() {
           <div className="w-full max-w-lg">
             <PPMarkIsometric />
           </div>
-          <div className="pointer-events-none absolute right-4 bottom-4 font-mono text-[11px] text-muted-foreground/60">
+          <div className="pointer-events-none absolute right-4 bottom-4 text-[11px] text-muted-foreground/60">
             [ Fig. 1 • Click & Drag ]
           </div>
         </div>
@@ -73,7 +67,7 @@ export function AnimationsSection() {
           <div className="w-full">
             <PhongPhanIsometric className="w-full" />
           </div>
-          <div className="pointer-events-none absolute right-4 bottom-4 font-mono text-[11px] text-muted-foreground/60">
+          <div className="pointer-events-none absolute right-4 bottom-4 text-[11px] text-muted-foreground/60">
             [ Fig. 2 • Interactive 3D Block ]
           </div>
         </div>
@@ -84,7 +78,7 @@ export function AnimationsSection() {
         description="Cyberpunk neon burnout animation with random char flicker"
         tag="GSAP"
       >
-        <div className="text-center font-mono text-2xl font-bold tracking-widest text-primary">
+        <div className="text-center text-2xl font-bold tracking-widest text-primary">
           <TextBurnNeon>NEON PULSE</TextBurnNeon>
         </div>
       </ShowcaseCard>

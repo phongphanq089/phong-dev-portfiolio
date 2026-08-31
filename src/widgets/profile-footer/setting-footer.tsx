@@ -34,11 +34,11 @@ export const coreTechnologies: TechCredit[] = [
     badge: "UI Library",
   },
   {
-    name: "TanStack Start",
-    title: "TanStack Start",
+    name: "TanStack",
+    title: "TanStack",
     description:
-      "Full-stack React framework with 100% type-safe routing and SSR prerendering.",
-    href: "https://tanstack.com/start",
+      "Headless, type-safe, composable tools for building modern web applications that work naturally for developers and reliably for agents",
+    href: "https://tanstack.com",
     icon: Tanstack,
     badge: "Framework",
   },

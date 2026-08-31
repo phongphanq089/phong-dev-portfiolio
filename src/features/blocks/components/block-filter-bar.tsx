@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router"
 import React from "react"
 
 import { cn } from "@/shared/lib"
+import { StripedPattern } from "@/shared/ui/system"
 
 import { BLOCK_CATEGORIES } from "../blocks-data"
 import type { BlockCategoryId } from "../types"
@@ -24,9 +25,9 @@ export const BlockFilterBar: React.FC<BlockFilterBarProps> = ({
             key={cat.id}
             to={to}
             className={cn(
-              "flex shrink-0 items-center justify-center border-r border-border px-5 py-3 font-mono text-xs font-bold tracking-wider uppercase transition-colors sm:px-6",
+              "flex shrink-0 items-center justify-center border-r border-border px-5 py-3 text-xs font-bold tracking-wider uppercase transition-colors sm:px-6",
               isSelected
-                ? "bg-white/10 font-extrabold text-white"
+                ? "bg-muted font-extrabold dark:bg-white/10 dark:text-white"
                 : "text-muted-foreground/70 hover:bg-white/[0.04] hover:text-foreground"
             )}
           >
@@ -35,8 +36,8 @@ export const BlockFilterBar: React.FC<BlockFilterBarProps> = ({
         )
       })}
 
-      {/* Remaining Technical Blueprint Striped Space (Image 1) */}
-      <div className="min-w-[32px] flex-1 bg-[repeating-linear-gradient(-45deg,transparent,transparent_6px,rgba(255,255,255,0.03)_6px,rgba(255,255,255,0.03)_7px)]" />
+      {/* Remaining Technical Blueprint Striped Space */}
+      <StripedPattern />
     </div>
   )
 }

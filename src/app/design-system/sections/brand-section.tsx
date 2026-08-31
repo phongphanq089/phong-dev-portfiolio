@@ -36,7 +36,7 @@ export function BrandSection() {
                 <PPPixelMark size={56} className="text-foreground" />
               </div>
               <div className="mt-3 w-full border-t border-border/50 pt-3">
-                <span className="font-mono text-xs font-semibold text-foreground">
+                <span className="text-xs font-semibold text-foreground">
                   Solid Monochrome
                 </span>
                 <p className="mt-0.5 text-[11px] text-muted-foreground">
@@ -51,7 +51,7 @@ export function BrandSection() {
                 <PPPixelMark size={56} className="text-primary" />
               </div>
               <div className="mt-3 w-full border-t border-border/50 pt-3">
-                <span className="font-mono text-xs font-semibold text-primary">
+                <span className="text-xs font-semibold text-primary">
                   PP Primary Red
                 </span>
                 <p className="mt-0.5 text-[11px] text-muted-foreground">
@@ -70,7 +70,7 @@ export function BrandSection() {
                 />
               </div>
               <div className="mt-3 w-full border-t border-border/50 pt-3">
-                <div className="flex items-center justify-center gap-1 font-mono text-xs font-semibold text-primary">
+                <div className="flex items-center justify-center gap-1 text-xs font-semibold text-primary">
                   <Sparkles className="h-3 w-3" />
                   <span>Neon Glow</span>
                 </div>
@@ -90,7 +90,7 @@ export function BrandSection() {
                 />
               </div>
               <div className="mt-3 w-full border-t border-border/50 pt-3">
-                <span className="font-mono text-xs font-semibold text-foreground">
+                <span className="text-xs font-semibold text-foreground">
                   Outline / Wireframe
                 </span>
                 <p className="mt-0.5 text-[11px] text-muted-foreground">
@@ -102,14 +102,14 @@ export function BrandSection() {
 
           {/* Size Hierarchy Matrix */}
           <div className="rounded-lg border border-border bg-card/60 p-5">
-            <h4 className="mb-4 font-mono text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+            <h4 className="mb-4 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
               Scale & Responsive Hierarchy
             </h4>
             <div className="flex flex-wrap items-end justify-between gap-6 overflow-x-auto py-2">
               {/* 20px */}
               <div className="flex flex-col items-center gap-2">
                 <PPPixelMark size={20} className="text-foreground" />
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   20px (Mobile)
                 </span>
               </div>
@@ -117,7 +117,7 @@ export function BrandSection() {
               {/* 28px */}
               <div className="flex flex-col items-center gap-2">
                 <PPPixelMark size={28} className="text-foreground" />
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   28px (Favicon/Dock)
                 </span>
               </div>
@@ -125,7 +125,7 @@ export function BrandSection() {
               {/* 36px */}
               <div className="flex flex-col items-center gap-2">
                 <PPPixelMark size={36} className="text-primary" />
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   36px (Header)
                 </span>
               </div>
@@ -133,7 +133,7 @@ export function BrandSection() {
               {/* 48px */}
               <div className="flex flex-col items-center gap-2">
                 <PPPixelMark size={48} className="text-foreground" />
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   48px (Standard)
                 </span>
               </div>
@@ -141,7 +141,7 @@ export function BrandSection() {
               {/* 64px */}
               <div className="flex flex-col items-center gap-2">
                 <PPPixelMark size={64} className="text-primary" />
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   64px (Card)
                 </span>
               </div>
@@ -153,7 +153,7 @@ export function BrandSection() {
                   variant="glow"
                   className="text-primary"
                 />
-                <span className="font-mono text-[10px] text-muted-foreground">
+                <span className="text-[10px] text-muted-foreground">
                   80px (Hero Display)
                 </span>
               </div>
@@ -162,7 +162,7 @@ export function BrandSection() {
 
           {/* Quick Copy Snippets */}
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-card p-4">
-            <div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Terminal className="h-4 w-4 text-primary" />
               <span>Import:</span>
               <code className="rounded bg-muted px-2 py-0.5 text-foreground">
@@ -180,7 +180,7 @@ export function BrandSection() {
                     '<PPPixelMark size={36} className="text-primary" />'
                   )
                 }
-                className="gap-1.5 font-mono text-xs"
+                className="gap-1.5 text-xs"
               >
                 {copiedType === "react" ? (
                   <Check className="h-3.5 w-3.5 text-green-500" />
@@ -196,7 +196,7 @@ export function BrandSection() {
                 variant="default"
                 size="sm"
                 onClick={() => copyCode("svg", rawSvgCode)}
-                className="gap-1.5 font-mono text-xs"
+                className="gap-1.5 text-xs"
               >
                 {copiedType === "svg" ? (
                   <Check className="h-3.5 w-3.5 text-green-500" />

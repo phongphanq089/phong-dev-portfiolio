@@ -53,9 +53,11 @@ function HomePage() {
       <SectionBookmarks />
 
       {/* 9. Location & Vietnam Map Section */}
-      <GridContainer showCrosshairs={true} as={"section"} id="vietnam-map">
-        <SectionMapVietnamese />
-      </GridContainer>
+      <section id="vietnam-map">
+        <GridContainer showCrosshairs={true} as={"div"}>
+          <SectionMapVietnamese />
+        </GridContainer>
+      </section>
     </div>
   )
 }

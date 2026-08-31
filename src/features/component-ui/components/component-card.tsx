@@ -30,18 +30,17 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({ component }) => {
       to="/component-ui/$slug"
       params={{ slug: component.slug }}
       className={cn(
-        "group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl p-4 transition-all duration-300 sm:p-5",
-        "border border-black/10 bg-white/[0.02] dark:border-white/10 dark:bg-[#111113]/90",
+        "group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg p-4 transition-all duration-300 sm:p-5",
+        "border border-black/10 bg-muted dark:border-white/10",
         "shadow-xs backdrop-blur-xl",
-        "hover:border-black/25 hover:shadow-[0_12px_28px_rgba(0,0,0,0.35)] dark:hover:border-white/25",
+        "hover:border-black/5 hover:bg-muted/80 dark:hover:border-white/10",
         "translate-z-0 will-change-transform focus:outline-none"
       )}
     >
-      {/* 1. Header: Component Title + Optional Count / Badge */}
       <div className="flex items-center justify-between gap-2 pb-3">
         <div className="flex items-center gap-2">
           {component.count !== undefined && (
-            <span className="flex size-5 items-center justify-center rounded-md bg-white/10 font-mono text-[10px] font-bold text-white">
+            <span className="flex size-5 items-center justify-center rounded-md bg-white/10 text-[10px] font-bold text-white">
               {component.count}
             </span>
           )}
@@ -54,7 +53,6 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({ component }) => {
         </div>
 
         <div className="flex items-center gap-1.5">
-          {/* Copy Name Tooltip Button */}
           <Tooltip>
             <TooltipTrigger asChild>
               <button
@@ -70,26 +68,15 @@ export const ComponentCard: React.FC<ComponentCardProps> = ({ component }) => {
                 )}
               </button>
             </TooltipTrigger>
-            <TooltipContent
-              side="top"
-              sideOffset={4}
-              className="font-mono text-[10px]"
-            >
+            <TooltipContent side="top" sideOffset={4} className="text-[10px]">
               {copied ? "Copied name!" : "Copy name"}
             </TooltipContent>
           </Tooltip>
-
-          {/* External Arrow */}
           <ArrowUpRight className="size-4 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-pp-primary" />
         </div>
       </div>
-
-      {/* 2. Schematic Preview Canvas Frame */}
-      <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border border-black/5 bg-black/40 p-4 transition-colors group-hover:border-white/10 sm:h-52 dark:border-white/5 dark:bg-black/60">
-        {/* Subtle Ambient Radial Spotlight behind schematic */}
+      <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-sm border border-black/5 bg-black/30 p-4 transition-colors group-hover:border-white/10 sm:h-52 dark:border-white/5 dark:bg-black/60">
         <div className="pointer-events-none absolute inset-0 bg-radial from-white/[0.04] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        {/* The Pixel-Perfect Schematic Wireframe */}
         <div className="relative z-10 flex items-center justify-center transition-transform duration-300 will-change-transform group-hover:scale-[1.02]">
           <RenderSchematic type={component.schematicType} />
         </div>
