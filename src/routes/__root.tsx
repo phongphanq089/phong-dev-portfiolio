@@ -33,7 +33,6 @@ export const Route = createRootRouteWithContext<{
         siteSettingsQueryOptions()
       )
 
-      console.log(siteSettings, "siteSettingsQueryOptions()")
       return { siteSettings }
     } catch {
       return { siteSettings: null }
