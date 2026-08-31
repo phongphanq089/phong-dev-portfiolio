@@ -1,9 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { Studio } from "sanity"
+import { lazy, Suspense } from "react"
 
 import { createSeoMeta } from "@/shared/config"
 
-import sanityConfig from "../../sanity.config"
+const StudioComponent = lazy(async () => {
+  const [{ Studio }, sanityConfig] = await Promise.all([
+    import("sanity"),
+    import("../../sanity.config").then((m) => m.default),
+  ])
+  return {
+    default: () => <Studio config={sanityConfig} />,
+  }
+})
 
 export const Route = createFileRoute("/studio/$")({
   ssr: false,
@@ -16,7 +24,15 @@ export const Route = createFileRoute("/studio/$")({
 function StudioPage() {
   return (
     <div className="fixed inset-0 z-[9999] h-[100dvh] w-full overflow-hidden bg-black">
-      <Studio config={sanityConfig} />
+      <Suspense
+        fallback={
+          <div className="flex h-full w-full items-center justify-center font-mono text-sm text-neutral-400">
+            Loading Sanity Studio...
+          </div>
+        }
+      >
+        <StudioComponent />
+      </Suspense>
     </div>
   )
 }
