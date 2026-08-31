@@ -3,6 +3,9 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
 
 .nitro
 .tanstack
@@ -18,3 +21,4 @@ stats.html
 # AI
 .gemini
 tsconfig.tsbuildinfo
+.netlify

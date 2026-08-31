@@ -1,35 +1,63 @@
 import { createFileRoute } from "@tanstack/react-router"
 
+import { GridContainer } from "@/app/layouts"
 import BannerHero from "@/features/home/banner-hero"
 import SectionAbout from "@/features/home/section-about"
-import UiComponentsSection from "@/features/home/ui-components-section"
+import { SectionBlocks } from "@/features/home/section-blocks"
+import { SectionBlog } from "@/features/home/section-blog"
+import { SectionBookmarks } from "@/features/home/section-bookmarks"
+import SectionMapVietnamese from "@/features/home/section-map-vietnammese"
+import { SectionResources } from "@/features/home/section-resources"
+import SectionTechStack from "@/features/home/section-tech-stack"
+import UiComponentsSection from "@/features/home/section-ui-components"
+import { createSeoMeta } from "@/shared/config"
 
 export const Route = createFileRoute("/_profile/")({
+  head: () => ({
+    meta: createSeoMeta("home"),
+  }),
   component: HomePage,
 })
 
 function HomePage() {
   return (
     <div className="w-full">
-      {/* Hero Section */}
-
-      <div className="mx-auto w-full px-3 sm:px-8 md:px-16">
+      {/* 1. Banner Hero */}
+      <GridContainer
+        className="relative flex flex-col overflow-hidden px-4 pt-8 pb-12 sm:px-8"
+        showCrosshairs={true}
+        borderBottom={false}
+      >
         <BannerHero />
-      </div>
+      </GridContainer>
+
+      {/* 2. About Me */}
       <SectionAbout />
+
+      {/* 3. Tech Stack */}
+      <SectionTechStack />
+
+      {/* 4. Blocks Showcase Section */}
+      <SectionBlocks />
+
+      {/* 5. Components UI Showcase Section */}
       <UiComponentsSection />
 
-      {/* ── UI Components Section ── */}
-      {/* <UiComponentsSection /> */}
+      {/* 6. Blog & Writing Section */}
+      <SectionBlog />
 
-      {/* ── Projects Section ── */}
-      {/* <ProjectsSection /> */}
+      {/* 7. Curated Resources Section */}
+      <SectionResources />
 
-      {/* ── Blog Section ── */}
-      {/* <BlogSection /> */}
+      {/* 8. Bookmarks Section */}
+      <SectionBookmarks />
 
-      {/* ── Bookmarks Section ── */}
-      {/* <BookmarkSection /> */}
+      {/* 9. Location & Vietnam Map Section */}
+      <section id="vietnam-map">
+        <GridContainer showCrosshairs={true} as={"div"}>
+          <SectionMapVietnamese />
+        </GridContainer>
+      </section>
     </div>
   )
 }

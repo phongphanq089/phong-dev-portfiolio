@@ -1,16 +1,22 @@
 import type { QueryClient } from "@tanstack/react-query"
 import {
   createRootRouteWithContext,
+  type ErrorComponentProps,
   HeadContent,
   Outlet,
   Scripts,
+  useLocation,
 } from "@tanstack/react-router"
+import type { JSX } from "react/jsx-runtime"
 
-import { DefaultCatchBoundary } from "@/components/errors/default-catch-boundary"
-import { NotFound } from "@/components/errors/not-found"
-import { seo } from "@/lib/utils"
+import { createSeoMeta, siteConfig } from "@/shared/config"
+import { ThemeProvider } from "@/shared/providers/theme-provider"
+import { TooltipProvider } from "@/shared/ui"
+import { DefaultCatchBoundary } from "@/shared/ui/system/default-catch-boundary"
+import { NotFound } from "@/shared/ui/system/not-found"
+import { CommandMenu } from "@/widgets/command-menu"
 
-import appCss from "../styles.css?url"
+import appCss from "../styles/app.css?url"
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
@@ -24,17 +30,10 @@ export const Route = createRootRouteWithContext<{
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      ...seo({
-        title: "Phong Phan | Full-stack Architect & Creative Developer",
-        description:
-          "Portfolio of Phong Phan, a Full-stack Architect specializing in high-performance systems and immersive digital experiences. Expert in React, TypeScript, and modern UI/UX design.",
-        keywords:
-          "Phong Phan, Full-stack Architect, Creative Developer, React, TypeScript, UI/UX Design, Portfolio, Web Development, Software Engineer",
-        image: "/OGimage.jpg",
-      }),
+      ...createSeoMeta(),
     ],
     links: [
-      { rel: "canonical", href: "https://phongphan.dev" },
+      { rel: "canonical", href: siteConfig.url },
       { rel: "stylesheet", href: appCss },
       {
         rel: "apple-touch-icon",
@@ -78,7 +77,7 @@ export const Route = createRootRouteWithContext<{
       },
     ],
   }),
-  errorComponent: (props) => {
+  errorComponent: (props: JSX.IntrinsicAttributes & ErrorComponentProps) => {
     return (
       <RootDocument>
         <DefaultCatchBoundary {...props} />
@@ -97,7 +96,7 @@ function RootComponent() {
   )
 }
 
-const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'dark',r=document.documentElement;if(t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches))r.classList.add('dark');else r.classList.remove('dark')}catch(e){}})()`
+const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'dark',r=document.documentElement,s=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;r.classList.remove('light','dark');r.classList.add(s);}catch(e){}})()`
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
@@ -107,16 +106,30 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body
-        className="relative font-sans wrap-anywhere antialiased"
+        className="relative wrap-anywhere antialiased"
         suppressHydrationWarning
       >
-        {children}
-        {/* Global Floating Actions */}
-
-        {/* <TanStackRouterDevtools position="bottom-right" />
-        <ReactQueryDevtools buttonPosition="bottom-left" /> */}
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <RootLayoutBody>{children}</RootLayoutBody>
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
+  )
+}
+
+function RootLayoutBody({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+  const isStudio = location.pathname.startsWith("/studio")
+
+  if (isStudio) {
+    return <>{children}</>
+  }
+
+  return (
+    <TooltipProvider>
+      {children}
+      <CommandMenu />
+    </TooltipProvider>
   )
 }

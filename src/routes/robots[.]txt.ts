@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router"
 
+import { siteConfig } from "@/shared/config"
+
 export const Route = createFileRoute("/robots.txt")({
   server: {
     handlers: {
       GET: async () => {
-        const host = import.meta.env.VITE_SITE_URL || "http://localhost:3000"
+        const host = import.meta.env.VITE_SITE_URL || siteConfig.url
         const robots = `User-agent: *
 					Allow: /
 					Disallow: /studio
@@ -19,4 +21,5 @@ export const Route = createFileRoute("/robots.txt")({
       },
     },
   },
-})
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any)

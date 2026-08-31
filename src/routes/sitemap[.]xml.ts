@@ -1,18 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { client } from "@/lib/sanity"
+import { siteConfig } from "@/shared/config"
+import { client } from "@/shared/lib/sanity"
 
 interface SitemapRoute {
   path: string
   lastmod: string
   changefreq:
-    | "always"
-    | "hourly"
-    | "daily"
-    | "weekly"
-    | "monthly"
-    | "yearly"
-    | "never"
+    "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never"
   priority: string
 }
 
@@ -24,36 +19,47 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        // 1. Cấu hình các trang tĩnh
+        const now = new Date().toISOString()
+
         const staticRoutes: SitemapRoute[] = [
           {
-            path: "/",
-            lastmod: new Date().toISOString(),
+            path: "",
+            lastmod: now,
             changefreq: "daily",
             priority: "1.0",
           },
           {
-            path: "/about",
-            lastmod: new Date().toISOString(),
-            changefreq: "monthly",
-            priority: "0.8",
-          },
-          {
-            path: "/library",
-            lastmod: new Date().toISOString(),
+            path: "/block",
+            lastmod: now,
             changefreq: "weekly",
             priority: "0.9",
           },
           {
-            path: "/dashboard",
-            lastmod: new Date().toISOString(),
+            path: "/blog",
+            lastmod: now,
             changefreq: "weekly",
-            priority: "0.5",
+            priority: "0.8",
+          },
+          {
+            path: "/resources",
+            lastmod: now,
+            changefreq: "weekly",
+            priority: "0.8",
+          },
+          {
+            path: "/component-ui",
+            lastmod: now,
+            changefreq: "weekly",
+            priority: "0.8",
+          },
+          {
+            path: "/design-system",
+            lastmod: now,
+            changefreq: "monthly",
+            priority: "0.7",
           },
         ]
 
-        // 2. Fetch dữ liệu động (Ví dụ từ Sanity)
-        // Bạn có thể mở comment bên dưới khi đã có Schema bài viết (Post)
         const dynamicRoutes: SitemapRoute[] = []
 
         try {
@@ -73,12 +79,9 @@ export const Route = createFileRoute("/sitemap.xml")({
         } catch (error) {
           console.error("Error fetching dynamic routes for sitemap:", error)
         }
-
-        // 3. Gom tất cả các route
         const allRoutes = [...staticRoutes, ...dynamicRoutes]
 
-        // 4. Tạo XML string
-        const host = process.env.VITE_SITE_URL || "http://localhost:3000"
+        const host = import.meta.env.VITE_SITE_URL || siteConfig.url
         const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allRoutes
@@ -103,4 +106,5 @@ ${allRoutes
       },
     },
   },
-})
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} as any)

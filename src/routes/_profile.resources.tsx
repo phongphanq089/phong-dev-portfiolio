@@ -1,26 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router"
 
-import { GridSection } from "@/components/layout/profile/grid-layout"
-import { UnderConstruction } from "@/components/shared/under-construction"
+import { ResourceGrid } from "@/features/resources"
+import { createSeoMeta } from "@/shared/config"
 
 export const Route = createFileRoute("/_profile/resources")({
+  head: () => ({
+    meta: createSeoMeta("resources"),
+  }),
   component: ResourcesPage,
 })
 
 function ResourcesPage() {
   return (
     <div className="w-full">
-      <GridSection
-        className="px-4 py-16 md:px-8"
-        borderTop={false}
-        showCrosshairs={true}
-      >
-        <UnderConstruction
-          pageName="Resources"
-          colorTheme="#ffcc00"
-          colorName="gold"
-        />
-      </GridSection>
+      <ResourceGrid />
     </div>
   )
 }

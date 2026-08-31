@@ -1,215 +1,91 @@
-"use client"
+import { ArrowDownRight } from "lucide-react"
 
-import { useRef } from "react"
-
-import TextBurnNeon from "@/components/ui/animation/text-burn-neon"
-import { TOCItems } from "@/constants"
-
-/* ─── Sidebar Navigation Item ─── */
-const SidebarItem = ({
-  number,
-  label,
-  active,
-  href,
-}: {
-  number: string
-  label: string
-  active?: boolean
-  href: string
-}) => (
-  <a
-    href={href}
-    onClick={(e) => {
-      e.preventDefault()
-      document
-        .getElementById(href.replace("#", ""))
-        ?.scrollIntoView({ behavior: "smooth" })
-    }}
-    className="group flex cursor-pointer items-center gap-3"
-  >
-    <span
-      className={`font-mono text-[10px] ${active ? "text-red-500" : "text-foreground/20 group-hover:text-foreground/40"}`}
-    >
-      {number}
-    </span>
-    <span
-      className={`font-mono text-[11px] tracking-widest whitespace-nowrap uppercase ${active ? "text-foreground" : "text-foreground/40 group-hover:text-foreground/70"}`}
-    >
-      {label}
-    </span>
-  </a>
-)
-
-/* ─── Bracketed Button ─── */
-const BracketButton = ({ label }: { label: string }) => (
-  <button className="group relative flex items-center px-4 py-1 text-[9px] tracking-[0.2em] text-foreground/60 transition-all hover:text-foreground sm:text-[11px]">
-    <span className="text-foreground/20 transition-colors group-hover:text-red-500">
-      [{" "}
-    </span>
-    <span className="mx-2 transition-colors group-hover:text-red-500">
-      {label}
-    </span>
-    <span className="text-foreground/20 transition-colors group-hover:text-red-500">
-      {" "}
-      ]
-    </span>
-  </button>
-)
+import { PPMarkIsometric } from "@/shared/ui"
+import TextBurnNeon from "@/shared/ui/animation/text-burn-neon"
+import { StripedPattern } from "@/shared/ui/system"
 
 const BannerHero = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-
   return (
-    <div
-      id="banner"
-      ref={containerRef}
-      className="relative w-full overflow-hidden text-foreground selection:bg-red-500/30"
-    >
-      {/* ── Background Noise & Grid ── */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.03] mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
+    <>
+      <StripedPattern
+        variant="absolute"
+        className="opacity-40 dark:opacity-20"
       />
-
-      {/* ── Main Layout Grid ── */}
-      <div className="relative z-10 flex grid-cols-1 flex-col sm:grid-cols-[160px_1fr] sm:grid-rows-[auto_1fr_auto] xl:grid">
-        {/* 1. LEFT SIDEBAR - Hidden on mobile */}
-        <div className="row-span-3 hidden flex-col justify-start gap-4 border-r border-border p-8 pt-12 xl:flex">
-          {TOCItems.map((item, index) => (
-            <SidebarItem
-              key={`${item.title}-${index}`}
-              number={`${index + 1}`}
-              label={item.title as string}
-              href={item.url}
-              active={index === 0}
-            />
-          ))}
-
-          <div className="mt-auto ml-1 h-32 w-px bg-linear-to-b from-border to-transparent" />
-        </div>
-
-        {/* 2. TOP HEADER SECTION */}
-        <div className="flex flex-row items-start justify-between border-b border-border px-6 py-8 max-sm:pb-0 max-xs:flex-col md:px-10 xl:items-end">
-          <div className="mb-8 max-w-[420px] md:mb-0">
-            <p className="font-mono text-xs leading-relaxed text-foreground md:text-sm">
-              Full-stack Architect with a passion for
-              <br />
-              high-performance systems and
-              <br />
-              immersive digital experiences.
-            </p>
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--border)_1px,transparent_1px)] [background-size:24px_24px] opacity-40 dark:opacity-30" />
+      <div className="relative z-10 mx-auto my-4 w-full">
+        <div className="group relative mx-auto flex flex-col items-center justify-center">
+          <div
+            className="relative z-10 mb-4 flex w-full items-end justify-end text-xs text-muted-foreground/80 sm:mb-8"
+            id="banner"
+          >
+            <div className="flex items-center gap-3">
+              <span className="font-semibold tracking-widest text-foreground/80 uppercase">
+                PHONG PHAN
+              </span>
+              <span className="rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
+                FRONTEND / UI ENGINEER
+              </span>
+            </div>
           </div>
 
-          <div className="relative w-full text-right md:w-auto">
-            <TextBurnNeon className="text-3xl font-black text-primary xl:text-[5rem]">
-              DEVELOPER
-            </TextBurnNeon>
-            <div className="absolute -top-4 -right-2 h-8 w-8 border-t border-r border-red-500/50 md:-right-4" />
-            <div className="absolute -bottom-2 -left-2 h-6 w-px bg-red-500/50 md:-left-4" />
-          </div>
-        </div>
-
-        {/* 3. THREE PANEL CONTENT AREA */}
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          {/* PANEL 1 */}
-          <div className="flex flex-col border-b border-border p-6 md:border-r md:border-b-0 md:p-10 md:pt-16">
-            <div className="group relative mb-6 aspect-square w-full overflow-hidden border border-border bg-foreground/5 max-sm:hidden md:mb-8">
-              <img
-                src="/assets/images/hero-left.png"
-                alt="Concept"
-                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-              />
-              <div className="absolute inset-0 bg-red-500/10 opacity-0 transition-opacity group-hover:opacity-100" />
-              {/* Corner labels */}
-              <div
-                className="absolute top-4 right-2 font-mono text-[10px] tracking-widest text-red-500 mix-blend-difference"
-                style={{ writingMode: "vertical-rl" }}
-              >
-                KIA
-              </div>
+          <div className="absolute top-20 left-0 flex flex-col gap-2.5 text-[11px] text-muted-foreground/80">
+            <div className="relative z-10 mx-auto mb-6 flex flex-col select-none">
+              <h1 className="text-3xl leading-[0.88] font-black tracking-tighter text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+                FRONTEND
+              </h1>
+              <TextBurnNeon className="mt-1 text-3xl leading-[0.88] font-black tracking-tighter text-primary sm:text-5xl md:text-6xl lg:text-7xl">
+                ENGINEER
+              </TextBurnNeon>
             </div>
 
-            <p className="max-w-[280px] font-mono text-[13px] leading-relaxed tracking-wide text-foreground md:text-sm">
-              I architect high-performance interfaces that bridge the gap
-              between human{" "}
-              <span className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]">
-                intuition
-              </span>{" "}
-              and machine precision.
-            </p>
-          </div>
-
-          {/* PANEL 2 - CENTER PIECE */}
-          <div className="relative aspect-3/4 border-b border-border md:border-r md:border-b-0">
-            <div className="group relative h-full w-full overflow-hidden">
-              <img
-                src="/assets/images/hero-center.png"
-                alt="Portrait"
-                className="h-full w-full object-cover contrast-125 grayscale-20 transition-transform duration-1000 group-hover:scale-105 group-hover:brightness-110"
-              />
-              <div className="absolute inset-0 bg-red-500/10 opacity-0 transition-opacity group-hover:opacity-100" />
+            <span className="text-[10px] font-bold tracking-widest text-primary/80 uppercase">
+              // DISCIPLINES
+            </span>
+            <div className="flex flex-col gap-1.5 text-foreground/70 max-xs:text-[10px]">
+              <span className="transition-colors hover:text-primary">
+                / INTERACTIVE UI & MOTION
+              </span>
+              <span className="transition-colors hover:text-primary">
+                / DESIGN SYSTEMS & TOKENS
+              </span>
+              <span className="transition-colors hover:text-primary">
+                / FULL-STACK CAPABILITY
+              </span>
             </div>
-            {/* Red accent line overlay */}
-            <div className="absolute top-0 -left-px hidden h-full w-px bg-red-500/20 md:block" />
-            <div className="absolute right-[-20px] bottom-12 hidden h-px w-40 bg-red-500/30 md:block" />
           </div>
 
-          {/* PANEL 3 */}
-          <div className="flex flex-col p-6 md:p-10 md:pt-16">
-            <div className="group relative mb-6 aspect-square w-full overflow-hidden border border-border bg-foreground/5 max-sm:hidden md:mb-8">
-              <img
-                src="/assets/images/hero-right.png"
-                alt="Work"
-                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-              />
-              <div className="absolute inset-0 bg-red-500/10 opacity-0 transition-opacity group-hover:opacity-100" />
-            </div>
-
-            <p className="max-w-[280px] font-mono text-[13px] leading-relaxed tracking-wider text-foreground uppercase md:text-sm">
-              Clean code & Solid structure.
-              <br />
-              Advanced UI/UX & Design Systems.
-              <br />
-              Crafting{" "}
-              <span className="text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]">
-                pixel-perfect
-              </span>{" "}
-              interfaces.
-            </p>
-          </div>
-        </div>
-
-        {/* 4. BOTTOM ACTION BAR */}
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-border px-6 py-8 md:col-start-2 md:flex-row md:gap-0 md:px-10 md:py-5">
-          <div className="flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-foreground/40">
-            <span className="animate-pulse font-bold text-red-500">&gt;_</span>{" "}
-            ROOT@DEV: READY TO SHIP_
-          </div>
-
-          <div className="flex items-center justify-center gap-4 md:gap-8">
-            <BracketButton label="VIEW MY WORK" />
-            <div className="hidden h-4 w-px bg-border md:block" />
-            <BracketButton label="GET IN TOUCH" />
-          </div>
-
-          <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] text-foreground/40 uppercase">
-            SCROLL DOWN
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="text-red-500">▼</span>
-            </div>
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl">
+            <PPMarkIsometric />
           </div>
         </div>
       </div>
+      <div className="relative z-10 mx-auto mt-2 flex max-w-xl flex-col items-center text-center">
+        <p className="text-xs leading-relaxed tracking-wide text-muted-foreground sm:text-sm">
+          CRAFTING HIGH-PERFORMANCE INTERFACES, DELIGHTFUL MICRO-INTERACTIONS &
+          THOUGHTFULLY ENGINEERED WEB EXPERIENCES.
+        </p>
+      </div>
 
-      {/* Decorative vertical lines */}
-      <div className="pointer-events-none absolute top-0 left-[300px] h-full w-px bg-border" />
-      <div className="pointer-events-none absolute top-0 right-[10%] h-full w-px bg-border/50" />
-
-      {/* Scanline effect */}
-      <div className="pointer-events-none absolute inset-0 z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-size-[100%_4px,3px_100%] opacity-[0.05] dark:opacity-20" />
-    </div>
+      <div className="relative z-10 mt-3 flex items-center justify-between gap-3 border-t border-border/50 pt-4 sm:gap-0 md:pt-8">
+        <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+          <div className="flex flex-col text-center">
+            <span className="font-semibold text-foreground">PORTFOLIO '26</span>
+            <span className="text-[10px] text-muted-foreground/70">
+              CRAFTED WITH PRECISION
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col items-center text-center sm:items-end sm:text-right">
+          <div className="flex items-center gap-1.5 text-[10px] tracking-widest text-muted-foreground uppercase">
+            <span>RECENT WORK</span>
+            <ArrowDownRight className="h-3 w-3 text-primary" />
+          </div>
+          <span className="text-xs font-black tracking-tight text-foreground uppercase sm:text-sm">
+            CRAFTED WITH PRECISION
+          </span>
+        </div>
+      </div>
+    </>
   )
 }
 

@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "sanity.config.ts"]
+  "include": ["src", "sanity", "sanity.config.ts"]
 }

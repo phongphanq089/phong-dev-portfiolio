@@ -1,50 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { lazy, Suspense } from "react"
+import { Studio } from "sanity"
 
-// Lazy-load Sanity Studio to avoid OOM during bundling and prevent SSR issues.
-const LazyStudio = lazy(() =>
-  Promise.all([import("sanity"), import("../../sanity.config")]).then(
-    ([{ Studio }, { default: studioConfig }]) => ({
-      default: function SanityStudio() {
-        return <Studio config={studioConfig} />
-      },
-    })
-  )
-)
+import { createSeoMeta } from "@/shared/config"
 
-// Catch-all splat route: handles /studio/, /studio/desk, /studio/desk/123, etc.
+import sanityConfig from "../../sanity.config"
+
 export const Route = createFileRoute("/studio/$")({
+  ssr: false,
+  head: () => ({
+    meta: createSeoMeta("studio"),
+  }),
   component: StudioPage,
 })
 
 function StudioPage() {
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        height: "100dvh",
-        overflow: "hidden",
-      }}
-    >
-      <Suspense
-        fallback={
-          <div
-            style={{
-              display: "flex",
-              height: "100%",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "sans-serif",
-            }}
-          >
-            Loading Studio...
-          </div>
-        }
-      >
-        <LazyStudio />
-      </Suspense>
+    <div className="fixed inset-0 z-[9999] h-[100dvh] w-full overflow-hidden bg-black">
+      <Studio config={sanityConfig} />
     </div>
   )
 }
