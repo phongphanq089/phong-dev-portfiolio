@@ -55,7 +55,7 @@ const BottomMenu = () => {
       case "menu":
         return (
           <div className="flex min-w-[240px] flex-col gap-1 p-1.5">
-            <div className="px-2.5 py-1 font-mono text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
+            <div className="px-2.5 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
               Navigation
             </div>
             {NAV_ITEMS.map(({ label, link }) => {
@@ -87,7 +87,7 @@ const BottomMenu = () => {
                     }}
                   />
 
-                  <span className="font-mono">{label}</span>
+                  <span className="">{label}</span>
                   {isActive && (
                     <span
                       className="ml-auto size-1.5 rounded-full bg-pp-primary"
@@ -105,7 +105,7 @@ const BottomMenu = () => {
       case "theme":
         return (
           <div className="flex min-w-[210px] flex-col gap-1 p-1.5">
-            <div className="px-2.5 py-1 font-mono text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
+            <div className="px-2.5 py-1 text-[10px] font-semibold tracking-wider text-muted-foreground uppercase">
               Theme Mode
             </div>
             {THEME_OPTIONS.map(({ key, icon: Icon, text }) => {

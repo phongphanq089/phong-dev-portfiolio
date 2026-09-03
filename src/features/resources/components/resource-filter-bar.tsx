@@ -157,7 +157,7 @@ export const ResourceFilterBar: React.FC<ResourceFilterBarProps> = ({
                       All Categories
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] text-muted-foreground">
+                  <span className="text-[10px] text-muted-foreground">
                     ({categoryCounts.all || 0})
                   </span>
                 </DropdownMenuItem>
@@ -195,7 +195,7 @@ export const ResourceFilterBar: React.FC<ResourceFilterBarProps> = ({
                           {cat.title}
                         </span>
                       </div>
-                      <span className="font-mono text-[10px] text-muted-foreground">
+                      <span className="text-[10px] text-muted-foreground">
                         ({count})
                       </span>
                     </DropdownMenuItem>
@@ -365,7 +365,7 @@ export const ResourceFilterBar: React.FC<ResourceFilterBarProps> = ({
           type="button"
           onClick={() => onSelectCategory(null)}
           className={cn(
-            "flex shrink-0 items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-[11px] font-medium transition-all",
+            "flex shrink-0 items-center gap-1.5 rounded-sm border px-2.5 py-1 text-[11px] font-medium transition-all",
             selectedCategory === null
               ? "border-pp-primary/60 bg-pp-primary/10 text-pp-primary shadow-xs"
               : "border-border/60 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/60 hover:text-foreground"
@@ -391,7 +391,7 @@ export const ResourceFilterBar: React.FC<ResourceFilterBarProps> = ({
               type="button"
               onClick={() => onSelectCategory(cat.slug.current)}
               className={cn(
-                "flex shrink-0 items-center gap-1.5 rounded-sm border px-2.5 py-1 font-mono text-[11px] font-medium transition-all",
+                "flex shrink-0 items-center gap-1.5 rounded-sm border px-2.5 py-1 text-[11px] font-medium transition-all",
                 isSelected
                   ? "border-pp-primary/60 bg-pp-primary/10 text-pp-primary shadow-xs"
                   : "border-border/60 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/60 hover:text-foreground"

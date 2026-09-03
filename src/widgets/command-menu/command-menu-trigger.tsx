@@ -44,10 +44,10 @@ export function CommandMenuTrigger({
       )}
 
       <div className="flex items-center gap-1">
-        <Kbd className="h-4.5 min-w-4.5 px-1 font-mono text-[10px] font-medium text-muted-foreground/80 shadow-2xs group-hover:text-foreground">
+        <Kbd className="h-4.5 min-w-4.5 px-1 text-[10px] font-medium text-muted-foreground/80 shadow-2xs group-hover:text-foreground">
           {isMac ? "⌘" : "Ctrl"}
         </Kbd>
-        <Kbd className="h-4.5 min-w-4.5 px-1 font-mono text-[10px] font-medium text-muted-foreground/80 shadow-2xs group-hover:text-foreground">
+        <Kbd className="h-4.5 min-w-4.5 px-1 text-[10px] font-medium text-muted-foreground/80 shadow-2xs group-hover:text-foreground">
           K
         </Kbd>
       </div>

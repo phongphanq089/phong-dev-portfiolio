@@ -140,7 +140,7 @@ export const BlogFilterBar: React.FC<BlogFilterBarProps> = ({
                       All Categories
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] text-muted-foreground">
+                  <span className="text-[10px] text-muted-foreground">
                     ({categoryCounts.all || 0})
                   </span>
                 </DropdownMenuItem>
@@ -176,7 +176,7 @@ export const BlogFilterBar: React.FC<BlogFilterBarProps> = ({
                           {cat.title}
                         </span>
                       </div>
-                      <span className="font-mono text-[10px] text-muted-foreground">
+                      <span className="text-[10px] text-muted-foreground">
                         ({count})
                       </span>
                     </DropdownMenuItem>
