@@ -19,7 +19,7 @@ export function ScrollFadeEffect({
     <div
       data-orientation={orientation}
       className={cn(
-        "data-[orientation=horizontal]:overflow-x-auto data-vertical:overflow-y-auto",
+        "custom-scrollbar data-[orientation=horizontal]:overflow-x-auto data-vertical:overflow-y-auto",
         "data-[orientation=horizontal]:scroll-fade-effect-x data-vertical:scroll-fade-effect-y",
         className
       )}

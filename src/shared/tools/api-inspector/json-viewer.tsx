@@ -10,6 +10,7 @@ import {
 import React, { useMemo, useState } from "react"
 
 import { cn } from "@/shared/lib/utils"
+import { ScrollFadeEffect } from "@/shared/ui/core/scroll-fade-effect"
 
 interface JsonViewerProps {
   data: unknown
@@ -352,7 +353,7 @@ export function JsonViewer({
       </div>
 
       {/* JSON Content Area */}
-      <div className="max-h-[500px] min-h-[160px] overflow-auto p-3 text-left">
+      <ScrollFadeEffect className="max-h-[500px] min-h-[160px] p-3 text-left">
         {viewMode === "tree" ? (
           <div key={expandKey} className="space-y-0.5">
             <JsonNode
@@ -366,7 +367,7 @@ export function JsonViewer({
             <code>{formattedJson}</code>
           </pre>
         )}
-      </div>
+      </ScrollFadeEffect>
     </div>
   )
 }
