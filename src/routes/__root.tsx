@@ -15,7 +15,7 @@ import {
   createSeoMeta,
   createSiteLinks,
 } from "@/shared/config"
-import { siteSettingsQueryOptions } from "@/shared/lib/sanity"
+import { getSiteSettings, siteSettingsQueryOptions } from "@/shared/lib/sanity"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
 import {
   ApiInspectorDrawer,
@@ -155,6 +155,7 @@ function RootLayoutBody({
           method: "GROQ" as const,
           status: 200,
           data: siteSettings,
+          fetcher: () => getSiteSettings(),
           description:
             "Global site metadata, theme, and SEO settings fetched from Sanity CMS",
         },

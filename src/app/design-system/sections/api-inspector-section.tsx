@@ -1,9 +1,10 @@
 import {
+  Code2,
   Database,
   ExternalLink,
   Layers,
-  Loader2,
   RefreshCw,
+  Sparkles,
   Terminal,
 } from "lucide-react"
 import { useState } from "react"
@@ -14,6 +15,7 @@ import {
   JsonViewer,
   useApiInspector,
 } from "@/shared/tools/api-inspector"
+import { Badge } from "@/shared/ui/core/badge"
 import { Button } from "@/shared/ui/core/button"
 import {
   Drawer,
@@ -25,6 +27,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/shared/ui/core/drawer"
+import { Spinner } from "@/shared/ui/core/spinner"
 
 interface EndpointDef {
   id: string
@@ -66,59 +69,40 @@ const DEMO_ENDPOINTS: EndpointDef[] = [
 ]
 
 export function ApiInspectorSection() {
-  const { openWithEntry, inspect, setIsOpen } = useApiInspector()
+  const { openWithEntry, register, setIsOpen } = useApiInspector()
 
   const [loadingMap, setLoadingMap] = useState<Record<string, boolean>>({})
   const [resultsMap, setResultsMap] = useState<Record<string, ApiEntry>>({})
   const [selectedEndpointId, setSelectedEndpointId] =
     useState<string>("jp-posts")
   const [batchLoading, setBatchLoading] = useState(false)
+  const [customFnLoading, setCustomFnLoading] = useState(false)
 
-  // Fetch a single endpoint
+  // Fetch a single endpoint using function-based registration
   const handleFetchEndpoint = async (
     endpoint: EndpointDef,
     openDrawerAfter = false
   ) => {
     setLoadingMap((prev) => ({ ...prev, [endpoint.id]: true }))
-    const start = performance.now()
 
     try {
-      const res = await fetch(endpoint.url)
-      const durationMs = Math.round(performance.now() - start)
-      const data = await res.json()
-
-      const entry: ApiEntry = {
+      const entry = await register({
         id: endpoint.id,
         title: endpoint.title,
         endpoint: endpoint.url,
         method: endpoint.method,
-        status: res.status,
-        durationMs,
-        data,
-        timestamp: new Date().toLocaleTimeString(),
+        fetcher: async () => {
+          const res = await fetch(endpoint.url)
+          return await res.json()
+        },
         description: endpoint.description,
-      }
+      })
 
       setResultsMap((prev) => ({ ...prev, [endpoint.id]: entry }))
-      inspect(entry)
 
       if (openDrawerAfter) {
         openWithEntry(entry)
       }
-    } catch (err) {
-      const durationMs = Math.round(performance.now() - start)
-      const errorEntry: ApiEntry = {
-        id: endpoint.id,
-        title: endpoint.title,
-        endpoint: endpoint.url,
-        method: endpoint.method,
-        status: "error",
-        durationMs,
-        data: { error: String(err) },
-        timestamp: new Date().toLocaleTimeString(),
-      }
-      setResultsMap((prev) => ({ ...prev, [endpoint.id]: errorEntry }))
-      inspect(errorEntry)
     } finally {
       setLoadingMap((prev) => ({ ...prev, [endpoint.id]: false }))
     }
@@ -134,6 +118,43 @@ export function ApiInspectorSection() {
     setIsOpen(true)
   }
 
+  // Demo triggering a custom function that returns data without needing an explicit URL
+  const handleTriggerCustomFunction = async () => {
+    setCustomFnLoading(true)
+    try {
+      const entry = await register({
+        id: "demo-custom-calculator",
+        title: "Developer Metrics Service",
+        endpoint: "calculateDevStats({ mock: true })",
+        method: "RPC",
+        description:
+          "Example of registering an async function directly returning rich analytics data",
+        fetcher: async () => {
+          await new Promise((resolve) => setTimeout(resolve, 320))
+          return {
+            status: "ok",
+            timestamp: new Date().toISOString(),
+            metrics: {
+              activeProjects: 8,
+              totalCommitsThisMonth: 142,
+              uptimeRatio: 0.9998,
+              codeQualityScore: "A+",
+              cacheHitRatePercent: 94.2,
+            },
+            system: {
+              runtime: "Vite 8 / React 19",
+              bundleSizeKB: 184.6,
+              memoryUsedMB: 42.1,
+            },
+          }
+        },
+      })
+      openWithEntry(entry)
+    } finally {
+      setCustomFnLoading(false)
+    }
+  }
+
   const currentResult = resultsMap[selectedEndpointId]
 
   return (
@@ -143,22 +164,28 @@ export function ApiInspectorSection() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="rounded-xs border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary uppercase">
-                Interactive Dev Tool
-              </span>
-              <span className="text-xs text-muted-foreground">
-                drawer.tsx + vaul + tabs
+              <Badge
+                variant="outline"
+                className="border-primary/40 bg-primary/10 font-mono text-[10px] font-bold text-primary uppercase"
+              >
+                Interactive Dev Tool HUD
+              </Badge>
+              <span className="font-mono text-xs text-muted-foreground">
+                Zero-Reload &bull; Function-Based &bull; Built-in API Client
               </span>
             </div>
             <h3 className="text-lg font-bold tracking-tight text-foreground">
               API Responses Inspector Drawer
             </h3>
             <p className="max-w-3xl text-xs text-muted-foreground">
-              Công cụ gỡ lỗi API trực quan thay thế cho{" "}
-              <code className="rounded bg-muted px-1 py-0.5">console.log</code>.
-              Các request được tổ chức thành các <strong>Tabs</strong>, hỗ trợ
-              tô màu cú pháp JSON, đo latency (ms), tính dung lượng (KB), lọc từ
-              khóa và sao chép 1-click.
+              A visual API debugging and testing HUD that completely replaces{" "}
+              <code className="rounded bg-muted px-1 py-0.5 font-mono text-foreground">
+                console.log
+              </code>
+              . Pass any data-returning function, test custom endpoints with{" "}
+              <strong>POST, PUT, PATCH, DELETE</strong>, measure live latency,
+              and <strong>re-trigger requests live</strong> without reloading
+              the page.
             </p>
           </div>
 
@@ -168,38 +195,49 @@ export function ApiInspectorSection() {
               type="button"
               variant="outline"
               size="sm"
+              onClick={handleTriggerCustomFunction}
+              disabled={customFnLoading}
+              className="h-8 gap-1.5 text-xs whitespace-nowrap"
+            >
+              {customFnLoading ? (
+                <Spinner className="size-3.5" />
+              ) : (
+                <Sparkles className="size-3.5 text-primary" />
+              )}
+              <span>Inspect Custom Function</span>
+            </Button>
+
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
               onClick={handleFetchAll}
               disabled={batchLoading}
-              className="cursor-pointer text-xs"
+              className="h-8 gap-1.5 text-xs whitespace-nowrap"
             >
               {batchLoading ? (
-                <>
-                  <Loader2 className="size-3.5 animate-spin" />
-                  <span>Fetching All APIs...</span>
-                </>
+                <Spinner className="size-3.5" />
               ) : (
-                <>
-                  <RefreshCw className="size-3.5 text-primary" />
-                  <span>Fetch All (4 Tabs)</span>
-                </>
+                <RefreshCw className="size-3.5 text-primary" />
               )}
+              <span>Fetch All (4 Tabs)</span>
             </Button>
 
             <Button
               type="button"
               size="sm"
               onClick={() => setIsOpen(true)}
-              className="cursor-pointer text-xs"
+              className="h-8 gap-1.5 text-xs whitespace-nowrap"
             >
               <Terminal className="size-3.5" />
-              <span>Open Drawer</span>
+              <span>Open Inspector</span>
             </Button>
           </div>
         </div>
       </div>
 
-      {/* 4 Endpoints Grid */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {/* 4 Endpoints Grid - 2 columns on mobile for densification */}
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {DEMO_ENDPOINTS.map((endpoint) => {
           const isLoading = Boolean(loadingMap[endpoint.id])
           const result = resultsMap[endpoint.id]
@@ -210,7 +248,7 @@ export function ApiInspectorSection() {
               key={endpoint.id}
               onClick={() => setSelectedEndpointId(endpoint.id)}
               className={cn(
-                "group relative flex cursor-pointer flex-col justify-between rounded-lg border p-4 transition-all select-none",
+                "group relative flex cursor-pointer flex-col justify-between rounded-xl border p-3 transition-all select-none sm:p-4",
                 isSelected
                   ? "border-primary/50 bg-primary/[0.04] shadow-xs"
                   : "border-border/70 bg-card/30 hover:border-border hover:bg-card/70"
@@ -218,19 +256,25 @@ export function ApiInspectorSection() {
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-1">
-                  <span className="rounded-xs border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
+                  <Badge
+                    variant="outline"
+                    className="border-emerald-500/30 bg-emerald-500/10 px-1 py-0 font-mono text-[9px] font-bold text-emerald-600 dark:text-emerald-400"
+                  >
                     {endpoint.method}
-                  </span>
+                  </Badge>
 
                   {result && (
-                    <span className="py-0.2 rounded-xs border border-border bg-background px-1.5 text-[9px] text-muted-foreground">
+                    <Badge
+                      variant="outline"
+                      className="font-mono text-[9px] text-muted-foreground"
+                    >
                       {result.durationMs}ms
-                    </span>
+                    </Badge>
                   )}
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-bold text-foreground">
+                  <h4 className="line-clamp-1 text-xs font-bold text-foreground">
                     {endpoint.title}
                   </h4>
                   <p className="mt-0.5 line-clamp-2 text-[11px] text-muted-foreground">
@@ -239,21 +283,23 @@ export function ApiInspectorSection() {
                 </div>
               </div>
 
-              {/* Card Actions */}
-              <div className="mt-4 flex items-center justify-between gap-2 border-t border-border/40 pt-3">
-                <button
+              {/* Card Actions using Core UI Button */}
+              <div className="mt-3 flex items-center justify-between gap-1.5 border-t border-border/40 pt-2.5 sm:mt-4 sm:pt-3">
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="xs"
                   onClick={(e) => {
                     e.stopPropagation()
                     handleFetchEndpoint(endpoint, false)
                   }}
                   disabled={isLoading}
-                  className="inline-flex cursor-pointer items-center gap-1 text-[11px] font-medium text-primary hover:underline disabled:opacity-50"
+                  className="h-6 gap-1 px-1.5 text-[11px] font-medium whitespace-nowrap text-primary hover:text-primary"
                 >
                   {isLoading ? (
                     <>
-                      <Loader2 className="size-3 animate-spin" />
-                      <span>Fetching...</span>
+                      <Spinner className="size-3" />
+                      <span className="hidden sm:inline">Fetching...</span>
                     </>
                   ) : (
                     <>
@@ -261,21 +307,23 @@ export function ApiInspectorSection() {
                       <span>{result ? "Refetch" : "Fetch"}</span>
                     </>
                   )}
-                </button>
+                </Button>
 
                 {result && (
-                  <button
+                  <Button
                     type="button"
+                    variant="outline"
+                    size="xs"
                     onClick={(e) => {
                       e.stopPropagation()
                       openWithEntry(result)
                     }}
-                    className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/70 bg-background px-1.5 py-0.5 text-[10px] text-muted-foreground hover:bg-accent hover:text-foreground"
+                    className="h-6 gap-1 px-1.5 text-[10px] whitespace-nowrap text-muted-foreground hover:text-foreground"
                     title="Inspect in Drawer"
                   >
                     <span>Inspect</span>
                     <ExternalLink className="size-2.5" />
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>
@@ -295,29 +343,31 @@ export function ApiInspectorSection() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="xs"
               onClick={() => {
                 const ep = DEMO_ENDPOINTS.find(
                   (e) => e.id === selectedEndpointId
                 )
                 if (ep) handleFetchEndpoint(ep, false)
               }}
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/80 bg-background px-2.5 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
+              className="h-7 gap-1.5 text-xs whitespace-nowrap"
             >
               <RefreshCw className="size-3" />
               <span>Fetch Now</span>
-            </button>
+            </Button>
 
             {currentResult && (
               <Button
                 type="button"
-                size="sm"
-                variant="outline"
+                size="xs"
+                variant="default"
                 onClick={() => openWithEntry(currentResult)}
-                className="cursor-pointer text-xs"
+                className="h-7 gap-1.5 text-xs whitespace-nowrap"
               >
-                <Terminal className="size-3 text-primary" />
+                <Terminal className="size-3" />
                 <span>Open in Drawer</span>
               </Button>
             )}
@@ -332,29 +382,54 @@ export function ApiInspectorSection() {
             className="w-full"
           />
         ) : (
-          <div className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border p-6 text-center">
+          <div className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border p-6 text-center">
             <span className="text-xs text-muted-foreground">
               Click &ldquo;Fetch Now&rdquo; above or choose an endpoint to fetch
               live data from JSONPlaceholder
             </span>
-            <button
+            <Button
               type="button"
+              variant="link"
+              size="xs"
               onClick={() => {
                 const ep = DEMO_ENDPOINTS.find(
                   (e) => e.id === selectedEndpointId
                 )
                 if (ep) handleFetchEndpoint(ep, false)
               }}
-              className="cursor-pointer text-xs font-semibold text-primary underline underline-offset-4"
+              className="text-xs font-semibold text-primary"
             >
               Fetch{" "}
               {DEMO_ENDPOINTS.find((e) => e.id === selectedEndpointId)?.title}
-            </button>
+            </Button>
           </div>
         )}
       </div>
 
-      {/* Standalone Right-Slide Drawer Demo (Requested Pattern) */}
+      {/* Function Registration Code Showcase */}
+      <div className="rounded-xl border border-border/70 bg-card/30 p-5">
+        <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
+          <Code2 className="size-4 text-primary" />
+          <span>How to Test POST, PUT, DELETE Programmatically or via UI</span>
+        </div>
+        <p className="mt-1 text-xs text-muted-foreground">
+          You can test APIs interactively using the Request Composer in the
+          Drawer or programmatically using `sendRequest`:
+        </p>
+        <pre className="mt-3 overflow-x-auto rounded-lg border border-border/70 bg-muted/40 p-3.5 font-mono text-[11px] leading-relaxed text-foreground">
+          <code>{`// In any React component:
+const { sendRequest } = useApiInspector();
+
+// Send POST request with JSON body:
+await sendRequest({
+  url: "https://api.example.com/posts",
+  method: "POST",
+  body: { title: "New Article", userId: 1 },
+});`}</code>
+        </pre>
+      </div>
+
+      {/* Standalone Right-Slide Drawer Demo */}
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border/70 bg-card/30 p-5">
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
@@ -362,11 +437,11 @@ export function ApiInspectorSection() {
             <span>Right-Slide Scrollable Drawer Pattern</span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Hiển thị Drawer trượt từ bên phải sang (
-            <code className="text-[11px] text-foreground">
+            Displays a slide-over drawer from the right edge (
+            <code className="rounded bg-muted px-1 py-0.5 font-mono text-[11px] text-foreground">
               direction=&quot;right&quot;
             </code>
-            ) với nội dung có thanh cuộn riêng biệt.
+            ) featuring independent, isolated scrollable content.
           </p>
         </div>
 
@@ -380,7 +455,10 @@ export function DrawerScrollableContent() {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
-        <Button variant="outline" className="cursor-pointer text-xs">
+        <Button
+          variant="outline"
+          className="cursor-pointer text-xs whitespace-nowrap"
+        >
           Open Right Drawer (Scrollable Demo)
         </Button>
       </DrawerTrigger>
@@ -395,27 +473,26 @@ export function DrawerScrollableContent() {
           {Array.from({ length: 8 }).map((_, index) => (
             <p
               key={index}
-              className="rounded-md border border-border/60 bg-card/40 p-3 leading-relaxed"
+              className="rounded-lg border border-border/60 bg-card/40 p-3 leading-relaxed"
             >
               <strong className="text-foreground">Entry #{index + 1}:</strong>{" "}
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
           ))}
         </div>
         <DrawerFooter className="flex flex-row items-center justify-end gap-2 border-t border-border/70 p-4">
-          <Button size="sm" className="cursor-pointer text-xs">
+          <Button
+            size="sm"
+            className="cursor-pointer text-xs whitespace-nowrap"
+          >
             Submit
           </Button>
           <DrawerClose asChild>
             <Button
               variant="outline"
               size="sm"
-              className="cursor-pointer text-xs"
+              className="cursor-pointer text-xs whitespace-nowrap"
             >
               Cancel
             </Button>
