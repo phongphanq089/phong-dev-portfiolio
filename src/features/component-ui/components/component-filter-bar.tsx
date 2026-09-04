@@ -58,7 +58,7 @@ export const ComponentFilterBar: React.FC<ComponentFilterBarProps> = ({
                 type="button"
                 onClick={() => onSelectCategory(cat.id)}
                 className={cn(
-                  "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-[11px] font-medium transition-all duration-200",
+                  "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium transition-all duration-200",
                   isSelected
                     ? "border-pp-primary/60 bg-pp-primary/10 text-pp-primary shadow-xs"
                     : "border-border/60 bg-muted/30 text-muted-foreground hover:border-border hover:bg-muted/60 hover:text-foreground"

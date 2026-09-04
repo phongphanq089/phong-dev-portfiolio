@@ -80,14 +80,14 @@ export function ApiInspectorDrawer() {
               </div>
               <div className="flex flex-col text-left">
                 <div className="flex items-center gap-2">
-                  <DrawerTitle className="font-mono text-sm font-bold tracking-tight text-foreground sm:text-base">
+                  <DrawerTitle className="text-sm font-bold tracking-tight text-foreground sm:text-base">
                     API RESPONSIVE INSPECTOR
                   </DrawerTitle>
-                  <span className="py-0.2 rounded-xs border border-primary/30 bg-primary/10 px-1.5 font-mono text-[10px] font-medium text-primary">
+                  <span className="py-0.2 rounded-xs border border-primary/30 bg-primary/10 px-1.5 text-[10px] font-medium text-primary">
                     DEV TOOL
                   </span>
                 </div>
-                <DrawerDescription className="font-mono text-[11px] text-muted-foreground">
+                <DrawerDescription className="text-[11px] text-muted-foreground">
                   Inspect incoming payload, headers, latency & JSON structure
                   without console.log
                 </DrawerDescription>
@@ -100,7 +100,7 @@ export function ApiInspectorDrawer() {
                 <button
                   type="button"
                   onClick={clearEntries}
-                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-card px-2.5 py-1 font-mono text-xs text-muted-foreground transition-colors hover:border-destructive/40 hover:bg-destructive/10 hover:text-destructive active:scale-95"
+                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-card px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:border-destructive/40 hover:bg-destructive/10 hover:text-destructive active:scale-95"
                   title="Clear all API entries"
                 >
                   <Trash2 className="size-3" />
@@ -129,7 +129,7 @@ export function ApiInspectorDrawer() {
                     key={entry.id}
                     onClick={() => setActiveEntryId(entry.id)}
                     className={cn(
-                      "group flex shrink-0 cursor-pointer items-center gap-2 rounded-md border px-2.5 py-1.5 font-mono text-xs transition-all select-none",
+                      "group flex shrink-0 cursor-pointer items-center gap-2 rounded-md border px-2.5 py-1.5 text-xs transition-all select-none",
                       isActive
                         ? "border-primary/50 bg-primary/10 text-primary shadow-xs"
                         : "border-border/70 bg-card/60 text-muted-foreground hover:border-border hover:bg-accent/70 hover:text-foreground"
@@ -187,14 +187,14 @@ export function ApiInspectorDrawer() {
                 <div className="flex min-w-0 flex-1 items-center gap-2">
                   <span
                     className={cn(
-                      "rounded-xs border px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-wider uppercase",
+                      "rounded-xs border px-1.5 py-0.5 text-[10px] font-bold tracking-wider uppercase",
                       getMethodBadge(activeEntry.method)
                     )}
                   >
                     {activeEntry.method || "GET"}
                   </span>
 
-                  <code className="truncate font-mono text-xs text-foreground select-all">
+                  <code className="truncate text-xs text-foreground select-all">
                     {activeEntry.endpoint}
                   </code>
 
@@ -213,7 +213,7 @@ export function ApiInspectorDrawer() {
                 </div>
 
                 {/* Badges: Status, Latency, Timestamp */}
-                <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+                <div className="flex flex-wrap items-center gap-2 text-[11px]">
                   {activeEntry.status && (
                     <span
                       className={cn(
@@ -253,10 +253,10 @@ export function ApiInspectorDrawer() {
               <div className="flex size-10 items-center justify-center rounded-full border border-border bg-muted/30 text-muted-foreground">
                 <Database className="size-5" />
               </div>
-              <h3 className="font-mono text-sm font-semibold text-foreground">
+              <h3 className="text-sm font-semibold text-foreground">
                 No API Requests Inspected Yet
               </h3>
-              <p className="max-w-md font-mono text-xs text-muted-foreground">
+              <p className="max-w-md text-xs text-muted-foreground">
                 Trigger an API request or click on any &ldquo;Inspect API&rdquo;
                 button in the app to inspect its payload, latency, and
                 structure.
@@ -267,7 +267,7 @@ export function ApiInspectorDrawer() {
 
         {/* Drawer Footer */}
         <DrawerFooter className="border-t border-border/70 px-4 py-3 sm:px-6">
-          <div className="flex w-full items-center justify-between gap-3 font-mono text-xs">
+          <div className="flex w-full items-center justify-between gap-3 text-xs">
             <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
               <span className="inline-flex size-2 animate-pulse rounded-full bg-emerald-500" />
               <span className="hidden sm:inline">Hotkey:</span>
@@ -279,7 +279,7 @@ export function ApiInspectorDrawer() {
             <DrawerClose asChild>
               <button
                 type="button"
-                className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border bg-card px-3 py-1.5 font-mono text-xs text-foreground transition-colors hover:bg-accent active:scale-95"
+                className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border bg-card px-3 py-1.5 text-xs text-foreground transition-colors hover:bg-accent active:scale-95"
               >
                 Close Drawer
               </button>

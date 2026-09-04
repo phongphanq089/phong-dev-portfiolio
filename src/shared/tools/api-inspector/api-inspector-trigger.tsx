@@ -25,7 +25,7 @@ export function DevApiInspectorFloatingTrigger({
       type="button"
       onClick={() => setIsOpen(!isOpen)}
       className={cn(
-        "group fixed bottom-5 left-5 z-40 flex cursor-pointer items-center gap-2 rounded-full border border-border/80 bg-background/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur-md transition-all hover:border-primary/50 hover:bg-card hover:shadow-primary/10 active:scale-95",
+        "group fixed bottom-5 left-5 z-40 flex cursor-pointer items-center gap-2 rounded-full border border-border/80 bg-background/90 px-3 py-1.5 text-xs text-foreground shadow-lg backdrop-blur-md transition-all hover:border-primary/50 hover:bg-card hover:shadow-primary/10 active:scale-95",
         isOpen && "border-primary/60 bg-primary/10 text-primary",
         className
       )}
@@ -77,7 +77,7 @@ export function ApiInspectorTrigger({
       type="button"
       onClick={handleClick}
       className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-card/60 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-xs transition-colors hover:border-border hover:bg-accent hover:text-foreground active:scale-95",
+        "inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/70 bg-card/60 px-2.5 py-1 text-xs text-muted-foreground shadow-xs transition-colors hover:border-border hover:bg-accent hover:text-foreground active:scale-95",
         className
       )}
       {...props}

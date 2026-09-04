@@ -217,7 +217,7 @@ export function DesignSystemShowcase() {
           </section>
         </main>
 
-        <div className="fixed right-6 bottom-22 z-100 flex flex-col items-end gap-3 lg:bottom-6">
+        <div className="fixed right-6 bottom-22 z-10 flex flex-col items-end gap-3 lg:bottom-6">
           <ScrollToTop />
         </div>
       </div>

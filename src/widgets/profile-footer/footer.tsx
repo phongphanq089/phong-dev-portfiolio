@@ -23,7 +23,7 @@ const SocialItem = ({
     className="flex h-16 items-center justify-center gap-3 transition-colors hover:bg-accent/50 hover:text-pp-primary"
   >
     {icon}
-    <span className="font-mono text-[10px] tracking-widest uppercase opacity-70">
+    <span className="text-[10px] tracking-widest uppercase opacity-70">
       {label}
     </span>
   </a>
@@ -64,7 +64,7 @@ export default function Footer() {
                   <div className="flex size-10 items-center justify-center rounded-lg border border-border/60 bg-card p-2 text-foreground shadow-2xs transition-all duration-200 group-hover:scale-105 group-hover:border-pp-primary/50 group-hover:text-pp-primary">
                     <IconComp className="size-5" />
                   </div>
-                  <span className="rounded border border-border/60 bg-muted/40 px-1.5 py-0.5 font-mono text-[9px] font-semibold text-muted-foreground uppercase">
+                  <span className="rounded border border-border/60 bg-muted/40 px-1.5 py-0.5 text-[9px] font-semibold text-muted-foreground uppercase">
                     {tech.badge}
                   </span>
                 </div>
@@ -81,10 +81,10 @@ export default function Footer() {
               </div>
 
               <div className="mt-5 flex items-center justify-between border-t border-border/40 pt-3">
-                <span className="font-mono text-[10px] text-muted-foreground/60 transition-colors group-hover:text-pp-primary">
+                <span className="text-[10px] text-muted-foreground/60 transition-colors group-hover:text-pp-primary">
                   {tech.href.replace(/^https?:\/\//, "")}
                 </span>
-                <span className="font-mono text-[9px] font-semibold text-muted-foreground/40 transition-colors group-hover:text-pp-primary">
+                <span className="text-[9px] font-semibold text-muted-foreground/40 transition-colors group-hover:text-pp-primary">
                   VISIT →
                 </span>
               </div>
@@ -103,7 +103,7 @@ export default function Footer() {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="font-mono text-foreground transition-colors hover:text-pp-primary"
+                  className="text-foreground transition-colors hover:text-pp-primary"
                 >
                   {item.name}
                 </a>

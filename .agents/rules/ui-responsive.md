@@ -2,6 +2,12 @@
 
 When building or updating user interfaces, follow these layout and styling standards:
 
+## 0. Mandatory Reuse of Core UI Primitives (Strict Anti-Reinvention)
+
+- **Always Reuse Core UI:** Always import and reuse existing primitives from `@/shared/ui` (located in `src/shared/ui/core/`, e.g., `Button`, `Input`, `Badge`, `Card`, `Checkbox`, `Dialog`, `Drawer`, `DropdownMenu`, `Textarea`, `Tooltip`, `Separator`, etc.).
+- **Strictly Forbidden:** NEVER write raw HTML elements with ad-hoc styling (e.g., `<button className="px-4 py-2 bg-blue-500 rounded...">` or `<input className="...">`) when a core component already exists.
+- **Variants & Customization:** Use the established component props and variants (`variant`, `size`, etc. powered by `cva`). If custom styling is needed, pass `className` to the core component for merging via `cn()`; do not reimplement the component from scratch.
+
 ## 1. Styling & Tailwind v4 Conventions
 
 - **Utility-First:** Use Tailwind CSS v4 utility classes.

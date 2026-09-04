@@ -77,7 +77,7 @@ function CommandInput({
       <CommandPrimitive.Input
         data-slot="command-input"
         className={cn(
-          "flex h-full w-full bg-transparent font-sans text-sm text-foreground outline-none placeholder:text-muted-foreground/60 disabled:cursor-not-allowed disabled:opacity-50",
+          "flex h-full w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground/60 disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
         {...props}
@@ -178,7 +178,7 @@ function CommandShortcut({
     <span
       data-slot="command-shortcut"
       className={cn(
-        "ml-auto flex items-center gap-1 font-mono text-[11px] font-medium tracking-wider text-muted-foreground/70 group-data-[selected=true]/command-item:text-foreground group-data-selected/command-item:text-foreground",
+        "ml-auto flex items-center gap-1 text-[11px] font-medium tracking-wider text-muted-foreground/70 group-data-[selected=true]/command-item:text-foreground group-data-selected/command-item:text-foreground",
         className
       )}
       {...props}

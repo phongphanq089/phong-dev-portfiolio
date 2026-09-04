@@ -114,7 +114,7 @@ function JsonNode({
     }
 
     return (
-      <div className="font-mono text-xs leading-5 hover:bg-muted/30">
+      <div className="text-xs leading-5 hover:bg-muted/30">
         <span style={{ paddingLeft: `${depth * 16}px` }} />
         {name !== undefined && (
           <span className="text-sky-700 dark:text-sky-300">
@@ -136,7 +136,7 @@ function JsonNode({
   const closing = isArray ? "]" : "}"
 
   return (
-    <div className="font-mono text-xs leading-5">
+    <div className="text-xs leading-5">
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="flex cursor-pointer items-center gap-1 rounded-xs hover:bg-muted/40"
@@ -246,7 +246,7 @@ export function JsonViewer({
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden rounded-lg border border-border bg-card/60 font-sans shadow-xs backdrop-blur-xs",
+        "flex flex-col overflow-hidden rounded-lg border border-border bg-card/60 shadow-xs backdrop-blur-xs",
         className
       )}
     >
@@ -259,7 +259,7 @@ export function JsonViewer({
               type="button"
               onClick={() => setViewMode("tree")}
               className={cn(
-                "cursor-pointer rounded px-2 py-1 font-mono text-[11px] font-medium transition-colors",
+                "cursor-pointer rounded px-2 py-1 text-[11px] font-medium transition-colors",
                 viewMode === "tree"
                   ? "bg-foreground text-background"
                   : "text-muted-foreground hover:text-foreground"
@@ -271,7 +271,7 @@ export function JsonViewer({
               type="button"
               onClick={() => setViewMode("raw")}
               className={cn(
-                "cursor-pointer rounded px-2 py-1 font-mono text-[11px] font-medium transition-colors",
+                "cursor-pointer rounded px-2 py-1 text-[11px] font-medium transition-colors",
                 viewMode === "raw"
                   ? "bg-foreground text-background"
                   : "text-muted-foreground hover:text-foreground"
@@ -285,7 +285,7 @@ export function JsonViewer({
             <button
               type="button"
               onClick={() => setExpandKey((prev) => prev + 1)}
-              className="cursor-pointer rounded border border-border/80 bg-background/80 px-2 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:border-border hover:bg-accent hover:text-foreground"
+              className="cursor-pointer rounded border border-border/80 bg-background/80 px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:border-border hover:bg-accent hover:text-foreground"
               title="Toggle expand/collapse"
             >
               Reset Tree
@@ -300,7 +300,7 @@ export function JsonViewer({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search keys & values..."
-              className="h-7 w-36 rounded-md border border-border/80 bg-background pr-6 pl-7 font-mono text-[11px] text-foreground placeholder:text-muted-foreground/60 focus:border-ring focus:ring-1 focus:ring-ring focus:outline-none sm:w-48"
+              className="h-7 w-36 rounded-md border border-border/80 bg-background pr-6 pl-7 text-[11px] text-foreground placeholder:text-muted-foreground/60 focus:border-ring focus:ring-1 focus:ring-ring focus:outline-none sm:w-48"
             />
             {searchQuery && (
               <button
@@ -316,7 +316,7 @@ export function JsonViewer({
 
         {/* Right: Size stats + Actions */}
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-muted-foreground">
+          <span className="text-[10px] text-muted-foreground">
             Size:{" "}
             <strong className="text-foreground">{formatBytes(size)}</strong>
           </span>
@@ -324,7 +324,7 @@ export function JsonViewer({
           <button
             type="button"
             onClick={handleCopy}
-            className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/80 bg-background px-2.5 py-1 font-mono text-[11px] text-muted-foreground shadow-xs transition-colors hover:border-border hover:bg-accent hover:text-foreground active:scale-95"
+            className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/80 bg-background px-2.5 py-1 text-[11px] text-muted-foreground shadow-xs transition-colors hover:border-border hover:bg-accent hover:text-foreground active:scale-95"
           >
             {copied ? (
               <>
@@ -342,7 +342,7 @@ export function JsonViewer({
           <button
             type="button"
             onClick={handleDownload}
-            className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/80 bg-background px-2.5 py-1 font-mono text-[11px] text-muted-foreground shadow-xs transition-colors hover:border-border hover:bg-accent hover:text-foreground active:scale-95"
+            className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/80 bg-background px-2.5 py-1 text-[11px] text-muted-foreground shadow-xs transition-colors hover:border-border hover:bg-accent hover:text-foreground active:scale-95"
             title="Download JSON File"
           >
             <Download className="size-3" />
@@ -362,7 +362,7 @@ export function JsonViewer({
             />
           </div>
         ) : (
-          <pre className="font-mono text-xs leading-relaxed text-foreground select-text">
+          <pre className="text-xs leading-relaxed text-foreground select-text">
             <code>{formattedJson}</code>
           </pre>
         )}

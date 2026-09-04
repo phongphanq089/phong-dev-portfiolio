@@ -38,7 +38,7 @@ export function CommandMenuTrigger({
       <SearchIcon className="size-3.5 shrink-0 text-muted-foreground/80 transition-colors group-hover:text-foreground" />
 
       {!compact && (
-        <span className="hidden font-sans text-xs text-muted-foreground/80 group-hover:text-foreground xl:inline">
+        <span className="hidden text-xs text-muted-foreground/80 group-hover:text-foreground xl:inline">
           Search commands...
         </span>
       )}

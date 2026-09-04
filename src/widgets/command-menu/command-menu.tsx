@@ -115,7 +115,7 @@ export function CommandMenu() {
                           {item.title}
                         </span>
                         {item.badge && (
-                          <span className="py-0.2 rounded border border-pp-primary/30 bg-pp-primary/15 px-1.5 font-mono text-[9px] font-semibold text-pp-primary">
+                          <span className="py-0.2 rounded border border-pp-primary/30 bg-pp-primary/15 px-1.5 text-[9px] font-semibold text-pp-primary">
                             {item.badge}
                           </span>
                         )}
@@ -132,7 +132,7 @@ export function CommandMenu() {
                         {item.shortcut.map((key, i) => (
                           <Kbd
                             key={i}
-                            className="h-5 min-w-5 px-1 font-mono text-[10px] font-semibold tracking-normal text-muted-foreground group-data-[selected=true]/command-item:text-foreground"
+                            className="h-5 min-w-5 px-1 text-[10px] font-semibold tracking-normal text-muted-foreground group-data-[selected=true]/command-item:text-foreground"
                           >
                             {key}
                           </Kbd>
@@ -151,11 +151,11 @@ export function CommandMenu() {
       <div className="flex items-center justify-between border-t border-border/60 bg-muted/30 px-3.5 py-2.5 text-xs text-muted-foreground">
         <div className="flex items-center gap-2">
           <PPPixelMark size={20} className="text-pp-primary" />
-          <span className="font-mono text-[11px] font-medium tracking-wide text-muted-foreground">
+          <span className="text-[11px] font-medium tracking-wide text-muted-foreground">
             PHONG PHAN
           </span>
         </div>
-        <div className="flex items-center gap-1.5 font-mono text-[11px]">
+        <div className="flex items-center gap-1.5 text-[11px]">
           <span>Go to page</span>
           <Kbd className="flex h-5 w-5 items-center justify-center p-0 text-[10px]">
             <CornerDownLeft className="size-3" />

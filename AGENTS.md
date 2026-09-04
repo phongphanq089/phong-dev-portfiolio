@@ -73,9 +73,14 @@ src/
 
 ## 4. Development Guidelines & Rules
 
+### Core UI Component Reuse Policy (MANDATORY)
+
+- **Always Reuse Existing UI:** Check and import primitives from `@/shared/ui` (`src/shared/ui/core/`, including `Button`, `Input`, `Badge`, `Card`, `Checkbox`, `Dialog`, `Drawer`, `DropdownMenu`, `Textarea`, `Tooltip`, `Separator`, etc.).
+- **Strict Prohibition:** NEVER write raw HTML controls (e.g. `<button className="...">`, `<input className="...">`) or reinvent separate styles when a core component already exists. Leverage existing `variant` and `size` props.
+
 For specific implementation requirements, refer to the modular rules in `.agents/rules/`:
 
 - [TypeScript Strict Quality](.agents/rules/typescript.md): Zero red lines, upfront typing, no `any`.
-- [UI & Responsive Rules](.agents/rules/ui-responsive.md): Mobile 2-column grid exception, body scroll lock, button wrap prevention.
+- [UI & Responsive Rules](.agents/rules/ui-responsive.md): Mandatory core UI reuse, mobile 2-column grid exception, body scroll lock, button wrap prevention.
 - [Code Performance & Data](.agents/rules/code-performance.md): Re-render audits, TanStack Query selectors, Zod validation.
 - [Frontend Design Craft](.agents/skills/frontend-design/SKILL.md): Distinctive, production-grade UI design principles avoiding generic AI UI.

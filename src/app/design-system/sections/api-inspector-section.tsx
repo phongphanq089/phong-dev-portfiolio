@@ -143,10 +143,10 @@ export function ApiInspectorSection() {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="rounded-xs border border-primary/30 bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-bold text-primary uppercase">
+              <span className="rounded-xs border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-bold text-primary uppercase">
                 Interactive Dev Tool
               </span>
-              <span className="font-mono text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 drawer.tsx + vaul + tabs
               </span>
             </div>
@@ -155,10 +155,8 @@ export function ApiInspectorSection() {
             </h3>
             <p className="max-w-3xl text-xs text-muted-foreground">
               Công cụ gỡ lỗi API trực quan thay thế cho{" "}
-              <code className="rounded bg-muted px-1 py-0.5 font-mono">
-                console.log
-              </code>
-              . Các request được tổ chức thành các <strong>Tabs</strong>, hỗ trợ
+              <code className="rounded bg-muted px-1 py-0.5">console.log</code>.
+              Các request được tổ chức thành các <strong>Tabs</strong>, hỗ trợ
               tô màu cú pháp JSON, đo latency (ms), tính dung lượng (KB), lọc từ
               khóa và sao chép 1-click.
             </p>
@@ -172,7 +170,7 @@ export function ApiInspectorSection() {
               size="sm"
               onClick={handleFetchAll}
               disabled={batchLoading}
-              className="cursor-pointer font-mono text-xs"
+              className="cursor-pointer text-xs"
             >
               {batchLoading ? (
                 <>
@@ -191,7 +189,7 @@ export function ApiInspectorSection() {
               type="button"
               size="sm"
               onClick={() => setIsOpen(true)}
-              className="cursor-pointer font-mono text-xs"
+              className="cursor-pointer text-xs"
             >
               <Terminal className="size-3.5" />
               <span>Open Drawer</span>
@@ -220,19 +218,19 @@ export function ApiInspectorSection() {
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-1">
-                  <span className="rounded-xs border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
+                  <span className="rounded-xs border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 text-[9px] font-bold text-emerald-600 dark:text-emerald-400">
                     {endpoint.method}
                   </span>
 
                   {result && (
-                    <span className="py-0.2 rounded-xs border border-border bg-background px-1.5 font-mono text-[9px] text-muted-foreground">
+                    <span className="py-0.2 rounded-xs border border-border bg-background px-1.5 text-[9px] text-muted-foreground">
                       {result.durationMs}ms
                     </span>
                   )}
                 </div>
 
                 <div>
-                  <h4 className="font-mono text-xs font-bold text-foreground">
+                  <h4 className="text-xs font-bold text-foreground">
                     {endpoint.title}
                   </h4>
                   <p className="mt-0.5 line-clamp-2 text-[11px] text-muted-foreground">
@@ -250,7 +248,7 @@ export function ApiInspectorSection() {
                     handleFetchEndpoint(endpoint, false)
                   }}
                   disabled={isLoading}
-                  className="inline-flex cursor-pointer items-center gap-1 font-mono text-[11px] font-medium text-primary hover:underline disabled:opacity-50"
+                  className="inline-flex cursor-pointer items-center gap-1 text-[11px] font-medium text-primary hover:underline disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>
@@ -272,7 +270,7 @@ export function ApiInspectorSection() {
                       e.stopPropagation()
                       openWithEntry(result)
                     }}
-                    className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/70 bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground hover:bg-accent hover:text-foreground"
+                    className="inline-flex cursor-pointer items-center gap-1 rounded border border-border/70 bg-background px-1.5 py-0.5 text-[10px] text-muted-foreground hover:bg-accent hover:text-foreground"
                     title="Inspect in Drawer"
                   >
                     <span>Inspect</span>
@@ -290,7 +288,7 @@ export function ApiInspectorSection() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Database className="size-4 text-primary" />
-            <span className="font-mono text-xs font-semibold text-foreground">
+            <span className="text-xs font-semibold text-foreground">
               Live Preview:{" "}
               {DEMO_ENDPOINTS.find((e) => e.id === selectedEndpointId)?.title}
             </span>
@@ -305,7 +303,7 @@ export function ApiInspectorSection() {
                 )
                 if (ep) handleFetchEndpoint(ep, false)
               }}
-              className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/80 bg-background px-2.5 py-1 font-mono text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-border/80 bg-background px-2.5 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
             >
               <RefreshCw className="size-3" />
               <span>Fetch Now</span>
@@ -317,7 +315,7 @@ export function ApiInspectorSection() {
                 size="sm"
                 variant="outline"
                 onClick={() => openWithEntry(currentResult)}
-                className="cursor-pointer font-mono text-xs"
+                className="cursor-pointer text-xs"
               >
                 <Terminal className="size-3 text-primary" />
                 <span>Open in Drawer</span>
@@ -335,7 +333,7 @@ export function ApiInspectorSection() {
           />
         ) : (
           <div className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border p-6 text-center">
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               Click &ldquo;Fetch Now&rdquo; above or choose an endpoint to fetch
               live data from JSONPlaceholder
             </span>
@@ -347,7 +345,7 @@ export function ApiInspectorSection() {
                 )
                 if (ep) handleFetchEndpoint(ep, false)
               }}
-              className="cursor-pointer font-mono text-xs font-semibold text-primary underline underline-offset-4"
+              className="cursor-pointer text-xs font-semibold text-primary underline underline-offset-4"
             >
               Fetch{" "}
               {DEMO_ENDPOINTS.find((e) => e.id === selectedEndpointId)?.title}
@@ -359,13 +357,13 @@ export function ApiInspectorSection() {
       {/* Standalone Right-Slide Drawer Demo (Requested Pattern) */}
       <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border/70 bg-card/30 p-5">
         <div className="space-y-1">
-          <div className="flex items-center gap-2 font-mono text-xs font-semibold text-foreground">
+          <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
             <Layers className="size-3.5 text-primary" />
             <span>Right-Slide Scrollable Drawer Pattern</span>
           </div>
           <p className="text-xs text-muted-foreground">
             Hiển thị Drawer trượt từ bên phải sang (
-            <code className="font-mono text-[11px] text-foreground">
+            <code className="text-[11px] text-foreground">
               direction=&quot;right&quot;
             </code>
             ) với nội dung có thanh cuộn riêng biệt.
@@ -382,20 +380,18 @@ export function DrawerScrollableContent() {
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
-        <Button variant="outline" className="cursor-pointer font-mono text-xs">
+        <Button variant="outline" className="cursor-pointer text-xs">
           Open Right Drawer (Scrollable Demo)
         </Button>
       </DrawerTrigger>
       <DrawerContent className="fixed inset-y-0 right-0 z-50 flex h-full w-full flex-col border-l border-border/80 bg-background/95 backdrop-blur-xl data-[vaul-drawer-direction=right]:w-[90vw] data-[vaul-drawer-direction=right]:sm:max-w-md">
         <DrawerHeader className="border-b border-border/70 p-4">
-          <DrawerTitle className="font-mono text-sm font-bold">
-            Move Goal
-          </DrawerTitle>
-          <DrawerDescription className="font-mono text-xs text-muted-foreground">
+          <DrawerTitle className="text-sm font-bold">Move Goal</DrawerTitle>
+          <DrawerDescription className="text-xs text-muted-foreground">
             Set your daily activity goal and inspect scrollable content.
           </DrawerDescription>
         </DrawerHeader>
-        <div className="no-scrollbar flex-1 space-y-3 overflow-y-auto px-4 py-4 font-mono text-xs text-muted-foreground">
+        <div className="no-scrollbar flex-1 space-y-3 overflow-y-auto px-4 py-4 text-xs text-muted-foreground">
           {Array.from({ length: 8 }).map((_, index) => (
             <p
               key={index}
@@ -412,14 +408,14 @@ export function DrawerScrollableContent() {
           ))}
         </div>
         <DrawerFooter className="flex flex-row items-center justify-end gap-2 border-t border-border/70 p-4">
-          <Button size="sm" className="cursor-pointer font-mono text-xs">
+          <Button size="sm" className="cursor-pointer text-xs">
             Submit
           </Button>
           <DrawerClose asChild>
             <Button
               variant="outline"
               size="sm"
-              className="cursor-pointer font-mono text-xs"
+              className="cursor-pointer text-xs"
             >
               Cancel
             </Button>

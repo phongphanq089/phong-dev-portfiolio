@@ -42,7 +42,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelectTag }) => {
           {/* Group / Series Badge if present */}
           {post.group && (
             <div className="absolute top-2.5 left-2.5 z-10">
-              <span className="rounded-md border border-white/20 bg-black/70 px-2 py-0.5 font-mono text-[9px] font-semibold text-white shadow-xs backdrop-blur-md">
+              <span className="rounded-md border border-white/20 bg-black/70 px-2 py-0.5 text-[9px] font-semibold text-white shadow-xs backdrop-blur-md">
                 {post.group.title}{" "}
                 {post.groupOrder ? `• #${post.groupOrder}` : ""}
               </span>
@@ -52,7 +52,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelectTag }) => {
           {/* Featured Ribbon */}
           {post.isFeatured && (
             <div className="absolute top-2.5 right-2.5 z-10">
-              <span className="rounded-md border border-pp-primary/40 bg-pp-primary/90 px-2 py-0.5 font-mono text-[9px] font-bold text-white shadow-xs backdrop-blur-md">
+              <span className="rounded-md border border-pp-primary/40 bg-pp-primary/90 px-2 py-0.5 text-[9px] font-bold text-white shadow-xs backdrop-blur-md">
                 FEATURED
               </span>
             </div>
@@ -64,7 +64,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelectTag }) => {
           <span className="font-semibold tracking-wide text-foreground">
             {primaryCategory}
           </span>
-          <span className="font-mono text-xs text-muted-foreground/80">
+          <span className="text-xs text-muted-foreground/80">
             {post.readTime} min read
           </span>
         </div>
@@ -93,7 +93,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelectTag }) => {
                   e.stopPropagation()
                   onSelectTag?.(tag.slug.current)
                 }}
-                className="rounded border border-border/50 bg-muted/40 px-1.5 py-0.5 font-mono text-[9px] text-muted-foreground/80 transition-colors hover:border-pp-primary/50 hover:text-foreground"
+                className="rounded border border-border/50 bg-muted/40 px-1.5 py-0.5 text-[9px] text-muted-foreground/80 transition-colors hover:border-pp-primary/50 hover:text-foreground"
               >
                 #{tag.title}
               </button>
