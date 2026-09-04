@@ -17,6 +17,11 @@ import {
 } from "@/shared/config"
 import { siteSettingsQueryOptions } from "@/shared/lib/sanity"
 import { ThemeProvider } from "@/shared/providers/theme-provider"
+import {
+  ApiInspectorDrawer,
+  ApiInspectorProvider,
+  DevApiInspectorFloatingTrigger,
+} from "@/shared/tools/api-inspector"
 import { TooltipProvider } from "@/shared/ui"
 import { DefaultCatchBoundary } from "@/shared/ui/system/default-catch-boundary"
 import { NotFound } from "@/shared/ui/system/not-found"
@@ -79,8 +84,9 @@ export const Route = createRootRouteWithContext<{
 })
 
 function RootComponent() {
+  const loaderData = Route.useLoaderData()
   return (
-    <RootDocument>
+    <RootDocument siteSettings={loaderData?.siteSettings}>
       <Outlet />
     </RootDocument>
   )
@@ -88,7 +94,13 @@ function RootComponent() {
 
 const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')||'dark',r=document.documentElement,s=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;r.classList.remove('light','dark');r.classList.add(s);}catch(e){}})()`
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({
+  children,
+  siteSettings,
+}: {
+  children: React.ReactNode
+  siteSettings?: unknown
+}) {
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       window.addEventListener("load", () => {
@@ -110,7 +122,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         suppressHydrationWarning
       >
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <RootLayoutBody>{children}</RootLayoutBody>
+          <RootLayoutBody siteSettings={siteSettings}>
+            {children}
+          </RootLayoutBody>
         </ThemeProvider>
         <Scripts />
       </body>
@@ -118,7 +132,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   )
 }
 
-function RootLayoutBody({ children }: { children: React.ReactNode }) {
+function RootLayoutBody({
+  children,
+  siteSettings,
+}: {
+  children: React.ReactNode
+  siteSettings?: unknown
+}) {
   const location = useLocation()
   const isStudio = location.pathname.startsWith("/studio")
 
@@ -126,10 +146,29 @@ function RootLayoutBody({ children }: { children: React.ReactNode }) {
     return <>{children}</>
   }
 
+  const initialEntries = siteSettings
+    ? [
+        {
+          id: "sanity-site-settings",
+          title: "Sanity Site Settings",
+          endpoint: "*[_type == 'setting'][0]",
+          method: "GROQ" as const,
+          status: 200,
+          data: siteSettings,
+          description:
+            "Global site metadata, theme, and SEO settings fetched from Sanity CMS",
+        },
+      ]
+    : []
+
   return (
-    <TooltipProvider>
-      {children}
-      <CommandMenu />
-    </TooltipProvider>
+    <ApiInspectorProvider initialEntries={initialEntries}>
+      <TooltipProvider>
+        {children}
+        <CommandMenu />
+        <DevApiInspectorFloatingTrigger />
+        <ApiInspectorDrawer />
+      </TooltipProvider>
+    </ApiInspectorProvider>
   )
 }
