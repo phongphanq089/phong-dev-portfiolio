@@ -12,7 +12,7 @@ import {
   Trash2,
   X,
 } from "lucide-react"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 import { cn } from "@/shared/lib/utils"
 import { Badge } from "@/shared/ui/core/badge"
@@ -117,6 +117,19 @@ export function ApiInspectorDrawer() {
     headers?: Record<string, string>
     body?: string
   } | null>(null)
+
+  // Auto-fetch data if active entry has a fetcher and no data yet
+  useEffect(() => {
+    if (
+      isOpen &&
+      activeEntry &&
+      activeEntry.data === undefined &&
+      typeof activeEntry.fetcher === "function" &&
+      !activeEntry.isLoading
+    ) {
+      refetchEntry(activeEntry.id)
+    }
+  }, [isOpen, activeEntry, refetchEntry])
 
   // Determine if active entry has a genuine, non-empty request body
   const hasRequestBody = (() => {

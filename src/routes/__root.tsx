@@ -11,6 +11,14 @@ import { useEffect } from "react"
 import type { JSX } from "react/jsx-runtime"
 
 import {
+  getResourceCategories,
+  getResources,
+  RESOURCE_CATEGORIES_QUERY,
+  resourceCategoriesQueryOptions,
+  RESOURCES_QUERY,
+  resourcesQueryOptions,
+} from "@/features/resources"
+import {
   createPersonJsonLd,
   createSeoMeta,
   createSiteLinks,
@@ -34,13 +42,15 @@ export const Route = createRootRouteWithContext<{
 }>()({
   loader: async ({ context }) => {
     try {
-      const siteSettings = await context.queryClient.ensureQueryData(
-        siteSettingsQueryOptions()
-      )
+      const [siteSettings, resources, categories] = await Promise.all([
+        context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
+        context.queryClient.ensureQueryData(resourcesQueryOptions()),
+        context.queryClient.ensureQueryData(resourceCategoriesQueryOptions()),
+      ])
 
-      return { siteSettings }
+      return { siteSettings, resources, categories }
     } catch {
-      return { siteSettings: null }
+      return { siteSettings: null, resources: [], categories: [] }
     }
   },
   head: ({ loaderData }) => {
@@ -86,7 +96,11 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   const loaderData = Route.useLoaderData()
   return (
-    <RootDocument siteSettings={loaderData?.siteSettings}>
+    <RootDocument
+      siteSettings={loaderData?.siteSettings}
+      resources={loaderData?.resources}
+      categories={loaderData?.categories}
+    >
       <Outlet />
     </RootDocument>
   )
@@ -97,9 +111,13 @@ const themeScript = `(function(){try{var t=localStorage.getItem('vite-ui-theme')
 function RootDocument({
   children,
   siteSettings,
+  resources,
+  categories,
 }: {
   children: React.ReactNode
   siteSettings?: unknown
+  resources?: unknown
+  categories?: unknown
 }) {
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
@@ -122,7 +140,11 @@ function RootDocument({
         suppressHydrationWarning
       >
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <RootLayoutBody siteSettings={siteSettings}>
+          <RootLayoutBody
+            siteSettings={siteSettings}
+            resources={resources}
+            categories={categories}
+          >
             {children}
           </RootLayoutBody>
         </ThemeProvider>
@@ -135,9 +157,13 @@ function RootDocument({
 function RootLayoutBody({
   children,
   siteSettings,
+  resources,
+  categories,
 }: {
   children: React.ReactNode
   siteSettings?: unknown
+  resources?: unknown
+  categories?: unknown
 }) {
   const location = useLocation()
   const isStudio = location.pathname.startsWith("/studio")
@@ -146,21 +172,45 @@ function RootLayoutBody({
     return <>{children}</>
   }
 
-  const initialEntries = siteSettings
-    ? [
-        {
-          id: "sanity-site-settings",
-          title: "Sanity Site Settings",
-          endpoint: "*[_type == 'setting'][0]",
-          method: "GROQ" as const,
-          status: 200,
-          data: siteSettings,
-          fetcher: () => getSiteSettings(),
-          description:
-            "Global site metadata, theme, and SEO settings fetched from Sanity CMS",
-        },
-      ]
-    : []
+  const initialEntries = [
+    ...(siteSettings
+      ? [
+          {
+            id: "sanity-site-settings",
+            title: "Sanity Site Settings",
+            endpoint: "*[_type == 'setting'][0]",
+            method: "GROQ" as const,
+            status: 200,
+            data: siteSettings,
+            fetcher: () => getSiteSettings(),
+            description:
+              "Global site metadata, theme, and SEO settings fetched from Sanity CMS",
+          },
+        ]
+      : []),
+    {
+      id: "sanity-resources",
+      title: "Sanity Resources",
+      endpoint: RESOURCES_QUERY,
+      method: "GROQ" as const,
+      status: 200,
+      data: resources,
+      fetcher: () => getResources(),
+      description:
+        "Curated developer tools, UI libraries, and design resources fetched via GROQ",
+    },
+    {
+      id: "sanity-resource-categories",
+      title: "Sanity Resource Categories",
+      endpoint: RESOURCE_CATEGORIES_QUERY,
+      method: "GROQ" as const,
+      status: 200,
+      data: categories,
+      fetcher: () => getResourceCategories(),
+      description:
+        "Developer resource categories and navigation filters fetched via GROQ",
+    },
+  ]
 
   return (
     <ApiInspectorProvider initialEntries={initialEntries}>
