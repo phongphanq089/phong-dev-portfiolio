@@ -1,14 +1,21 @@
 import { CheckCircle2 } from "lucide-react"
 import React from "react"
 
+import { cn } from "@/shared/lib"
+
 import type { BlogPost } from "../types"
 
 interface BlogCardProps {
   post: BlogPost
   onSelectTag?: (tagSlug: string) => void
+  onSelectGroup?: (groupSlug: string) => void
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelectTag }) => {
+export const BlogCard: React.FC<BlogCardProps> = ({
+  post,
+  onSelectTag,
+  onSelectGroup,
+}) => {
   const primaryCategory = post.categories[0]?.title || "Article"
 
   const formattedDate = React.useMemo(() => {
@@ -42,10 +49,22 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, onSelectTag }) => {
           {/* Group / Series Badge if present */}
           {post.group && (
             <div className="absolute top-2.5 left-2.5 z-10">
-              <span className="rounded-md border border-white/20 bg-black/70 px-2 py-0.5 text-[9px] font-semibold text-white shadow-xs backdrop-blur-md">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onSelectGroup?.(post.group!.slug.current)
+                }}
+                className={cn(
+                  "rounded-md border border-white/20 bg-black/70 px-2 py-0.5 text-[9px] font-semibold text-white shadow-xs backdrop-blur-md transition-all",
+                  onSelectGroup &&
+                    "cursor-pointer hover:border-pp-primary hover:bg-pp-primary/90"
+                )}
+                title={`Filter series: ${post.group.title}`}
+              >
                 {post.group.title}{" "}
                 {post.groupOrder ? `• #${post.groupOrder}` : ""}
-              </span>
+              </button>
             </div>
           )}
 

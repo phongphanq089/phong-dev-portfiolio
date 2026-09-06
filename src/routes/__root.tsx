@@ -11,6 +11,17 @@ import { useEffect } from "react"
 import type { JSX } from "react/jsx-runtime"
 
 import {
+  BLOG_CATEGORIES_QUERY,
+  BLOG_GROUPS_QUERY,
+  BLOG_POSTS_QUERY,
+  blogCategoriesQueryOptions,
+  blogGroupsQueryOptions,
+  blogPostsQueryOptions,
+  getBlogCategories,
+  getBlogGroups,
+  getBlogPosts,
+} from "@/features/blog"
+import {
   getResourceCategories,
   getResources,
   RESOURCE_CATEGORIES_QUERY,
@@ -42,15 +53,39 @@ export const Route = createRootRouteWithContext<{
 }>()({
   loader: async ({ context }) => {
     try {
-      const [siteSettings, resources, categories] = await Promise.all([
+      const [
+        siteSettings,
+        resources,
+        categories,
+        blogPosts,
+        blogCategories,
+        blogGroups,
+      ] = await Promise.all([
         context.queryClient.ensureQueryData(siteSettingsQueryOptions()),
         context.queryClient.ensureQueryData(resourcesQueryOptions()),
         context.queryClient.ensureQueryData(resourceCategoriesQueryOptions()),
+        context.queryClient.ensureQueryData(blogPostsQueryOptions()),
+        context.queryClient.ensureQueryData(blogCategoriesQueryOptions()),
+        context.queryClient.ensureQueryData(blogGroupsQueryOptions()),
       ])
 
-      return { siteSettings, resources, categories }
+      return {
+        siteSettings,
+        resources,
+        categories,
+        blogPosts,
+        blogCategories,
+        blogGroups,
+      }
     } catch {
-      return { siteSettings: null, resources: [], categories: [] }
+      return {
+        siteSettings: null,
+        resources: [],
+        categories: [],
+        blogPosts: [],
+        blogCategories: [],
+        blogGroups: [],
+      }
     }
   },
   head: ({ loaderData }) => {
@@ -100,6 +135,9 @@ function RootComponent() {
       siteSettings={loaderData?.siteSettings}
       resources={loaderData?.resources}
       categories={loaderData?.categories}
+      blogPosts={loaderData?.blogPosts}
+      blogCategories={loaderData?.blogCategories}
+      blogGroups={loaderData?.blogGroups}
     >
       <Outlet />
     </RootDocument>
@@ -113,11 +151,17 @@ function RootDocument({
   siteSettings,
   resources,
   categories,
+  blogPosts,
+  blogCategories,
+  blogGroups,
 }: {
   children: React.ReactNode
   siteSettings?: unknown
   resources?: unknown
   categories?: unknown
+  blogPosts?: unknown
+  blogCategories?: unknown
+  blogGroups?: unknown
 }) {
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
@@ -144,6 +188,9 @@ function RootDocument({
             siteSettings={siteSettings}
             resources={resources}
             categories={categories}
+            blogPosts={blogPosts}
+            blogCategories={blogCategories}
+            blogGroups={blogGroups}
           >
             {children}
           </RootLayoutBody>
@@ -159,11 +206,17 @@ function RootLayoutBody({
   siteSettings,
   resources,
   categories,
+  blogPosts,
+  blogCategories,
+  blogGroups,
 }: {
   children: React.ReactNode
   siteSettings?: unknown
   resources?: unknown
   categories?: unknown
+  blogPosts?: unknown
+  blogCategories?: unknown
+  blogGroups?: unknown
 }) {
   const location = useLocation()
   const isStudio = location.pathname.startsWith("/studio")
@@ -209,6 +262,38 @@ function RootLayoutBody({
       fetcher: () => getResourceCategories(),
       description:
         "Developer resource categories and navigation filters fetched via GROQ",
+    },
+    {
+      id: "sanity-blog-posts",
+      title: "Sanity Blog Posts",
+      endpoint: BLOG_POSTS_QUERY,
+      method: "GROQ" as const,
+      status: 200,
+      data: blogPosts,
+      fetcher: () => getBlogPosts(),
+      description:
+        "Full list of articles and engineering writeups fetched from Sanity CMS",
+    },
+    {
+      id: "sanity-blog-categories",
+      title: "Sanity Blog Categories",
+      endpoint: BLOG_CATEGORIES_QUERY,
+      method: "GROQ" as const,
+      status: 200,
+      data: blogCategories,
+      fetcher: () => getBlogCategories(),
+      description: "Blog categories for filtering posts fetched via GROQ",
+    },
+    {
+      id: "sanity-blog-groups",
+      title: "Sanity Blog Series",
+      endpoint: BLOG_GROUPS_QUERY,
+      method: "GROQ" as const,
+      status: 200,
+      data: blogGroups,
+      fetcher: () => getBlogGroups(),
+      description:
+        "Curated multi-part engineering series and learning collections fetched via GROQ",
     },
   ]
 

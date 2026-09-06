@@ -19,10 +19,18 @@ export interface BlogTag {
 
 export interface BlogGroup {
   _id: string
+  _type?: "group"
   title: string
   slug: {
     current: string
   }
+  description?: string
+  coverImage?: {
+    url: string
+    alt?: string
+  }
+  isCompleted?: boolean
+  postCount?: number
 }
 
 export interface BlogAuthor {
