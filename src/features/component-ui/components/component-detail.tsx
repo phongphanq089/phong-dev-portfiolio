@@ -20,6 +20,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/shared/ui/core"
+import { TableOfContents, type TOCItem } from "@/shared/ui/system"
 
 import { COMPONENTS_DATA } from "../components-data"
 import type { ComponentItem } from "../types"
@@ -28,6 +29,16 @@ import { RenderSchematic } from "./schematics"
 interface ComponentDetailProps {
   component: ComponentItem
 }
+
+const COMPONENT_TOC_ITEMS: TOCItem[] = [
+  { id: "overview", title: "Overview", depth: 2 },
+  { id: "installation", title: "Installation", depth: 2 },
+  { id: "cli-setup", title: "CLI Command", depth: 3 },
+  { id: "interactive-demo", title: "Interactive Demo", depth: 2 },
+  { id: "code-implementation", title: "Code Usage", depth: 3 },
+  { id: "api-props", title: "API & Props", depth: 3 },
+  { id: "navigation", title: "Related Components", depth: 2 },
+]
 
 type TabMode = "preview" | "code" | "props"
 
@@ -99,10 +110,31 @@ export function ${pascalName}Demo() {
     }
   }
 
+  const handleTocItemClick = (id: string) => {
+    if (id === "code-implementation") {
+      setActiveTab("code")
+    } else if (id === "api-props") {
+      setActiveTab("props")
+    } else if (id === "interactive-demo") {
+      setActiveTab("preview")
+    }
+  }
+
   return (
-    <div className="w-full">
+    <div className="relative w-full">
+      {/* Sticky Table of Contents on Desktop Screens */}
+      <aside className="pointer-events-auto fixed top-28 right-4 z-30 hidden w-52 xl:block 2xl:right-12">
+        <div className="rounded-xl border border-border/80 bg-background/90 p-4 shadow-xl backdrop-blur-md dark:bg-black/75">
+          <TableOfContents
+            items={COMPONENT_TOC_ITEMS}
+            onItemClick={handleTocItemClick}
+          />
+        </div>
+      </aside>
+
       {/* 1. Header Hero Section */}
       <GridContainer
+        id="overview"
         borderTop
         borderBottom
         showCrosshairs
@@ -165,8 +197,11 @@ export function ${pascalName}Demo() {
           </div>
 
           {/* CLI Install Snippet Box */}
-          <div className="mt-2 flex flex-col gap-2 rounded-xl border border-black/10 bg-black/60 p-3 shadow-md backdrop-blur-md sm:flex-row sm:items-center sm:justify-between dark:border-white/10">
-            <div className="flex items-center gap-3">
+          <div
+            id="installation"
+            className="mt-2 flex flex-col gap-2 rounded-xl border border-black/10 bg-black/60 p-3 shadow-md backdrop-blur-md sm:flex-row sm:items-center sm:justify-between dark:border-white/10"
+          >
+            <div id="cli-setup" className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 rounded-md border border-white/10 bg-white/5 px-2 py-1">
                 <Terminal className="size-3.5 text-white/60" />
                 <div className="flex items-center gap-1 text-[11px] text-white/60">
@@ -224,7 +259,12 @@ export function ${pascalName}Demo() {
       </GridContainer>
 
       {/* 2. Interactive Showcase Tabs & Preview Stage */}
-      <GridContainer borderBottom showCrosshairs className="px-4 py-3 sm:px-8">
+      <GridContainer
+        id="interactive-demo"
+        borderBottom
+        showCrosshairs
+        className="px-4 py-3 sm:px-8"
+      >
         <div className="flex items-center gap-1.5">
           <button
             type="button"
@@ -291,7 +331,10 @@ export function ${pascalName}Demo() {
         )}
 
         {activeTab === "code" && (
-          <div className="relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/90 p-5 shadow-2xl">
+          <div
+            id="code-implementation"
+            className="relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/90 p-5 shadow-2xl"
+          >
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <div className="size-3 rounded-full bg-red-500/80" />
@@ -328,7 +371,10 @@ export function ${pascalName}Demo() {
         )}
 
         {activeTab === "props" && (
-          <div className="flex w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/60 p-4 shadow-xl backdrop-blur-md">
+          <div
+            id="api-props"
+            className="flex w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-black/60 p-4 shadow-xl backdrop-blur-md"
+          >
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
@@ -386,6 +432,7 @@ export function ${pascalName}Demo() {
 
       {/* 4. Pagination / Next & Previous Navigation */}
       <GridContainer
+        id="navigation"
         borderBottom
         showCrosshairs
         className="flex flex-col gap-4 p-4 sm:p-8 md:flex-row md:items-center md:justify-between"

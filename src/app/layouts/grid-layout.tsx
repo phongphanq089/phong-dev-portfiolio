@@ -26,6 +26,7 @@ export interface GridContainerProps {
   columns?: 1 | 2 | 3
   borderBottom?: boolean
   borderTop?: boolean
+  id?: string
 }
 
 export function GridContainer({
@@ -36,9 +37,11 @@ export function GridContainer({
   columns = 1,
   borderBottom = true,
   borderTop = false,
+  id,
 }: GridContainerProps) {
   return (
     <Component
+      id={id}
       className={cn(
         "relative z-1",
         borderBottom && "border-b border-border",
