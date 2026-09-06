@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router"
 import { CheckCircle2 } from "lucide-react"
 import React from "react"
 
@@ -36,15 +37,20 @@ export const BlogCard: React.FC<BlogCardProps> = ({
       {/* Top Half: Cover Image */}
       <div className="flex flex-col gap-4">
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-border/60 bg-muted/40">
-          <img
-            src={post.coverImage.url}
-            alt={post.coverImage.alt || post.title}
-            className="h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
-            loading="lazy"
-          />
-
-          {/* Subtle Cyber Vignette & Gradient Overlay */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 opacity-60 transition-opacity group-hover:opacity-40" />
+          <Link
+            to="/blog/$slug"
+            params={{ slug: post.slug.current }}
+            className="block h-full w-full"
+          >
+            <img
+              src={post.coverImage.url}
+              alt={post.coverImage.alt || post.title}
+              className="h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-105"
+              loading="lazy"
+            />
+            {/* Subtle Cyber Vignette & Gradient Overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 opacity-60 transition-opacity group-hover:opacity-40" />
+          </Link>
 
           {/* Group / Series Badge if present */}
           {post.group && (
@@ -89,9 +95,11 @@ export const BlogCard: React.FC<BlogCardProps> = ({
         </div>
 
         {/* Title (Matching Image 1) */}
-        <h3 className="line-clamp-2 text-lg font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-pp-primary sm:text-xl">
-          {post.title}
-        </h3>
+        <Link to="/blog/$slug" params={{ slug: post.slug.current }}>
+          <h3 className="line-clamp-2 text-lg font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-pp-primary hover:text-pp-primary sm:text-xl">
+            {post.title}
+          </h3>
+        </Link>
 
         {/* Excerpt / Summary (Matching Image 1) */}
         <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:line-clamp-3 sm:text-sm">

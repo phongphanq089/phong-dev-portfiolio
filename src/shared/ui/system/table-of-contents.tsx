@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { AlignLeft } from "lucide-react"
+import { BookOpen } from "lucide-react"
 import React, {
   useCallback,
   useEffect,
@@ -66,8 +66,8 @@ const INDENT_STEP = 16
 export const TableOfContents: React.FC<TableOfContentsProps> = ({
   items: propItems,
   containerRef,
-  title = "On this page",
-  icon = <AlignLeft className="size-3.5 opacity-80" />,
+  title = "ON THIS PAGE",
+  icon = <BookOpen className="size-3.5 opacity-75" />,
   className,
   activeId: controlledActiveId,
   onItemClick,
@@ -324,10 +324,12 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
       )}
     >
       {/* Header */}
-      <div className="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground/80">
-        {icon}
-        <span className="tracking-wide">{title}</span>
-      </div>
+      {title && (
+        <div className="mb-3.5 flex items-center gap-2 text-[11px] font-semibold tracking-wider text-muted-foreground/75 uppercase">
+          {icon}
+          <span>{title}</span>
+        </div>
+      )}
 
       {/* Main Container with Stepped SVG Rail and Nav Items */}
       <div className="relative w-full">
@@ -416,7 +418,9 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
                       : "font-normal text-muted-foreground/75 hover:text-foreground"
                   )}
                 >
-                  <span className="truncate">{item.title}</span>
+                  <span className="line-clamp-2 leading-relaxed">
+                    {item.title}
+                  </span>
                 </a>
               </li>
             )

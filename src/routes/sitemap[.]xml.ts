@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router"
 
+import { BLOCKS_DATA } from "@/features/blocks"
+import { COMPONENTS_DATA } from "@/features/component-ui"
 import { siteConfig } from "@/shared/config"
 import { client } from "@/shared/lib/sanity"
 
@@ -63,22 +65,53 @@ export const Route = createFileRoute("/sitemap.xml")({
         const dynamicRoutes: SitemapRoute[] = []
 
         try {
-          /*
-          const posts = await client.fetch(`*[_type == "post" && defined(slug.current)]{ "path": "/blog/" + slug.current, _updatedAt }`)
-          posts.forEach((post: any) => dynamicRoutes.push({
-            path: post.path,
-            lastmod: post._updatedAt,
-            changefreq: 'weekly',
-            priority: '0.7'
-          }))
-          */
-          // Sample logic to prevent lint error for unused 'client' if not using it yet
-          if (!client) {
-            console.log("Sanity client initialized")
+          // 1. Dynamic Sanity Blog Posts
+          const sanityPosts = await client.fetch<
+            Array<{
+              slug: string
+              _updatedAt?: string
+              publishedAt?: string
+            }>
+          >(
+            `*[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt, publishedAt }`
+          )
+
+          if (Array.isArray(sanityPosts)) {
+            sanityPosts.forEach((post) => {
+              if (post.slug) {
+                dynamicRoutes.push({
+                  path: `/blog/${post.slug}`,
+                  lastmod: post._updatedAt || post.publishedAt || now,
+                  changefreq: "weekly",
+                  priority: "0.8",
+                })
+              }
+            })
           }
         } catch (error) {
-          console.error("Error fetching dynamic routes for sitemap:", error)
+          console.error("Error fetching dynamic blog posts for sitemap:", error)
         }
+
+        // 2. Dynamic Component UI Pages
+        COMPONENTS_DATA.forEach((component) => {
+          dynamicRoutes.push({
+            path: `/component-ui/${component.slug}`,
+            lastmod: now,
+            changefreq: "weekly",
+            priority: "0.8",
+          })
+        })
+
+        // 3. Dynamic Blocks Pages
+        BLOCKS_DATA.forEach((block) => {
+          dynamicRoutes.push({
+            path: `/blocks/${block.category}/${block.slug}`,
+            lastmod: now,
+            changefreq: "weekly",
+            priority: "0.8",
+          })
+        })
+
         const allRoutes = [...staticRoutes, ...dynamicRoutes]
 
         const host = import.meta.env.VITE_SITE_URL || siteConfig.url

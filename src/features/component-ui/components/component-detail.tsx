@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router"
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   Check,
   Code2,
   Copy,
@@ -122,14 +123,14 @@ export function ${pascalName}Demo() {
 
   return (
     <div className="relative w-full">
-      {/* Sticky Table of Contents on Desktop Screens */}
-      <aside className="pointer-events-auto fixed top-28 right-4 z-30 hidden w-52 xl:block 2xl:right-12">
-        <div className="rounded-xl border border-border/80 bg-background/90 p-4 shadow-xl backdrop-blur-md dark:bg-black/75">
-          <TableOfContents
-            items={COMPONENT_TOC_ITEMS}
-            onItemClick={handleTocItemClick}
-          />
-        </div>
+      {/* Fixed Table of Contents on Desktop Screens (outside container) */}
+      <aside className="pointer-events-auto fixed top-28 right-4 z-30 hidden w-52 xl:block min-[1400px]:right-auto min-[1400px]:left-[calc(50%+33rem)] 2xl:right-12">
+        <TableOfContents
+          items={COMPONENT_TOC_ITEMS}
+          title="ON THIS PAGE"
+          icon={<BookOpen className="size-3.5 opacity-80" />}
+          onItemClick={handleTocItemClick}
+        />
       </aside>
 
       {/* 1. Header Hero Section */}
