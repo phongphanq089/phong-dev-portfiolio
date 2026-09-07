@@ -36,28 +36,23 @@ export function DevApiInspectorFloatingTrigger({
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button
+        <button
           type="button"
-          variant="outline"
-          size="sm"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle theme mode"
           className={cn(
-            "fixed bottom-5 left-5 z-40 h-8 gap-2 rounded-full border-border/80 bg-background/90 px-3 text-xs text-foreground shadow-lg backdrop-blur-md transition-all hover:border-primary/50 hover:bg-card hover:shadow-primary/10",
-            isOpen && "border-primary/60 bg-primary/10 text-primary",
-            className
+            "flex size-9 min-w-[50px] items-center justify-center rounded-sm transition-all duration-200 active:scale-95",
+            className,
+            isOpen
+              ? "bg-accent text-foreground"
+              : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
           )}
         >
-          <div className="flex size-4 items-center justify-center text-primary">
-            {isAnyLoading ? (
-              <RefreshCw className="size-3.5 animate-spin" />
-            ) : (
-              <Terminal className="size-3.5" />
-            )}
-          </div>
-
-          <span className="hidden font-mono text-[11px] font-semibold tracking-wider sm:inline">
-            API DEVTOOL
-          </span>
+          {isAnyLoading ? (
+            <RefreshCw className="size-3.5 animate-spin" />
+          ) : (
+            <Terminal className="size-4.5 shrink-0 text-pp-primary" />
+          )}
 
           {entries.length > 0 && (
             <Badge
@@ -67,11 +62,7 @@ export function DevApiInspectorFloatingTrigger({
               {entries.length}
             </Badge>
           )}
-
-          {isAnyLoading && (
-            <span className="size-2 animate-ping rounded-full bg-primary" />
-          )}
-        </Button>
+        </button>
       </TooltipTrigger>
       <TooltipContent
         side="right"
@@ -142,7 +133,7 @@ export function ApiInspectorTrigger({
       {...props}
     >
       <Terminal className="size-3 text-primary" />
-      <span className="whitespace-nowrap">{children || "Inspect API"}</span>
+      <span className="whitespace-nowrap">{children || "Inspect API "}</span>
     </Button>
   )
 }
