@@ -78,6 +78,10 @@ src/
 - **Always Reuse Existing UI:** Check and import primitives from `@/shared/ui` (`src/shared/ui/core/`, including `Button`, `Input`, `Badge`, `Card`, `Checkbox`, `Dialog`, `Drawer`, `DropdownMenu`, `Textarea`, `Tooltip`, `Separator`, etc.).
 - **Strict Prohibition:** NEVER write raw HTML controls (e.g. `<button className="...">`, `<input className="...">`) or reinvent separate styles when a core component already exists. Leverage existing `variant` and `size` props.
 
+### Modern Component Typing Policy (MANDATORY)
+
+- **Strict Prohibition of `React.FC`:** NEVER use `React.FC` or `React.FunctionComponent`. Always declare components using standard named functions with explicitly typed props: `export function ComponentName({ ... }: ComponentProps)`.
+
 For specific implementation requirements, refer to the modular rules in `.agents/rules/`:
 
 - [TypeScript Strict Quality](.agents/rules/typescript.md): Zero red lines, upfront typing, no `any`.
