@@ -1,5 +1,5 @@
 import { RotateCcw, Search, X } from "lucide-react"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 
 import { cn } from "@/shared/lib"
 import { Button, Input } from "@/shared/ui/core"
@@ -21,14 +21,14 @@ interface ComponentFilterBarProps {
   totalCount: number
 }
 
-export const ComponentFilterBar: React.FC<ComponentFilterBarProps> = ({
+export const ComponentFilterBar = ({
   categories,
   components,
   selectedCategory,
   onSelectCategory,
   searchQuery,
   onSearchChange,
-}) => {
+}: ComponentFilterBarProps) => {
   // Compute count for each category
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { all: components.length }

@@ -11,7 +11,7 @@ import {
   Tablet,
   Terminal,
 } from "lucide-react"
-import React, { useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 
 import { GridContainer } from "@/app/layouts"
 import { cn } from "@/shared/lib"
@@ -33,7 +33,7 @@ interface BlockDetailProps {
 type ViewportMode = "desktop" | "tablet" | "mobile"
 type TabMode = "preview" | "code"
 
-export const BlockDetail: React.FC<BlockDetailProps> = ({ block }) => {
+export const BlockDetail = ({ block }: BlockDetailProps) => {
   const [viewport, setViewport] = useState<ViewportMode>("desktop")
   const [activeTab, setActiveTab] = useState<TabMode>("preview")
   const [copiedInstall, setCopiedInstall] = useState(false)

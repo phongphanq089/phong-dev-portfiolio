@@ -11,11 +11,11 @@ export interface CardCanvasProps extends React.HTMLAttributes<HTMLDivElement> {
  * Interactive canvas container that tracks mouse position and renders
  * an ambient radial glow backdrop across child GlowCard components.
  */
-export const CardCanvas: React.FC<CardCanvasProps> = ({
+export const CardCanvas = ({
   children,
   className,
   ...props
-}) => {
+}: CardCanvasProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -52,13 +52,13 @@ export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
  * Features extending corner crosshairs reticles, dynamic hover border glow,
  * and dot-matrix blueprint background texture.
  */
-export const GlowCard: React.FC<GlowCardProps> = ({
+export const GlowCard = ({
   children,
   className,
   contentClassName,
   showCrosshairs = true,
   ...props
-}) => {
+}: GlowCardProps) => {
   return (
     <div className={cn("glow-card", className)} {...props}>
       {/* Corner crosshairs extending outwards on hover */}

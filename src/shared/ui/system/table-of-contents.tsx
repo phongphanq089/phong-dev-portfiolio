@@ -63,7 +63,7 @@ interface ItemCoords {
 const X_BASE = 14
 const INDENT_STEP = 16
 
-export const TableOfContents: React.FC<TableOfContentsProps> = ({
+export const TableOfContents = ({
   items: propItems,
   containerRef,
   title = "ON THIS PAGE",
@@ -72,7 +72,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   activeId: controlledActiveId,
   onItemClick,
   scrollOffset = 84,
-}) => {
+}: TableOfContentsProps) => {
   const [scannedItems, setScannedItems] = useState<TOCItem[]>([])
   const [internalActiveId, setInternalActiveId] = useState<string | null>(null)
   const listRef = useRef<HTMLUListElement | null>(null)

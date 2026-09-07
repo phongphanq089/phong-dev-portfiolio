@@ -12,11 +12,11 @@ interface BlogCardProps {
   onSelectGroup?: (groupSlug: string) => void
 }
 
-export const BlogCard: React.FC<BlogCardProps> = ({
+export const BlogCard = ({
   post,
   onSelectTag,
   onSelectGroup,
-}) => {
+}: BlogCardProps) => {
   const primaryCategory = post.categories[0]?.title || "Article"
 
   const formattedDate = React.useMemo(() => {

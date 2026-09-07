@@ -1,5 +1,4 @@
 import { ArrowRight, BookOpen, CheckCircle2, Clock } from "lucide-react"
-import React from "react"
 
 import { Button } from "@/shared/ui/core"
 
@@ -11,11 +10,11 @@ interface BlogSeriesCardProps {
   onSelect: (groupSlug: string) => void
 }
 
-export const BlogSeriesCard: React.FC<BlogSeriesCardProps> = ({
+export const BlogSeriesCard = ({
   group,
   postCount,
   onSelect,
-}) => {
+}: BlogSeriesCardProps) => {
   return (
     <div
       onClick={() => onSelect(group.slug.current)}

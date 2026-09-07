@@ -1,5 +1,4 @@
 import { ArrowLeft, BookOpen, CheckCircle2, Clock } from "lucide-react"
-import React from "react"
 
 import { Button } from "@/shared/ui/core"
 
@@ -11,11 +10,11 @@ interface BlogSeriesBannerProps {
   onClear: () => void
 }
 
-export const BlogSeriesBanner: React.FC<BlogSeriesBannerProps> = ({
+export const BlogSeriesBanner = ({
   group,
   totalParts,
   onClear,
-}) => {
+}: BlogSeriesBannerProps) => {
   return (
     <div className="relative overflow-hidden rounded-xl border border-pp-primary/30 bg-gradient-to-br from-pp-primary/[0.08] via-background to-background p-5 sm:p-6 md:p-8">
       {/* Background glow accent */}

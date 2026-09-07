@@ -10,7 +10,7 @@ import {
   Search,
   X,
 } from "lucide-react"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 
 import { cn } from "@/shared/lib"
 import {
@@ -53,7 +53,7 @@ const PRICING_OPTIONS: Array<{ value: PricingBadge | "ALL"; label: string }> = [
   { value: "Paid", label: "Paid" },
 ]
 
-export const ResourceFilterBar: React.FC<ResourceFilterBarProps> = ({
+export const ResourceFilterBar = ({
   categories,
   resources,
   selectedCategory,
@@ -64,7 +64,7 @@ export const ResourceFilterBar: React.FC<ResourceFilterBarProps> = ({
   onSelectPricing,
   sortOption,
   onSortChange,
-}) => {
+}: ResourceFilterBarProps) => {
   // Compute counts for categories
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { all: resources.length }

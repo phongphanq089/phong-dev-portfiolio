@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router"
 import { ArrowDownRight, Terminal } from "lucide-react"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import { PPMarkIsometric } from "@/shared/ui"
 import TextBurnNeon from "@/shared/ui/animation/text-burn-neon"
@@ -14,10 +14,10 @@ export interface UnderConstructionProps {
   className?: string
 }
 
-export const UnderConstruction: React.FC<UnderConstructionProps> = ({
+export const UnderConstruction = ({
   pageName,
   className = "",
-}) => {
+}: UnderConstructionProps) => {
   const [progress, setProgress] = useState(78)
 
   const [activeLogIndex, setActiveLogIndex] = useState(0)

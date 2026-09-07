@@ -8,7 +8,7 @@ import {
   Search,
   X,
 } from "lucide-react"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 
 import { cn } from "@/shared/lib"
 import {
@@ -40,7 +40,7 @@ interface BlogFilterBarProps {
   totalCount: number
 }
 
-export const BlogFilterBar: React.FC<BlogFilterBarProps> = ({
+export const BlogFilterBar = ({
   categories,
   posts,
   selectedCategory,
@@ -53,7 +53,7 @@ export const BlogFilterBar: React.FC<BlogFilterBarProps> = ({
   groups = [],
   selectedGroup = null,
   onSelectGroup,
-}) => {
+}: BlogFilterBarProps) => {
   // Compute counts for categories
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {}

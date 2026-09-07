@@ -11,7 +11,7 @@ import {
   Sparkles,
   Terminal,
 } from "lucide-react"
-import React, { useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 
 import { GridContainer } from "@/app/layouts"
 import { cn } from "@/shared/lib"
@@ -43,9 +43,7 @@ const COMPONENT_TOC_ITEMS: TOCItem[] = [
 
 type TabMode = "preview" | "code" | "props"
 
-export const ComponentDetail: React.FC<ComponentDetailProps> = ({
-  component,
-}) => {
+export const ComponentDetail = ({ component }: ComponentDetailProps) => {
   const [activeTab, setActiveTab] = useState<TabMode>("preview")
   const [copiedInstall, setCopiedInstall] = useState(false)
   const [copiedCode, setCopiedCode] = useState(false)

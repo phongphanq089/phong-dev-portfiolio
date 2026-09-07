@@ -1,5 +1,5 @@
 import { Layers } from "lucide-react"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 
 import type { BlogGroup, BlogPost } from "../types"
 import { BlogSeriesCard } from "./blog-series-card"
@@ -10,11 +10,11 @@ interface BlogSeriesShelfProps {
   onSelectGroup: (groupSlug: string) => void
 }
 
-export const BlogSeriesShelf: React.FC<BlogSeriesShelfProps> = ({
+export const BlogSeriesShelf = ({
   groups,
   posts,
   onSelectGroup,
-}) => {
+}: BlogSeriesShelfProps) => {
   const seriesWithCounts = useMemo(() => {
     return groups.map((group) => {
       const count = posts.filter(

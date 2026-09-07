@@ -64,9 +64,9 @@ interface CodeBlockValue {
   filename?: string
 }
 
-export const PortableTextCodeBlock: React.FC<
-  PortableTextTypeComponentProps<CodeBlockValue>
-> = ({ value }) => {
+export const PortableTextCodeBlock = ({
+  value,
+}: PortableTextTypeComponentProps<CodeBlockValue>) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
@@ -138,9 +138,9 @@ interface CalloutValue {
   text?: string
 }
 
-export const PortableTextCallout: React.FC<
-  PortableTextTypeComponentProps<CalloutValue>
-> = ({ value }) => {
+export const PortableTextCallout = ({
+  value,
+}: PortableTextTypeComponentProps<CalloutValue>) => {
   const tone = value?.tone || "info"
 
   const config = useMemo(() => {
@@ -200,9 +200,9 @@ interface ImageValue {
   caption?: string
 }
 
-export const PortableTextImage: React.FC<
-  PortableTextTypeComponentProps<ImageValue>
-> = ({ value }) => {
+export const PortableTextImage = ({
+  value,
+}: PortableTextTypeComponentProps<ImageValue>) => {
   const imageUrl = useMemo(() => {
     if (!value) return ""
     try {
@@ -357,7 +357,11 @@ export const defaultPortableTextComponents: PortableTextComponents = {
     link: ({
       value,
       children,
-    }: PortableTextMarkComponentProps<{ href?: string; blank?: boolean }>) => {
+    }: PortableTextMarkComponentProps<{
+      _type: string
+      href?: string
+      blank?: boolean
+    }>) => {
       const isExternal =
         value?.blank ||
         (value?.href &&
@@ -388,11 +392,11 @@ export interface PortableTextRendererProps {
   className?: string
 }
 
-export const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({
+export const PortableTextRenderer = ({
   value,
   components,
   className,
-}) => {
+}: PortableTextRendererProps) => {
   const mergedComponents = useMemo(() => {
     if (!components) return defaultPortableTextComponents
     return {

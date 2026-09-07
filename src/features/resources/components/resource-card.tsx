@@ -37,10 +37,10 @@ const PRICING_STYLES: Record<
   },
 }
 
-export const ResourceCard: React.FC<ResourceCardProps> = ({
+export const ResourceCard = ({
   resource,
   onSelectCategory,
-}) => {
+}: ResourceCardProps) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = (e: React.MouseEvent) => {

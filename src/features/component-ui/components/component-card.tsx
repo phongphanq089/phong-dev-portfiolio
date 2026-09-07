@@ -12,7 +12,7 @@ interface ComponentCardProps {
   component: ComponentItem
 }
 
-export const ComponentCard: React.FC<ComponentCardProps> = ({ component }) => {
+export const ComponentCard = ({ component }: ComponentCardProps) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = (e: React.MouseEvent) => {
