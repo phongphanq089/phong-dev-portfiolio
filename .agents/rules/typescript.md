@@ -23,3 +23,39 @@ When writing, refactoring, or generating code for this project, you MUST strictl
 
 - Refer to `tsconfig.json` and `tsconfig.app.json` settings to make sure path aliases (e.g., `@/*` pointing to `src/*`) and compiler options are properly used and supported.
 - Systematically ensure all imports are valid and that generic constraints match library documentation.
+
+## 5. Modern Component Typing (Strict Prohibition of `React.FC`)
+
+- **Strict Prohibition of `React.FC` / `React.FunctionComponent`**: NEVER declare components using `React.FC` or `React.FunctionComponent` (e.g., `const MyComponent: React.FC<Props> = ...`). This pattern is outdated and discouraged by both React Core and TypeScript teams due to legacy implicit children behavior, lack of natural generic component support, anonymous function assignment in DevTools, and redundant verbosity.
+- **Mandatory Modern Standard**: Always define components as standard named functions with explicit props typing:
+  ```tsx
+  // ✅ CORRECT: Standard Named Function with typed props
+  interface UserProfileProps {
+    name: string
+    role?: string
+  }
+
+  export function UserProfile({ name, role = "Member" }: UserProfileProps) {
+    return (
+      <div>
+        {name} - {role}
+      </div>
+    )
+  }
+  ```
+  Or explicitly typed arrow function parameters if a const arrow is specifically required:
+  ```tsx
+  export const UserProfile = ({ name, role = "Member" }: UserProfileProps) => {
+    return (
+      <div>
+        {name} - {role}
+      </div>
+    )
+  }
+  ```
+- **Generic Components**: Always leverage native TypeScript function generics:
+  ```tsx
+  export function DataList<T>({ items, renderItem }: DataListProps<T>) {
+    return <ul>{items.map(renderItem)}</ul>
+  }
+  ```
