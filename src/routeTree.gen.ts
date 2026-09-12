@@ -12,9 +12,12 @@ import { Route as rootRouteImport } from "./routes/__root"
 import { Route as SitemapDotxmlRouteImport } from "./routes/sitemap[.]xml"
 import { Route as RobotsDottxtRouteImport } from "./routes/robots[.]txt"
 import { Route as DesignSystemRouteImport } from "./routes/design-system"
+import { Route as AdminRouteImport } from "./routes/admin"
 import { Route as ProfileRouteImport } from "./routes/_profile"
+import { Route as AdminIndexRouteImport } from "./routes/admin/index"
 import { Route as ProfileIndexRouteImport } from "./routes/_profile.index"
 import { Route as StudioSplatRouteImport } from "./routes/studio.$"
+import { Route as AdminSplatRouteImport } from "./routes/admin/$"
 import { Route as ProfileResourcesRouteImport } from "./routes/_profile.resources"
 import { Route as ProfileComponentUiRouteImport } from "./routes/_profile.component-ui"
 import { Route as ProfileBlogRouteImport } from "./routes/_profile.blog"
@@ -41,9 +44,19 @@ const DesignSystemRoute = DesignSystemRouteImport.update({
   path: "/design-system",
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: "/admin",
+  path: "/admin",
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: "/_profile",
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: "/",
+  path: "/",
+  getParentRoute: () => AdminRoute,
 } as any)
 const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: "/",
@@ -54,6 +67,11 @@ const StudioSplatRoute = StudioSplatRouteImport.update({
   id: "/studio/$",
   path: "/studio/$",
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSplatRoute = AdminSplatRouteImport.update({
+  id: "/$",
+  path: "/$",
+  getParentRoute: () => AdminRoute,
 } as any)
 const ProfileResourcesRoute = ProfileResourcesRouteImport.update({
   id: "/resources",
@@ -110,6 +128,7 @@ const ProfileBlocksCategorySlugRoute =
 
 export interface FileRoutesByFullPath {
   "/": typeof ProfileIndexRoute
+  "/admin": typeof AdminRouteWithChildren
   "/design-system": typeof DesignSystemRoute
   "/robots.txt": typeof RobotsDottxtRoute
   "/sitemap.xml": typeof SitemapDotxmlRoute
@@ -117,7 +136,9 @@ export interface FileRoutesByFullPath {
   "/blog": typeof ProfileBlogRoute
   "/component-ui": typeof ProfileComponentUiRoute
   "/resources": typeof ProfileResourcesRoute
+  "/admin/$": typeof AdminSplatRoute
   "/studio/$": typeof StudioSplatRoute
+  "/admin/": typeof AdminIndexRoute
   "/block/$slug": typeof ProfileBlockSlugRoute
   "/blog/$slug": typeof ProfileBlogSlugRoute
   "/component-ui/$slug": typeof ProfileComponentUiSlugRoute
@@ -133,8 +154,10 @@ export interface FileRoutesByTo {
   "/blog": typeof ProfileBlogRoute
   "/component-ui": typeof ProfileComponentUiRoute
   "/resources": typeof ProfileResourcesRoute
+  "/admin/$": typeof AdminSplatRoute
   "/studio/$": typeof StudioSplatRoute
   "/": typeof ProfileIndexRoute
+  "/admin": typeof AdminIndexRoute
   "/block/$slug": typeof ProfileBlockSlugRoute
   "/blog/$slug": typeof ProfileBlogSlugRoute
   "/component-ui/$slug": typeof ProfileComponentUiSlugRoute
@@ -145,6 +168,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   "/_profile": typeof ProfileRouteWithChildren
+  "/admin": typeof AdminRouteWithChildren
   "/design-system": typeof DesignSystemRoute
   "/robots.txt": typeof RobotsDottxtRoute
   "/sitemap.xml": typeof SitemapDotxmlRoute
@@ -152,8 +176,10 @@ export interface FileRoutesById {
   "/_profile/blog": typeof ProfileBlogRoute
   "/_profile/component-ui": typeof ProfileComponentUiRoute
   "/_profile/resources": typeof ProfileResourcesRoute
+  "/admin/$": typeof AdminSplatRoute
   "/studio/$": typeof StudioSplatRoute
   "/_profile/": typeof ProfileIndexRoute
+  "/admin/": typeof AdminIndexRoute
   "/_profile/block_/$slug": typeof ProfileBlockSlugRoute
   "/_profile/blog_/$slug": typeof ProfileBlogSlugRoute
   "/_profile/component-ui_/$slug": typeof ProfileComponentUiSlugRoute
@@ -165,6 +191,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | "/"
+    | "/admin"
     | "/design-system"
     | "/robots.txt"
     | "/sitemap.xml"
@@ -172,7 +199,9 @@ export interface FileRouteTypes {
     | "/blog"
     | "/component-ui"
     | "/resources"
+    | "/admin/$"
     | "/studio/$"
+    | "/admin/"
     | "/block/$slug"
     | "/blog/$slug"
     | "/component-ui/$slug"
@@ -188,8 +217,10 @@ export interface FileRouteTypes {
     | "/blog"
     | "/component-ui"
     | "/resources"
+    | "/admin/$"
     | "/studio/$"
     | "/"
+    | "/admin"
     | "/block/$slug"
     | "/blog/$slug"
     | "/component-ui/$slug"
@@ -199,6 +230,7 @@ export interface FileRouteTypes {
   id:
     | "__root__"
     | "/_profile"
+    | "/admin"
     | "/design-system"
     | "/robots.txt"
     | "/sitemap.xml"
@@ -206,8 +238,10 @@ export interface FileRouteTypes {
     | "/_profile/blog"
     | "/_profile/component-ui"
     | "/_profile/resources"
+    | "/admin/$"
     | "/studio/$"
     | "/_profile/"
+    | "/admin/"
     | "/_profile/block_/$slug"
     | "/_profile/blog_/$slug"
     | "/_profile/component-ui_/$slug"
@@ -218,6 +252,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
   DesignSystemRoute: typeof DesignSystemRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -247,12 +282,26 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    "/admin": {
+      id: "/admin"
+      path: "/admin"
+      fullPath: "/admin"
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     "/_profile": {
       id: "/_profile"
       path: ""
       fullPath: "/"
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    "/admin/": {
+      id: "/admin/"
+      path: "/"
+      fullPath: "/admin/"
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     "/_profile/": {
       id: "/_profile/"
@@ -267,6 +316,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/studio/$"
       preLoaderRoute: typeof StudioSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    "/admin/$": {
+      id: "/admin/$"
+      path: "/$"
+      fullPath: "/admin/$"
+      preLoaderRoute: typeof AdminSplatRouteImport
+      parentRoute: typeof AdminRoute
     }
     "/_profile/resources": {
       id: "/_profile/resources"
@@ -372,8 +428,21 @@ const ProfileRouteChildren: ProfileRouteChildren = {
 const ProfileRouteWithChildren =
   ProfileRoute._addFileChildren(ProfileRouteChildren)
 
+interface AdminRouteChildren {
+  AdminSplatRoute: typeof AdminSplatRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminSplatRoute: AdminSplatRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
   DesignSystemRoute: DesignSystemRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
